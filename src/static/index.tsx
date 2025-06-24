@@ -1,4 +1,4 @@
-import { NavigationItemType } from "@/models/navigation";
+import { NavigationItemType } from "@/models/navigationTypes";
 
 export const MainNavigation: NavigationItemType[] = [
   { name: 'Estudios', href: '/estudios' },

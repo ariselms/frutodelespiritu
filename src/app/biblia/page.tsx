@@ -1,9 +1,11 @@
+import JumbotronSection from "@/components/JumbotronSection";
 export default function BibliaPage() {
   return (
     <main>
-      <div>
-        Biblia
-      </div>
+      <JumbotronSection 
+        section="Estudios Biblicos"
+        imageSrc="/images/bible.svg"
+      />
     </main>
   );
 }
