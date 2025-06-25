@@ -5,12 +5,20 @@ export default function JumbotronMain() {
 		<section className="bg-orange-100 dark:bg-gray-900">
 			<div className="grid max-w-screen-xl px-4 py-24 mx-auto lg:gap-12 xl:gap-0 lg:py-32 lg:grid-cols-12">
 				<div className="mr-auto place-self-center lg:col-span-7 xl:col-span-8">
-					<h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-orange-700 dark:text-white">
-						Biblia, Estudios y Reflexiones
+					<h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-orange-700 dark:text-gray-100">
+						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+							Biblia
+						</span>{" "}
+						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+							Estudios
+						</span>{" "}
+						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+							Reflexiones
+						</span>
 					</h1>
 					<p className="max-w-2xl mb-10 font-light text-gray-950 lg:mb-8 md:text-lg lg:text-xl dark:text-orange-50">
-						Explora la sabiduría de la Biblia a través de estudios profundos y reflexiones
-            inspiradoras que nutren tu espíritu y fortalecen tu fe.
+						Explora la sabiduría de la Biblia a través de estudios profundos y
+						reflexiones inspiradoras que nutren tu espíritu y fortalecen tu fe.
 					</p>
 					<form>
 						<div className="flex items-center mb-3">
@@ -56,8 +64,8 @@ export default function JumbotronMain() {
 				</div>
 				<div className="hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
 					<Image
-            width={300}
-            height={300}
+						width={300}
+						height={300}
 						src="/images/pray.svg"
 						alt="phone illustration"
 					/>

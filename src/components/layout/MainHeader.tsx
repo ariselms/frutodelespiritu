@@ -49,7 +49,7 @@ export default function MainHeader() {
               as={Link}
               href={nav.href}
               active={isActive(nav.href)}
-              className="text-gray-700 hover:bg-gray-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+              className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
             >
               {nav.name}
             </NavbarLink>

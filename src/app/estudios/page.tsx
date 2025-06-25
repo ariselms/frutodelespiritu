@@ -1,8 +1,8 @@
 import JumbotronSection from "@/components/JumbotronSection";
-export default function EstudiosPage() {
+export default async function EstudiosPage() {
   return (
-    <main>  
-      <JumbotronSection 
+    <main>
+      <JumbotronSection
         section="Estudios Biblicos"
         imageSrc="/images/reading.svg"
       />
