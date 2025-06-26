@@ -33,8 +33,9 @@ async function getBlogData(
   try {
 		const response = await fetch(url.toString());
 
-
 		const result = await response.json();
+
+    console.log("API Response:", result);
 
 		if (result.success) {
 			// Assuming your API returns data in this shape
