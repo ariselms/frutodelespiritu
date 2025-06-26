@@ -6,13 +6,13 @@ export default function JumbotronMain() {
 			<div className="grid max-w-screen-xl px-4 py-24 mx-auto lg:gap-12 xl:gap-0 lg:py-32 lg:grid-cols-12">
 				<div className="mr-auto place-self-center lg:col-span-7 xl:col-span-8">
 					<h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-orange-700 dark:text-gray-100">
-						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+						<span className="bg-orange-200 dark:bg-gray-800 mb-4 inline-block rounded-r-xl px-4">
 							Biblia
 						</span>{" "}
-						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+						<span className="bg-orange-200 dark:bg-gray-800 mb-4 inline-block rounded-r-xl px-4">
 							Estudios
 						</span>{" "}
-						<span className="bg-orange-200 dark:bg-gray-800 mb-2 inline-block rounded-r-xl px-4">
+						<span className="bg-orange-200 dark:bg-gray-800 mb-4 inline-block rounded-r-xl px-4">
 							Reflexiones
 						</span>
 					</h1>

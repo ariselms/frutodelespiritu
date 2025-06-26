@@ -1,143 +1,84 @@
-
-export function BlogSection(){
-  return (
-            <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-          <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Our Blog
-          </h2>
-          <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-            We use an agile approach to test assumptions and connect with the
-            needs of your audience early and often.
-          </p>
-        </div>
-  )
+export function BlogSection() {
+	return (
+		<div className="mx-auto max-w-screen-sm text-center mb-32">
+			<h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+				Aprendizaje y crecimiento
+			</h2>
+			<p className="mt-2 text-lg/8 text-gray-600">
+				Descubre artículos y recursos que te ayudarán a profundizar en tu fe y
+        a crecer espiritualmente.
+			</p>
+		</div>
+	);
 }
 
-export function BlogItem({
-  title
-} : {
-  title: string
-}) {
-  return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <BlogSection/>
-        <div className="grid gap-8 lg:grid-cols-2">
-          <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-5 text-gray-500">
-              <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                <svg
-                  className="mr-1 w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
-                </svg>
-                Tutorial
-              </span>
-              <span className="text-sm">14 days ago</span>
-            </div>
-            <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">How to quickly deploy a static website</a>
-            </h2>
-            <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-              Static websites are now used to bootstrap lots of websites and are
-              becoming the basis for a variety of tools that even influence both
-              web designers and developers influence both web designers and
-              developers.
-            </p>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-7 h-7 rounded-full"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                  alt="Jese Leos avatar"
-                />
-                <span className="font-medium dark:text-white">Jese Leos</span>
-              </div>
-              <a
-                href="#"
-                className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
-              >
-                Read more
-                <svg
-                  className="ml-2 w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </article>
-          <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-5 text-gray-500">
-              <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                <svg
-                  className="mr-1 w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                    clip-rule="evenodd"
-                  ></path>
-                  <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-                </svg>
-                Article
-              </span>
-              <span className="text-sm">14 days ago</span>
-            </div>
-            <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">Our first project with React</a>
-            </h2>
-            <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-              Static websites are now used to bootstrap lots of websites and are
-              becoming the basis for a variety of tools that even influence both
-              web designers and developers influence both web designers and
-              developers.
-            </p>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-7 h-7 rounded-full"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                  alt="Bonnie Green avatar"
-                />
-                <span className="font-medium dark:text-white">
-                  Bonnie Green
-                </span>
-              </div>
-              <a
-                href="#"
-                className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
-              >
-                Read more
-                <svg
-                  className="ml-2 w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
+// TODO: Create BlogItem type
+export function BlogItem({ article }: { article: any }) {
+	return (
+		<article
+			key={article.id}
+			className="relative isolate flex flex-col gap-8 lg:flex-row">
+			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+				<img
+					alt="Article image"
+					src={"/images/church.svg"}
+					className="absolute inset-0 size-full rounded-2xl bg-gray-50 object-cover"
+				/>
+				<div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+			</div>
+			<div>
+				<div className="flex items-center gap-x-4 text-xs">
+					<time dateTime={article.created_at} className="text-gray-500">
+						{article.created_at}
+					</time>
+					<a
+						href={""}
+						className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
+						Category
+					</a>
+				</div>
+				<div className="group relative max-w-xl">
+					<h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
+						<a href={article.slug}>
+							<span className="absolute inset-0" />
+							{article.title}
+						</a>
+					</h3>
+					<p className="mt-5 text-sm/6 text-gray-600">{article.summary}</p>
+				</div>
+				<div className="mt-6 flex border-t border-gray-900/5 pt-6">
+					<div className="relative flex items-center gap-x-4">
+						<img alt="" src={"/images/cross.svg"} className="size-10 rounded-full bg-gray-50" />
+						<div className="text-sm/6">
+							<p className="font-semibold text-gray-900">
+								<a href={""}>
+									<span className="absolute inset-0" />
+									Author name
+								</a>
+							</p>
+							<p className="text-gray-600">Author role</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	);
+}
+
+// TODO: Create Blog type
+export function BlogList({ data }: { data: any }) {
+	return (
+		<section className="bg-white py-24 sm:py-32">
+			<div className="mx-auto max-w-7xl px-6 lg:px-8">
+				<div className="mx-auto max-w-2xl lg:max-w-4xl">
+          <BlogSection />
+					<div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+						{data?.articles?.map((article: any) => (
+							<BlogItem key={article.id} article={article} />
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 }
