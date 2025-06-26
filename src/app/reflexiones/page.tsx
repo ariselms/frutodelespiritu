@@ -32,10 +32,11 @@ async function getBlogData(
 
   try {
 		const response = await fetch(url.toString(), {
-			next: { revalidate: 3600 } // Cache data for an hour
+			next: { revalidate: 30 } // Cache data for 30 seconds
 		});
 
-    console.log("--- Response ---");
+    console.log("--- URL - Response ---");
+    console.log(url.toString());
     console.log(response);
 
 		if (!response.ok) throw new Error("Failed to fetch blog data");
