@@ -39,8 +39,6 @@ async function getBlogData(
     console.log(url.toString());
     console.log(response);
 
-		if (!response.ok) throw new Error("Failed to fetch blog data");
-
 		const result = await response.json();
 
 		if (result.success) {
