@@ -14,10 +14,20 @@ export function BlogSection() {
 
 // TODO: Create BlogItem type
 export function BlogItem({ article }: { article: any }) {
+	const creation_date = new Date(article.created_at); // Ensure it's a Date object if it's coming as a string
+
+  // Format the date to a more readable format
+  const formatDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
+
 	return (
-		<article
-			key={article.id}
-			className="relative isolate flex flex-col gap-8 lg:flex-row">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<img
 					alt="Article image"
@@ -28,8 +38,8 @@ export function BlogItem({ article }: { article: any }) {
 			</div>
 			<div>
 				<div className="flex items-center gap-x-4 text-xs">
-					<time dateTime={article.created_at} className="text-gray-300">
-						{article.created_at}
+					<time dateTime={formatDate(creation_date)} className="text-gray-300">
+						{formatDate(creation_date)}
 					</time>
 					<a
 						href={""}
@@ -44,11 +54,17 @@ export function BlogItem({ article }: { article: any }) {
 							{article.title}
 						</a>
 					</h3>
-					<p className="mt-5 text-sm/6 text-gray-600 dark:text-gray-200">{article.summary}</p>
+					<p className="mt-5 text-sm/6 text-gray-600 dark:text-gray-200">
+						{article.summary}
+					</p>
 				</div>
 				<div className="mt-6 flex border-t border-gray-900/5 pt-6">
 					<div className="relative flex items-center gap-x-4">
-						<img alt="" src={"/images/cross.svg"} className="size-10 rounded-full bg-gray-50" />
+						<img
+							alt=""
+							src={"/images/cross.svg"}
+							className="size-10 rounded-full bg-gray-50"
+						/>
 						<div className="text-sm/6">
 							<p className="font-semibold text-gray-900 dark:text-gray-100">
 								<a href={""}>
@@ -66,14 +82,15 @@ export function BlogItem({ article }: { article: any }) {
 }
 
 // TODO: Create Blog type
-export function BlogList({ data }: { data: any }) {
+export function BlogList({ articles }: { articles: any }) {
+
 	return (
 		<section className="bg-white dark:bg-gray-800 py-24 sm:py-32">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div className="mx-auto max-w-2xl lg:max-w-4xl">
           <BlogSection />
 					<div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
-						{data?.articles?.map((article: any) => (
+						{articles?.map((article: any) => (
 							<BlogItem key={article.id} article={article} />
 						))}
 					</div>

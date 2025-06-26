@@ -3,60 +3,8 @@ import JumbotronSection from "@/components/JumbotronSection";
 import { PaginationControls } from "@/components/blog/PaginationControls";
 import { BlogList } from "@/components/blog/item";
 import { FetchEndpoints, serverBaseUrl } from "@/static";
-
-interface BlogPost {
-	id: number;
-	title: string;
-	// ... other properties
-}
-
-// Your API response should include pagination metadata
-interface PaginatedResponse {
-	data: {
-		articles: BlogPost[];
-		totalItems: number;
-		totalPages: number;
-		currentPage: number;
-	};
-}
-
-// Update the function to accept page and limit
-async function getBlogData(
-	page: number,
-	limit: number
-): Promise<PaginatedResponse> {
-	// Construct the URL with query parameters for your backend API
-	const url = new URL(serverBaseUrl + FetchEndpoints.Articles.GetAll);
-	url.searchParams.set("page", String(page));
-	url.searchParams.set("limit", String(limit));
-
-  try {
-		const response = await fetch(url.toString());
-
-		const result = await response.json();
-
-    console.log("API Response:", result);
-
-		if (result.success) {
-			// Assuming your API returns data in this shape
-			return {
-				data: result.data
-			};
-		} else {
-			throw new Error(result.message || "API returned an error");
-		}
-	} catch (error) {
-		console.error("Error fetching blog data:", error);
-		return {
-			data: {
-				articles: [],
-				totalItems: 0,
-				totalPages: 1,
-				currentPage: 1
-			}
-		};
-	}
-}
+import { PaginatedResponse } from "@/models/navigationTypes";
+import { sql } from "@vercel/postgres";
 
 // Server Components receive `searchParams` as a prop
 export default async function ReflexionesPage({
@@ -65,12 +13,37 @@ export default async function ReflexionesPage({
 	searchParams: any;
 }) {
 	// Read page and limit from the URL, providing default values
-  let {page, limit} = await searchParams;
-  page = Number(page) || 1; // Default to page 1
-  limit = Number(limit) || 10; // Default to 10 items per page
+	let { page, limit } = await searchParams;
+	page = Number(page) || 1; // Default to page 1
+	limit = Number(limit) || 10; // Default to 10 items per page
 
-	// Fetch the specific page of data
-	const { data: blogData } = await getBlogData(page, limit);
+	// 3. Calculate the OFFSET for SQL pagination
+	//    For page 1, offset is 0. For page 2, offset is `limit`, and so on.
+	const offset = (page - 1) * limit;
+
+	// 4. Run two queries concurrently for better performance
+	//    - One to get the paginated list of articles
+	//    - One to get the total count of all articles for calculating total pages
+	const [articlesResult, countResult] = await Promise.all([
+		// Query for the specific page of articles
+		sql`
+        SELECT * FROM articles
+        WHERE draft = false
+        ORDER BY created_at DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+      `,
+		// Query for the total count of non-draft articles
+		sql`
+        SELECT COUNT(*) as total_count
+        FROM articles
+        WHERE draft = false
+      `
+	]);
+
+	const articles = articlesResult.rows;
+	const totalItems = Number(countResult.rows[0].total_count);
+	const totalPages = Math.ceil(totalItems / limit);
 
 	return (
 		<main>
@@ -78,13 +51,12 @@ export default async function ReflexionesPage({
 				section="Reflexiones Biblicas"
 				imageSrc="/images/cross-with-flowers.svg"
 			/>
-
-			<BlogList data={blogData} />
+			<BlogList articles={articles} />
 
 			<PaginationControls
-				currentPage={blogData.currentPage}
-				totalPages={blogData.totalPages}
-				totalItems={blogData.totalItems}
+				currentPage={page}
+				totalPages={totalPages}
+				totalItems={totalItems}
 				limit={limit}
 			/>
 		</main>

@@ -9,3 +9,18 @@ export interface PaginationControlsProps {
 	totalItems: number | undefined;
 	limit: number | undefined;
 }
+
+export interface PaginatedResponse {
+	data: {
+		articles: BlogPost[];
+		totalItems: number;
+		totalPages: number;
+		currentPage: number;
+	};
+}
+
+export interface BlogPost {
+	id: number;
+	title: string;
+	// ... other properties
+}
