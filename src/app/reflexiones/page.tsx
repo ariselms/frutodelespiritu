@@ -35,6 +35,9 @@ async function getBlogData(
 			next: { revalidate: 3600 } // Cache data for an hour
 		});
 
+    console.log("--- Response ---");
+    console.log(response);
+
 		if (!response.ok) throw new Error("Failed to fetch blog data");
 
 		const result = await response.json();
