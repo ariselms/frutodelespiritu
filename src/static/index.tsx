@@ -52,4 +52,6 @@ if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
 	baseUrl = "https://frutodelespiritu.vercel.app/";
 }
 
+console.log("Base URL:", baseUrl);
+
 export const serverBaseUrl = baseUrl;
