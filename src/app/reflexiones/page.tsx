@@ -12,8 +12,11 @@ export default async function ReflexionesPage({
 }: {
 	searchParams: any;
 }) {
-	// Read page and limit from the URL, providing default values
+	// 1. Get URL Search Parameters
 	let { page, limit } = await searchParams;
+
+	// 2. Get and validate 'limit' and 'page'
+	//    Provide sensible defaults if they are missing or invalid.
 	page = Number(page) || 1; // Default to page 1
 	limit = Number(limit) || 10; // Default to 10 items per page
 

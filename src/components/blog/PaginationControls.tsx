@@ -27,7 +27,13 @@ export function PaginationControls({
 			const newParams = new URLSearchParams(searchParams.toString());
 			newParams.set("page", String(newPage));
       newParams.set("limit", String(itemsPerPage));
+      // Scroll to the top of the page
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 			router.push(`/reflexiones?${newParams.toString()}`);
+
 		}
 	};
 
