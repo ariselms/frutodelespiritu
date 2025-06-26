@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
 
 		// 2. Get and validate 'limit' and 'page'
 		//    Provide sensible defaults if they are missing or invalid.
-		const limit = Number(searchParams.get("limit")) || 9;
 		const page = Number(searchParams.get("page")) || 1;
+		const limit = Number(searchParams.get("limit")) || 10;
 
 		// Ensure they are positive integers
 		if (limit <= 0) {
