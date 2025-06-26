@@ -27,13 +27,10 @@ async function getBlogData(
 ): Promise<PaginatedResponse> {
 	// Construct the URL with query parameters for your backend API
 	const url = new URL(serverBaseUrl + FetchEndpoints.Articles.GetAll);
-  console.log(url);
 	url.searchParams.set("page", String(page));
 	url.searchParams.set("limit", String(limit));
 
-  console.log("Fetching blog data from:", url.toString());
-
-	try {
+  try {
 		const response = await fetch(url.toString(), {
 			next: { revalidate: 3600 } // Cache data for an hour
 		});
