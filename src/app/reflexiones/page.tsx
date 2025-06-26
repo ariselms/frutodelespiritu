@@ -30,14 +30,12 @@ async function getBlogData(
 	url.searchParams.set("page", String(page));
 	url.searchParams.set("limit", String(limit));
 
-  try {
-		const response = await fetch(url.toString(), {
-			next: { revalidate: 30 } // Cache data for 30 seconds
-		});
+  console.log("--- URL ---");
+  console.log(url.toString());
 
-    console.log("--- URL - Response ---");
-    console.log(url.toString());
-    console.log(response);
+  try {
+		const response = await fetch(url.toString());
+
 
 		const result = await response.json();
 

@@ -82,9 +82,6 @@ export async function POST(request: Request) {
   try {
 		const body = await request.json();
 
-    console.log("--- Received body ---");
-    console.log(body);
-
 		const { rows: newPublication } = await sql`
       INSERT INTO articles
       (image_url, title, summary, category_id, slug, by_user_id, content, video_url, draft, created_at, updated_at)
