@@ -82,13 +82,9 @@ export default async function ReflexionesPage({
 				section="Reflexiones Biblicas"
 				imageSrc="/images/cross-with-flowers.svg"
 			/>
-			{process.env.NEXT_PUBLIC_VERCEL_ENV}
-      {serverBaseUrl}
 
-			{/* The BlogList itself can remain a simple presentational component */}
 			<BlogList data={blogData} />
 
-			{/* Add the client component for pagination controls */}
 			<PaginationControls
 				currentPage={blogData.currentPage}
 				totalPages={blogData.totalPages}
