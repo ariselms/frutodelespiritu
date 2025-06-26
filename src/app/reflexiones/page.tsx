@@ -27,11 +27,8 @@ async function getBlogData(
 ): Promise<PaginatedResponse> {
 	// Construct the URL with query parameters for your backend API
 	const url = new URL(serverBaseUrl + FetchEndpoints.Articles.GetAll);
-	url.searchParams.set("page", String(page));
-	url.searchParams.set("limit", String(limit));
-
-  console.log("--- URL ---");
-  console.log(url.toString());
+	url.searchParams.set("page", String(page) || "1"); // Default to page 1 if not provided
+	url.searchParams.set("limit", String(limit) || "10"); // Default to 10 items per page if not provided
 
   try {
 		const response = await fetch(url.toString());
