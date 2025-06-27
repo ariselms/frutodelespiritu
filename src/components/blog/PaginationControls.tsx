@@ -32,7 +32,7 @@ export function PaginationControls({
         top: 0,
         behavior: "smooth"
       });
-			router.push(`/reflexiones?${newParams.toString()}`);
+			router.push(`/lecturas?${newParams.toString()}`);
 
 		}
 	};

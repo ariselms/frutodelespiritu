@@ -1,8 +1,7 @@
 import { NavigationItemType } from "@/models/navigationTypes";
 
 export const MainNavigation: NavigationItemType[] = [
-  { name: 'Estudios', href: '/estudios' },
-  { name: 'Reflexiones', href: '/reflexiones' },
+  { name: 'Lecturas', href: '/lecturas' },
   { name: 'Biblia', href: '/biblia' },
 ];
 
