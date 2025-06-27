@@ -11,7 +11,7 @@ import {
 
 export default function MainFooter() {
 	return (
-		<Footer container className="rounded-none bg-amber-50 border-t border-amber-100 dark:border-gray-700">
+		<Footer container className="rounded-none bg-amber-50 dark:bg-black border-t border-amber-100 dark:border-gray-700">
 			<div className="w-full text-center">
 				<div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
 					<FooterBrand
