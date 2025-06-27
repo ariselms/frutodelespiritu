@@ -20,9 +20,6 @@ export default async function ReflexionesPage({
 	keyword = keyword || ""; // Default to empty string if no keyword
 	category || ""; // Default to empty string if no category
 
-	console.log("Cagegory");
-	console.log(category);
-
 	// 3. Calculate the OFFSET for SQL pagination
 	const offset = (page - 1) * limit;
 
