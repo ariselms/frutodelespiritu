@@ -28,7 +28,7 @@ export default async function Home() {
 					<ContentRightTwoImagesLeftDescription
 						firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
 						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/estudios"
+						btnLink="/lecturas?category=1"
 						btnText="Estudios"
 					/>
 				}
@@ -43,7 +43,7 @@ export default async function Home() {
 					<ContentLeftTwoImagesRightDescription
 						firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
 						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/reflexiones"
+						btnLink="/lecturas?category=2"
 						btnText="Reflexiones"
 					/>
 				}

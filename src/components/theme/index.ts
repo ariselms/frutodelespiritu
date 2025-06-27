@@ -34,7 +34,7 @@ export const OrangeLinkTheme = createTheme({
 		base: "block py-2 pl-3 pr-4 md:p-0",
 		active: {
 			on: "bg-orange-600 md:bg-transparent md:text-orange-600 md:dark:text-orange-500 mb-3 md:mb-0",
-			off: "text-gray-700 rounded-0 border-0 md:border-0  md:hover:text-orange-600  dark:text-gray-300  md:dark:hover:text-orange-500 mb-3 md:mb-0 hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 dark:hover:text-white"
+			off: "text-gray-700 rounded-0 border-0 md:border-0  md:hover:text-orange-600 md:hover:bg-transparent  dark:text-gray-300  md:dark:hover:text-orange-500 mb-3 md:mb-0 hover:bg-orange-600 hover:text-white dark:hover:bg-orange-600 dark:hover:text-white"
 		},
 		disabled: {
 			on: "text-gray-300 hover:cursor-not-allowed dark:text-gray-600",

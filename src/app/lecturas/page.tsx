@@ -106,7 +106,7 @@ export default async function ReflexionesPage({
 	return (
 		<main>
 			<JumbotronSection
-				section="Reflexiones Biblicas"
+				section="Lecturas Biblicas"
 				imageSrc="/images/cross-with-flowers.svg"
 			/>
 
