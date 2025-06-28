@@ -63,6 +63,7 @@ export default async function BibliaPage() {
 		(res) => res && !res.error
 	);
 
+  console.log("--- Bible Books Response ---")
   console.log(successfulBibleBooks);
 
   // TODO: Create a nice layout to switch bibles
