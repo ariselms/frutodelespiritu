@@ -63,6 +63,8 @@ export default async function BibliaPage() {
 		(res) => res && !res.error
 	);
 
+  console.log(successfulBibleBooks);
+
   // TODO: Create a nice layout to switch bibles
   // TODO: Create a reading tab that the user can click to continue reading selected bible
 
