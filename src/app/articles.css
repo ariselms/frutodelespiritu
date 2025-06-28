@@ -1,0 +1,323 @@
+/*
+ * Base CSS Stylesheet (Scoped for Rich Text Content)
+ * This file provides foundational styles for common HTML elements
+ * specifically within a container element with the class `rich-text-content`.
+ * This prevents global overrides of Tailwind CSS and allows selective styling
+ * of HTML content loaded from a database.
+ */
+
+/* Define CSS variables for colors within the .rich-text-content scope */
+.rich-text-content {
+  /* Light theme defaults */
+  --rich-text-color-primary: #333;
+  --rich-text-color-heading: #222;
+  --rich-text-color-secondary: #555;
+  --rich-text-color-link: #1a73e8;
+  --rich-text-color-link-visited: #551a8b;
+  --rich-text-color-border: #ccc;
+  --rich-text-color-background-light: #eee; /* For code, mark */
+  --rich-text-color-background-medium: #f4f4f4; /* For pre */
+  --rich-text-color-background-blockquote: #f9f9f9; /* For blockquote */
+  --rich-text-color-background-table-header: #f2f2f2; /* For table headers */
+  --rich-text-color-button-primary: #007bff;
+  --rich-text-color-button-primary-hover: #0056b3;
+}
+
+/* Dark theme overrides when html has 'dark' class */
+html.dark .rich-text-content {
+  --rich-text-color-primary: #e0e0e0;
+  --rich-text-color-heading: #f0f0f0;
+  --rich-text-color-secondary: #aaaaaa;
+  --rich-text-color-link: #82b1ff;
+  --rich-text-color-link-visited: #b39ddb;
+  --rich-text-color-border: #555;
+  --rich-text-color-background-light: #444; /* For code, mark */
+  --rich-text-color-background-medium: #333; /* For pre */
+  --rich-text-color-background-blockquote: #2a2a2a; /* For blockquote */
+  --rich-text-color-background-table-header: #3a3a3a; /* For table headers */
+  --rich-text-color-button-primary: #1a73e8; /* Can adjust if needed for dark mode */
+  --rich-text-color-button-primary-hover: #0d47a1; /* Can adjust if needed for dark mode */
+}
+
+
+/* 1. Basic HTML Resets & Body Styles (scoped to .rich-text-content) */
+.rich-text-content {
+  /* Ensure consistent box-sizing for the rich text content itself */
+  box-sizing: border-box;
+}
+
+.rich-text-content *,
+.rich-text-content *::before,
+.rich-text-content *::after {
+  box-sizing: inherit;
+}
+
+.rich-text-content html { /* html selector here is mostly symbolic for nested structure, usually not needed */
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.rich-text-content body { /* body selector here is mostly symbolic for nested structure, usually not needed */
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: var(--rich-text-color-primary); /* Use variable */
+  background-color: transparent; /* Assuming container sets the background */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Typography - Headings (scoped to .rich-text-content) */
+.rich-text-content h1,
+.rich-text-content h2,
+.rich-text-content h3,
+.rich-text-content h4,
+.rich-text-content h5,
+.rich-text-content h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--rich-text-color-heading); /* Use variable */
+}
+
+.rich-text-content h1 {
+  font-size: 2.5em;
+}
+
+.rich-text-content h2 {
+  font-size: 2em;
+}
+
+.rich-text-content h3 {
+  font-size: 1.75em;
+}
+
+.rich-text-content h4 {
+  font-size: 1.5em;
+}
+
+.rich-text-content h5 {
+  font-size: 1.25em;
+}
+
+.rich-text-content h6 {
+  font-size: 1em;
+}
+
+/* 3. Typography - Paragraphs and Text Elements (scoped to .rich-text-content) */
+.rich-text-content p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.6;
+  color: var(--rich-text-color-heading);
+}
+
+.rich-text-content strong {
+  font-weight: 700;
+}
+
+.rich-text-content em {
+  font-style: italic;
+}
+
+.rich-text-content small {
+  font-size: 0.8em;
+}
+
+.rich-text-content mark {
+  background-color: var(--rich-text-color-background-light); /* Use variable */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* 4. Links (scoped to .rich-text-content) */
+.rich-text-content a {
+  color: var(--rich-text-color-link); /* Use variable */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rich-text-content a:hover {
+  text-decoration: underline;
+}
+
+.rich-text-content a:visited {
+  color: var(--rich-text-color-link-visited); /* Use variable */
+}
+
+/* 5. Lists (scoped to .rich-text-content) */
+.rich-text-content ul,
+.rich-text-content ol {
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-left: 20px;
+  color: var(--rich-text-color-heading)
+}
+
+.rich-text-content ul {
+  list-style-type: disc;
+}
+
+.rich-text-content ol {
+  list-style-type: decimal;
+}
+
+.rich-text-content li {
+  margin-bottom: 0.5em;
+}
+
+/* Reset for lists without bullet points (scoped to .rich-text-content) */
+.rich-text-content .list-none {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 6. Blockquotes (scoped to .rich-text-content) */
+.rich-text-content blockquote {
+  margin: 0 0 1em;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--rich-text-color-border); /* Use variable */
+  color: var(--rich-text-color-secondary); /* Use variable */
+  font-style: italic;
+  background-color: var(--rich-text-color-background-blockquote); /* Use variable */
+}
+
+.rich-text-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* 7. Code and Preformatted Text (scoped to .rich-text-content) */
+.rich-text-content code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: var(--rich-text-color-background-light); /* Use variable */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.rich-text-content pre {
+  background-color: var(--rich-text-color-background-medium); /* Use variable */
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-bottom: 1em;
+}
+
+.rich-text-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 8. Tables (scoped to .rich-text-content) */
+.rich-text-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.rich-text-content th,
+.rich-text-content td {
+  border: 1px solid var(--rich-text-color-border); /* Use variable */
+  padding: 0.8em;
+  text-align: left;
+}
+
+.rich-text-content th {
+  background-color: var(--rich-text-color-background-table-header); /* Use variable */
+  font-weight: 700;
+}
+
+/* 9. Images and Media (scoped to .rich-text-content) */
+.rich-text-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.rich-text-content figure {
+  margin: 0 0 1em;
+  padding: 0;
+}
+
+.rich-text-content figcaption {
+  font-size: 0.9em;
+  color: var(--rich-text-color-secondary); /* Use variable */
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* 10. Horizontal Rule (scoped to .rich-text-content) */
+.rich-text-content hr {
+  border: 0;
+  border-top: 1px solid var(--rich-text-color-border); /* Use variable */
+  margin: 2em 0;
+}
+
+/* 11. Form Elements - Basic Resets for Consistency (scoped to .rich-text-content) */
+.rich-text-content input[type="text"],
+.rich-text-content input[type="email"],
+.rich-text-content input[type="password"],
+.rich-text-content input[type="number"],
+.rich-text-content input[type="search"],
+.rich-text-content textarea,
+.rich-text-content select {
+  width: 100%;
+  padding: 0.75em;
+  margin-bottom: 1em;
+  border: 1px solid var(--rich-text-color-border); /* Use variable */
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: inherit;
+  line-height: 1.5;
+  box-sizing: border-box;
+  color: var(--rich-text-color-primary); /* Ensure form text also switches color */
+  background-color: var(--rich-text-color-background-blockquote); /* Use similar background for input fields */
+}
+
+.rich-text-content textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.rich-text-content button,
+.rich-text-content input[type="submit"],
+.rich-text-content input[type="button"] {
+  display: inline-block;
+  padding: 0.75em 1.25em;
+  margin-bottom: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--rich-text-color-button-primary); /* Use variable */
+  color: #fff; /* Keep button text white for contrast */
+  font-size: 1em;
+  cursor: pointer;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.rich-text-content button:hover,
+.rich-text-content input[type="submit"]:hover,
+.rich-text-content input[type="button"]:hover {
+  background-color: var(--rich-text-color-button-primary-hover); /* Use variable */
+}
+
+/* Accessibility (scoped to .rich-text-content) */
+.rich-text-content [tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+/* Utility for clearing floats (if you still use them) (scoped to .rich-text-content) */
+.rich-text-content .clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

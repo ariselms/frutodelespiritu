@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "images.pexels.com"
+			},
+			{
+				protocol: "https",
+				hostname: "flowbite.s3.amazonaws.com"
+			},
+			{
+				protocol: "https",
+				hostname: "media.licdn.com"
 			}
 		]
 	}

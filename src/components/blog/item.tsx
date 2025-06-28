@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+
 export function BlogSection() {
 	return (
 		<div className="mx-auto max-w-screen-sm text-center mb-16">
@@ -23,9 +26,9 @@ export function BlogItem({ article }: { article: any }) {
 		const options: Intl.DateTimeFormatOptions = {
 			year: "numeric",
 			month: "long",
-			day: "numeric"
+			day: "numeric",
 		};
-		return date.toLocaleDateString("en-US", options);
+		return date.toLocaleDateString("es-US", options);
 	};
 
 	return (
@@ -40,31 +43,32 @@ export function BlogItem({ article }: { article: any }) {
 			<div className="flex flex-col justify-between">
 				<div>
 					<div className="flex items-center gap-x-4 text-xs">
-						<time
-							dateTime={formatDate(creation_date)}
-							className="text-gray-800 dark:text-gray-300">
-							{formatDate(creation_date)}
-						</time>
-						<span
-							className="relative z-10 rounded-full bg-orange-100 border border-orange-700 dark:border-gray-50 dark:bg-gray-900 px-3 py-1.5 font-medium text-orange-700 dark:text-gray-50 hover:bg-orange-200 dark:hover:bg-gray-800 transition-colors duration-200">
+						<span className="relative z-10 rounded-full bg-orange-100 border border-orange-700 dark:border-gray-50 dark:bg-gray-900 px-3 py-1.5 font-medium text-orange-700 dark:text-gray-50  transition-colors duration-200">
 							{article.category_name}
 						</span>
+						<time
+							dateTime={formatDate(creation_date)}
+							className="text-gray-700 dark:text-gray-300">
+							{formatDate(creation_date)}
+						</time>
 					</div>
 					<div className="group relative max-w-xl">
-						<h3 className="mt-3 text-lg/6 font-semibold text-gray-900 dark:text-gray-100 group-hover:text-gray-600 dark:group-hover:text-gray-200">
-							<a href={article.slug}>
+						<h3 className="mt-3 text-xl font-semibold text-orange-700 dark:text-gray-100 group-hover:text-gray-600 dark:group-hover:text-gray-200">
+							<Link href={`/lecturas/${article.id}`}>
 								<span className="absolute inset-0" />
 								{article.title}
-							</a>
+							</Link>
 						</h3>
-						<p className="mt-5 text-sm/6 text-gray-600 dark:text-gray-200">
+						<p className="mt-5 text-base text-gray-700 dark:text-gray-200">
 							{article.summary}
 						</p>
 					</div>
 				</div>
-				<div className="mt-6 flex border-t border-gray-900/5 pt-6">
+				<div className="mt-6 flex pt-6">
 					<div className="relative flex items-center gap-x-4">
-						<img
+						<Image
+              width={40}
+              height={40}
 							alt=""
 							src={article.author_image_url || "/images/church.svg"}
 							className="size-10 rounded-full bg-gray-50"
@@ -75,9 +79,6 @@ export function BlogItem({ article }: { article: any }) {
 									<span className="absolute inset-0" />
 									{article.author_name}
 								</a>
-							</p>
-							<p className="text-gray-600 dark:text-gray-200">
-								{article.author_role.toUpperCase()}
 							</p>
 						</div>
 					</div>

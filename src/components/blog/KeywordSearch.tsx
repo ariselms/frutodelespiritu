@@ -71,7 +71,7 @@ export function KeywordSearch({
 				<div className="relative">
 					<div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 						<svg
-							className="w-4 h-4 text-gray-500 dark:text-gray-400"
+							className="w-4 h-4 text-orange-500 dark:text-gray-300"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -86,7 +86,7 @@ export function KeywordSearch({
 						</svg>
 					</div>
 					<input
-						className="block w-full lg:w-4/6 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 focus-visible:outline-orange-700"
+						className="block w-full lg:w-4/6 p-4 ps-10 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 						id="blog_search_term"
 						type="search"
 						placeholder="e.j. Preservar tu alma"
@@ -101,21 +101,21 @@ export function KeywordSearch({
 				</p>
 				<div className="flex">
 					<div className="flex items-center flex-wrap gap-2">
-						<div className="flex items-center border rounded-lg p-4 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700">
+						<div className="flex items-center border rounded-lg p-4 border-orange-300 dark:border-gray-600 bg-orange-50 dark:bg-gray-700">
 							<Radio
 								color="black"
 								onChange={hanldeCategoryChange}
 								name="categories"
 								value="All"
 								checked={selectedCategory === "All"}
-								className="mr-2"
+								className="mr-2 border-orange-500 checked:bg-orange-500 checked checked:ring-orange-500 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
 							/>
 							<Label htmlFor="All">Todas Publicaciones</Label>
 						</div>
 						{categories.map((category) => (
 							<div
 								key={category.id}
-								className="flex items-center border rounded-lg p-4 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700">
+								className="flex items-center border rounded-lg p-4 border-orange-300 dark:border-gray-600 bg-orange-50 dark:bg-gray-700">
 								<Radio
 									color="black"
 									onChange={hanldeCategoryChange}
@@ -123,7 +123,7 @@ export function KeywordSearch({
 									name="categories"
 									value={category.id}
 									checked={Number(selectedCategory) === category.id}
-									className="mr-2"
+									className="mr-2 border-orange-500 checked:bg-orange-500 checked checked:ring-orange-500 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
 								/>
 								<Label htmlFor={category.slug}>{category.name}</Label>
 							</div>

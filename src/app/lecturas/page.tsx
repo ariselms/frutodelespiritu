@@ -18,7 +18,7 @@ export default async function ReflexionesPage({
 	page = Number(page) || 1; // Default to page 1
 	limit = Number(limit) || 10; // Default to 10 items per page
 	keyword = keyword || ""; // Default to empty string if no keyword
-	category || ""; // Default to empty string if no category
+	category = Number(category) || undefined; // Default to empty string if no category
 
 	// 3. Calculate the OFFSET for SQL pagination
 	const offset = (page - 1) * limit;
@@ -100,10 +100,21 @@ export default async function ReflexionesPage({
 	const totalItems = Number(countResult.rows[0].total_count);
 	const totalPages = Math.ceil(totalItems / limit);
 
+  let JumbotronTitle = "Todas las lecturas";
+
+  if(category === 1){
+    JumbotronTitle = "Estudios de la Biblia";
+  }
+
+  if(category === 2){
+    JumbotronTitle = "Reflexiones de la Biblia";
+  }
+
 	return (
 		<main>
+
 			<JumbotronSection
-				section="Lecturas Biblicas"
+				section={JumbotronTitle}
 				imageSrc="/images/cross-with-flowers.svg"
 			/>
 
