@@ -14,13 +14,9 @@ import { MainNavigation } from "@/static";
 import { NavigationItemType } from "@/models/navigationTypes";
 import Image from "next/image";
 import { OrangeLinkTheme } from "../theme";
+import { isActive } from "@/helpers";
 
 export default function MainHeader() {
-  const pathname = usePathname();
-
-  const isActive = (currentPath: string) => {
-    return pathname === currentPath;
-  };
 
   return (
     <Navbar

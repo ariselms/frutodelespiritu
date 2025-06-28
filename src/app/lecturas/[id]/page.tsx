@@ -4,10 +4,6 @@ import Link from "next/link";
 import "../../articles.css";
 import Image from "next/image";
 
-interface PageProps {
-  params: { id: string };
-}
-
 export default async function SingleLecturePage({
 	params
 }: {
