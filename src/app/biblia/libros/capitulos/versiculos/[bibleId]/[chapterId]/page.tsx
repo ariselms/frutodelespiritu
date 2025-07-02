@@ -58,8 +58,6 @@ export default async function SingleChapterPage({
 		// `chaptersRequestResult` already holds the resolved JSON data
 		BibleChapter = chaptersRequestResult;
 
-
-    console.log(BibleChapter.data);
 	} catch (error) {
 		// This catch block will now catch errors thrown by the `reject` call inside the Promise,
 		// or any unexpected errors during the Promise's execution.
@@ -72,7 +70,7 @@ export default async function SingleChapterPage({
 
 	return (
 		<main>
-			<section className="w-full dark:bg-gray-900 text-gray-800">
+			<section className="w-full dark:bg-gray-900 text-gray-800 mb-16">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<Link
 						className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 inline-flex items-center mb-8"
