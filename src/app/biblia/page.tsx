@@ -71,7 +71,7 @@ export default async function BibliaPage() {
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-900 text-gray-800">
-				<div className="max-w-7xl mx-auto py-16 px-2 xl:px-0">
+				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 
           <BibleHeaderSection
             section="La Santa Biblia"
