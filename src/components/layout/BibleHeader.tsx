@@ -19,7 +19,7 @@ export default function BibleHeader() {
 					className={`${
 						isActive(pathname, "/biblia") &&
 						"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex items-end`}
 					href="/biblia">
 					Versiones de la Biblia
 				</Link>
@@ -28,7 +28,7 @@ export default function BibleHeader() {
 						className={`${
 							isActive(pathname, `/biblia/libros/${bibleId}`) &&
 							"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12  flex items-end`}
 						href={`/biblia/libros/${bibleId}`}>
 						Libros
 					</Link>
@@ -41,7 +41,7 @@ export default function BibleHeader() {
 								`/biblia/libros/capitulos/${bibleId}/${bookId}`
 							) &&
 							"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12  flex items-end`}
 						href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
 						Capítulos
 					</Link>
@@ -54,7 +54,7 @@ export default function BibleHeader() {
 								`/biblia/libros/capitulos/versiculos/${bibleId}/${chapterId}`
 							) &&
 							"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12  flex items-end`}
 						href={`/biblia/libros/capitulos/versiculos/${bibleId}/${chapterId}`}>
 						Lectura
 					</Link>
@@ -63,7 +63,7 @@ export default function BibleHeader() {
 					className={`${
 						isActive(pathname, "/biblia/buscar") &&
 						"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12  flex items-end`}
 					href="/biblia/buscar">
 					Buscar por palabras claves
 				</Link>
@@ -71,7 +71,7 @@ export default function BibleHeader() {
 					className={`${
 						isActive(pathname, "/biblia/buscar/pasaje") &&
 						"bg-orange-500 dark:bg-gray-900 px-4 py-2 rounded-t-xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base`}
+					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-xs md:text-base min-h-20 sm:min-h-16 lg:min-h-12  flex items-end`}
 					href="/biblia/buscar/pasaje">
 					Buscar por pasajes
 				</Link>
