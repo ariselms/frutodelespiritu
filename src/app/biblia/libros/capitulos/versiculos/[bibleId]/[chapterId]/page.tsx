@@ -58,6 +58,7 @@ export default async function SingleChapterPage({
 		// `chaptersRequestResult` already holds the resolved JSON data
 		BibleChapter = chaptersRequestResult;
 
+
     console.log(BibleChapter.data);
 	} catch (error) {
 		// This catch block will now catch errors thrown by the `reject` call inside the Promise,
@@ -92,6 +93,7 @@ export default async function SingleChapterPage({
 								d="m15 19-7-7 7-7"
 							/>
 						</svg>
+						Capítulos de {BibleChapter.data.bookId}
 						Capítulos de {BibleChapter.data.bookId}
 					</Link>
 					<BibleHeaderSection
