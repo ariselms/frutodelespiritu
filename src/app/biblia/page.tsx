@@ -91,7 +91,7 @@ export default async function BibliaPage() {
 								/>
 								<Link
 									href={`/biblia/libros/${bible.bibleId}`}
-									className="flex items-center justify-center bg-orange-400 dark:bg-gray-950 text-white rounded-lg px-4 py-2 hover:text-gray-100 mt-auto">
+									className="flex items-center justify-center bg-orange-700 dark:bg-gray-950 text-white rounded-lg px-4 py-2 hover:text-gray-100 mt-auto">
 									Abrir Biblia
 									<svg
 										className="-mr-1 ml-2 h-4 w-4"

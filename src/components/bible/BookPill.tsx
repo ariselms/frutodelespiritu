@@ -14,7 +14,8 @@ export function BookPillBlock({
 	libros: any;
 }) {
 	return (
-		<div className="bg-orange-50 dark:bg-gray-800 p-4 rounded-xl mb-8">
+		<div
+			className={`bg-orange-50 dark:bg-gray-800 border-2 border-${colorAccent}-700 p-4 rounded-xl mb-8`}>
 			<div className="flex items-center justify-center mb-2">
 				<Image
 					alt={seccion}
@@ -30,7 +31,7 @@ export function BookPillBlock({
 			<p className="max-w-3xl mx-auto text-center mb-4 text-gray-900 dark:text-gray-100">
 				{seccionDescription}
 			</p>
-			<div className="bg-orange-50 dark:bg-gray-800  p-4 flex justify-center flex-wrap h-full max-w-3xl mx-auto">
+			<div className=" dark:bg-gray-800  p-4 flex justify-center flex-wrap h-full max-w-3xl mx-auto">
 				{libros?.map((l: any) => (
 					<Link
 						className={`bg-${colorAccent}-700 mr-2 mb-2 text-white font-bold px-7 py-3 rounded-full`}
