@@ -15,5 +15,5 @@ export default {
 				foreground: "var(--foreground)"
 			}
 		}
-	}
+	},
 } satisfies Config;

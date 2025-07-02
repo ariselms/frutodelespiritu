@@ -1,5 +1,6 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
+import { SeccionesBiblia } from "@/static";
 
 export default async function BibleBooksPage({
 	params
@@ -50,7 +51,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Pentateuco"
 						colorAccent="red"
-						seccionDescription="El Pentateuco consiste de los primeros cinco libros de la Biblia."
+						seccionDescription={SeccionesBiblia.Pentateuco}
 						seccionImgUrl="/images/bible-icons/pentateucos.png"
 						libros={pentateuco}
 					/>
@@ -58,7 +59,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Históricos"
 						colorAccent="orange"
-						seccionDescription="Los Históricos son libros de la Biblia que se escribieron despues del Pentateuco."
+						seccionDescription={SeccionesBiblia.LibrosHistoricos}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historicos}
 					/>
@@ -66,7 +67,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Poeticos"
 						colorAccent="purple"
-						seccionDescription="Los Poeticos son libros de la Biblia que se escribieron despues del Pentateuco."
+						seccionDescription={SeccionesBiblia.LibrosPoeticos}
 						seccionImgUrl="/images/bible-icons/poeticos.png"
 						libros={poetiocs}
 					/>
@@ -74,7 +75,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Profetas"
 						colorAccent="blue"
-						seccionDescription="Los Libros de los Profetas son libros de la Biblia."
+						seccionDescription={SeccionesBiblia.LibrosProfeticos}
 						seccionImgUrl="/images/bible-icons/profetas.png"
 						libros={profetas}
 					/>
@@ -86,7 +87,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Evangelios"
 						colorAccent="orange"
-						seccionDescription="Los Evangelios son libros de la Biblia."
+						seccionDescription={SeccionesBiblia.Evangelios}
 						seccionImgUrl="/images/bible-icons/evangelios.png"
 						libros={evangelios}
 					/>
@@ -94,7 +95,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Historia"
 						colorAccent="orange"
-						seccionDescription="Los Libros históricos son libros de la Biblia."
+						seccionDescription={SeccionesBiblia.HistoriaNuevoTestamento}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historico}
 					/>
@@ -102,7 +103,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Cartas"
 						colorAccent="green"
-						seccionDescription="Los Libros de las Cartas son libros de la Biblia."
+						seccionDescription={SeccionesBiblia.CartasApostolicas}
 						seccionImgUrl="/images/bible-icons/cartas.png"
 						libros={cartas}
 					/>
@@ -110,7 +111,7 @@ export default async function BibleBooksPage({
 					<BookPillBlock
 						seccion="Revelaciones"
 						colorAccent="blue"
-						seccionDescription="Los Libros de las Revelaciones son libros de la Biblia."
+						seccionDescription={SeccionesBiblia.Apocalipsis}
 						seccionImgUrl="/images/bible-icons/revelaciones.png"
 						libros={revelaciones}
 					/>

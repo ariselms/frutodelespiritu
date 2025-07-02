@@ -52,3 +52,22 @@ if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
 }
 
 export const serverBaseUrl = baseUrl;
+
+export const SeccionesBiblia = {
+	Pentateuco:
+		"Los primeros cinco libros del Antiguo Testamento, también conocidos como la Torá.",
+	LibrosHistoricos:
+		"Libros que narran la historia de Israel, desde la conquista de Canaán al exilio.",
+	LibrosPoeticos:
+		"Libros de sabiduría y poesía que exploran la condición humana y la relación con Dios.",
+	LibrosProfeticos:
+		"Libros que contienen los mensajes de Dios al pueblo de Israel a través de sus profetas.",
+	Evangelios:
+		"Los cuatro relatos de la vida, enseñanzas, muerte y resurrección de Jesucristo.",
+	HistoriaNuevoTestamento:
+		"Narra la historia de los apóstoles y el crecimiento de la iglesia primitiva.",
+	CartasApostolicas:
+		"Cartas de los apóstoles a las iglesias para instruir, animar y corregir su fe.",
+	Apocalipsis:
+		"Libro profético que revela el fin de los tiempos y la victoria final de Dios."
+};
