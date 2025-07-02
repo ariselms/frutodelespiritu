@@ -1,0 +1,330 @@
+/*
+ * Base CSS Stylesheet (Scoped for Rich Text Content)
+ * This file provides foundational styles for common HTML elements
+ * specifically within a container element with the class `bible-chapter`.
+ * This prevents global overrides of Tailwind CSS and allows selective styling
+ * of HTML content loaded from a database.
+ */
+
+/* Define CSS variables for colors within the .bible-chapter scope */
+.bible-chapter {
+  /* Light theme defaults */
+  --rich-text-color-primary: #333;
+  --rich-text-color-heading: #222;
+  --rich-text-color-secondary: #555;
+  --rich-text-color-link: #1a73e8;
+  --rich-text-color-link-visited: #551a8b;
+  --rich-text-color-border: #ccc;
+  --rich-text-color-background-light: #eee; /* For code, mark */
+  --rich-text-color-background-medium: #f4f4f4; /* For pre */
+  --rich-text-color-background-blockquote: #f9f9f9; /* For blockquote */
+  --rich-text-color-background-table-header: #f2f2f2; /* For table headers */
+  --rich-text-color-button-primary: #007bff;
+  --rich-text-color-button-primary-hover: #0056b3;
+}
+
+/* Dark theme overrides when html has 'dark' class */
+html.dark .bible-chapter {
+  --rich-text-color-primary: #e0e0e0;
+  --rich-text-color-heading: #f0f0f0;
+  --rich-text-color-secondary: #aaaaaa;
+  --rich-text-color-link: #82b1ff;
+  --rich-text-color-link-visited: #b39ddb;
+  --rich-text-color-border: #555;
+  --rich-text-color-background-light: #444; /* For code, mark */
+  --rich-text-color-background-medium: #333; /* For pre */
+  --rich-text-color-background-blockquote: #2a2a2a; /* For blockquote */
+  --rich-text-color-background-table-header: #3a3a3a; /* For table headers */
+  --rich-text-color-button-primary: #1a73e8; /* Can adjust if needed for dark mode */
+  --rich-text-color-button-primary-hover: #0d47a1; /* Can adjust if needed for dark mode */
+}
+
+
+/* 1. Basic HTML Resets & Body Styles (scoped to .bible-chapter) */
+.bible-chapter {
+  /* Ensure consistent box-sizing for the rich text content itself */
+  box-sizing: border-box;
+}
+
+.bible-chapter *,
+.bible-chapter *::before,
+.bible-chapter *::after {
+  box-sizing: inherit;
+}
+
+.bible-chapter html { /* html selector here is mostly symbolic for nested structure, usually not needed */
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.bible-chapter body { /* body selector here is mostly symbolic for nested structure, usually not needed */
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: var(--rich-text-color-primary); /* Use variable */
+  background-color: transparent; /* Assuming container sets the background */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Typography - Headings (scoped to .bible-chapter) */
+.bible-chapter h1,
+.bible-chapter h2,
+.bible-chapter h3,
+.bible-chapter h4,
+.bible-chapter h5,
+.bible-chapter h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--rich-text-color-heading); /* Use variable */
+}
+
+.bible-chapter h1 {
+  font-size: 2.5em;
+}
+
+.bible-chapter h2 {
+  font-size: 2em;
+}
+
+.bible-chapter h3 {
+  font-size: 1.75em;
+}
+
+.bible-chapter h4 {
+  font-size: 1.5em;
+}
+
+.bible-chapter h5 {
+  font-size: 1.25em;
+}
+
+.bible-chapter h6 {
+  font-size: 1em;
+}
+
+/* 3. Typography - Paragraphs and Text Elements (scoped to .bible-chapter) */
+.bible-chapter p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.6;
+  color: var(--rich-text-color-heading);
+  font-size: 18px;
+}
+
+.bible-chapter p.s1{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bible-chapter strong {
+  font-weight: 700;
+}
+
+.bible-chapter em {
+  font-style: italic;
+}
+
+.bible-chapter small {
+  font-size: 0.8em;
+}
+
+.bible-chapter mark {
+  background-color: var(--rich-text-color-background-light); /* Use variable */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* 4. Links (scoped to .bible-chapter) */
+.bible-chapter a {
+  color: var(--rich-text-color-link); /* Use variable */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bible-chapter a:hover {
+  text-decoration: underline;
+}
+
+.bible-chapter a:visited {
+  color: var(--rich-text-color-link-visited); /* Use variable */
+}
+
+/* 5. Lists (scoped to .bible-chapter) */
+.bible-chapter ul,
+.bible-chapter ol {
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-left: 20px;
+  color: var(--rich-text-color-heading)
+}
+
+.bible-chapter ul {
+  list-style-type: disc;
+}
+
+.bible-chapter ol {
+  list-style-type: decimal;
+}
+
+.bible-chapter li {
+  margin-bottom: 0.5em;
+}
+
+/* Reset for lists without bullet points (scoped to .bible-chapter) */
+.bible-chapter .list-none {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 6. Blockquotes (scoped to .bible-chapter) */
+.bible-chapter blockquote {
+  margin: 0 0 1em;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--rich-text-color-border); /* Use variable */
+  color: var(--rich-text-color-secondary); /* Use variable */
+  font-style: italic;
+  background-color: var(--rich-text-color-background-blockquote); /* Use variable */
+}
+
+.bible-chapter blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* 7. Code and Preformatted Text (scoped to .bible-chapter) */
+.bible-chapter code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: var(--rich-text-color-background-light); /* Use variable */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.bible-chapter pre {
+  background-color: var(--rich-text-color-background-medium); /* Use variable */
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-bottom: 1em;
+}
+
+.bible-chapter pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 8. Tables (scoped to .bible-chapter) */
+.bible-chapter table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.bible-chapter th,
+.bible-chapter td {
+  border: 1px solid var(--rich-text-color-border); /* Use variable */
+  padding: 0.8em;
+  text-align: left;
+}
+
+.bible-chapter th {
+  background-color: var(--rich-text-color-background-table-header); /* Use variable */
+  font-weight: 700;
+}
+
+/* 9. Images and Media (scoped to .bible-chapter) */
+.bible-chapter img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.bible-chapter figure {
+  margin: 0 0 1em;
+  padding: 0;
+}
+
+.bible-chapter figcaption {
+  font-size: 0.9em;
+  color: var(--rich-text-color-secondary); /* Use variable */
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* 10. Horizontal Rule (scoped to .bible-chapter) */
+.bible-chapter hr {
+  border: 0;
+  border-top: 1px solid var(--rich-text-color-border); /* Use variable */
+  margin: 2em 0;
+}
+
+/* 11. Form Elements - Basic Resets for Consistency (scoped to .bible-chapter) */
+.bible-chapter input[type="text"],
+.bible-chapter input[type="email"],
+.bible-chapter input[type="password"],
+.bible-chapter input[type="number"],
+.bible-chapter input[type="search"],
+.bible-chapter textarea,
+.bible-chapter select {
+  width: 100%;
+  padding: 0.75em;
+  margin-bottom: 1em;
+  border: 1px solid var(--rich-text-color-border); /* Use variable */
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: inherit;
+  line-height: 1.5;
+  box-sizing: border-box;
+  color: var(--rich-text-color-primary); /* Ensure form text also switches color */
+  background-color: var(--rich-text-color-background-blockquote); /* Use similar background for input fields */
+}
+
+.bible-chapter textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.bible-chapter button,
+.bible-chapter input[type="submit"],
+.bible-chapter input[type="button"] {
+  display: inline-block;
+  padding: 0.75em 1.25em;
+  margin-bottom: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--rich-text-color-button-primary); /* Use variable */
+  color: #fff; /* Keep button text white for contrast */
+  font-size: 1em;
+  cursor: pointer;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.bible-chapter button:hover,
+.bible-chapter input[type="submit"]:hover,
+.bible-chapter input[type="button"]:hover {
+  background-color: var(--rich-text-color-button-primary-hover); /* Use variable */
+}
+
+/* Accessibility (scoped to .bible-chapter) */
+.bible-chapter [tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+/* Utility for clearing floats (if you still use them) (scoped to .bible-chapter) */
+.bible-chapter .clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
