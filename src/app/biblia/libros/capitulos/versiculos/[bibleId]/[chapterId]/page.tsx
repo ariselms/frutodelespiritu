@@ -96,7 +96,7 @@ export default async function SingleChapterPage({
 						Capítulos de {BibleChapter.data.bookId}
 					</Link>
 					<BibleHeaderSection
-						section={`Leyendo ${BibleChapter.data.reference}`}
+						section={`${BibleChapter.data.reference}`}
 					/>
 					<BibleNavigationAndNotes BibleChapterData={BibleChapter.data} />
 					<div
