@@ -30,6 +30,8 @@ export default async function SingleChapterPage({
 
     BibleChapter = await chaptersRequest.json();
 
+    console.log(BibleChapter.data);
+
   } catch (error) {
     console.error(error);
   }
@@ -41,15 +43,19 @@ export default async function SingleChapterPage({
 					<BibleHeaderSection
 						section={`Leyendo ${BibleChapter.data.reference}`}
 					/>
-					<nav className="flex items-center justify-between px-4">
-						<button className=" rounded-xl border border-orange-200 dark:border-gray-700 bg-orange-100 px-5 py-1 font-bold">
-							{BibleChapter.data.previous.bookId}{" "}
-							{BibleChapter.data.previous.number}
-						</button>
+					<nav className="flex items-center justify-between">
+						{BibleChapter.data.previous && (
+							<button className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
+								{BibleChapter.data.previous.bookId}{" "}
+								{BibleChapter.data.previous.number}
+							</button>
+						)}
 
-						<button className=" rounded-xl border border-orange-200 dark:border-gray-700 bg-orange-100 px-5 py-1 font-bold">
-							{BibleChapter.data.next.number} {BibleChapter.data.next.bookId}
-						</button>
+						{BibleChapter.data.next && (
+							<button className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
+								{BibleChapter.data.next.number} {BibleChapter.data.next.bookId}
+							</button>
+						)}
 					</nav>
 					<div
 						className="max-w-[80ch] mx-auto"
