@@ -58,7 +58,7 @@ export default async function SingleChapterPage({
 							<Link
 								href={`/biblia/libros/capitulos/versiculos/${BibleChapter.data.bibleId}/${BibleChapter.data.next.id}`}
 								className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
-								{BibleChapter.data.next.number} {BibleChapter.data.next.bookId}
+								{BibleChapter.data.next.bookId} {BibleChapter.data.next.number}
 							</Link>
 						)}
 					</nav>
