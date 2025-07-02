@@ -60,7 +60,7 @@ export default async function BibleChaptersPage({
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<BibleHeaderSection section={`Capítulos de ${Bible.nameLong}`} />
 
-					<div className="flex items-center flex-wrap gap-2">
+					<div className="flex items-center justify-center flex-wrap gap-2">
 						{BookChapters.map((book: any) => (
 							<Link
 								key={book.id}
