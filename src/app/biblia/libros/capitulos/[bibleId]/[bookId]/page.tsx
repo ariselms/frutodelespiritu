@@ -5,7 +5,6 @@ export default async function BibleChaptersPage({
 }: {
 	params: Promise<{ bibleId: string; bookId: string }>;
 }) {
-
   const { bibleId, bookId } = await params;
 
   const BibleAPIKey = process.env.BIBLE_API_KEY;
@@ -47,7 +46,6 @@ export default async function BibleChaptersPage({
 
     Bible = book.data;
     BookChapters = chapterResponse.data;
-    console.log(BookChapters);
 
   } catch (error) {
     console.error(
