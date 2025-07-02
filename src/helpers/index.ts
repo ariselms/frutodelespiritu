@@ -1,9 +1,4 @@
-"use client"
+export const isActive = (urlPathname: string, linkPathName: string) => {
 
-import { usePathname } from "next/navigation";
-
-export const isActive = (currentPath: string,) => {
-  const pathname = usePathname();
-
-  return pathname === currentPath;
+  return urlPathname === linkPathName;
 };
