@@ -1,4 +1,5 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
+import Link from "next/link";
 
 export default async function SingleChapterPage({
 	params
@@ -45,16 +46,20 @@ export default async function SingleChapterPage({
 					/>
 					<nav className="flex items-center justify-between">
 						{BibleChapter.data.previous && (
-							<button className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
+							<Link
+								href={`/biblia/libros/capitulos/versiculos/${BibleChapter.data.bibleId}/${BibleChapter.data.previous.id}`}
+								className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
 								{BibleChapter.data.previous.bookId}{" "}
 								{BibleChapter.data.previous.number}
-							</button>
+							</Link>
 						)}
 
 						{BibleChapter.data.next && (
-							<button className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
+							<Link
+								href={`/biblia/libros/capitulos/versiculos/${BibleChapter.data.bibleId}/${BibleChapter.data.next.id}`}
+								className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50">
 								{BibleChapter.data.next.number} {BibleChapter.data.next.bookId}
-							</button>
+							</Link>
 						)}
 					</nav>
 					<div
