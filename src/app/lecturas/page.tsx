@@ -1,5 +1,5 @@
 import JumbotronSection from "@/components/JumbotronSection";
-import { KeywordSearch } from "@/components/blog/KeywordSearch";
+import { LectureSearch } from "@/components/blog/LectureSearch";
 // We will create this new component for the pagination buttons
 import { PaginationControls } from "@/components/blog/PaginationControls";
 import { BlogList } from "@/components/blog/item";
@@ -119,7 +119,7 @@ export default async function ReflexionesPage({
 			/>
 
 			<BlogList articles={articles}>
-				<KeywordSearch
+				<LectureSearch
 					searchTerm={keyword || ""}
 					categories={categoriesResult.rows}
 				/>

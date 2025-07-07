@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Label, Radio } from "flowbite-react";
 
 // TODO: Create a type for categories if needed
-export function KeywordSearch({
+export function LectureSearch({
 	searchTerm,
 	categories
 }: {
@@ -25,8 +25,8 @@ export function KeywordSearch({
 		setInputSearchTerm(event.target.value);
 		if (event.target.value === "") {
 			newParams.delete("keyword"); // Remove keyword if input is empty
-      newParams.delete("category");
-      setSelectedCategory("All");
+			newParams.delete("category");
+			setSelectedCategory("All");
 			router.push(`/lecturas?${newParams.toString()}`);
 		}
 	};
@@ -36,25 +36,25 @@ export function KeywordSearch({
 		newParams.set("keyword", inputSearchTerm);
 		newParams.set("page", "1"); // Reset to page 1 on new search
 		newParams.set("limit", "10"); // Reset to default limit
-    newParams.delete("category");
-    setSelectedCategory("All");
+		newParams.delete("category");
+		setSelectedCategory("All");
 		router.push(`/lecturas?${newParams.toString()}`);
 	};
 
 	const hanldeCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		newParams.set("page", "1"); // Reset to page 1 on new search
 		newParams.set("limit", "10"); // Reset to default limit
-    newParams.delete("keyword");
-    setInputSearchTerm("");
+		newParams.delete("keyword");
+		setInputSearchTerm("");
 
-    const categoryValye = event.target.value
-    setSelectedCategory(categoryValye);
+		const categoryValye = event.target.value
+		setSelectedCategory(categoryValye);
 
-    if(categoryValye === "All"){
-      newParams.delete("category");
-    } else {
-      newParams.set("category", categoryValye);
-    }
+		if(categoryValye === "All"){
+		newParams.delete("category");
+		} else {
+		newParams.set("category", categoryValye);
+		}
 
 		router.push(`/lecturas?${newParams.toString()}`);
 	};

@@ -91,10 +91,10 @@ export function BlogItem({ article }: { article: any }) {
 // TODO: Create Blog type
 export function BlogList({ children, articles }: { children: React.ReactNode; articles: any }) {
 	return (
-		<section className="bg-white dark:bg-gray-800 py-24 sm:py-32">
+		<section className="bg-white dark:bg-gray-800 py-8 sm:py-16">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<BlogSection />
-        {children}
+        		{children}
 				<div className="mt-16 space-y-20 lg:mt-20 lg:space-y-8  ">
 					{articles?.map((article: any) => (
 						<BlogItem key={article.id} article={article} />

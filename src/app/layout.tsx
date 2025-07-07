@@ -29,6 +29,8 @@ export default function RootLayout({
 		<html className="dark" lang="es" suppressHydrationWarning>
 			<head>
 				<ThemeModeScript />
+				{/* add favicon */}
+				<link rel="icon" href="/images/logo.png" />
 			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
