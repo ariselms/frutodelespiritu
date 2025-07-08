@@ -24,8 +24,6 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 
         const targetElement = contentRef.current.querySelectorAll(`[id="${targetId}"]`)[0];
 
-        console.log(targetElement)
-
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: "smooth" });
         }
