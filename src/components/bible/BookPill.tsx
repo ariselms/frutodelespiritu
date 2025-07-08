@@ -2,13 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 export function BookPillBlock({
 	seccion,
-  colorAccent,
 	seccionDescription,
 	seccionImgUrl,
 	libros
 }: {
 	seccion: string;
-  colorAccent: string;
 	seccionDescription: string;
 	seccionImgUrl: string;
 	libros: any;

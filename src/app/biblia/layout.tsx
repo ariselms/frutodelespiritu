@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import BibleHeader from "@/components/layout/BibleHeader";
-import { BackButton } from "@/components/BackButton";
 
 export const metadata: Metadata = {
 	title: "Fruto del Espíritu",

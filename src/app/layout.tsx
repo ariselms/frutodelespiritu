@@ -29,8 +29,11 @@ export default function RootLayout({
 		<html className="dark" lang="es" suppressHydrationWarning>
 			<head>
 				<ThemeModeScript />
-				{/* add favicon */}
-				<link rel="icon" href="/images/logo.png" />
+				<link rel="apple-touch-icon" sizes="180x180" href="/ios/180.png" />
+				<link rel="icon" type="image/png" sizes="32x32" href="/ios/32.png" />
+				<link rel="icon" type="image/png" sizes="16x16" href="/ios/16.png" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="icon" type="image/png" href="/images/logo.png" />
 			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

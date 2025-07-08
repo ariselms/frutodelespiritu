@@ -66,8 +66,9 @@ export default function JumbotronMain() {
 					<Image
 						width={300}
 						height={300}
+            className="w-full h-full object-cover"
 						src="/images/pray.svg"
-						alt="phone illustration"
+						alt="praying man stricker illustration"
 					/>
 				</div>
 			</div>

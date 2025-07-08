@@ -2,6 +2,7 @@
 // TODO: add the functionality to create cards to share on Social Media
 
 import { BibleSearch } from "@/components/bible/BibleSearch";
+import { SearchResultList } from "@/components/bible/SearchResults";
 import BibleHeaderSection from "@/components/layout/BibleSection";
 
 export default async function BuscarBibliaPage() {

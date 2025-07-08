@@ -50,7 +50,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Pentateuco"
-						colorAccent="red"
 						seccionDescription={SeccionesBiblia.Pentateuco}
 						seccionImgUrl="/images/bible-icons/pentateucos.png"
 						libros={pentateuco}
@@ -58,7 +57,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Históricos"
-						colorAccent="orange"
 						seccionDescription={SeccionesBiblia.LibrosHistoricos}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historicos}
@@ -66,7 +64,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Poeticos"
-						colorAccent="purple"
 						seccionDescription={SeccionesBiblia.LibrosPoeticos}
 						seccionImgUrl="/images/bible-icons/poeticos.png"
 						libros={poetiocs}
@@ -74,7 +71,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Profetas"
-						colorAccent="blue"
 						seccionDescription={SeccionesBiblia.LibrosProfeticos}
 						seccionImgUrl="/images/bible-icons/profetas.png"
 						libros={profetas}
@@ -86,7 +82,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Evangelios"
-						colorAccent="orange"
 						seccionDescription={SeccionesBiblia.Evangelios}
 						seccionImgUrl="/images/bible-icons/evangelios.png"
 						libros={evangelios}
@@ -94,7 +89,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Historia"
-						colorAccent="orange"
 						seccionDescription={SeccionesBiblia.HistoriaNuevoTestamento}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historico}
@@ -102,7 +96,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Cartas"
-						colorAccent="green"
 						seccionDescription={SeccionesBiblia.CartasApostolicas}
 						seccionImgUrl="/images/bible-icons/cartas.png"
 						libros={cartas}
@@ -110,7 +103,6 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Revelaciones"
-						colorAccent="blue"
 						seccionDescription={SeccionesBiblia.Apocalipsis}
 						seccionImgUrl="/images/bible-icons/revelaciones.png"
 						libros={revelaciones}
