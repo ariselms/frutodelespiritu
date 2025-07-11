@@ -1,12 +1,11 @@
-import { Button } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
+import { BibleResponseType } from "@/models/bibleTypes";
 
 export const SpanishBibleItem = (
-  { bible,
-    setSelectedSpanishBible } :
-  { bible: any,
-    setSelectedSpanishBible?: any }) => {
+  { bible } :
+  { bible: BibleResponseType }) => {
+
   return (
 		<div
 			className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-xl p-4 flex flex-col h-full"

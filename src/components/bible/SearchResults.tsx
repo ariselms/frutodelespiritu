@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { SearchResultType } from "@/models/bibleTypes";
 
-export function SearchResultList({ results }: { results: any[] }) {
+export function SearchResultList({ results }: { results: SearchResultType[] }) {
+
 	return (
 		<section className="bg-white dark:bg-gray-800 py-8 sm:py-16">
 			<div className="mx-auto max-w-7xl">

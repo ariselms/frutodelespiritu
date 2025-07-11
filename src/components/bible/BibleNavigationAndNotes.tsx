@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { ChapterType } from "@/models/bibleTypes";
 
-export function BibleNavigationAndNotes({BibleChapterData}: any) {
+export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData: ChapterType }) {
+
   return (
 		<nav className="flex items-center justify-between mb-4 xl:-mb-10">
 			{BibleChapterData.previous && (

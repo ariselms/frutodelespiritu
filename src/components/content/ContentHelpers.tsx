@@ -1,11 +1,10 @@
-import { Button } from "flowbite-react";
 import Link from "next/link";
 import { BtnLinkBtnTextProps } from "@/models/componentTypes";
 
 export const ContentLeftTwoImagesRightDescription = ({
-	firstParagraph, 
-	secondParagraph, 
-	btnLink, 
+	firstParagraph,
+	secondParagraph,
+	btnLink,
 	btnText
 } : BtnLinkBtnTextProps) => (
   <>
@@ -15,7 +14,7 @@ export const ContentLeftTwoImagesRightDescription = ({
     <p>
 			{secondParagraph}
     </p>
-    <Link 
+    <Link
       href={btnLink}
       className={ContentWithImagesBtnStyles}>
         {btnText}
@@ -24,9 +23,9 @@ export const ContentLeftTwoImagesRightDescription = ({
 );
 
 export const ContentRightTwoImagesLeftDescription = ({
-  firstParagraph, 
-  secondParagraph, 
-  btnLink, 
+  firstParagraph,
+  secondParagraph,
+  btnLink,
   btnText
 } : BtnLinkBtnTextProps) => (
   <>
@@ -36,7 +35,7 @@ export const ContentRightTwoImagesLeftDescription = ({
     <p>
       {secondParagraph}
     </p>
-    <Link 
+    <Link
       href={btnLink}
       className={ContentWithImagesBtnStyles}>
         {btnText}

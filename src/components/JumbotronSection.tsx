@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { JumbotronSectionProps } from "@/models/componentTypes";
 
-export default function JumbotronSection({section, imageSrc}: {section: string, imageSrc: string}) {
+export default function JumbotronSection({section, imageSrc}: JumbotronSectionProps) {
   return (
     <section className="bg-orange-50 dark:bg-gray-900 py-16">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">

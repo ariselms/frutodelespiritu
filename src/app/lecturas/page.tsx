@@ -117,7 +117,7 @@ export default async function ReflexionesPage({
 
 			<JumbotronSection
 				section={JumbotronTitle}
-				imageSrc="/images/cross-with-flowers.svg"
+				imageSrc="/images/bible-with-flowers.svg"
 			/>
 
 			<ArticleList articles={articles}>

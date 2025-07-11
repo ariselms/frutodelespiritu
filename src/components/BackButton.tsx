@@ -17,7 +17,7 @@ export function BackButton() {
           d="M15 19l-7-7 7-7"
         />
       </svg>
-      <span className="ml-2">Volver</span>
+      <span className="ml-2">Regresar</span>
     </div>
   );
 }
