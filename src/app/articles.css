@@ -12,8 +12,8 @@
   --rich-text-color-primary: #333;
   --rich-text-color-heading: #222;
   --rich-text-color-secondary: #555;
-  --rich-text-color-link: #1a73e8;
-  --rich-text-color-link-visited: #551a8b;
+  --rich-text-color-link: #D03801;
+  --rich-text-color-link-visited: #D03801;
   --rich-text-color-border: #ccc;
   --rich-text-color-background-light: #eee; /* For code, mark */
   --rich-text-color-background-medium: #f4f4f4; /* For pre */
@@ -28,8 +28,8 @@ html.dark .rich-text-content {
   --rich-text-color-primary: #e0e0e0;
   --rich-text-color-heading: #f0f0f0;
   --rich-text-color-secondary: #aaaaaa;
-  --rich-text-color-link: #82b1ff;
-  --rich-text-color-link-visited: #b39ddb;
+  --rich-text-color-link: #f0f0f0;
+  --rich-text-color-link-visited: #f0f0f0;
   --rich-text-color-border: #555;
   --rich-text-color-background-light: #444; /* For code, mark */
   --rich-text-color-background-medium: #333; /* For pre */

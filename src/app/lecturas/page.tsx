@@ -1,9 +1,10 @@
 import JumbotronSection from "@/components/JumbotronSection";
-import { LectureSearch } from "@/components/blog/LectureSearch";
+import { ArticleSearch } from "@/components/blog/ArticleSearch";
 // We will create this new component for the pagination buttons
 import { PaginationControls } from "@/components/blog/PaginationControls";
-import { BlogList } from "@/components/blog/item";
+import { ArticleList } from "@/components/blog/item";
 import { sql } from "@vercel/postgres";
+import { ArticleType, CategoryType } from "@/models/articlesTypes";
 
 // Server Components receive `searchParams` as a prop
 export default async function ReflexionesPage({
@@ -18,7 +19,7 @@ export default async function ReflexionesPage({
 	page = Number(page) || 1; // Default to page 1
 	limit = Number(limit) || 10; // Default to 10 items per page
 	keyword = keyword || ""; // Default to empty string if no keyword
-	category = Number(category) || undefined; // Default to empty string if no category
+	category = Number(category) || undefined; // Default to undefined if no category
 
 	// 3. Calculate the OFFSET for SQL pagination
 	const offset = (page - 1) * limit;
@@ -96,11 +97,12 @@ export default async function ReflexionesPage({
 		]);
 	}
 
-	const articles = articlesResult.rows;
-	const totalItems = Number(countResult.rows[0].total_count);
-	const totalPages = Math.ceil(totalItems / limit);
+	const articles: ArticleType[] = articlesResult.rows;
+  const categories: CategoryType[] = categoriesResult.rows;
+	const totalItems: number = Number(countResult.rows[0].total_count);
+	const totalPages: number = Math.ceil(totalItems / limit);
 
-  let JumbotronTitle = "Todas las lecturas";
+  let JumbotronTitle: string = "Todas las lecturas";
 
   if(category === 1){
     JumbotronTitle = "Estudios de la Biblia";
@@ -118,12 +120,12 @@ export default async function ReflexionesPage({
 				imageSrc="/images/cross-with-flowers.svg"
 			/>
 
-			<BlogList articles={articles}>
-				<LectureSearch
+			<ArticleList articles={articles}>
+				<ArticleSearch
 					searchTerm={keyword || ""}
-					categories={categoriesResult.rows}
+					categories={categories}
 				/>
-			</BlogList>
+			</ArticleList>
 
 			<PaginationControls
 				currentPage={page}

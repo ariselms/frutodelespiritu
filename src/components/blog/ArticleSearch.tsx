@@ -1,21 +1,24 @@
 "use client";
 
+import { CategoryType } from "@/models/articlesTypes";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Label, Radio } from "flowbite-react";
 
 // TODO: Create a type for categories if needed
-export function LectureSearch({
+export function ArticleSearch({
 	searchTerm,
 	categories
 }: {
 	searchTerm: string;
-	categories: any[];
+	categories: CategoryType[];
 }) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [inputSearchTerm, setInputSearchTerm] = useState(searchTerm || "");
-	const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "All");
+	const [selectedCategory, setSelectedCategory] = useState(
+		searchParams.get("category") || "All"
+	);
 	const newParams = new URLSearchParams(searchParams.toString());
 
 	const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,13 +50,13 @@ export function LectureSearch({
 		newParams.delete("keyword");
 		setInputSearchTerm("");
 
-		const categoryValye = event.target.value
+		const categoryValye = event.target.value;
 		setSelectedCategory(categoryValye);
 
-		if(categoryValye === "All"){
-		newParams.delete("category");
+		if (categoryValye === "All") {
+			newParams.delete("category");
 		} else {
-		newParams.set("category", categoryValye);
+			newParams.set("category", categoryValye);
 		}
 
 		router.push(`/lecturas?${newParams.toString()}`);
@@ -119,13 +122,13 @@ export function LectureSearch({
 								<Radio
 									color="black"
 									onChange={hanldeCategoryChange}
-									id={category.id}
+									id={category.id.toString()}
 									name="categories"
 									value={category.id}
 									checked={Number(selectedCategory) === category.id}
 									className="mr-2 border-orange-500 checked:bg-orange-500 checked checked:ring-orange-500 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
 								/>
-								<Label htmlFor={category.slug}>{category.name}</Label>
+								<Label htmlFor={category.id.toString()}>{category.name}</Label>
 							</div>
 						))}
 					</div>

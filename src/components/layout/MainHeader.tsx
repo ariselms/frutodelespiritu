@@ -23,7 +23,7 @@ export default function MainHeader() {
 		<Navbar
 			theme={OrangeLinkTheme}
 			fluid
-			className="bg-amber-50 py-4 border-b border-amber-100">
+			className="bg-orange-50 py-4 border-b border-orange-300 dark:bg-gray-900 dark:border-gray-700">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
@@ -35,7 +35,7 @@ export default function MainHeader() {
 				<span
 					className={`${
 						isActive(pathname, "/") &&
-						"text-orange-600 hover:text-orange-700 dark:text-orange-200 dark:hover:text-orange-400"
+						"text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-500"
 					} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
 					Fruto del Espíritu
 				</span>

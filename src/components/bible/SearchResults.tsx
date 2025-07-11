@@ -33,7 +33,7 @@ export const SearchResultItem = ({ result }: { result: any }) => {
   const verseId = bibleVerseParts[2];
 
 	return (
-		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-400 dark:border-gray-600 rounded-xl p-4 flex flex-col justify-between">
+		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-xl p-4 flex flex-col justify-between">
 			<div>
 				<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
 					{result.reference}
@@ -42,8 +42,8 @@ export const SearchResultItem = ({ result }: { result: any }) => {
 			</div>
 			<Link
 				href={`/biblia/libros/capitulos/versiculos/${result.bibleId}/${result.chapterId}#${verseId}`}
-				className="text-orange-500 hover:underline mt-10 block">
-				Ver más
+				className="inline-block text-center rounded-2xl text-orange-700 dark:text-gray-100 bg-orange-200 dark:bg-gray-800 px-4 py-2 border border-orange-300 dark:border-gray-600 mt-8">
+				Leer contexto
 			</Link>
 		</div>
 	);
