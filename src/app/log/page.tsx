@@ -1,8 +1,10 @@
 "use client";
 
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 export default function LogPage(){
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [code, setCode] = useState<string>("");
   const [codeSent, setCodeSent] = useState<boolean>(false);
@@ -11,34 +13,88 @@ export default function LogPage(){
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       setProcessing(true);
-      // Here you would typically send the email to your backend for processing
-      console.log("Email submitted:", email);
-      // Reset the email input after submission
-      setCodeSent(true);
-      setEmail("");
-    } catch (error) {
+
+			const request = await fetch("/api/log", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ email })
+			});
+
+			const response = await request.json();
+
+			if (response.success) {
+
+				setCodeSent(true);
+
+			} else {
+
+        setError(
+					response.message || "An error occurred while submitting the code."
+				);
+
+			}
+		} catch (error) {
+
       console.error("Error submitting email:", error);
-      // Handle error (e.g., show a notification)
+      setError("An error occurred while submitting your email. Please try again.");
+
     } finally {
       setProcessing(false);
     }
   };
 
   const handleCodeSubmit = async (e: React.FormEvent) => {
+
 		e.preventDefault();
+
 		try {
-			setProcessing(true);
-			// Here you would typically send the email to your backend for processing
-			console.log("Code submitted:", code);
-      // Handle successful code submission (e.g., redirect to a dashboard)
+      setProcessing(true);
+
+			if (!code || !email) {
+				throw new Error("Email and code are required");
+			}
+
+			if (code.length !== 6) {
+				const errorMessage = "El código debe tener 6 digitos";
+				throw new Error(errorMessage);
+			}
+
+			const request = await fetch("/api/auth", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ email, code })
+			});
+
+			const response = await request.json();
+
+			if (response.success) {
+				// toast.success(response.message);
+				router.push("/admin");
+
+			} else {
+
+        console.error(response.message);
+
+			}
 		} catch (error) {
-			console.error("Error submitting code:", error);
-			// Handle error (e.g., show a notification)
+
+      console.error(error);
+
+      const errorMessage =
+				error instanceof Error ? error.message : "An error occurred";
+
 		} finally {
-			setProcessing(false);
-		}
+
+      setProcessing(false);
+
+    }
 	};
 
   return (

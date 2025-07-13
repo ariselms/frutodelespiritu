@@ -15,9 +15,20 @@ import { NavigationItemType } from "@/models/navigationTypes";
 import Image from "next/image";
 import { OrangeLinkTheme } from "../theme";
 import { isActive } from "@/helpers";
+import { useAuthContext } from "@/context/authContext";
+import { useEffect } from "react";
 
 export default function MainHeader() {
   const pathname = usePathname();
+  const {user, persistUser, signOutUser} = useAuthContext();
+
+  useEffect(() => {
+
+    persistUser();
+
+  }, [pathname]);
+
+  console.log("User in MainHeader:", user);
 
   return (
 		<Navbar
@@ -53,6 +64,30 @@ export default function MainHeader() {
 							{nav.name}
 						</NavbarLink>
 					))}
+					{user ? (
+						<>
+							<NavbarLink
+								as={Link}
+								href="/admin"
+								active={isActive(pathname, "/admin")}
+								className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+								Admin
+							</NavbarLink>
+							<button
+                onClick={signOutUser}
+								className="dark:text-gray-300  dark:hover:text-white rounded-lg text-sm font-medium cursor-pointer">
+								Cerrar Sesión
+							</button>
+						</>
+					) : (
+						<NavbarLink
+							as={Link}
+							href="/log"
+							active={isActive(pathname, "/log")}
+							className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+							Iniciar Sesión
+						</NavbarLink>
+					)}
 					<DarkThemeToggle />
 				</div>
 			</NavbarCollapse>

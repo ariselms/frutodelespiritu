@@ -3,7 +3,6 @@ import { NavigationItemType } from "@/models/navigationTypes";
 export const MainNavigation: NavigationItemType[] = [
   { name: 'Lecturas', href: '/lecturas' },
   { name: 'Biblia', href: '/biblia' },
-  { name: 'Iniciar Sesión', href: '/log' },
 ];
 
 export const FooterNavigation = [];
