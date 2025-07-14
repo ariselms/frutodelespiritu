@@ -5,6 +5,7 @@ import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import { ThemeModeScript } from "flowbite-react";
 import { AuthContextProvider } from "@/context/authContext";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -39,6 +40,9 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AuthContextProvider>
+          <ToastContainer
+            theme="dark"
+          />
 					<MainHeader />
 					{children}
 					<MainFooter />

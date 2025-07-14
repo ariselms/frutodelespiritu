@@ -1,8 +1,9 @@
 "use client";
 
-import {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
+import { toast } from "react-toastify";
 export default function LogPage(){
   const router = useRouter();
   const {user} = useAuthContext();
@@ -14,7 +15,7 @@ export default function LogPage(){
 
   useEffect(() => {
     if (user) {
-      router.push("/admin");
+      router.push("/profile");
     }
   }, [user, router]);
 
@@ -38,6 +39,8 @@ export default function LogPage(){
 			if (response.success) {
 
 				setCodeSent(true);
+
+        toast.success(response.message || "Código enviado exitosamente.");
 
 			} else {
 
@@ -83,8 +86,10 @@ export default function LogPage(){
 			const response = await request.json();
 
 			if (response.success) {
-				// toast.success(response.message);
-				router.push("/admin");
+
+        router.push("/profile");
+
+        toast.success(response.message);
 
 			} else {
 
@@ -166,7 +171,7 @@ export default function LogPage(){
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 cursor-pointer">
+						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 cursor-pointer">
 						Validar Código
 					</button>
 				</form>

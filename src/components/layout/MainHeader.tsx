@@ -67,8 +67,8 @@ export default function MainHeader() {
 						<>
 							<NavbarLink
 								as={Link}
-								href="/admin"
-								active={isActive(pathname, "/admin")}
+								href="/profile"
+								active={isActive(pathname, "/profile")}
 								className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
 								Admin
 							</NavbarLink>

@@ -48,7 +48,7 @@ export async function POST(request: Request) {
 					data: user
 				});
 
-				serverResponse.cookies.set("sessiontoken", user.session_token);
+				serverResponse.cookies.set("session_token", user.session_token);
 
 				return serverResponse;
 
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 export async function GET() {
 	const cookieStore = cookies();
 
-	const authCookie = (await cookieStore).get("sessiontoken");
+	const authCookie = (await cookieStore).get("session_token");
 
 	try {
 		const { rows: userExist } =
@@ -132,7 +132,7 @@ export async function DELETE() {
 	try {
 		const cookieStore = cookies();
 
-		(await cookieStore).delete("sessiontoken");
+		(await cookieStore).delete("session_token");
 
 		return NextResponse.json(
 			{

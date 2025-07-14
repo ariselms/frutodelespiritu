@@ -38,9 +38,6 @@ export async function POST(request: Request) {
     <p>Gracias por usar Fruto del Espíritu</p>
   `;
 
-  console.log("--- Code BaseURL Prepared ---");
-  console.log(btoa(code.toString()));
-
 	// if the user doesn't exist, create it
 	if (existingUser.rows.length === 0) {
 		try {
