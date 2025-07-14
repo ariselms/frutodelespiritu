@@ -1,5 +1,6 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
+import { BibleResponseType } from "@/models/bibleTypes";
 
 export default async function BibliaPage() {
 	// TODO: Add Biblia Page
@@ -11,16 +12,17 @@ export default async function BibliaPage() {
 	const SantaBibliaEspanol = process.env.NEXT_PUBLIC_LA_SANTA_BIBLIA_ESPANOL;
 	const BibliaLibre = process.env.NEXT_PUBLIC_VERSION_BIBLIA_LIBRE;
 
-	const BibleIds: string[] = [RV60Id, PalabraDeDiosId, SantaBibliaEspanol, BibliaLibre].filter(
-		(id): id is string => typeof id === "string" && !!id
-	);
+	const BibleIds: string[] = [
+		RV60Id,
+		PalabraDeDiosId,
+		SantaBibliaEspanol,
+		BibliaLibre
+	].filter((id): id is string => typeof id === "string" && !!id);
 
-	const FetchPromises = BibleIds.map(async (bibleId) => {
-
+	const FetchPromises = BibleIds.map(async (bibleId: string) => {
 		const url = `https://api.scripture.api.bible/v1/bibles/${bibleId}`;
 
 		try {
-
 			const request = await fetch(url, {
 				method: "GET",
 				headers: {
@@ -48,38 +50,32 @@ export default async function BibliaPage() {
 				bibleId: bibleId,
 				data: response.data
 			};
-
-    } catch (error) {
-
-      return {
+		} catch (error) {
+			return {
 				bibleId: bibleId,
 				error: `Failed to fetch: ${error}`
 			};
-
-    }
+		}
 	});
 
 	const allBibleResponses = await Promise.all(FetchPromises);
 
-	const spanishBibles = allBibleResponses.filter(
-		(res) => res && !res.error
-	);
+	const spanishBibles = allBibleResponses
+		.filter((res) => res && !res.error && res.data)
+		.map((res) => ({
+			bibleId: res.bibleId,
+			data: res.data
+		})) as BibleResponseType[];
 
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
-
-          <BibleHeaderSection
-            section="La Santa Biblia"
-          />
+					<BibleHeaderSection section="La Santa Biblia" />
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						{spanishBibles.map((bible) => (
-              <SpanishBibleItem
-                key={bible.bibleId}
-                bible={bible}
-              />
+						{spanishBibles.map((bible: BibleResponseType) => (
+							<SpanishBibleItem key={bible.bibleId} bible={bible} />
 						))}
 					</div>
 				</div>
