@@ -92,13 +92,15 @@ export default function LogPage() {
 
 			const errorMessage =
 				error instanceof Error ? error.message : "An error occurred";
+
+      setError(errorMessage);
 		} finally {
 			setProcessing(false);
 		}
 	};
 
 	return (
-		<main className="bg-white dark:bg-gray-800">
+		<main className="bg-white dark:bg-gray-800 p-2 md:p-8">
 			{!codeSent && (
 				<form onSubmit={handleEmailSubmit} className="max-w-lg mx-auto py-32">
 					<h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-4">

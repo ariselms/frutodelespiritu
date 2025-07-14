@@ -29,7 +29,7 @@ export function BookPillBlock({
 			<div className="p-4 flex justify-center flex-wrap h-full max-w-3xl mx-auto">
 				{libros?.map((l: any) => (
 					<Link
-						className={`bg-orange-700 dark:bg-gray-800 mr-2 mb-2 text-white font-bold px-7 py-3 rounded-full`}
+						className={`bg-orange-700 dark:bg-gray-800 mr-2 mb-2 text-white font-bold px-7 py-4 rounded-full`}
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.bibleId}/${l.id}`}>
 						{l.name}
