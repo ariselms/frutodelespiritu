@@ -43,4 +43,4 @@ export const ContentRightTwoImagesLeftDescription = ({
   </>
 );
 
-const ContentWithImagesBtnStyles: string = "inline-block mt-6 px-5 py-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300  dark:focus:ring-orange-800";
+const ContentWithImagesBtnStyles: string = "inline-block mt-6 p-5 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300  dark:focus:ring-orange-800";

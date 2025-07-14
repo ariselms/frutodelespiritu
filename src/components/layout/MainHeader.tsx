@@ -20,6 +20,7 @@ import { useEffect } from "react";
 
 export default function MainHeader() {
   const pathname = usePathname();
+
   const {user, persistUser, signOutUser} = useAuthContext();
 
   useEffect(() => {
@@ -27,8 +28,6 @@ export default function MainHeader() {
     persistUser();
 
   }, [pathname]);
-
-  console.log("User in MainHeader:", user);
 
   return (
 		<Navbar

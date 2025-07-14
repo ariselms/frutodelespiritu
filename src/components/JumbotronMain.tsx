@@ -39,7 +39,7 @@ export default function JumbotronMain() {
 									</svg>
 								</div>
 								<input
-									className="block md:w-96 w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+									className="block md:w-96 w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
 									placeholder="Ingresa tu correo electrónico"
 									type="email"
 									name="email"
@@ -51,7 +51,7 @@ export default function JumbotronMain() {
 								<input
 									type="submit"
 									value="Suscríbete"
-									className="px-5 py-3 text-sm font-medium text-center text-white dark:text-gray-700 rounded-lg cursor-pointer bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-100 dark:focus:ring-gray-800"
+									className="p-4 text-sm font-medium text-center text-white dark:text-gray-700 rounded-lg cursor-pointer bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-100 dark:focus:ring-gray-800"
 									name="member_submit"
 									id="member_submit"
 								/>
