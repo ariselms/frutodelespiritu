@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
-export default function LogPage(){
-  const router = useRouter();
-  const {user} = useAuthContext();
-  const [email, setEmail] = useState<string>("");
-  const [code, setCode] = useState<string>("");
-  const [codeSent, setCodeSent] = useState<boolean>(false);
-  const [processing, setProcessing] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+import { Spinner } from "flowbite-react";
+export default function LogPage() {
+	const router = useRouter();
+	const { user } = useAuthContext();
+	const [email, setEmail] = useState<string>("");
+	const [code, setCode] = useState<string>("");
+	const [codeSent, setCodeSent] = useState<boolean>(false);
+	const [processing, setProcessing] = useState<boolean>(false);
+	const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (user) {
-      router.push("/profile");
-    }
-  }, [user, router]);
+	useEffect(() => {
+		if (user) {
+			router.push("/profile");
+		}
+	}, [user, router]);
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
+	const handleEmailSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
 
-    e.preventDefault();
-
-    try {
-      setProcessing(true);
+		try {
+			setProcessing(true);
 
 			const request = await fetch("/api/log", {
 				method: "POST",
@@ -37,34 +37,29 @@ export default function LogPage(){
 			const response = await request.json();
 
 			if (response.success) {
-
 				setCodeSent(true);
 
-        toast.success(response.message || "Código enviado exitosamente.");
-
+				toast.success(response.message || "Código enviado exitosamente.");
 			} else {
-
-        setError(
+				setError(
 					response.message || "An error occurred while submitting the code."
 				);
-
 			}
 		} catch (error) {
+			console.error("Error submitting email:", error);
+			setError(
+				"An error occurred while submitting your email. Please try again."
+			);
+		} finally {
+			setProcessing(false);
+		}
+	};
 
-      console.error("Error submitting email:", error);
-      setError("An error occurred while submitting your email. Please try again.");
-
-    } finally {
-      setProcessing(false);
-    }
-  };
-
-  const handleCodeSubmit = async (e: React.FormEvent) => {
-
+	const handleCodeSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		try {
-      setProcessing(true);
+			setProcessing(true);
 
 			if (!code || !email) {
 				throw new Error("Email and code are required");
@@ -86,31 +81,23 @@ export default function LogPage(){
 			const response = await request.json();
 
 			if (response.success) {
+				router.push("/profile");
 
-        router.push("/profile");
-
-        toast.success(response.message);
-
+				toast.success(response.message);
 			} else {
-
-        console.error(response.message);
-
+				console.error(response.message);
 			}
 		} catch (error) {
+			console.error(error);
 
-      console.error(error);
-
-      const errorMessage =
+			const errorMessage =
 				error instanceof Error ? error.message : "An error occurred";
-
 		} finally {
-
-      setProcessing(false);
-
-    }
+			setProcessing(false);
+		}
 	};
 
-  return (
+	return (
 		<main className="bg-white dark:bg-gray-800">
 			{!codeSent && (
 				<form onSubmit={handleEmailSubmit} className="max-w-lg mx-auto py-32">
@@ -121,6 +108,7 @@ export default function LogPage(){
 						Ingresa tu correo electr&oacute;nico y recibir&aacute;s un
 						c&oacute;digo para ingresar.
 					</p>
+					<div>{error && <p className="text-red-500">{error}</p>}</div>
 					<div className="mb-8">
 						<label
 							htmlFor="email"
@@ -140,7 +128,14 @@ export default function LogPage(){
 					<button
 						type="submit"
 						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 cursor-pointer">
-						Enviar Código
+						{processing ? (
+							<>
+								<Spinner size="sm" className="mr-2" light />
+								Enviando...
+							</>
+						) : (
+							"Enviar Código"
+						)}
 					</button>
 				</form>
 			)}
@@ -150,8 +145,11 @@ export default function LogPage(){
 						Ingresa tu Código
 					</h1>
 					<p className="block mb-12 text-base text-center text-gray-900 dark:text-white">
-						Verifica tu correo electr&oacute;nico e ingresa c&oacute;digo que enviamos. Verifica tu carpeta de spam si no lo ves en tu bandeja de entrada.
+						Verifica tu correo electr&oacute;nico e ingresa c&oacute;digo que
+						enviamos. Verifica tu carpeta de spam si no lo ves en tu bandeja de
+						entrada.
 					</p>
+					{error && <p className="text-red-500">{error}</p>}
 					<div className="mb-8">
 						<label
 							htmlFor="code"
@@ -165,14 +163,21 @@ export default function LogPage(){
 							placeholder="e.g. 197382"
 							required
 							value={code}
-              maxLength={6}
+							maxLength={6}
 							onChange={(e) => setCode(e.target.value)}
 						/>
 					</div>
 					<button
 						type="submit"
 						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 cursor-pointer">
-						Validar Código
+						{processing ? (
+							<>
+								<Spinner size="sm" className="mr-2" light />
+								Validando...
+							</>
+						) : (
+							"Validar Código"
+						)}
 					</button>
 				</form>
 			)}
