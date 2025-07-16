@@ -22,7 +22,7 @@ export function BibleSearch() {
   }, []);
 
 	const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setBibleKeywordSearch(event.target.value.trim());
+		setBibleKeywordSearch(event.target.value);
 	};
 
 	const handleKeywordSearchSubmit = async (
