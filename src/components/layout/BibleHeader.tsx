@@ -82,7 +82,7 @@ export default function BibleHeader() {
 							alt="Logo"
 							width={100}
 							height={100}
-							src="/images/animated/static-chapters.png"
+							src="/images/animated/static-reading.png"
 							className="w-8 h-8 mr-0"
 						/>								
 						Lectura
