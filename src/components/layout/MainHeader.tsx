@@ -21,7 +21,7 @@ import { useEffect } from "react";
 export default function MainHeader() {
   const pathname = usePathname();
 
-  const {user, persistUser, signOutUser} = useAuthContext();
+  const {user, persistUser} = useAuthContext();
 
   useEffect(() => {
 
@@ -64,20 +64,13 @@ export default function MainHeader() {
 						</NavbarLink>
 					))}
 					{user ? (
-						<>
-							<NavbarLink
-								as={Link}
-								href="/profile"
-								active={isActive(pathname, "/profile")}
-								className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
-								Admin
-							</NavbarLink>
-							<button
-                onClick={signOutUser}
-								className="dark:text-gray-300  dark:hover:text-white rounded-lg text-sm font-medium cursor-pointer">
-								Cerrar Sesión
-							</button>
-						</>
+            <NavbarLink
+              as={Link}
+              href="/profile"
+              active={isActive(pathname, "/profile")}
+              className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+              Admin
+            </NavbarLink>
 					) : (
 						<NavbarLink
 							as={Link}

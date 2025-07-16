@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { sql } from "@vercel/postgres";
+import { UserMainHeader } from "@/components/admin/UserMainHeader";
 
 export default async function ProfileLayout({
 	children
@@ -8,8 +9,6 @@ export default async function ProfileLayout({
 	children: React.ReactNode;
 }>) {
 	const cookie = (await cookies()).get("session_token");
-
-  console.log("Cookie:", cookie);
 
 	if (!cookie) {
 		redirect("/log");
@@ -19,8 +18,7 @@ export default async function ProfileLayout({
 
 	let user;
 
-	const { rows: userDb } =
-		await sql`SELECT * FROM users
+	const { rows: userDb } = await sql`SELECT * FROM users
       WHERE session_token = ${value}
       AND session_expiration > NOW()`;
 
@@ -34,5 +32,10 @@ export default async function ProfileLayout({
 		redirect("/log");
 	}
 
-	return <>{children}</>;
+	return (
+		<>
+      <UserMainHeader />
+			{children}
+		</>
+	);
 }

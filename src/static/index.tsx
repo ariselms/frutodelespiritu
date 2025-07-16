@@ -5,6 +5,11 @@ export const MainNavigation: NavigationItemType[] = [
   { name: 'Biblia', href: '/biblia' },
 ];
 
+export const UserProfileNavigation: NavigationItemType[] = [
+	{ name: "Biblia", href: "/profile/biblia" },
+	{ name: "Lecturas", href: "/profile/lecturas" },
+];
+
 export const FooterNavigation = [];
 
 export const FetchEndpoints = Object.freeze({
