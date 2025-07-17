@@ -6,15 +6,7 @@ export default function JumbotronMain() {
 			<div className="grid max-w-screen-xl px-4 py-24 mx-auto lg:gap-12 xl:gap-0 lg:py-32 lg:grid-cols-12">
 				<div className="mr-auto place-self-center lg:col-span-7 xl:col-span-8">
 					<h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-wide leading-none md:text-5xl xl:text-6xl text-orange-700 dark:text-gray-100">
-						<span>
-							Biblia
-						</span>{" "}
-						<span>
-							Estudios
-						</span>{" "}
-						<span>
-							Reflexiones
-						</span>
+						<span>Biblia</span> <span>Estudios</span> <span>Reflexiones</span>
 					</h1>
 					<p className="max-w-2xl mb-10 font-light text-gray-950 lg:mb-8 md:text-lg lg:text-xl dark:text-orange-50">
 						Explora la sabiduría de la Biblia a través de estudios profundos y
@@ -39,7 +31,7 @@ export default function JumbotronMain() {
 									</svg>
 								</div>
 								<input
-									className="block md:w-96 w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+									className="block bg-orange-50 dark:bg-gray-700 md:w-96 w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-orange-500 focus:border-orange-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
 									placeholder="Ingresa tu correo electrónico"
 									type="email"
 									name="email"
@@ -51,7 +43,7 @@ export default function JumbotronMain() {
 								<input
 									type="submit"
 									value="Suscríbete"
-									className="p-4 text-sm font-medium text-center text-white dark:text-gray-700 rounded-lg cursor-pointer bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-100 dark:focus:ring-gray-800"
+									className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-lg cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-100 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
 									name="member_submit"
 									id="member_submit"
 								/>
@@ -66,7 +58,7 @@ export default function JumbotronMain() {
 					<Image
 						width={300}
 						height={300}
-            className="w-full h-full object-cover"
+						className="w-full h-full object-cover"
 						src="/images/pray.svg"
 						alt="praying man stricker illustration"
 					/>
