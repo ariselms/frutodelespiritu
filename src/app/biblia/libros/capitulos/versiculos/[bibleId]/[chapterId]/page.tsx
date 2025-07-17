@@ -24,8 +24,6 @@ export default async function SingleChapterPage({
 
 	let BibleChapter: any; // Consider defining a proper interface for BibleChapter
 
-  let UpdatedHTML: any;
-
 	try {
 		// Correct way to use `new Promise` with `async/await` inside the executor
 		const chaptersRequestResult = await new Promise(async (resolve, reject) => {
@@ -52,6 +50,7 @@ export default async function SingleChapterPage({
 				const data = await response.json();
 
 				resolve(data); // Resolve the promise with the parsed JSON data
+
 			} catch (innerError) {
 				// Catch errors from `fetch` itself (e.g., network errors)
 				reject(innerError);
@@ -65,13 +64,16 @@ export default async function SingleChapterPage({
 
 		// 3. Modify the HTML (find elements with class 'v' and add id)
 		$(".v").each((index, element) => {
-			const verseElement = $(element);
+
+      const verseElement = $(element);
 			const verseNumber = verseElement.attr("data-number");
-			if (verseNumber) {
+
+      if (verseNumber) {
 				verseElement.attr("id", verseNumber);
 			}
 
       BibleChapter.data.content = $.html();
+
 		});
 	} catch (error) {
 		// This catch block will now catch errors thrown by the `reject` call inside the Promise,
@@ -84,7 +86,6 @@ export default async function SingleChapterPage({
 	// TODO: Add notes functionality as a top bar as well as commentary from the API in a new sort of modal
 
 	return (
-		<>
 			<main>
 				<section className="w-full dark:bg-gray-800 text-gray-800 pb-16">
 					<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
@@ -114,6 +115,5 @@ export default async function SingleChapterPage({
 					</div>
 				</section>
 			</main>
-		</>
 	);
 }
