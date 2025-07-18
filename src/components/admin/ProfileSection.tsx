@@ -1,3 +1,5 @@
+import { UserProfileForm } from "@/components/forms/UserProfileForm";
+
 export default function ProfileSection({
   sectionName,
   sectionEmail,
@@ -10,7 +12,7 @@ export default function ProfileSection({
  return (
 		<section className="py-16 text-black dark:text-white">
 			<div className="mb-4">
-				<h1 className="text-2xl">{sectionName}</h1>
+				<h1 className="text-2xl">{sectionName} <UserProfileForm /></h1>
         {sectionEmail && (
 				  <p className="text-sm font-bold">{sectionEmail}</p>
         )}
