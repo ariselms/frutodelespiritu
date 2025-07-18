@@ -1,19 +1,20 @@
 "use client";
 
 import { useAuthContext } from "@/context/authContext";
-import { Card, Button } from "flowbite-react";
 import { UserProfileNavigation } from "@/static";
+import { NavigationItemTypeWithAuth } from "@/models/navigationTypes";
 import Link from "next/link";
 import ProfileSection from "@/components/admin/ProfileSection";
+
 
 export default function AdminPage() {
 	const { user } = useAuthContext();
 
   const UserNavigationNoAuth = UserProfileNavigation.filter(
-		(item) => !item.requiresAdmin
+		(item: NavigationItemTypeWithAuth) => !item.requiresAdmin
 	);
   const UserNavigationWithAuth = UserProfileNavigation.filter(
-    (item) => item.requiresAdmin
+    (item: NavigationItemTypeWithAuth) => item.requiresAdmin
   );
 
 	return (
@@ -27,7 +28,7 @@ export default function AdminPage() {
 				<section className="pb-16">
 					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 						{user?.role === "admin" &&
-							UserNavigationWithAuth.map((item) => (
+							UserNavigationWithAuth.map((item: NavigationItemTypeWithAuth) => (
 								<div
 									key={item.name}
 									className="flex flex-col justify-around rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600">
@@ -55,7 +56,7 @@ export default function AdminPage() {
 									</Link>
 								</div>
 							))}
-						{UserNavigationNoAuth.map((item) => (
+						{UserNavigationNoAuth.map((item: NavigationItemTypeWithAuth) => (
 							<div
 								key={item.name}
 								className="flex flex-col justify-around rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600">
