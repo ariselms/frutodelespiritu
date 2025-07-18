@@ -10,11 +10,18 @@ export function UserMainHeader() {
   const pathname = usePathname();
   const {signOutUser} = useAuthContext();
 
+  const UserNavigationNoAuth = UserProfileNavigation.filter(
+		(item) => !item.requiresAdmin
+	);
+	const UserNavigationWithAuth = UserProfileNavigation.filter(
+		(item) => item.requiresAdmin
+	);
+
   return (
 		<header>
-			<nav className="px-4 lg:px-6 py-2.5 bg-orange-50 dark:bg-gray-800 border-b border-orange-300 dark:border-gray-700 ">
+			<nav className="px-4 lg:px-6 py-2.5 bg-orange-50 dark:bg-gray-900 border-b border-orange-300 dark:border-gray-700 ">
 				<div className="flex flex-wrap justify-between items-center mx-auto container">
-					<Link href="/profile" className="flex items-center">
+					<Link href="/perfil" className="flex items-center">
 						<img
 							src="/images/logo.png"
 							className="mr-3 h-6 sm:h-9"
@@ -22,11 +29,11 @@ export function UserMainHeader() {
 						/>
 						<span
 							className={`${
-								isActive(pathname, "/profile")
+								isActive(pathname, "/perfil")
 									? "text-orange-500"
 									: "text-gray-700 dark:text-gray-300 hover:text-orange-700 dark:hover:text-white"
 							} self-center text-xl font-semibold whitespace-nowrap`}>
-							Profile Home
+							Perfil
 						</span>
 					</Link>
 					<div className="flex items-center lg:order-2">
@@ -75,7 +82,7 @@ export function UserMainHeader() {
 						className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
 						id="mobile-menu-2">
 						<ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-							{UserProfileNavigation.map((nav) => (
+							{UserNavigationNoAuth.map((nav) => (
 								<li key={nav.name}>
 									<Link
 										href={nav.href}

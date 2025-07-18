@@ -1,6 +1,16 @@
+import Ract from 'react';
+
 export interface NavigationItemType {
-    name: string;
-    href: string;
+  name: string;
+  href: string;
+}
+
+export interface NavigationItemTypeWithAuth {
+	name: string;
+	description: string;
+	icon?: Ract.ReactNode;
+	href: string;
+	requiresAdmin?: boolean;
 }
 
 export interface PaginationControlsProps {

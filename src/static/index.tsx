@@ -1,13 +1,35 @@
-import { NavigationItemType } from "@/models/navigationTypes";
+import { NavigationItemType, NavigationItemTypeWithAuth } from "@/models/navigationTypes";
 
 export const MainNavigation: NavigationItemType[] = [
   { name: 'Lecturas', href: '/lecturas' },
   { name: 'Biblia', href: '/biblia' },
 ];
 
-export const UserProfileNavigation: NavigationItemType[] = [
-	{ name: "Biblia", href: "/profile/biblia" },
-	{ name: "Lecturas", href: "/profile/lecturas" },
+export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
+	{
+		name: "Biblia",
+		description: "Tu colección de notas relacionada con la Biblia.",
+		href: "/perfil/biblia",
+		requiresAdmin: false
+	},
+	{
+		name: "Lecturas",
+		description: "Tus lecturas y reflexiones guardadas como favoritos.",
+		href: "/perfil/lecturas",
+		requiresAdmin: false
+	},
+	{
+		name: "Órdenes",
+		description: "Tus órdenes de nuestra tienda virtual.",
+		href: "/perfil/ordenes",
+		requiresAdmin: false
+	},
+	{
+		name: "Tus Publicaciones",
+		description: "Maneja la creación y edición de tus publicaciones.",
+		href: "/perfil/admin",
+		requiresAdmin: true
+	}
 ];
 
 export const FooterNavigation = [];
