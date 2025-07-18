@@ -16,7 +16,7 @@ export default function LogPage() {
 
 	useEffect(() => {
 		if (user) {
-			router.push("/profile");
+			router.push("/perfil");
 		}
 	}, [user, router]);
 
@@ -81,7 +81,7 @@ export default function LogPage() {
 			const response = await request.json();
 
 			if (response.success) {
-				router.push("/profile");
+				router.push("/perfil");
 
 				toast.success(response.message);
 			} else {
