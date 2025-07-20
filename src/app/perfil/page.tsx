@@ -24,6 +24,7 @@ export default function AdminPage() {
           sectionName={user?.name}
           sectionEmail={user?.contact_email}
           sectionDescription="Administra tu informacion personal, configura tu cuenta y accede a las herramientas de administracion."
+					isProfile={true}
         />
 				<section className="pb-16">
 					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
