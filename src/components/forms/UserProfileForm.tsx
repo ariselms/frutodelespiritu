@@ -62,7 +62,20 @@ export function UserProfileForm() {
 
     return (
         <>
-            <Button className="cursor-pointer" onClick={() => setOpenModal(true)}>Update profile</Button>
+            <Button className="flex items-center justify-center p-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-orange-800 transition-all mt-auto" onClick={() => setOpenModal(true)}>
+                Actualizar
+                <svg
+                    className="-mr-1 ml-2 h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </Button>
 
             <Modal 
                 show={openModal} 
@@ -90,7 +103,7 @@ export function UserProfileForm() {
                             />
                         </div>
                         <p className="mb-1 text-gray-900 dark:text-white">Dirección  Residencial</p>
-                        <div className="border border-gray-600 rounded-md p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="border border-gray-300 dark:border-gray-600 rounded-md p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <div className="mb-2 block">
                                     <Label htmlFor="address_street">Calle</Label>
@@ -184,8 +197,7 @@ export function UserProfileForm() {
                                     name="image_url"
                                     accept="image/*"
                                     required
-                                    onChange={handleUserProfileChange}
-                                    value={userProfile?.image_url || ""}    
+                                    onChange={handleUserProfileChange}   
                                 />
                                 <HelperText className="mt-1">Selecciona una imagen de perfil. No puede ser mayor a 5MB.</HelperText>
                             </div>
