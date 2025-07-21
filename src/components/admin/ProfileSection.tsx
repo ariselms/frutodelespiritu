@@ -12,7 +12,7 @@ export default function ProfileSection({
 	isProfile?: boolean
 }) {
 	return (
-		<section className="py-16 px-4 xl:px-0 bg-white dark:bg-gray-950 text-black dark:text-white border-b border-orange-300">
+		<section className="py-16 px-4 xl:px-0 bg-white dark:bg-gray-950 text-black dark:text-white border-b border-orange-300 dark:border-gray-700">
 			<div className="container mx-auto flex items-start flex-wrap">
 				<div>
 					<div className="mb-4">
