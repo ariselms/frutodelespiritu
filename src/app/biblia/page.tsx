@@ -73,6 +73,14 @@ export default async function BibliaPage() {
 			data: res.data
 		})) as BibleResponseType[];
 
+	if(RequestError !== null){
+		return (
+			<main>
+				<p className="py-8 text-black dark:text-white text-center">{RequestError}</p>
+			</main>
+		)
+	}
+
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
