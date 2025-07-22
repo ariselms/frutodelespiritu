@@ -11,6 +11,9 @@ export default async function BibliaPage() {
 	const PalabraDeDiosId = process.env.NEXT_PUBLIC_BIBLE_PALABRA_DE_DIOS;
 	const SantaBibliaEspanol = process.env.NEXT_PUBLIC_LA_SANTA_BIBLIA_ESPANOL;
 	const BibliaLibre = process.env.NEXT_PUBLIC_VERSION_BIBLIA_LIBRE;
+	let RequestError = null;
+
+	console.log(BibleAPIKey);
 
 	const BibleIds: string[] = [
 		RV60Id,
@@ -38,6 +41,8 @@ export default async function BibliaPage() {
 					errorData
 				);
 
+				RequestError = "Lo sentimos, ha ocurrido un error, intenta de nuevo mas tarde.";
+
 				return {
 					bibleId: bibleId,
 					error: `Failed to fetch: ${request.status}`
@@ -51,6 +56,7 @@ export default async function BibliaPage() {
 				data: response.data
 			};
 		} catch (error) {
+			console.log(error)
 			return {
 				bibleId: bibleId,
 				error: `Failed to fetch: ${error}`
@@ -72,9 +78,11 @@ export default async function BibliaPage() {
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<BibleHeaderSection section="La Santa Biblia" />
+					
+					{RequestError && <p>{RequestError}</p>}
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						{spanishBibles.map((bible: BibleResponseType) => (
+						{spanishBibles?.map((bible: BibleResponseType) => (
 							<SpanishBibleItem key={bible.bibleId} bible={bible} />
 						))}
 					</div>

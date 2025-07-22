@@ -26,10 +26,3 @@ export interface UserLogin {
 export interface UserCode {
 	code: string;
 }
-
-        // name: "",
-        // image_url: "",
-        // bio: "",
-        // contact_email: "",
-        // contact_phone: "",
-        // role: "",
