@@ -7,7 +7,9 @@ import { useAuthContext } from "@/context/authContext";
 import Image from "next/image";
 
 export function UserMainHeader() {
+
   const pathname = usePathname();
+
   const {signOutUser} = useAuthContext();
 
   const UserNavigationNoAuth = UserProfileNavigation.filter(

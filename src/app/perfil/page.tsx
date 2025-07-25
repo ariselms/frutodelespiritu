@@ -21,6 +21,7 @@ export default function AdminPage() {
 		<main className="dark:bg-gray-800">
 			<article>
 				<ProfileSection
+          imageUrl={user?.image_url}
 					sectionName={user?.name}
 					sectionEmail={user?.contact_email}
 					sectionDescription="Administra tu informacion personal, configura tu cuenta y accede a las herramientas de administracion."

@@ -1,11 +1,14 @@
 import { UserProfileForm } from "@/components/forms/UserProfileForm";
+import Image from "next/image";
 
 export default function ProfileSection({
+  imageUrl,
 	sectionName,
 	sectionEmail,
 	sectionDescription,
 	isProfile = false
 }: {
+  imageUrl?: string;
 	sectionName: string;
 	sectionEmail?: string;
 	sectionDescription: string;
@@ -13,22 +16,30 @@ export default function ProfileSection({
 }) {
 	return (
 		<section className="py-16 px-4 xl:px-0 bg-white dark:bg-gray-950 text-black dark:text-white border-b border-orange-300 dark:border-gray-700">
-			<div className="container mx-auto flex items-start flex-wrap">
-				<div>
+			<div className="container mx-auto flex flex-col items-start lg:flex-row">
+				<div className="flex-2 p-2">
 					<div className="mb-4">
-						<h1 className="text-2xl">{sectionName}</h1>
+						{imageUrl && (
+							<Image
+								width={100}
+								height={100}
+								className="w-20 h-20 rounded-full"
+								src={imageUrl}
+								alt="user avatar"
+							/>
+						)}
+						{sectionName && <h1 className="text-2xl">{sectionName}</h1>}
 						{sectionEmail && (
-							<p className="text-sm font-bold">{sectionEmail}</p>
+							<p className="text-sm font-bold mb-4">{sectionEmail}</p>
+						)}
+						{sectionDescription && (
+							<p className="text-lg max-w-[80ch]">{sectionDescription}</p>
 						)}
 					</div>
-					<p className="max-w-[80ch]">
-						{sectionDescription}
-					</p>
 				</div>
-				<div>
+				<div className="flex-1 p-2">
 					{isProfile && (
-						<div
-							className="flex flex-col justify-between rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 w-fit-content mt-8 xl:mt-0">
+						<div className="flex flex-col justify-between rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 w-fit-content mt-8 lg:mt-0">
 							<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 								Edita tu perfil
 							</h5>

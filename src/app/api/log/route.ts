@@ -8,14 +8,8 @@ export async function POST(request: Request) {
 	// get the email
 	const { email } = await request.json();
 
-  console.log("--- Email Received in Server ---");
 	// generate the code
 	const { code, codeExpirationTime, sessionTokenExpirationTime } = await generateVerificationCodeWithExpirationTime();
-
-  console.log("--- Code Generated ---");
-  console.log(`Code: ${code}`);
-
-
 
 	const existingUser = await sql`SELECT * FROM users WHERE contact_email = ${email}`;
 

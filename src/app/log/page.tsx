@@ -6,6 +6,7 @@ import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
 export default function LogPage() {
+
 	const router = useRouter();
 	const { user } = useAuthContext();
 	const [email, setEmail] = useState<string>("");
@@ -21,6 +22,7 @@ export default function LogPage() {
 	}, [user, router]);
 
 	const handleEmailSubmit = async (e: React.FormEvent) => {
+
 		e.preventDefault();
 
 		try {
@@ -81,21 +83,33 @@ export default function LogPage() {
 			const response = await request.json();
 
 			if (response.success) {
+
 				router.push("/perfil");
 
 				toast.success(response.message);
+
 			} else {
-				console.error(response.message);
+
+        console.error(response.message);
+
+        toast.error(response.message);
+
 			}
 		} catch (error) {
+
 			console.error(error);
 
 			const errorMessage =
-				error instanceof Error ? error.message : "An error occurred";
+				error instanceof Error
+          ? error.message
+          : "An error occurred";
 
       setError(errorMessage);
+
 		} finally {
+
 			setProcessing(false);
+
 		}
 	};
 
@@ -120,7 +134,7 @@ export default function LogPage() {
 						<input
 							type="email"
 							id="email"
-							className="block w-full p-4 ps-10 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 							placeholder="e.g. usuario@correo.com"
 							required
 							value={email}
@@ -161,7 +175,7 @@ export default function LogPage() {
 						<input
 							type="text"
 							id="code"
-							className="block w-full p-4 ps-10 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 							placeholder="e.g. 197382"
 							required
 							value={code}

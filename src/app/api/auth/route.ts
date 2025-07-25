@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 			const decodedCode = atob(user.email_code_number);
 
 			if (decodedCode !== code) {
-				const invalidCodeMessage = "Código inválido";
+				const invalidCodeMessage = "Código inválido, intenta de nuevo";
 
 				return NextResponse.json({
 					success: false,

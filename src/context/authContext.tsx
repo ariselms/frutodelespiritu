@@ -16,19 +16,25 @@ export const AuthContextProvider = ({
 	const router = useRouter();
 
 	const signOutUser = async () => {
-		const request = await fetch(`${serverBaseUrl}/api/auth/`, {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
 
-		const response = await request.json();
+    try {
 
-		if (response.success) {
-			setUser(null);
-			router.push("/log");
-		}
+      const request = await fetch(`${serverBaseUrl}/api/auth/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const response = await request.json();
+
+      if (response.success) {
+        setUser(null);
+        router.push("/log");
+      }
+    } catch (error) {
+      console.error(error);
+    }
 	};
 
 	// user persistance
