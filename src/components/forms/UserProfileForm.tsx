@@ -13,15 +13,12 @@ import { UserType } from "@/models/userTypes";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { ModalUserProfileTheme } from "@/components/theme";
-import type { PutBlobResult } from "@vercel/blob";
 
 export function UserProfileForm() {
 
 	const { user } = useAuthContext();
 
   const imageInputFileRef = useRef<HTMLInputElement>(null);
-
-  const [imageFile, setImageFile] = useState<PutBlobResult | null>(null);
 
 	const [openModal, setOpenModal] = useState(false);
 
@@ -84,6 +81,18 @@ export function UserProfileForm() {
 
         const file = imageInputFileRef.current?.files?.[0];
 
+        // check file size must be less or equal to 4.5MB
+        if (file && file?.size > 4500000) {
+          toast.error("La imagen de perfil debe ser menor o igual a 4.5MB");
+          return;
+        }
+
+        // check if file is an image
+        if (file && !file?.type.startsWith("image/")) {
+          toast.error("El archivo debe ser una imagen");
+          return;
+        }
+
         const fileRequest = await fetch(
           `/api/user/profile?filename=${file?.name}`,
           {
@@ -133,7 +142,7 @@ export function UserProfileForm() {
 	return (
 		<>
 			<Button
-				className="flex items-center justify-center p-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-orange-800 transition-all mt-auto"
+				className="flex items-center justify-center py-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all mt-4 flex-1"
 				onClick={() => setOpenModal(true)}>
 				Actualizar
 				<svg
@@ -338,11 +347,11 @@ export function UserProfileForm() {
 							/>
 						</div>
 						<div className="w-full mt-8 mb-8">
-							<Button
-								className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 cursor-pointer"
+							<button
+								className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-  -800 cursor-pointer transition-all mt-4"
 								type="submit">
 								Actualizar Perfil
-							</Button>
+							</button>
 						</div>
 					</form>
 				</ModalBody>

@@ -57,11 +57,9 @@ export async function PUT(request: Request) {
       address_country
     } = body;
 
-    console.log(image_url);
-
     const {rows: existingUser} = await sql`
       SELECT * FROM users
-      WHERE contact_email = ${contact_email}
+        WHERE contact_email = ${contact_email}
     `;
 
     if(existingUser.length === 0) {
@@ -77,9 +75,11 @@ export async function PUT(request: Request) {
 
     let updatedImage: string| null = null;
 
-    if(image_url !== "" && existingUser[0].image_url !== image_url) {
+    if(image_url !== "" && existingUser[0].image_url !== image_url)
+    {
       updatedImage = image_url
-    } else {
+    }
+    else {
       updatedImage = existingUser[0].image_url
     }
 
@@ -106,7 +106,7 @@ export async function PUT(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "No se pudo actualizar el usuario",
+          message: "No se pudo actualizar el usuario, inténtelo nuevamente",
           data: null
         },
         { status: 400 }
@@ -127,7 +127,7 @@ export async function PUT(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Error al actualizar el usuario",
+        message: error instanceof Error ? error.message : "Hubo un error, inténtelo nuevamente",
         data: null
       },
       { status: 500 }

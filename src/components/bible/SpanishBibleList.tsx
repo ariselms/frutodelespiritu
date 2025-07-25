@@ -22,7 +22,7 @@ export const SpanishBibleItem = (
 
 			<Link
 				href={`/biblia/libros/${bible.bibleId}`}
-				className="inline-block mt-6 p-4 text-sm font-medium text-center text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-orange-800 transition-all">
+				className="inline-block mt-6 p-4 text-sm font-medium text-center text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all">
 				Abrir Biblia
 			</Link>
 		</div>
