@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 		const [articlesResult, countResult] = await Promise.all([
 			// Query for the specific page of articles
 			sql`
-        SELECT * FROM articles
+        SELECT * FROM lectures
         WHERE draft = false
         ORDER BY created_at DESC
         LIMIT ${limit}
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 			// Query for the total count of non-draft articles
 			sql`
         SELECT COUNT(*) as total_count
-        FROM articles
+        FROM lectures
         WHERE draft = false
       `
 		]);
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
 		const body = await request.json();
 
 		const { rows: newPublication } = await sql`
-      INSERT INTO articles
+      INSERT INTO lectures
       (image_url, title, summary, category_id, slug, by_user_id, content, video_url, draft, created_at, updated_at)
       VALUES (
         ${body.image_url},

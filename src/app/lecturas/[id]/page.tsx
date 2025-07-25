@@ -1,7 +1,7 @@
 // this is the view to see the single article details, it will use the article id to fetch it from the server side
 import { QueryResultRow, sql } from "@vercel/postgres";
 import Link from "next/link";
-import "../../articles.css";
+import "../../lectures.css";
 import Image from "next/image";
 import { ArticleType } from "@/models/articlesTypes";
 
@@ -17,26 +17,26 @@ export default async function SingleLecturePage({
 
 	const { rows: DbArticleDetails } = await sql`
     SELECT
-      articles.*,
+      lectures.*,
       users.name as author_name,
       categories.name as category_name,
       categories.id as category_id
-    FROM articles
-    INNER JOIN users ON articles.by_user_id = users.id
-    INNER JOIN categories ON articles.category_id = categories.id
-    WHERE articles.draft = false
-    AND articles.id = ${id}
+    FROM lectures
+    INNER JOIN users ON lectures.by_user_id = users.id
+    INNER JOIN categories ON lectures.category_id = categories.id
+    WHERE lectures.draft = false
+    AND lectures.id = ${id}
   `;
 
   const { rows: DbRecentArticles } = await sql`
     SELECT
-      articles.*,
+      lectures.*,
       categories.name as category_name,
       categories.id as category_id
-    FROM articles
-    INNER JOIN categories ON articles.category_id = categories.id
-    WHERE articles.draft = false
-    AND articles.id != ${id}
+    FROM lectures
+    INNER JOIN categories ON lectures.category_id = categories.id
+    WHERE lectures.draft = false
+    AND lectures.id != ${id}
     ORDER BY created_at DESC
     LIMIT 6
   `;

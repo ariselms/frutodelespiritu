@@ -10,7 +10,7 @@ export async function GET(
 
   const result =
 		await sql`
-      SELECT * FROM articles
+      SELECT * FROM lectures
       WHERE category_id != ${id}
       ORDER BY created_at DESC
       LIMIT 6

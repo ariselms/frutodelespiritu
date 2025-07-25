@@ -32,19 +32,19 @@ export default async function ReflexionesPage({
 			// Query for the specific page of articles
 			sql`
           SELECT
-            articles.*,
+            lectures.*,
             users.name as author_name,
             users.role as author_role,
             users.image_url as author_image_url,
             categories.name as category_name
-          FROM articles
-          INNER JOIN users ON articles.by_user_id = users.id
-          INNER JOIN categories ON articles.category_id = categories.id
-          WHERE articles.draft = false
-          AND articles.title ILIKE '%' || ${keyword} || '%'
-          OR articles.summary ILIKE '%' || ${keyword} || '%'
-          OR articles.content ILIKE '%' || ${keyword} || '%'
-          ORDER BY articles.created_at DESC
+          FROM lectures
+          INNER JOIN users ON lectures.by_user_id = users.id
+          INNER JOIN categories ON lectures.category_id = categories.id
+          WHERE lectures.draft = false
+          AND lectures.title ILIKE '%' || ${keyword} || '%'
+          OR lectures.summary ILIKE '%' || ${keyword} || '%'
+          OR lectures.content ILIKE '%' || ${keyword} || '%'
+          ORDER BY lectures.created_at DESC
           LIMIT ${limit}
           OFFSET ${offset}
       `,
@@ -57,7 +57,7 @@ export default async function ReflexionesPage({
 			// Query for the total count of non-draft articles
 			sql`
           SELECT COUNT(*) as total_count
-          FROM articles
+          FROM lectures
           WHERE draft = false
         `
 		]);
@@ -67,17 +67,17 @@ export default async function ReflexionesPage({
 			// Query for the specific page of articles
 			sql`
           SELECT
-            articles.*,
+            lectures.*,
             users.name as author_name,
             users.role as author_role,
             users.image_url as author_image_url,
             categories.name as category_name
-          FROM articles
-          INNER JOIN users ON articles.by_user_id = users.id
-          INNER JOIN categories ON articles.category_id = categories.id
-          WHERE articles.draft = false
-          AND articles.category_id = ${category}
-          ORDER BY articles.created_at DESC
+          FROM lectures
+          INNER JOIN users ON lectures.by_user_id = users.id
+          INNER JOIN categories ON lectures.category_id = categories.id
+          WHERE lectures.draft = false
+          AND lectures.category_id = ${category}
+          ORDER BY lectures.created_at DESC
           LIMIT ${limit}
           OFFSET ${offset}
       `,
@@ -90,7 +90,7 @@ export default async function ReflexionesPage({
 			// Query for the total count of non-draft articles
 			sql`
           SELECT COUNT(*) as total_count
-          FROM articles
+          FROM lectures
           WHERE draft = false
           AND category_id = ${category}
       `
