@@ -34,9 +34,15 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	return (
 		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-6 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border-2">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
-				<img
+				<Image
 					alt="Article image"
-					src={"/images/church.svg"}
+					src={
+						article?.image_url !== ""
+							? article?.image_url
+							: "/images/church.svg"
+					}
+					width={500}
+					height={500}
 					className="absolute inset-0 size-full rounded-2xl bg-transparent object-cover border-0"
 				/>
 			</div>

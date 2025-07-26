@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SearchResultList } from "./SearchResults";
+import { BibleSearchResultList } from "./BibleSearchResultsSearchResults";
 import { useSearchParams, useRouter } from "next/navigation";
 
 // TODO: Create a type for categories if needed
@@ -88,7 +88,7 @@ export function BibleSearch() {
 							</svg>
 						</div>
 						<input
-							className="block w-full lg:w-4/6 px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-300 focus:border-orange-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-300 dark:focus-visible:outline-gray-500"
+							className="block w-full lg:w-4/6 py-4 px-10  text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-300 focus:border-orange-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-300 dark:focus-visible:outline-gray-500"
 							id="blog_search_term"
 							type="search"
 							placeholder="e.j. Amor del padre"
@@ -98,7 +98,7 @@ export function BibleSearch() {
 					</div>
 				</div>
 			</form>
-			<SearchResultList results={bibleKeywordResults?.verses} />
+			<BibleSearchResultList results={bibleKeywordResults?.verses} />
 		</>
 	);
 }
