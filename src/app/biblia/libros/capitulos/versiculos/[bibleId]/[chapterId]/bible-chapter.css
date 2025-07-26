@@ -127,7 +127,19 @@ html.dark .bible-chapter {
 
 span[data-number]{
   display: inline-block;
-  border: 1px solid var(--rich-text-color-link);
+  background-color: #FFF8F1;
+  color: #B43403;
+  border: 1px solid #FDBA8C;
+  border-radius: 4px;
+  margin-right: .3rem;
+  padding: 0 .5rem;
+}
+
+.dark span[data-number]{
+  display: inline-block;
+  background-color: #111827;
+  color: #FFF;
+  border: 1px solid #4B5563;
   border-radius: 4px;
   margin-right: .3rem;
   padding: 0 .5rem;

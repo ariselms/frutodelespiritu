@@ -8,7 +8,7 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
 			{BibleChapterData.previous && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${BibleChapterData.bibleId}/${BibleChapterData.previous.id}`}
-					className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-700 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center">
+					className="rounded-xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all">
 					<svg
 						className="w-6 h-6 text-orange-700 bolder dark:text-white"
 						aria-hidden="true"
@@ -30,7 +30,7 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
 			{BibleChapterData.next && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${BibleChapterData.bibleId}/${BibleChapterData.next.id}`}
-					className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-700 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center">
+					className="rounded-xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all">
 					{BibleChapterData.next.bookId} {BibleChapterData.next.number}
 					<svg
 						className="w-6 h-6 text-orange-700 dark:text-white"

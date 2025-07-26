@@ -90,7 +90,7 @@ export default async function SingleChapterPage({
 				<section className="w-full dark:bg-gray-800 text-gray-800 pb-16">
 					<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 						<Link
-							className="rounded-xl border border-orange-400 dark:border-gray-600 bg-orange-100 dark:bg-gray-700 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 inline-flex items-center mb-8"
+							className="rounded-xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 inline-flex items-center mb-8"
 							href={`/biblia/libros/capitulos/${BibleChapter.data.bibleId}/${BibleChapter.data.bookId}`}>
 							<svg
 								className="w-6 h-6 text-orange-700 bolder dark:text-white mr-2"
