@@ -35,7 +35,7 @@ export const SearchResultItem = ({ result }: { result: any }) => {
   const verseId = bibleVerseParts[2];
 
 	return (
-		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-xl p-4 flex flex-col justify-between">
+		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-2xl p-4 flex flex-col justify-between">
 			<div>
 				<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
 					{result.reference}

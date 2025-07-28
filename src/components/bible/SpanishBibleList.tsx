@@ -8,7 +8,7 @@ export const SpanishBibleItem = (
 
   return (
 		<div
-			className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-xl p-4 flex flex-col h-full"
+			className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-2xl p-4 flex flex-col h-full"
 			key={bible.bibleId}>
 
 			<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

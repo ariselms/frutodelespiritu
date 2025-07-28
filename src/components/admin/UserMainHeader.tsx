@@ -41,7 +41,7 @@ export function UserMainHeader() {
 					<div className="flex items-center lg:order-2">
 						<button
 							onClick={signOutUser}
-							className="bg-red-600 border border-red-950 dark:border-red-50 text-white ml-1 lg:ml-3 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-1 700 focus:outline-none dark:focus:ring-gray-800 cursor-pointer flex items-center">
+							className="bg-red-600 border border-red-950 dark:border-red-50 text-white ml-1 lg:ml-3 focus:ring-4 focus:ring-gray-300 font-medium rounded-2xl text-sm px-3 py-1 700 focus:outline-none dark:focus:ring-gray-800 cursor-pointer flex items-center">
 							Cerrar Sesión
 							<Image
 								alt="Logo"
@@ -54,7 +54,7 @@ export function UserMainHeader() {
 						<button
 							data-collapse-toggle="mobile-menu-2"
 							type="button"
-							className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+							className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-2xl lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
 							aria-controls="mobile-menu-2"
 							aria-expanded="false">
 							<span className="sr-only">Open main menu</span>

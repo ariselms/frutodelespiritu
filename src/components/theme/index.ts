@@ -42,7 +42,7 @@ export const OrangeLinkTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
+		base: "inline-flex items-center rounded-2xl p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -82,7 +82,7 @@ export const ModalUserProfileTheme = createTheme({
 	content: {
 		base: "relative h-full w-full p-4 md:h-auto",
 		inner:
-			"relative flex max-h-[90dvh] flex-col rounded-lg shadow-2xl  bg-white dark:bg-gray-800 border border-orange-300 dark:border-gray-600"
+			"relative flex max-h-[90dvh] flex-col rounded-2xl shadow-2xl  bg-white dark:bg-gray-800 border border-orange-300 dark:border-gray-600"
 	},
 	body: {
 		base: "flex-1 overflow-auto p-6",
@@ -93,7 +93,7 @@ export const ModalUserProfileTheme = createTheme({
 		popup: "border-b-0 p-2",
 		title: "text-xl font-medium text-gray-900 dark:text-white",
 		close: {
-			base: "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
+			base: "ml-auto inline-flex items-center rounded-2xl bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
 			icon: "h-5 w-5"
 		}
 	},

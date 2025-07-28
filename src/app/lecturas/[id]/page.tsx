@@ -57,13 +57,13 @@ export default async function SingleLecturePage({
 				<div className="absolute top-20 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:px-0">
 					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
-						className="inline-block mb-4 rounded-lg px-2 py-1 bg-orange-700 hover:bg-orange-600 dark:bg-gray-800 dark:hover:bg-gray-900 text-white transition-all">
+						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-orange-700 hover:bg-orange-600 dark:bg-gray-800 dark:hover:bg-gray-900 text-white transition-all">
 						{FetchedDetailedArticled.category_name}
 					</Link>
 					<h1 className="mb-4 max-w-4xl text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-orange-700 dark:text-gray-300">
 						{FetchedDetailedArticled.title}
 					</h1>
-					<p className="text-lg font-normal text-gray-900 dark:text-gray-300 line-clamp-5 max-w-[80ch]">
+					<p className="text-lg font-normal text-gray-900 dark:text-gray-300 line-clamp-5 max-w-[80ch] bg-white dark:bg-gray-800 inline-block rounded-2xl px-2">
 						{FetchedDetailedArticled.summary}
 					</p>
 				</div>

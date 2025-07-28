@@ -59,7 +59,7 @@ export default function MainHeader() {
 							as={Link}
 							href={nav.href}
 							active={isActive(pathname, nav.href)}
-							className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
 							{nav.name}
 						</NavbarLink>
 					))}
@@ -68,7 +68,7 @@ export default function MainHeader() {
               as={Link}
               href="/perfil"
               active={isActive(pathname, "/perfil")}
-              className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+              className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
               Admin
             </NavbarLink>
 					) : (
@@ -76,7 +76,7 @@ export default function MainHeader() {
 							as={Link}
 							href="/log"
 							active={isActive(pathname, "/log")}
-							className="dark:text-gray-300  dark:hover:text-white rounded-lg px-3 py-2 text-sm font-medium">
+							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
 							Iniciar Sesión
 						</NavbarLink>
 					)}

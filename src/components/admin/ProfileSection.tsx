@@ -23,7 +23,7 @@ export default function ProfileSection({
 							<Image
 								width={100}
 								height={100}
-								className="w-20 h-20 rounded-full"
+								className="w-20 h-20 rounded-2xl"
 								src={imageUrl}
 								alt="user avatar"
 							/>

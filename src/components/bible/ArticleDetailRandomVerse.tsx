@@ -223,12 +223,12 @@ export default function ArticleDetailRandomVerse() {
 				<p className="text-sm">{randomVerse.text}</p>
 			</div>
 			<Link
-				className="inline-block px-5 py-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-300 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 w-full"
+				className="inline-block px-5 py-3 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-300 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 w-full"
 				href={`/biblia/libros/capitulos/versiculos/592420522e16049f-01/${randomVerse.reference}`}>
 				Leer Contexto
 			</Link>
 			<Link
-				className="inline-block mt-5 mb-2 px-5 py-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-300 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 w-full"
+				className="inline-block mt-5 mb-2 px-5 py-3 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-300 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 w-full"
 				href="/biblia">
 				Abrir Biblia
 			</Link>

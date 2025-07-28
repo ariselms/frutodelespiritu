@@ -61,7 +61,7 @@ export default async function BibleChaptersPage({
 					<BibleHeaderSection section={`Capítulos de ${Bible.nameLong}`} />
 					<div
 						className="flex items-center justify-center flex-wrap gap-1.5 bg-orange-50 dark:bg-gray-700 border-1 border-orange-300
-					dark:border-gray-600 p-4 rounded-xl transition-all">
+					dark:border-gray-600 p-4 rounded-2xl transition-all">
 						{BookChapters.map((book: any) => (
 							<Link
 								key={book.id}

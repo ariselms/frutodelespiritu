@@ -19,8 +19,8 @@ export default function BibleHeader() {
 				<Link
 					className={`${
 						isActive(pathname, "/biblia") &&
-						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
+					} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
 					href="/biblia">
 					<Image
 						alt="Logo"
@@ -35,8 +35,8 @@ export default function BibleHeader() {
 					<Link
 						className={`${
 							isActive(pathname, `/biblia/libros/${bibleId}`) &&
-							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
 						href={`/biblia/libros/${bibleId}`}>
 						<Image
 							alt="Logo"
@@ -55,8 +55,8 @@ export default function BibleHeader() {
 								pathname,
 								`/biblia/libros/capitulos/${bibleId}/${bookId}`
 							) &&
-							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
 						href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
 						<Image
 							alt="Logo"
@@ -64,7 +64,7 @@ export default function BibleHeader() {
 							height={100}
 							src="/images/animated/static-chapters.png"
 							className="w-8 h-8 mr-0"
-						/>							
+						/>
 						Capítulos
 					</Link>
 				)}
@@ -75,8 +75,8 @@ export default function BibleHeader() {
 								pathname,
 								`/biblia/libros/capitulos/versiculos/${bibleId}/${chapterId}`
 							) &&
-							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
 						href={`/biblia/libros/capitulos/versiculos/${bibleId}/${chapterId}`}>
 						<Image
 							alt="Logo"
@@ -84,15 +84,15 @@ export default function BibleHeader() {
 							height={100}
 							src="/images/animated/static-reading.png"
 							className="w-8 h-8 mr-0"
-						/>								
+						/>
 						Lectura
 					</Link>
 				)}
 				<Link
 					className={`${
 						isActive(pathname, "/biblia/buscar") &&
-						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
+					} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
 					href="/biblia/buscar">
 					<Image
 						alt="Logo"
@@ -100,7 +100,7 @@ export default function BibleHeader() {
 						height={100}
 						src="/images/animated/static-bible-search.png"
 						className="w-8 h-8 mr-0"
-					/>									
+					/>
 					Buscar
 				</Link>
 				{/* TODO: if the user is signed in, show notes */}

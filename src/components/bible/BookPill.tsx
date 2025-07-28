@@ -10,7 +10,7 @@ export function BookPillBlock({
 
 	return (
 		<div
-			className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 p-4 rounded-xl mb-8">
+			className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 p-4 rounded-2xl mb-8">
 			<div className="flex items-center justify-center mb-2">
 				<Image
 					alt={seccion}

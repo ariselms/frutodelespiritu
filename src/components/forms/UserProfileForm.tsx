@@ -180,7 +180,7 @@ export function UserProfileForm() {
 								<Label htmlFor="name">Nombre Completo</Label>
 							</div>
 							<input
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 								id="name"
 								name="name"
 								placeholder="Juanito Perez"
@@ -199,7 +199,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_street">Calle</Label>
 								</div>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									id="address_street"
 									name="address_street"
 									placeholder="123 Calle Principal"
@@ -214,7 +214,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_city">Ciudad</Label>
 								</div>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									id="address_city"
 									name="address_city"
 									placeholder="Ciudad"
@@ -229,7 +229,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_state">Estado</Label>
 								</div>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									id="address_state"
 									name="address_state"
 									placeholder="Estado"
@@ -244,7 +244,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_zip">Código Postal</Label>
 								</div>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									id="address_zip"
 									name="address_zip"
 									placeholder="Código Postal"
@@ -259,7 +259,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_country">Pais</Label>
 								</div>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									id="address_country"
 									name="address_country"
 									placeholder="Pais"
@@ -276,7 +276,7 @@ export function UserProfileForm() {
 								<Label htmlFor="role">Permisos</Label>
 							</div>
 							<input
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 								id="role"
 								name="role"
 								value={userProfile?.role || ""}
@@ -291,7 +291,7 @@ export function UserProfileForm() {
 									Sube una imagen de perfil
 								</Label>
 								<input
-									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+									className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 									name="image_url"
 									ref={imageInputFileRef}
 									type="file"
@@ -308,7 +308,7 @@ export function UserProfileForm() {
 								<Label htmlFor="bio">Bio</Label>
 							</div>
 							<textarea
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 								id="bio"
 								name="bio"
 								placeholder="Escribe una corta bio sobre ti..."
@@ -323,7 +323,7 @@ export function UserProfileForm() {
 								<Label htmlFor="contact_email">Correo Electrónico</Label>
 							</div>
 							<input
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 								id="contact_email"
 								name="contact_email"
 								placeholder="email@example.com"
@@ -339,7 +339,7 @@ export function UserProfileForm() {
 								<Label htmlFor="contact_phone">Número de Teléfono</Label>
 							</div>
 							<input
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 								id="contact_phone"
 								name="contact_phone"
 								placeholder="+1234567890"
@@ -351,7 +351,7 @@ export function UserProfileForm() {
 						</div>
 						<div className="w-full mt-8 mb-8">
 							<button
-								className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-  -800 cursor-pointer transition-all mt-4"
+								className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-  -800 cursor-pointer transition-all mt-4"
 								type="submit">
 								Actualizar Perfil
 							</button>

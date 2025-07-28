@@ -49,7 +49,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 			<div className="flex flex-col justify-between">
 				<div>
 					<div className="flex items-center gap-x-4 text-xs">
-						<span className="relative z-10 rounded-full bg-orange-100 border border-orange-700 dark:border-gray-50 dark:bg-gray-900 px-3 py-1.5 font-medium text-orange-700 dark:text-gray-50  transition-colors duration-200">
+						<span className="relative z-10 rounded-2xl bg-orange-100 border border-orange-700 dark:border-gray-50 dark:bg-gray-900 px-3 py-1.5 font-medium text-orange-700 dark:text-gray-50  transition-colors duration-200">
 							{article.category_name}
 						</span>
 						<time
@@ -77,7 +77,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 							height={40}
 							alt=""
 							src={article.author_image_url || "/images/church.svg"}
-							className="size-10 rounded-full bg-gray-50"
+							className="size-10 rounded-2xl bg-gray-50"
 						/>
 						<div className="text-sm/6">
 							<p className="font-semibold text-gray-900 dark:text-gray-100">

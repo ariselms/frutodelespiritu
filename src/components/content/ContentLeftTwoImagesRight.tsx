@@ -19,12 +19,12 @@ export default function ContentLeftTwoImagesRight({
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <img
-            className="w-full rounded-lg"
+            className="w-full rounded-2xl"
             src={firstImgUrl}
             alt={firstImgUrlAlt}
           />
           <img
-            className="mt-4 w-full lg:mt-10 rounded-lg"
+            className="mt-4 w-full lg:mt-10 rounded-2xl"
             src={secondImgUrl}
             alt={secondImgUrlAlt}
           />

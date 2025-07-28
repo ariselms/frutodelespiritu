@@ -13,12 +13,12 @@ export default function ContentRightTwoImagesLeft({
 			<div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
 				<div className="grid grid-cols-2 gap-4 mt-8">
 					<img
-						className="w-full rounded-lg"
+						className="w-full rounded-2xl"
 						src={firstImgUrl}
 						alt={firstImgUrlAlt}
 					/>
 					<img
-						className="mt-4 w-full lg:mt-10 rounded-lg"
+						className="mt-4 w-full lg:mt-10 rounded-2xl"
 						src={secondImgUrl}
 						alt={secondImgUrlAlt}
 					/>

@@ -134,7 +134,7 @@ export default function LogPage() {
 						<input
 							type="email"
 							id="email"
-							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 							placeholder="e.g. usuario@correo.com"
 							required
 							value={email}
@@ -143,7 +143,7 @@ export default function LogPage() {
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-gray-800 cursor-pointer">
+						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-gray-800 cursor-pointer">
 						{processing ? (
 							<>
 								<Spinner size="sm" className="mr-2" light />
@@ -175,7 +175,7 @@ export default function LogPage() {
 						<input
 							type="text"
 							id="code"
-							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+							className="block w-full px-2 py-4 text-sm text-gray-900 border border-orange-300 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
 							placeholder="e.g. 197382"
 							required
 							value={code}
@@ -185,7 +185,7 @@ export default function LogPage() {
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-gray-800 cursor-pointer">
+						className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-gray-800 cursor-pointer">
 						{processing ? (
 							<>
 								<Spinner size="sm" className="mr-2" light />
