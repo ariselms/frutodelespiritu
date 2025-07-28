@@ -63,7 +63,7 @@ export default async function SingleLecturePage({
 					<h1 className="mb-4 max-w-4xl text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-orange-700 dark:text-gray-300">
 						{FetchedDetailedArticled.title}
 					</h1>
-					<p className="text-lg font-normal text-gray-900 dark:text-gray-300 line-clamp-5">
+					<p className="text-lg font-normal text-gray-900 dark:text-gray-300 line-clamp-5 max-w-[80ch]">
 						{FetchedDetailedArticled.summary}
 					</p>
 				</div>
