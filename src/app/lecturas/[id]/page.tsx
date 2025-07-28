@@ -49,7 +49,7 @@ export default async function SingleLecturePage({
 	return (
 		<main className="pb-16 lg:pb-24 bg-orange-50 dark:bg-gray-900 antialiased">
 			<header
-				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative"
+				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16"
 				style={{
 					backgroundImage: `url(${FetchedDetailedArticled?.image_url})`
 				}}>
@@ -68,7 +68,7 @@ export default async function SingleLecturePage({
 					</p>
 				</div>
 			</header>
-			<div className="rich-text-content flex relative z-20 justify-between p-6 -m-16 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
+			<div className="rich-text-content flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
 				<div
 					className="pr-8 flex-2"
 					dangerouslySetInnerHTML={{ __html: FetchedDetailedArticled.content }}
