@@ -63,12 +63,12 @@ export default async function SingleLecturePage({
 					<h1 className="mb-4 max-w-4xl text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-orange-700 dark:text-gray-300">
 						{FetchedDetailedArticled.title}
 					</h1>
-					<p className="text-lg font-normal text-gray-900 dark:text-gray-300">
+					<p className="text-lg font-normal text-gray-900 dark:text-gray-300 line-clamp-5">
 						{FetchedDetailedArticled.summary}
 					</p>
 				</div>
 			</header>
-			<div className="rich-text-content flex relative z-20 justify-between p-6 -m-36 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
+			<div className="rich-text-content flex relative z-20 justify-between p-6 -m-16 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
 				<div
 					className="pr-8 flex-2"
 					dangerouslySetInnerHTML={{ __html: FetchedDetailedArticled.content }}
@@ -85,7 +85,7 @@ export default async function SingleLecturePage({
 				</aside>
 			</div>
 
-			<aside aria-label="Related articles" className="py-8 lg:py-16 mt-32">
+			<aside aria-label="Related articles" className="py-8 lg:py-16 mt-40 lg:mt-32 ">
 				<div className="px-8 mx-auto max-w-screen-xl">
 					<h2 className="mb-6 lg:mb-8 text-2xl font-bold text-gray-900 dark:text-white">
 						Artículos recientes
