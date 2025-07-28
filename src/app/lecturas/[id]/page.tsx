@@ -53,7 +53,7 @@ export default async function SingleLecturePage({
 				style={{
 					backgroundImage: `url(${FetchedDetailedArticled?.image_url})`
 				}}>
-				<div className="absolute top-0 left-0 w-full h-full text-orange-700 bg-orange-100/80 dark:bg-black/70"></div>
+				<div className="absolute top-0 left-0 w-full h-full text-orange-700 bg-orange-100/70 dark:bg-black/60"></div>
 				<div className="absolute top-20 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:px-0">
 					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
