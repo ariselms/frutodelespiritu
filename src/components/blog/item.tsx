@@ -60,7 +60,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 					</div>
 					<div className="group relative max-w-xl">
 						<h3 className="mt-3 text-xl font-semibold text-orange-700 dark:text-gray-50 group-hover:text-gray-600 dark:group-hover:text-gray-200">
-							<Link href={`/lecturas/${article.id}`}>
+							<Link href={`/lecturas/${article.slug}`}>
 								<span className="absolute inset-0" />
 								{article.title}
 							</Link>

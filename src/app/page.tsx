@@ -3,6 +3,50 @@ import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImages
 import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 
+// In a page.js or layout.js file, export a metadata object
+export const metadata = {
+	title:
+		"Fruto del Espíritu - tu recurso de reflexiones (devocionales) y estudios bíblicos",
+	description:
+		"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en Fruto del Espíritu.",
+	keywords: [
+		"devocionales",
+		"cristiano",
+		"reflexiones",
+		"estudios bíblicos",
+		"biblias en espanol",
+		"la biblia en espanol",
+		"biblia en espanol",
+		"entiende la biblia",
+		"espiritu santo",
+		"aprende la biblia",
+		"libros de la biblia reina valera 1960 en orden",
+		"lista de libros de la biblia reina valera 1960",
+		"tres significados de mundo en la biblia",
+		"significados de mundo en la biblia"
+	],
+	robots: {
+		index: true,
+		follow: true
+	},
+	openGraph: {
+		title:
+			"Fruto del Espíritu - tu recurso de reflexiones (devocionales) y estudios bíblicos",
+		description:
+			"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en Fruto del Espíritu.",
+		url: "https://frutodelespiritu.com/lecturas",
+		siteName: "Fruto del Espíritu",
+		type: "website",
+		locale: "es_US",
+		images: [
+			{
+				url: "https://frutodelespiritu.com/images/logo.png",
+				alt: "Fruto del Espíritu"
+			}
+		]
+	}
+};
+
 export default async function Home() {
 	return (
 		<main>

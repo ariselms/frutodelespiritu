@@ -6,15 +6,67 @@ import Image from "next/image";
 import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
 
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+
+  const {rows: article}: QueryResultRow =
+		await sql`SELECT * FROM lectures WHERE slug = ${slug}`;
+
+  let a = article[0];
+
+	return {
+		title: `${a?.title} | Fruto del Espíritu`,
+		description: a?.summary,
+		keywords: [
+			"devocionales",
+			"cristiano",
+			"reflexiones",
+			"estudios bíblicos",
+			"biblias en espanol",
+			"la biblia en espanol",
+			"biblia en espanol",
+			"entiende la biblia",
+			"espiritu santo",
+			"aprende la biblia",
+			"libros de la biblia reina valera 1960 en orden",
+			"lista de libros de la biblia reina valera 1960",
+			"tres significados de mundo en la biblia",
+			"significados de mundo en la biblia"
+		].concat(a?.title?.split(" ")),
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `${a?.title} | Fruto del Espíritu`,
+			description: a?.summary,
+			url: `https://frutodelespiritu.com/lecturas/${slug}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: "https://frutodelespiritu.com/images/logo.png",
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
+}
+
 export default async function SingleLecturePage({
 	params
 }: {
-	params: Promise<{ id: string }>;
+	params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
+	const { slug } = await params;
 
 	let FetchedDetailedArticled: ArticleType | QueryResultRow;
-  let FetchedRecentArticles: ArticleType[] | QueryResultRow[];
+	let FetchedRecentArticles: ArticleType[] | QueryResultRow[];
 
 	const { rows: DbArticleDetails } = await sql`
     SELECT
@@ -26,10 +78,10 @@ export default async function SingleLecturePage({
     INNER JOIN users ON lectures.by_user_id = users.id
     INNER JOIN categories ON lectures.category_id = categories.id
     WHERE lectures.draft = false
-    AND lectures.id = ${id}
+    AND lectures.slug = ${slug}
   `;
 
-  const { rows: DbRecentArticles } = await sql`
+	const { rows: DbRecentArticles } = await sql`
     SELECT
       lectures.*,
       categories.name as category_name,
@@ -37,14 +89,14 @@ export default async function SingleLecturePage({
     FROM lectures
     INNER JOIN categories ON lectures.category_id = categories.id
     WHERE lectures.draft = false
-    AND lectures.id != ${id}
+    AND lectures.slug != ${slug}
     ORDER BY created_at DESC
     LIMIT 6
   `;
 
 	FetchedDetailedArticled = DbArticleDetails[0];
 
-  FetchedRecentArticles = DbRecentArticles;
+	FetchedRecentArticles = DbRecentArticles;
 
 	return (
 		<main className="pb-16 lg:pb-24 bg-orange-50 dark:bg-gray-900 antialiased">
@@ -80,12 +132,14 @@ export default async function SingleLecturePage({
 						<h3 id="sidebar-label" className="sr-only">
 							Sidebar
 						</h3>
-            <ArticleDetailRandomVerse/>
+						<ArticleDetailRandomVerse />
 					</div>
 				</aside>
 			</div>
 
-			<aside aria-label="Related articles" className="py-8 lg:py-16 mt-40 lg:mt-32 ">
+			<aside
+				aria-label="Related articles"
+				className="py-8 lg:py-16 mt-40 lg:mt-32 ">
 				<div className="px-8 mx-auto max-w-screen-xl">
 					<h2 className="mb-6 lg:mb-8 text-2xl font-bold text-gray-900 dark:text-white">
 						Artículos recientes
@@ -97,33 +151,29 @@ export default async function SingleLecturePage({
 									key={article.id}
 									className="flex flex-col md:flex md:flex-row">
 									<Link
-										href={`/lecturas/${article.id}`}
+										href={`/lecturas/${article.slug}`}
 										className="xl:mb-0 w-full md:w-2/6 mr-3">
 										<Image
 											width={300}
 											height={300}
-											src={
-												article?.image_url !== ""
-													? article?.image_url
-													: "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png"
-											}
+											src={article?.image_url}
 											className="h-full mr-5 w-full object-cover rounded-2xl"
 											alt="Image 1"
 										/>
 									</Link>
 									<div className="flex-1 flex flex-col justify-start md:w-4/6 pb-1">
 										<Link
-											href={`/lecturas?page=1&limit=10&category=${article.category_id}`}
+											href={`/lecturas?page=1&limit=10&category=${article?.category_id}`}
 											className="inline-flex items-center font-medium underline underline-offset-4 text-orange-600 dark:text-gray-300 hover:no-underline my-2">
-											{article.category_name}
+											{article?.category_name}
 										</Link>
 										<h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white hover:underline">
-											<Link href={`/lecturas/${article.id}`}>
-												{article.title}
+											<Link href={`/lecturas/${article?.slug}`}>
+												{article?.title}
 											</Link>
 										</h2>
 										<p className="mb-4 text-gray-800 dark:text-gray-300 max-w-sm">
-											{article.summary}
+											{article?.summary}
 										</p>
 									</div>
 								</article>

@@ -61,7 +61,6 @@ html.dark .rich-text-content {
 .rich-text-content body { /* body selector here is mostly symbolic for nested structure, usually not needed */
   margin: 0;
   padding: 0;
-  font-size: 16px;
   color: var(--rich-text-color-primary); /* Use variable */
   background-color: transparent; /* Assuming container sets the background */
   -webkit-font-smoothing: antialiased;
@@ -83,15 +82,15 @@ html.dark .rich-text-content {
 }
 
 .rich-text-content h1 {
-  font-size: 2.5em;
-}
-
-.rich-text-content h2 {
   font-size: 2em;
 }
 
+.rich-text-content h2 {
+  font-size: 1.8em;
+}
+
 .rich-text-content h3 {
-  font-size: 1.75em;
+  font-size: 1.7em;
 }
 
 .rich-text-content h4 {
@@ -99,7 +98,7 @@ html.dark .rich-text-content {
 }
 
 .rich-text-content h5 {
-  font-size: 1.25em;
+  font-size: 1.3em;
 }
 
 .rich-text-content h6 {
@@ -110,8 +109,12 @@ html.dark .rich-text-content {
 .rich-text-content p {
   margin-top: 0;
   margin-bottom: 1em;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--rich-text-color-heading);
+}
+
+.rich-text-content {
+  font-size: 18px !important;
 }
 
 .rich-text-content strong {
