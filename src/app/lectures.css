@@ -19,8 +19,9 @@
   --rich-text-color-background-medium: #f4f4f4; /* For pre */
   --rich-text-color-background-blockquote: #f9f9f9; /* For blockquote */
   --rich-text-color-background-table-header: #f2f2f2; /* For table headers */
-  --rich-text-color-button-primary: #007bff;
-  --rich-text-color-button-primary-hover: #0056b3;
+  --rich-text-color-button-primary: #B43403;
+  --rich-text-color-button-primary-hover: #b94111;
+  --btn-border-color: none;
 }
 
 /* Dark theme overrides when html has 'dark' class */
@@ -35,8 +36,9 @@ html.dark .rich-text-content {
   --rich-text-color-background-medium: #333; /* For pre */
   --rich-text-color-background-blockquote: #2a2a2a; /* For blockquote */
   --rich-text-color-background-table-header: #3a3a3a; /* For table headers */
-  --rich-text-color-button-primary: #1a73e8; /* Can adjust if needed for dark mode */
-  --rich-text-color-button-primary-hover: #0d47a1; /* Can adjust if needed for dark mode */
+  --rich-text-color-button-primary: #374151; /* Can adjust if needed for dark mode */
+  --rich-text-color-button-primary-hover: #3d485a; /* Can adjust if needed for dark mode */
+  --btn-border-color: #4B5563;
 }
 
 
@@ -292,11 +294,14 @@ html.dark .rich-text-content {
 .rich-text-content button,
 .rich-text-content input[type="submit"],
 .rich-text-content input[type="button"] {
-  display: inline-block;
-  padding: 0.75em 1.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   margin-bottom: 1em;
   border: none;
-  border-radius: 4px;
+  border-radius: 1em;
+  border: 1px solid var(--btn-border-color);
   background-color: var(--rich-text-color-button-primary); /* Use variable */
   color: #fff; /* Keep button text white for contrast */
   font-size: 1em;

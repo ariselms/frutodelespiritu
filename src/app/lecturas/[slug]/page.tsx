@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
 import {ShareButtons} from "@/components/ShareButtons";
+import { SaveLecturebutton } from "@/components/SaveLectureButton";
 
 export async function generateMetadata({
 	params
@@ -135,11 +136,14 @@ export default async function SingleLecturePage({
 						</h3>
 						<ArticleDetailRandomVerse />
 						<ShareButtons />
+						<SaveLecturebutton />
 					</div>
 				</aside>
 			</div>
-			<div className="lg:hidden py-8 lg:py-16 mt-8 lg:mt-32">
+			<div className="lg:hidden py-8 lg:py-16 mt-0 lg:mt-32">
+				<SaveLecturebutton />
 				<ShareButtons />
+				<ArticleDetailRandomVerse />
 			</div>
 			<section aria-label="Related articles" className="mt-4 lg:mt-16 xl:mt-44">
 				<div className="px-8 mx-auto max-w-screen-xl">
@@ -184,7 +188,6 @@ export default async function SingleLecturePage({
 					</div>
 				</div>
 			</section>
-			<ArticleDetailRandomVerse />
 		</main>
 	);
 }

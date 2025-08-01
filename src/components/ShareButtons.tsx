@@ -24,7 +24,7 @@ export function ShareButtons(){
 
 	if (!pathname.includes("admin")) {
 		return (
-			<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl pt-2 pb-4 lg:pt-6 lg:pb-2 m-4 lg:m-0">
+			<div className="my-8 bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl pt-2 pb-4 lg:pt-6 lg:pb-2 m-4 lg:mx-0">
 
         <p className="font-bold text-lg text-center mb-2">Comparte este contenido</p>
 

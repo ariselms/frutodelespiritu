@@ -33,7 +33,7 @@ export default function MainHeader() {
 		<Navbar
 			theme={OrangeLinkTheme}
 			fluid
-			className="bg-orange-50 py-4 border-b border-orange-300 dark:bg-gray-900 dark:border-gray-700">
+			className="relative bg-orange-50 py-4 border-b border-orange-300 dark:bg-gray-900 dark:border-gray-700 z-20">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
