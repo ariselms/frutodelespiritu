@@ -136,7 +136,6 @@ export default async function SingleLecturePage({
 					</div>
 				</aside>
 			</div>
-
 			<aside
 				aria-label="Related articles"
 				className="py-8 lg:py-16 mt-40 lg:mt-32 ">

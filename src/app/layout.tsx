@@ -17,11 +17,6 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"]
 });
 
-export const metadata: Metadata = {
-	title: "Fruto del Espíritu",
-	description: "Una comunidad cristiana para compartir y crecer en la fe."
-};
-
 export default function RootLayout({
 	children
 }: Readonly<{

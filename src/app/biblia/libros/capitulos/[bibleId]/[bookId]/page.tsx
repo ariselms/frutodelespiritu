@@ -1,5 +1,69 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import Link from "next/link";
+
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ bibleId: string; bookId: string }>;
+}) {
+
+  const { bibleId, bookId } = await params;
+
+  const BibleAPIKey = process.env.BIBLE_API_KEY;
+
+  const bookUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}`;
+
+  let Bible;
+
+  const bookRequest = await fetch(bookUrl, {
+    method: "GET",
+    headers: {
+      "api-key": `${BibleAPIKey}`,
+      Accept: "application/json"
+    }
+  });
+
+  if (!bookRequest.ok) {
+    const errorData = await bookRequest.json();
+    console.error(
+      `HTTP error! Status: ${bookRequest.status} for Bible ID: ${bibleId}`,
+      errorData
+    );
+  }
+
+  const book = await bookRequest.json();
+
+  Bible = book.data;
+
+	return {
+		title: `Libros de ${Bible.nameLong} | Lee la biblia en Fruto del Espíritu`,
+		description: `Lee el libro de ${Bible.nameLong}. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+		keywords: [
+      `Libro de ${Bible.nameLong}`,
+      `Capitulos de ${Bible.nameLong}`,
+      `Capitulos del libro de ${Bible.nameLong}`,
+      `${Bible.nameLong}`,
+		],
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `Libros de ${Bible.nameLong} | Lee la biblia en Fruto del Espíritu`,
+			description: `Lee el libro de ${Bible.nameLong}. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+			url: `https://frutodelespiritu.com/biblia/libros/capitulos/592420522e16049f-01/${Bible.id}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: "https://frutodelespiritu.com/images/logo.png",
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
+}
 export default async function BibleChaptersPage({
 	params
 }: {
@@ -48,10 +112,12 @@ export default async function BibleChaptersPage({
     BookChapters = chapterResponse.data;
 
   } catch (error) {
+
     console.error(
       `Error fetching data for Bible ID: ${bibleId}`,
       error
     );
+
   }
 
 	return (

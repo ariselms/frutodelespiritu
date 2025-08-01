@@ -10,7 +10,7 @@ export const metadata = {
 	title:
 		"Reflexiones | Fruto del Espíritu",
   description:
-    "Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en Fruto del Espíritu.",
+    "Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 	keywords: [
     "devocionales",
     "cristiano",
@@ -34,7 +34,7 @@ export const metadata = {
 	openGraph: {
 		title: "Reflexiones | Fruto del Espíritu",
 		description:
-			"Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en Fruto del Espíritu.",
+			"Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 		url: "https://frutodelespiritu.com/lecturas",
 		siteName: "Fruto del Espíritu",
 		type: "website",

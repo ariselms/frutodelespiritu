@@ -2,6 +2,47 @@ import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
 import { SeccionesBiblia } from "@/static";
 
+export const metadata = {
+	title: "La biblia en espanol | Fruto del Espíritu",
+	description:
+		"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+	keywords: [
+		"devocionales",
+		"cristiano",
+		"reflexiones",
+		"estudios bíblicos",
+		"biblias en espanol",
+		"la biblia en espanol",
+		"biblia en espanol",
+		"entiende la biblia",
+		"espiritu santo",
+		"aprende la biblia",
+		"libros de la biblia reina valera 1960 en orden",
+		"lista de libros de la biblia reina valera 1960",
+		"tres significados de mundo en la biblia",
+		"significados de mundo en la biblia"
+	],
+	robots: {
+		index: true,
+		follow: true
+	},
+	openGraph: {
+		title: "La biblia en espanol | Fruto del Espíritu",
+		description:
+			"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+		url: "https://frutodelespiritu.com/lecturas",
+		siteName: "Fruto del Espíritu",
+		type: "website",
+		locale: "es_US",
+		images: [
+			{
+				url: "https://frutodelespiritu.com/images/logo.png",
+				alt: "Fruto del Espíritu"
+			}
+		]
+	}
+};
+
 export default async function BibleBooksPage({
 	params
 }: {

@@ -8,7 +8,7 @@ export const metadata = {
 	title:
 		"Fruto del Espíritu - tu recurso de reflexiones (devocionales) y estudios bíblicos",
 	description:
-		"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en Fruto del Espíritu.",
+		"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 	keywords: [
 		"devocionales",
 		"cristiano",
@@ -33,7 +33,7 @@ export const metadata = {
 		title:
 			"Fruto del Espíritu - tu recurso de reflexiones (devocionales) y estudios bíblicos",
 		description:
-			"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en Fruto del Espíritu.",
+			"Bienvenido a Fruto del Espíritu, tu recurso de reflexiones y estudios bíblicos. Toma notas, guarda reflexiones y estudios bíblicos. Aprende a escribir sermones y prepárate de manera eficiente con nosotros utilizando modo estudio y muchos más. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 		url: "https://frutodelespiritu.com/lecturas",
 		siteName: "Fruto del Espíritu",
 		type: "website",
