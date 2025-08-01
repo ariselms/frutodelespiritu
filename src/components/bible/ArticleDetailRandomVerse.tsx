@@ -216,7 +216,7 @@ const randomVerse = getRandomBibleVerseWithReference();
 
 export default function ArticleDetailRandomVerse() {
 	return (
-		<div className="mb-8 bg-orange-200 dark:bg-gray-900 shadow shadow-orange-300 dark:shadow-gray-700 p-4 rounded-2xl">
+		<div className="mb-8 bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 shadow shadow-orange-300 dark:shadow-gray-700 p-4 rounded-2xl">
 			<h4 className="text-center">Versículo Destacado</h4>
 			<div className="my-10">
 				<p className="text-sm font-extrabold">{randomVerse.verse_or_passage}</p>
