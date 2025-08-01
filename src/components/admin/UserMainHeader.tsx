@@ -24,9 +24,11 @@ export function UserMainHeader() {
 			<nav className="px-4 lg:px-6 py-2.5 bg-orange-50 dark:bg-gray-900 border-b border-orange-300 dark:border-gray-700 ">
 				<div className="flex flex-wrap justify-between items-center mx-auto container">
 					<Link href="/perfil" className="flex items-center">
-						<img
-							src="/images/logo.png"
-							className="mr-3 h-6 sm:h-9"
+						<Image
+              width={100}
+              height={100}
+							src="/images/animated/static-user.png"
+							className="mr-2 h-12 w-12"
 							alt="Flowbite Logo"
 						/>
 						<span
