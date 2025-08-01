@@ -30,7 +30,7 @@ export const metadata = {
 		title: "La biblia en espanol | Fruto del Espíritu",
 		description:
 			"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-		url: "https://frutodelespiritu.com/lecturas",
+		url: "https://frutodelespiritu.com/biblia/libros/592420522e16049f-01",
 		siteName: "Fruto del Espíritu",
 		type: "website",
 		locale: "es_US",

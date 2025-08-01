@@ -49,7 +49,7 @@ export async function generateMetadata({
 			follow: true
 		},
 		openGraph: {
-			title: `Libros de ${Bible.nameLong} | Lee la biblia en Fruto del Espíritu`,
+			title: `Capítulos de ${Bible.nameLong} | Lee la biblia en Fruto del Espíritu`,
 			description: `Lee el libro de ${Bible.nameLong}. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
 			url: `https://frutodelespiritu.com/biblia/libros/capitulos/592420522e16049f-01/${Bible.id}`,
 			siteName: "Fruto del Espíritu",
