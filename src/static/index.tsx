@@ -25,8 +25,8 @@ export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 		requiresAdmin: false
 	},
 	{
-		name: "Tus Publicaciones",
-		description: "Maneja la creación y edición de tus publicaciones.",
+		name: "Panel Administrador",
+		description: "Administra tus publicaciones, categorias y usuarios.",
 		href: "/perfil/admin",
 		requiresAdmin: true
 	}
