@@ -102,12 +102,12 @@ export default async function SingleLecturePage({
 	return (
 		<main className="pb-16 lg:pb-24 bg-orange-50 dark:bg-gray-900 antialiased">
 			<header
-				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16"
+				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16 flex justify-center items-center"
 				style={{
 					backgroundImage: `url(${FetchedDetailedArticled?.image_url})`
 				}}>
 				<div className="absolute top-0 left-0 w-full h-full text-orange-700 bg-orange-100/70 dark:bg-black/60"></div>
-				<div className="absolute top-20 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:px-0">
+				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-screen-xl xl:px-0">
 					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
 						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-orange-700 hover:bg-orange-600 dark:bg-gray-800 dark:hover:bg-gray-900 text-white transition-all">
@@ -141,10 +141,7 @@ export default async function SingleLecturePage({
 			<div className="lg:hidden py-8 lg:py-16 mt-8 lg:mt-32">
 				<ShareButtons />
 			</div>
-			<section
-				aria-label="Related articles"
-        className="mt-4 lg:mt-16 xl:mt-44"
-        >
+			<section aria-label="Related articles" className="mt-4 lg:mt-16 xl:mt-44">
 				<div className="px-8 mx-auto max-w-screen-xl">
 					<h2 className="mb-6 lg:mb-8 text-2xl font-bold text-gray-900 dark:text-white">
 						Artículos recientes
@@ -187,6 +184,7 @@ export default async function SingleLecturePage({
 					</div>
 				</div>
 			</section>
+			<ArticleDetailRandomVerse />
 		</main>
 	);
 }
