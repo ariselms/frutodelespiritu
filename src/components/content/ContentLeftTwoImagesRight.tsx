@@ -5,9 +5,7 @@ export default function ContentLeftTwoImagesRight({
   title,
   description,
   firstImgUrl,
-  secondImgUrl,
   firstImgUrlAlt = "",
-  secondImgUrlAlt = "",
 }: ContentAndTwoImagesProps) {
   return (
 		<section className="bg-orange-50 dark:bg-gray-800 border-y border-orange-300 dark:border-gray-800 pt-10 pb-16">

@@ -24,7 +24,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   const blob = await put(`/avatars/${filename}`, request.body, {
-    access: "public"
+    access: "public",
+    allowOverwrite: true
   });
 
 	return NextResponse.json(

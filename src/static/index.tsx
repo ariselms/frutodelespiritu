@@ -8,19 +8,19 @@ export const MainNavigation: NavigationItemType[] = [
 export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 	{
 		name: "Biblia",
-		description: "Tu colección de notas relacionada con la Biblia.",
+		description: "Administra tus notas y documentos relacionados con la Biblia. Esta función estará disponible pronto.",
 		href: "/perfil/biblia",
 		requiresAdmin: false
 	},
 	{
 		name: "Lecturas",
-		description: "Tus lecturas y reflexiones guardadas como favoritos.",
+		description: "Administra tus lecturas guardadas, así como tus recortes y notas relacionadas a las lecturas. Esta función estará muy pronto.",
 		href: "/perfil/lecturas",
 		requiresAdmin: false
 	},
 	{
 		name: "Órdenes",
-		description: "Tus órdenes de nuestra tienda virtual.",
+		description: "Administra tus órdenes y revisa tu historial de compras. Esta función estará disponible en el 2026.",
 		href: "/perfil/ordenes",
 		requiresAdmin: false
 	},

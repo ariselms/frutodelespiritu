@@ -145,7 +145,7 @@ export function UserProfileForm() {
 				className="flex items-center justify-center py-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-950 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all mt-4 flex-1"
 				onClick={() => setOpenModal(true)}>
 				<svg
-					className="w-6 h-6 text-gray-800 dark:text-white mr-2"
+					className="fill-orange-700 dark:fill-gray-200 w-6 h-6 text-gray-800 dark:text-white mr-2"
 					aria-hidden="true"
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

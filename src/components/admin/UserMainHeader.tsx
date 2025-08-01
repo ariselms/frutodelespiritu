@@ -41,15 +41,15 @@ export function UserMainHeader() {
 					<div className="flex items-center lg:order-2">
 						<button
 							onClick={signOutUser}
-							className="bg-red-600 border border-red-950 dark:border-red-50 text-white ml-1 lg:ml-3 focus:ring-4 focus:ring-gray-300 font-medium rounded-2xl text-sm px-3 py-1 700 focus:outline-none dark:focus:ring-gray-800 cursor-pointer flex items-center">
-							Cerrar Sesión
+							className="bg-red-600 border border-red-950 dark:border-red-50 text-white ml-1 lg:ml-3 focus:ring-4 focus:ring-gray-300 font-medium rounded-2xl text-sm px-2 py-0 700 focus:outline-none dark:focus:ring-gray-800 cursor-pointer flex items-center">
 							<Image
-								alt="Logo"
+								alt="Sign Out"
 								width={100}
 								height={100}
 								src="/images/animated/static-logout.png"
 								className="w-8 h-8 ml-2"
 							/>
+							Cerrar Sesión
 						</button>
 						<button
 							data-collapse-toggle="mobile-menu-2"

@@ -7,7 +7,7 @@ export default function UserLecturesPage(){
 				<div className="bg-white dark:bg-gray-950 text-black dark:text-white border-b border-orange-300 dark:border-gray-700">
 					<ProfileSection
 						sectionName="Lecturas"
-						sectionDescription="Lista de tus lecturas favoritas"
+						sectionDescription="Administra tus lecturas guardadas, así como tus recortes y notas relacionadas a las lecturas. Esta función estará muy pronto."
 					/>
 				</div>
 			</article>
