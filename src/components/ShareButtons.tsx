@@ -1,0 +1,48 @@
+"use client";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import {
+	FacebookShareButton,
+	TwitterShareButton,
+	LinkedinShareButton,
+	FacebookIcon,
+	TwitterIcon,
+	LinkedinIcon,
+	EmailShareButton,
+	EmailIcon
+} from "react-share";
+
+export function ShareButtons(){
+	const pathname = usePathname();
+	const [url, setUrl] = useState("");
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setUrl(window.location.href);
+		}
+	}, [typeof window !== "undefined" && window.location.href]);
+
+	if (!pathname.includes("admin")) {
+		return (
+			<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl pt-6 pb-2">
+
+        <p className="font-bold text-lg text-center">Comparte este contenido</p>
+
+				<div className="flex items-center justify-center">
+					<FacebookShareButton url={url} className="mr-1">
+						<FacebookIcon className="h-10" />
+					</FacebookShareButton>
+					<TwitterShareButton url={url} className="mr-1">
+						<TwitterIcon className="h-10" />
+					</TwitterShareButton>
+					<LinkedinShareButton url={url} className="mr-1">
+						<LinkedinIcon className="h-10" />
+					</LinkedinShareButton>
+					<EmailShareButton url={url} className="mr-1">
+						<EmailIcon className="h-10" />
+					</EmailShareButton>
+				</div>
+			</div>
+		);
+	}
+};

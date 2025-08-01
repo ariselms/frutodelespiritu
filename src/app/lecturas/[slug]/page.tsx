@@ -5,6 +5,7 @@ import "../../lectures.css";
 import Image from "next/image";
 import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
+import {ShareButtons} from "@/components/ShareButtons";
 
 export async function generateMetadata({
 	params
@@ -133,12 +134,17 @@ export default async function SingleLecturePage({
 							Sidebar
 						</h3>
 						<ArticleDetailRandomVerse />
+						<ShareButtons />
 					</div>
 				</aside>
 			</div>
-			<aside
+			<div className="lg:hidden py-8 lg:py-16 mt-8 lg:mt-32">
+				<ShareButtons />
+			</div>
+			<section
 				aria-label="Related articles"
-				className="py-8 lg:py-16 mt-40 lg:mt-32 ">
+        className="mt-4 lg:mt-16 xl:mt-44"
+        >
 				<div className="px-8 mx-auto max-w-screen-xl">
 					<h2 className="mb-6 lg:mb-8 text-2xl font-bold text-gray-900 dark:text-white">
 						Artículos recientes
@@ -180,7 +186,7 @@ export default async function SingleLecturePage({
 						)}
 					</div>
 				</div>
-			</aside>
+			</section>
 		</main>
 	);
 }
