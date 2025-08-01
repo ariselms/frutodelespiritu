@@ -8,11 +8,11 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import Link from "next/link";
+import Image from "next/image";
 import { DarkThemeToggle } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import { MainNavigation } from "@/static";
 import { NavigationItemType } from "@/models/navigationTypes";
-import Image from "next/image";
 import { OrangeLinkTheme } from "../theme";
 import { isActive } from "@/helpers";
 import { useAuthContext } from "@/context/authContext";

@@ -30,10 +30,10 @@ export default function ProfileSection({
 						)}
 						{sectionName && <h1 className="text-2xl">{sectionName}</h1>}
 						{sectionEmail && (
-							<p className="text-sm font-bold mb-4">{sectionEmail}</p>
+							<p className="text-sm font-bold">{sectionEmail}</p>
 						)}
 						{sectionDescription && (
-							<p className="text-lg max-w-[80ch]">{sectionDescription}</p>
+							<p className="text-lg max-w-[80ch] mt-4">{sectionDescription}</p>
 						)}
 					</div>
 				</div>

@@ -136,12 +136,16 @@ export default async function SingleLecturePage({
 						</h3>
 						<ArticleDetailRandomVerse />
 						<ShareButtons />
-						<SaveLecturebutton />
+						<SaveLecturebutton
+              lectureId={FetchedDetailedArticled.id}
+            />
 					</div>
 				</aside>
 			</div>
 			<div className="lg:hidden py-8 lg:py-16 mt-0 lg:mt-32">
-				<SaveLecturebutton />
+				<SaveLecturebutton
+          lectureId={FetchedDetailedArticled.id}
+        />
 				<ShareButtons />
 				<ArticleDetailRandomVerse />
 			</div>
