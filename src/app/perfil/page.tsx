@@ -37,11 +37,11 @@ export default function AdminPage() {
 									(item: NavigationItemTypeWithAuth) => (
 										<div
 											key={item.name}
-											className="flex flex-col justify-around rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600">
+											className="flex flex-col justify-start rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600">
 											<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 												{item.name}
 											</h5>
-											<p className="font-normal text-gray-700 dark:text-gray-200 mb-4">
+											<p className="font-normal text-gray-700 dark:text-gray-200 mb-8">
 												{item.description}
 											</p>
 											<Link
@@ -59,12 +59,12 @@ export default function AdminPage() {
 									<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 										{item.name}
 									</h5>
-									<p className="font-normal text-gray-700 dark:text-gray-200 mb-12">
+									<p className="font-normal text-gray-700 dark:text-gray-200 mb-8">
 										{item.description}
 									</p>
 									<Link
 										href={item.href}
-										className="flex items-center justify-center mt-6 p-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all">
+										className="flex items-center justify-center p-4 text-sm font-medium text-orange-700 dark:text-gray-50 rounded-2xl cursor-pointer bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all mt-auto">
 										Administra
 									</Link>
 								</div>
