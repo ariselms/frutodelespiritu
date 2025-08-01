@@ -69,7 +69,7 @@ export default function SubscriberForm() {
 					<input
 						type="submit"
 						value="Suscríbete"
-						className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-100 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
+						className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
 						name="member_submit"
 						id="member_submit"
 					/>

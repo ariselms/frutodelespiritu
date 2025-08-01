@@ -43,4 +43,4 @@ export const ContentRightTwoImagesLeftDescription = ({
   </>
 );
 
-const ContentWithImagesBtnStyles: string = "inline-block mt-6 p-5 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 dark:bg-gray-50 hover:bg-orange-600 dark:hover:bg-gray-200 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in";
+const ContentWithImagesBtnStyles: string = "inline-block mt-6 p-5 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 dark:bg-gray-50 hover:bg-orange-600 dark:hover:bg-gray-300 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in";

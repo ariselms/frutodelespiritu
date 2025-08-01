@@ -13,13 +13,19 @@ export default function JumbotronMain() {
 						Explora la sabiduría de la Biblia a través de estudios profundos y
 						reflexiones inspiradoras que nutren tu espíritu y fortalecen tu fe.
 					</p>
-          <SubscriberForm />
+					<SubscriberForm />
 				</div>
-				<div className="hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
+				<div className="relative hidden lg:mt-0 lg:col-span-5 xl:col-span-4 lg:flex">
+					<svg
+						className="fill-orange-100 dark:fill-gray-800 absolute z-10 w-225 h-225 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rotate-90"
+						viewBox="-120 -120 240 240"
+						xmlns="http://www.w3.org/2000/svg">
+						<path d="M 76.49640930706043,0 C 78.43336426547953,17.00422111358067 61.762731515693,72.45877354841575 47.01738638281921,81.43650205413994 C 32.272041249945424,90.41423055986412 -25.655766212795008,82.00139080256099 -41.466351755929864,71.8218280457935 C -57.27693729906472,61.64226528902601 -79.7664380817211,17.43733112595886 -79.46729796225962,9.731937208637023e-15 C -79.16815784279814,-17.43733112595884 -52.94686138495376,-60.85216260506411 -39.073230800238,-67.67682096187728 C -25.19960021552224,-74.50147931869046 17.075541702054167,-63.05686947474007 31.52174671546647,-54.597266854505406 C 45.967951728878774,-46.137664234270744 74.55945434864134,-17.00422111358067 76.49640930706043,0 Z" />
+					</svg>
 					<Image
 						width={300}
 						height={300}
-						className="w-full h-full object-cover"
+						className="z-20 w-full h-full object-cover"
 						src="/images/pray.svg"
 						alt="praying man stricker illustration"
 					/>
