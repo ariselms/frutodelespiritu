@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
+import { useSearchParams } from "next/navigation";
 export default function LogPage() {
 
 	const router = useRouter();
@@ -14,6 +15,7 @@ export default function LogPage() {
 	const [codeSent, setCodeSent] = useState<boolean>(false);
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
 
 	useEffect(() => {
 		if (user) {
@@ -82,13 +84,23 @@ export default function LogPage() {
 
 			const response = await request.json();
 
-			if (response.success) {
+      console.log(response.success && searchParams.get("redirectUrl") !== null);
 
-				router.push("/perfil");
+			if (response.success && searchParams.get("redirectUrl") !== null) {
+
+        const redirectUrl: string = String(searchParams.get("redirectUrl"));
+
+				router.push(redirectUrl);
 
 				toast.success(response.message);
 
-			} else {
+			} else if (response.success && searchParams.get("redirectUrl") === null) {
+
+        router.push("/perfil");
+
+				toast.success(response.message);
+
+      } else {
 
         console.error(response.message);
 

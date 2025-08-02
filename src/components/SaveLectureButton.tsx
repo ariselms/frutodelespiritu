@@ -2,19 +2,25 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { serverBaseUrl } from "@/static";
 
 export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
+
 	const { user } = useAuthContext();
 
 	const router = useRouter();
+
+  const pathname = usePathname();
 
 	const [lectureIsSaved, setLectureIsSaved] = useState<boolean>(false);
 
 	useEffect(() => {
 		// check if the lecture is saved
 		const checkIfLectureIsSaved = async () => {
-			if (user) {
+
+      if (user) {
+
 				const request = await fetch(
 					`/api/user/lectures?lectureId=${lectureId}&userId=${user.id}`,
 					{
@@ -28,19 +34,28 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 				const response = await request.json();
 
 				if (response.success && response.data) {
-					setLectureIsSaved(true);
-				} else {
-					setLectureIsSaved(false);
-				}
+
+
+          setLectureIsSaved(true);
+
+        } else {
+
+          setLectureIsSaved(false);
+
+        }
 			}
 		};
 
 		checkIfLectureIsSaved();
+
 	}, [user]);
 
 	const handleSaveLecture = async () => {
+
 		try {
+
 			if (user) {
+
 				const request = await fetch(`/api/user/lectures`, {
 					method: "POST",
 					headers: {
@@ -55,16 +70,24 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 				const response = await request.json();
 
 				if (response.success) {
+
 					toast.success(response.message);
+
 					setLectureIsSaved(true);
+
 				} else {
-          toast.error(response.message);
+
+          toast.warning(response.message);
+
         }
 			} else {
+
 				toast.warning(
-					"You must be logged in to save a lecture, please log in."
+					"Necesitas ingresar para guardar lecturas."
 				);
-				router.push("/log");
+
+				router.push("/log?redirectUrl=" + serverBaseUrl + pathname);
+
 			}
 		} catch (error) {
 			console.error(error);
@@ -78,7 +101,7 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 				onClick={handleSaveLecture}
 				className="rounde-2xl px-5 py-3 text-sm font-medium text-orange-700 dark:text-gray-100 rounded-2xl cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-300 dark:border-gray-600 focus:ring-4 focus:ring-orange-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
 				<svg
-					className="text-orange-700 dark:text-gray-100 m-1"
+					className="text-orange-700 lg:text-white dark:text-gray-100 m-1"
 					aria-hidden="true"
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

@@ -64,13 +64,13 @@ export default function MainHeader() {
 						</NavbarLink>
 					))}
 					{user ? (
-            <NavbarLink
-              as={Link}
-              href="/perfil"
-              active={isActive(pathname, "/perfil")}
-              className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
-              Admin
-            </NavbarLink>
+						<NavbarLink
+							as={Link}
+							href="/perfil"
+							active={isActive(pathname, "/perfil")}
+							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
+							Admin
+						</NavbarLink>
 					) : (
 						<NavbarLink
 							as={Link}
@@ -80,7 +80,9 @@ export default function MainHeader() {
 							Iniciar Sesión
 						</NavbarLink>
 					)}
-					<DarkThemeToggle />
+					<div className="px-3">
+						<DarkThemeToggle />
+					</div>
 				</div>
 			</NavbarCollapse>
 		</Navbar>
