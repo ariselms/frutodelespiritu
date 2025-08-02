@@ -29,7 +29,7 @@ export function UserMainHeader() {
 
   return (
 		<header>
-			<Navbar theme={OrangeLinkTheme} fluid>
+			<Navbar theme={OrangeLinkTheme}>
 				<NavbarBrand as={Link} href="/perfil">
 					<Image
 						width={100}
@@ -40,8 +40,8 @@ export function UserMainHeader() {
 					/>
 					<span
 						className={`${
-							isActive(pathname, "/") &&
-							"text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-500"
+							isActive(pathname, "/perfil") &&
+							"text-orange-700 hover:text-orange-600 dark:text-orange-500 dark:hover:text-orange-600"
 						} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
 						{user?.name || "Perfil"}
 					</span>
