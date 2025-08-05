@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
   // temporary headers to be able to fetch and migrate data to production
   const headers = new Headers(request.headers);
-  headers.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  headers.set("Access-Control-Allow-Origin", "http://localhost:3000");
   headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   headers.set('Access-Control-Allow-Credentials', 'true');

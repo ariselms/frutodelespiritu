@@ -6,29 +6,37 @@ import { Button } from "flowbite-react";
 
 export default function MigratePage() {
 
-	const [dataToMigrate, setDataToMigrate] = useState<any>(null);
-	const fetchData = async () => {
+  const [dataToMigrate, setDataToMigrate] = useState<any>(null);
 
-		const response = await fetch(
-			"https://frutodelespiritu-dev.vercel.app/api/articles",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization:
-						"Bearer " + process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION
-				}
-			}
-		);
+  try {
+    const fetchData = async () => {
 
-		const data = await response.json();
+      const response = await fetch(
+        "https://frutodelespiritu-dev.vercel.app/api/articles",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION
+          }
+        }
+      );
 
-    console.log(data);
+      const data = await response.json();
 
-		setDataToMigrate(data);
-	};
+      console.log(data);
 
-	fetchData();
+      setDataToMigrate(data);
+    };
+
+    fetchData();
+
+  } catch (error) {
+    console.error(error);
+  }
+
+
 
 	const migrateData = async () => {
 
