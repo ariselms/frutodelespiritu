@@ -5,11 +5,25 @@ import { FetchEndpoints } from "@/static";
 import { Button } from "flowbite-react";
 
 export default function MigratePage() {
+
 	const [dataToMigrate, setDataToMigrate] = useState<any>(null);
 	const fetchData = async () => {
-		const response = await fetch("https://frutodelespiritu.com/api/lecturas");
+
+		const response = await fetch(
+			"https://frutodelespiritu-dev.vercel.app/api/articles",
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:
+						"Bearer " + process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION
+				}
+			}
+		);
 
 		const data = await response.json();
+
+    console.log(data);
 
 		setDataToMigrate(data);
 	};
@@ -17,6 +31,11 @@ export default function MigratePage() {
 	fetchData();
 
 	const migrateData = async () => {
+
+    console.log(dataToMigrate);
+
+    return;
+
 		if (dataToMigrate) {
 			dataToMigrate.map(async (item: any) => {
 				// destructure old item

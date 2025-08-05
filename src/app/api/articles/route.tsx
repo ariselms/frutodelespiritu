@@ -4,15 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 // The `request` object contains all the information about the incoming request
 export async function GET(request: NextRequest) {
 	try {
-		// 1. Get URL Search Parameters
+
+  // temporary headers to be able to fetch and migrate data to production
+  const headers = new Headers(request.headers);
+  headers.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  headers.set('Access-Control-Allow-Credentials', 'true');
+
+
 		const { searchParams } = new URL(request.url);
 
-		// 2. Get and validate 'limit' and 'page'
-		//    Provide sensible defaults if they are missing or invalid.
 		const page = Number(searchParams.get("page")) || 1;
 		const limit = Number(searchParams.get("limit")) || 10;
 
-		// Ensure they are positive integers
 		if (limit <= 0) {
 			return NextResponse.json(
 				{ error: "Limit must be a positive number" },
