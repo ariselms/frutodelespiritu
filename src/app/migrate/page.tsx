@@ -12,15 +12,7 @@ export default function MigratePage() {
     const fetchData = async () => {
 
       const response = await fetch(
-        "https://frutodelespiritu-dev.vercel.app/api/articles",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer " + process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION
-          }
-        }
+        "https://frutodelespiritu-dev.vercel.app/api/articles"
       );
 
       const data = await response.json();
