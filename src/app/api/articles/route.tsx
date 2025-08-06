@@ -4,13 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 // The `request` object contains all the information about the incoming request
 export async function GET(request: NextRequest) {
 	try {
-
-  // temporary headers to be able to fetch and migrate data to production
-  const headers = new Headers(request.headers);
-  headers.set("Access-Control-Allow-Origin", "*");
-  headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-
-
 		const { searchParams } = new URL(request.url);
 
 		const page = Number(searchParams.get("page")) || 1;
