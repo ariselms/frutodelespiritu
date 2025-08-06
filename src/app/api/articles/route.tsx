@@ -80,7 +80,7 @@ export async function POST(request: Request) {
 
 		const { rows: newPublication } = await sql`
       INSERT INTO lectures
-      (image_url, title, summary, category_id, slug, by_user_id, content, video_url, draft, created_at, updated_at)
+      (image_url, title, summary, category_id, slug, by_user_id, content, video_url, draft, created_at, updated_at, is_featured)
       VALUES (
         ${body.image_url},
         ${body.title},
@@ -91,8 +91,9 @@ export async function POST(request: Request) {
         ${body.content},
         ${body.video_url},
         ${body.draft},
-        ${new Date(body.createdat).toISOString()},
-        ${new Date(body.updatedat).toISOString()}
+        ${new Date(body.created_at).toISOString()},
+        ${new Date(body.updated_at).toISOString()},
+        ${body.is_featured}
       ) RETURNING *
     `;
 

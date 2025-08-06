@@ -9,7 +9,9 @@ export default function MigratePage() {
 
 		if (articlesData) {
 
-			articlesData.data.articles.map(async (item: any) => {
+      const data = articlesData.data.articles.reverse();
+
+      data.map(async (item: any) => {
 				// destructure old item
 				const {
 					image_url,
@@ -39,15 +41,14 @@ export default function MigratePage() {
 					video_url,
 					draft: false,
 					created_at,
-          updated_at
+          updated_at,
+          is_featured: false
 				};
 
-				await fetch("https://frutodelespiritu.vercel.app/api/articles", {
+				await fetch(FetchEndpoints.Articles.Post, {
 					method: "POST",
 					headers: {
-						"Content-Type": "application/json",
-						// bearer token
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION}`
+						"Content-Type": "application/json"
 					},
 					body: JSON.stringify(newItem)
 				});
