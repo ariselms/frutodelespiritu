@@ -1,82 +1,53 @@
 "use client";
 
-import { useState } from "react";
 import { FetchEndpoints } from "@/static";
 import { Button } from "flowbite-react";
+import articlesData from "./data.json";
 
 export default function MigratePage() {
-
-  const [dataToMigrate, setDataToMigrate] = useState<any>(null);
-
-  try {
-    const fetchData = async () => {
-
-      const response = await fetch(
-        "https://frutodelespiritu-dev.vercel.app/api/articles",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer " + process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION
-          }
-        }
-      );
-
-      const data = await response.json();
-
-      console.log(data);
-
-      setDataToMigrate(data);
-    };
-
-    fetchData();
-
-  } catch (error) {
-    console.error(error);
-  }
-
-
-
 	const migrateData = async () => {
 
-    console.log(dataToMigrate);
+		if (articlesData) {
 
-    return;
-
-		if (dataToMigrate) {
-			dataToMigrate.map(async (item: any) => {
+			articlesData.data.articles.map(async (item: any) => {
 				// destructure old item
 				const {
-					categoria,
-					titulo,
+					image_url,
+					title,
+					summary,
+					category_id,
 					slug,
-					resumen,
-					contenido,
-					createdAt,
-					updatedAt
+					by_user_id,
+					content,
+          video_url,
+          draft,
+          created_at,
+          updated_at,
+          is_featured
 				} = item;
 
 				// create new item
 				const newItem = {
 					id: null,
-					image_url: "",
-					title: titulo,
-					summary: resumen,
-					category_id: categoria === "Estudios Bíblicos" ? 1 : 2,
-					slug: slug,
-					by_user_id: 1,
-					content: contenido,
-					video_url: "",
+					image_url,
+					title,
+					summary,
+					category_id,
+					slug,
+					by_user_id,
+					content,
+					video_url,
 					draft: false,
-					createdat: createdAt,
-					updatedat: updatedAt
+					created_at,
+          updated_at
 				};
 
-				await fetch(FetchEndpoints.Articles.Post, {
+				await fetch("https://frutodelespiritu.vercel.app/api/articles", {
 					method: "POST",
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						// bearer token
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_FRUTO_DEL_ESPIRITU_MIGRATION}`
 					},
 					body: JSON.stringify(newItem)
 				});
@@ -98,7 +69,7 @@ export default function MigratePage() {
 				</Button>
 			</div>
 			<div className="mx-auto max-w-7xl px-3 py-12 ">
-				<pre>{JSON.stringify(dataToMigrate, null, 2)}</pre>
+				<pre>{JSON.stringify(articlesData, null, 2)}</pre>
 			</div>
 		</main>
 	);
