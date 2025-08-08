@@ -3,7 +3,7 @@ import { BookPillBlock } from "@/components/bible/BookPill";
 import { SeccionesBiblia } from "@/static";
 
 export const metadata = {
-	title: "La biblia en espanol | Fruto del Espíritu",
+	title: "La biblia en español | Fruto del Espíritu",
 	description:
 		"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 	keywords: [
@@ -48,6 +48,7 @@ export default async function BibleBooksPage({
 }: {
 	params: Promise<{ bibleId: string }>;
 }) {
+
 	const { bibleId } = await params;
 
 	const [BibleInfo, BibleBooks] = await Promise.all([
