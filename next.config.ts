@@ -7,18 +7,6 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "images.pexels.com"
-			},
-			{
-				protocol: "https",
-				hostname: "flowbite.s3.amazonaws.com"
-			},
-			{
-				protocol: "https",
-				hostname: "media.licdn.com"
-			},
-			{
-				protocol: "https",
 				hostname: "s1pbt15ufg1rrece.public.blob.vercel-storage.com"
 			}
 		]
