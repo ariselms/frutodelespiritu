@@ -12,7 +12,7 @@ export const SpanishBibleItem = (
 			key={bible.bibleId}>
 
 			<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-				{bible.data.name}
+				{bible.data.nameLocal}
 			</h5>
 
 			{/* <div

@@ -63,6 +63,20 @@ export const FetchEndpoints = Object.freeze({
   }
 });
 
+export const BibleIdsPublic: string[] = [
+  process.env.NEXT_PUBLIC_BIBLE_RV60,
+  process.env.NEXT_PUBLIC_BIBLE_PALABRA_DE_DIOS,
+  process.env.NEXT_PUBLIC_LA_SANTA_BIBLIA_ESPANOL,
+  process.env.NEXT_PUBLIC_VERSION_BIBLIA_LIBRE
+].filter((id): id is string => typeof id === "string" && !!id);
+
+export const BibleIdsPrivate: string[] = [
+	process.env.BIBLE_RV60,
+	process.env.BIBLE_PALABRA_DE_DIOS,
+	process.env.LA_SANTA_BIBLIA_ESPANOL,
+	process.env.VERSION_BIBLIA_LIBRE
+].filter((id): id is string => typeof id === "string" && !!id);
+
 // Determine the base URL based on the environment
 let baseUrl;
 

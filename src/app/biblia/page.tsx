@@ -1,6 +1,7 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
 import { BibleResponseType } from "@/models/bibleTypes";
+import { BibleIdsPublic } from "@/static";
 
 export const metadata = {
 	title:
@@ -47,19 +48,9 @@ export const metadata = {
 
 export default async function BibliaPage() {
 
-	const BibleAPIKey = process.env.BIBLE_API_KEY;
-	const RV60Id = process.env.NEXT_PUBLIC_BIBLE_RV60;
-	const PalabraDeDiosId = process.env.NEXT_PUBLIC_BIBLE_PALABRA_DE_DIOS;
-	const SantaBibliaEspanol = process.env.NEXT_PUBLIC_LA_SANTA_BIBLIA_ESPANOL;
-	const BibliaLibre = process.env.NEXT_PUBLIC_VERSION_BIBLIA_LIBRE;
 	let RequestError = null;
 
-	const BibleIds: string[] = [
-		RV60Id,
-		PalabraDeDiosId,
-		SantaBibliaEspanol,
-		BibliaLibre
-	].filter((id): id is string => typeof id === "string" && !!id);
+	const BibleIds: string[] = BibleIdsPublic;
 
 	const FetchPromises = BibleIds.map(async (bibleId: string) => {
 
@@ -69,13 +60,15 @@ export default async function BibliaPage() {
 			const request = await fetch(url, {
 				method: "GET",
 				headers: {
-					"api-key": `${BibleAPIKey}`,
+					"api-key": `${process.env.BIBLE_API_KEY}`,
 					Accept: "application/json"
 				}
 			});
 
 			if (!request.ok) {
-				const errorData = await request.json();
+
+        const errorData = await request.json();
+
 				console.error(
 					`HTTP error! Status: ${request.status} for Bible ID: ${bibleId}`,
 					errorData
