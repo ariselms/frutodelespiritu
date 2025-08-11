@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 import withFlowbiteReact from "flowbite-react/plugin/nextjs";
 
+/* config options here */
 const nextConfig: NextConfig = {
-	/* config options here */
+
+  // images domains allowed
 	images: {
 		remotePatterns: [
 			{
@@ -12,6 +14,7 @@ const nextConfig: NextConfig = {
 		]
 	},
 
+  // redirects configuration
 	async redirects() {
 		return [
 			// spanish bibles
