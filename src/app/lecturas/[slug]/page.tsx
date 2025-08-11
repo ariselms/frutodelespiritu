@@ -52,7 +52,7 @@ export async function generateMetadata({
 			locale: "es_US",
 			images: [
 				{
-					url: "https://frutodelespiritu.com/images/logo.png",
+					url: `${a?.image_url}`,
 					alt: "Fruto del Espíritu"
 				}
 			]

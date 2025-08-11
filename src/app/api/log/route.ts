@@ -4,7 +4,6 @@ import { generateVerificationCodeWithExpirationTime } from "@/helpers/server";
 import { v4 as uuidv4 } from "uuid";
 import { sendEmail } from "@/helpers/server";
 
-
 export async function POST(request: Request) {
 	// get the email
 	const { email } = await request.json();
