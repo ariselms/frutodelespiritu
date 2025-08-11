@@ -12,11 +12,8 @@ export default function AdminPage(){
 
   return (
 		<main className="dark:bg-gray-800">
-			<article className="container mx-auto px-4 xl:px-0">
-        <ProfileSection
-          sectionName="Admin"
-          sectionDescription="Administra categorías, publicaciones, usuarios y más."
-        />
+			<article className="container mx-auto px-2 text-black dark:text-white py-16">
+				El panel de administración aparecerá aquí para super usuarios.
 			</article>
 		</main>
 	);
