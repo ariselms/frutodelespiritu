@@ -2,3 +2,18 @@
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../../.flowbite-react/class-list.json";
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* custom styles */
+
+
+/*
+REACT ADMIN CUSTOM STYLES START
+*/
+
+img .RaImageField-image{
+  margin: 0 !important;
+}
+
+/*
+REACT ADMIN CUSTOM STYLES END
+*/

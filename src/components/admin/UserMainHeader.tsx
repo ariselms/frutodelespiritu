@@ -12,22 +12,22 @@ import {
 	NavbarLink,
 	NavbarToggle
 } from "flowbite-react";
-import { OrangeLinkTheme } from "../theme";
+import { SignOutButton } from "@/components/SignOutButton";
+import { OrangeLinkTheme } from "@/components/theme";
 
 export function UserMainHeader() {
+	const pathname = usePathname();
 
-  const pathname = usePathname();
+	const { user } = useAuthContext();
 
-  const {user, signOutUser} = useAuthContext();
-
-  const UserNavigationNoAuth = UserProfileNavigation.filter(
+	const UserNavigationNoAuth = UserProfileNavigation.filter(
 		(item) => !item.requiresAdmin
 	);
 	const UserNavigationWithAuth = UserProfileNavigation.filter(
 		(item) => item.requiresAdmin
 	);
 
-  return (
+	return (
 		<header>
 			<Navbar theme={OrangeLinkTheme}>
 				<NavbarBrand as={Link} href="/perfil">
@@ -63,11 +63,11 @@ export function UserMainHeader() {
 								key={item.name}
 								active={isActive(pathname, item.href)}
 								as={Link}
-								href={item.href}
-								onClick={signOutUser}>
+								href={item.href}>
 								{item.name}
 							</NavbarLink>
 						))}
+					<SignOutButton />
 				</NavbarCollapse>
 			</Navbar>
 		</header>
