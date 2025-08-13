@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
 			},
 			// lectures
 			{
-				source: "/lecturas",
+				source: "/lecturas/lectura",
 				has: [
 					{
 						type: "query",
@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
 						value: "(?<slug>.*)" // Capture the value of the 'slug' query param
 					}
 				],
-				destination: "/lecturas/:slug?", // Use the captured 'id' in the new path
+				destination: "/lecturas/:slug", // Use the captured 'id' in the new path
 				permanent: true // This makes it a 301 redirect
 			}
 		];
