@@ -89,7 +89,7 @@ if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
 }
 
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
-	baseUrl = "https://frutodelespiritu.vercel.app";
+	baseUrl = "https://frutodelespiritu.app";
 }
 
 export const serverBaseUrl = baseUrl;
