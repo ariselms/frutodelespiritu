@@ -35,33 +35,71 @@ export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 export const FooterNavigation = [];
 
 export const FetchEndpoints = Object.freeze({
-  Articles: {
-    Post: '/api/articles',
-    GetAll: '/api/articles',
-    GetOne: (id: string) => `/api/articles/${id}`,
-    Update: (id: string) => `/api/articles/${id}`,
-    Delete: (id: string) => `/api/articles/${id}`,
-    GetByCategory: (categoryId: string) => `/api/articles/category/${categoryId}`,
-    GetByUser: (userId: string) => `/api/articles/user/${userId}`,
-  },
-  Users: {
-    Post: '/api/users',
-    GetAll: '/api/users',
-    GetOne: (id: string) => `/api/users/${id}`,
-    Update: (id: string) => `/api/users/${id}`,
-    Delete: (id: string) => `/api/users/${id}`,
-    GetByEmail: (email: string) => `/api/users/email/${email}`,
-    GetByRole: (role: string) => `/api/users/role/${role}`,
-  },
-  Categories: {
-    POST: '/api/categories',
-    GetAll: '/api/categories',
-    GetOne: (id: string) => `/api/categories/${id}`,
-    Update: (id: string) => `/api/categories/${id}`,
-    Delete: (id: string) => `/api/categories/${id}`,
-    GetByName: (name: string) => `/api/categories/name/${name}`,
-  }
+	Articles: {
+		Post: "/api/articles",
+		GetAll: "/api/articles",
+		GetOne: (id: string) => `/api/articles/${id}`,
+		Update: (id: string) => `/api/articles/${id}`,
+		Delete: (id: string) => `/api/articles/${id}`,
+		GetByCategory: (categoryId: string) =>
+			`/api/articles/category/${categoryId}`,
+		GetByUser: (userId: string) => `/api/articles/user/${userId}`,
+		GetLectureSavedByUser: (lectureId: string, userId: string) =>
+			`/api/user/lectures?lectureId=${lectureId}&userId=${userId}`,
+		PostLectureSaveByUser: "/api/user/lectures"
+	},
+	Users: {
+		Post: "/api/user",
+		PostWithFilename: (filename: string) =>
+			`/api/user/profile?filename=${filename}`,
+		GetAll: "/api/user",
+		GetOne: (id: string) => `/api/user/${id}`,
+		Update: "/api/user/profile",
+		Delete: (id: string) => `/api/users/${id}`,
+		GetByEmail: (email: string) => `/api/users/email/${email}`,
+		GetByRole: (role: string) => `/api/users/role/${role}`
+	},
+	Categories: {
+		POST: "/api/categories",
+		GetAll: "/api/categories",
+		GetOne: (id: string) => `/api/categories/${id}`,
+		Update: (id: string) => `/api/categories/${id}`,
+		Delete: (id: string) => `/api/categories/${id}`,
+		GetByName: (name: string) => `/api/categories/name/${name}`
+	},
+	Log: {
+		Post: "/api/log",
+	},
+	Auth: {
+		Post: "/api/auth",
+		DeleteSession: "/api/auth",
+		PersistUser: "/api/auth"
+	},
+	BibleApiBase: {
+		GetSpanishBibles: (bibleId: string) =>
+			`https://api.scripture.api.bible/v1/bibles/${bibleId}`,
+		GetSpanishBibleBooks: (bibleId: string) =>
+			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books`,
+		GetSpanishBookInfo: (bibleId: string, bookId: string) =>
+			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}`,
+		GetSpanishBookChapters: (bibleId: string, bookId: string) =>
+			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}/chapters`,
+		GetSpansihBookChapterVerses: (bibleId: string, chapterId: string) =>
+			`https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`,
+		SearchBibleVerses: (bibleKeywordSearch: string) =>
+			`https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`
+	}
 });
+
+// Create a reusable type from the object's shape using `typeof`
+export type FetchEndpointsType = typeof FetchEndpoints;
+
+export const DataProvider: any = Object.freeze({
+  Lectures: "lectures",
+  Articles: "articles",
+  Categories: "categories",
+  Users: "users",
+})
 
 export const BibleIdsPublic: string[] = [
   process.env.NEXT_PUBLIC_BIBLE_RV60,

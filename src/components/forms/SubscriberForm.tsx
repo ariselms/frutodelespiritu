@@ -1,4 +1,5 @@
 "use client";
+import { FetchEndpoints } from "@/static";
 import { useState } from "react";
 import {toast} from "react-toastify";
 
@@ -11,7 +12,7 @@ export default function SubscriberForm() {
     e.preventDefault();
 
     try {
-      const request = await fetch("/api/user", {
+      const request = await fetch(FetchEndpoints.Users.Post, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

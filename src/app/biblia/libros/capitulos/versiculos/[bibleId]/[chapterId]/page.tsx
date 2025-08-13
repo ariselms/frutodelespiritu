@@ -4,6 +4,7 @@ import "./bible-chapter.css";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
 import * as cheerio from "cheerio";
 import { VerseScroller } from "@/components/bible/VerseScroller";
+import { FetchEndpoints } from "@/static";
 
 export async function generateMetadata({
 	params
@@ -14,7 +15,7 @@ export async function generateMetadata({
 
 	const BibleAPIKey = process.env.BIBLE_API_KEY;
 
-	const chapterUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`;
+	const chapterUrl = FetchEndpoints.BibleApiBase.GetSpansihBookChapterVerses(bibleId, chapterId);
 
 	let BibleChapter;
 
@@ -94,7 +95,7 @@ export default async function SingleChapterPage({
 		);
 	}
 
-	const chapterUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`;
+	const chapterUrl = FetchEndpoints.BibleApiBase.GetSpansihBookChapterVerses(bibleId, chapterId);
 
 	let BibleChapter: any; // Consider defining a proper interface for BibleChapter
 

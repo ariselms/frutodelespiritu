@@ -3,6 +3,7 @@ import { MetadataRoute } from "next";
 import { sql } from "@vercel/postgres";
 import { BibleIdsPrivate } from "@/static";
 import { BibleResponseType } from "@/models/bibleTypes";
+import { FetchEndpoints, serverBaseUrl } from "@/static";
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -15,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const FetchPromises = BibleIds.map(async (bibleId: string) => {
 
-    const url = `https://api.scripture.api.bible/v1/bibles/${bibleId}`;
+    const url = FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId);
 
     try {
       const request = await fetch(url, {
@@ -69,31 +70,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes = [
 		{
-			url: `https://frutodelespiritu.com/`,
+			url: `${serverBaseUrl}`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 1
 		},
 		{
-			url: `https://frutodelespiritu.com/lecturas`,
+			url: `${serverBaseUrl}/lecturas`,
 			lastModified: new Date(),
 			changeFrequency: "daily" as const,
 			priority: 0.8
 		},
 		{
-			url: `https://frutodelespiritu.com/biblia`,
+			url: `${serverBaseUrl}/biblia`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 0.8
 		},
 		{
-			url: `https://frutodelespiritu.com/biblia/buscar`,
+			url: `${serverBaseUrl}/biblia/buscar`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 0.8
 		},
 		{
-			url: `https://frutodelespiritu.com/log`,
+			url: `${serverBaseUrl}/log`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 0.8
@@ -101,18 +102,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	];
 
 	const postEntries: MetadataRoute.Sitemap = lecturePosts.map((lecture) => ({
-		url: `https://frutodelespiritu.com/lecturas/${lecture.slug}`,
+		url: `${serverBaseUrl}/lecturas/${lecture.slug}`,
 		lastModified: new Date(lecture.updated_at),
 		changeFrequency: "daily" as const,
 		priority: 0.7
 	}));
 
   const bibleEntries: MetadataRoute.Sitemap = spanishBibles.map((bible) => ({
-    url: `https://frutodelespiritu.com/biblia/libros/${bible.bibleId}`,
+    url: `${serverBaseUrl}/biblia/libros/${bible.bibleId}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.6
   }));
+
+  console.log(staticRoutes)
+  console.log(postEntries)
+  console.log(bibleEntries)
 
 	return [...staticRoutes, ...postEntries, ...bibleEntries];
 }

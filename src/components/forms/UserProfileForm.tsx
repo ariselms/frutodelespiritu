@@ -13,6 +13,7 @@ import { UserType } from "@/models/userTypes";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { ModalUserProfileTheme } from "@/components/theme";
+import { FetchEndpoints } from "@/static";
 
 export function UserProfileForm() {
 
@@ -94,7 +95,7 @@ export function UserProfileForm() {
         }
 
         const fileRequest = await fetch(
-          `/api/user/profile?filename=${file?.name}`,
+          FetchEndpoints.Users.PostWithFilename(file.name),
           {
             method: "POST",
             body: file
@@ -110,7 +111,7 @@ export function UserProfileForm() {
 
       userProfile.image_url = new_image_url || userProfile.image_url;
 
-      const request = await fetch("/api/user/profile", {
+      const request = await fetch(FetchEndpoints.Users.Update, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

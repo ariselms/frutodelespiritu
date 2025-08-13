@@ -1,4 +1,5 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
+import { FetchEndpoints } from "@/static";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -11,7 +12,7 @@ export async function generateMetadata({
 
   const BibleAPIKey = process.env.BIBLE_API_KEY;
 
-  const bookUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}`;
+  const bookUrl = FetchEndpoints.BibleApiBase.GetSpanishBookInfo(bibleId, bookId);
 
   let Bible;
 
@@ -73,8 +74,8 @@ export default async function BibleChaptersPage({
 
   const BibleAPIKey = process.env.BIBLE_API_KEY;
 
-  const bookUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}`;
-  const chaptersUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}/chapters`;
+  const bookUrl = FetchEndpoints.BibleApiBase.GetSpanishBookInfo(bibleId, bookId);
+  const chaptersUrl = FetchEndpoints.BibleApiBase.GetSpanishBookChapters(bibleId, bookId);
 
   let Bible;
   let BookChapters;

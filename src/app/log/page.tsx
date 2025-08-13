@@ -6,6 +6,8 @@ import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
 import { useSearchParams } from "next/navigation";
+import { FetchEndpoints } from "@/static";
+
 export default function LogPage() {
 
 	const router = useRouter();
@@ -28,6 +30,7 @@ export default function LogPage() {
 		e.preventDefault();
 
 		try {
+
 			setProcessing(true);
 
 			const request = await fetch("/api/log", {
@@ -74,7 +77,7 @@ export default function LogPage() {
 				throw new Error(errorMessage);
 			}
 
-			const request = await fetch("/api/auth", {
+			const request = await fetch(FetchEndpoints.Auth.Post, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -83,8 +86,6 @@ export default function LogPage() {
 			});
 
 			const response = await request.json();
-
-      console.log(response.success && searchParams.get("redirectUrl") !== null);
 
 			if (response.success && searchParams.get("redirectUrl") !== null) {
 

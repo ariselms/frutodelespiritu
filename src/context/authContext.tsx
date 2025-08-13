@@ -2,7 +2,7 @@
 import type { AuthContextType } from "@/models/contextTypes";
 import React, { createContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { serverBaseUrl } from "@/static";
+import { FetchEndpoints, serverBaseUrl } from "@/static";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -19,7 +19,7 @@ export const AuthContextProvider = ({
 
     try {
 
-      const request = await fetch(`${serverBaseUrl}/api/auth/`, {
+      const request = await fetch(FetchEndpoints.Auth.DeleteSession, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -43,7 +43,7 @@ export const AuthContextProvider = ({
 			return;
 		}
 
-		const request = await fetch(`/api/auth/`, {
+		const request = await fetch(FetchEndpoints.Auth.PersistUser, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -53,9 +53,13 @@ export const AuthContextProvider = ({
 		const response = await request.json();
 
 		if (response.success) {
+
 			setUser(response.data);
+
 		} else {
+
 			setUser(null);
+
 		}
 	};
 

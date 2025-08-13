@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { useRouter, usePathname } from "next/navigation";
-import { serverBaseUrl } from "@/static";
+import { serverBaseUrl, FetchEndpoints } from "@/static";
 
 export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 
@@ -35,7 +35,6 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 
 				if (response.success && response.data) {
 
-
           setLectureIsSaved(true);
 
         } else {
@@ -56,7 +55,7 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 
 			if (user) {
 
-				const request = await fetch(`/api/user/lectures`, {
+				const request = await fetch(FetchEndpoints.Articles.PostLectureSaveByUser, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"

@@ -1,21 +1,21 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
 import { BibleResponseType } from "@/models/bibleTypes";
-import { BibleIdsPublic } from "@/static";
+import { BibleIdsPublic, FetchEndpoints, serverBaseUrl } from "@/static";
 
 export const metadata = {
 	title:
-		"Biblia en espanol | Fruto del Espíritu",
+		"Biblia en español | Fruto del Espíritu",
   description:
-    "Disponibles cuatro versiones de la biblia en espanol. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+    "Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 	keywords: [
     "devocionales",
     "cristiano",
     "reflexiones",
     "estudios bíblicos",
-    "biblias en espanol",
-		"la biblia en espanol",
-		"biblia en espanol",
+    "biblias en español",
+		"la biblia en español",
+		"biblia en español",
 		"entiende la biblia",
 		"espiritu santo",
     "aprende la biblia",
@@ -30,9 +30,9 @@ export const metadata = {
 	},
 	openGraph: {
     title:
-      "Biblia en espanol | Fruto del Espíritu",
+      "Biblia en español | Fruto del Espíritu",
     description:
-      "Disponibles cuatro versiones de la biblia en espanol. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+      "Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 		url: "https://frutodelespiritu.com/lecturas",
 		siteName: "Fruto del Espíritu",
 		type: "website",
@@ -54,7 +54,7 @@ export default async function BibliaPage() {
 
 	const FetchPromises = BibleIds.map(async (bibleId: string) => {
 
-		const url = `https://api.scripture.api.bible/v1/bibles/${bibleId}`;
+		const url = FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId);
 
 		try {
 			const request = await fetch(url, {

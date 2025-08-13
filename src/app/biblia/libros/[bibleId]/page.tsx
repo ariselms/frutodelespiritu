@@ -1,6 +1,6 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
-import { SeccionesBiblia } from "@/static";
+import { FetchEndpoints, SeccionesBiblia } from "@/static";
 
 export const metadata = {
 	title: "La biblia en español | Fruto del Espíritu",
@@ -52,14 +52,14 @@ export default async function BibleBooksPage({
 	const { bibleId } = await params;
 
 	const [BibleInfo, BibleBooks] = await Promise.all([
-		fetch(`https://api.scripture.api.bible/v1/bibles/${bibleId}`, {
+		fetch(FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId), {
 			method: "GET",
 			headers: {
 				"api-key": `${process.env.BIBLE_API_KEY}`,
 				Accept: "application/json"
 			}
 		}),
-		fetch(`https://api.scripture.api.bible/v1/bibles/${bibleId}/books`, {
+		fetch(FetchEndpoints.BibleApiBase.GetSpanishBibleBooks(bibleId), {
 			method: "GET",
 			headers: {
 				"api-key": `${process.env.BIBLE_API_KEY}`,

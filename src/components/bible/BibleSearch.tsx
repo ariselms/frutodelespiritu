@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { BibleSearchResultList } from "./BibleSearchResultsSearchResults";
 import { useSearchParams, useRouter } from "next/navigation";
+import { FetchEndpoints } from "@/static";
 
 // TODO: Create a type for categories if needed
 export function BibleSearch() {
@@ -34,7 +35,9 @@ export function BibleSearch() {
 
 		try {
 			// url to request bible term:
-			const url = `https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`;
+			const url = FetchEndpoints.BibleApiBase.SearchBibleVerses(
+        bibleKeywordSearch.trim()
+      );
 
 			const request = await fetch(url, {
 				method: "GET",
