@@ -1,6 +1,7 @@
 "use server";
-
+import { cookies } from "next/headers";
 import nodemailer from "nodemailer";
+import { sql } from "@vercel/postgres";
 
 export async function generateVerificationCodeWithExpirationTime() {
 	const code = Math.floor(100000 + Math.random() * 900000).toString();
@@ -46,3 +47,31 @@ export const sendEmail = async (
 
 	console.info(`Message sent: ${info.messageId}`);
 };
+
+export const isAuthenticated = async () => {
+
+  const cookie = (await cookies()).get("session_token");
+
+  if (!cookie) {
+    return false;
+  }
+
+  const { value } = cookie;
+
+  let user;
+
+  const { rows: userDb } = await sql`
+    SELECT * FROM users
+      WHERE session_token = ${value}
+      AND session_expiration > NOW()
+    `;
+
+  user = userDb[0];
+
+  if (!user) {
+    return false;
+  }
+
+  return true;
+
+}

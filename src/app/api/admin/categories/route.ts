@@ -1,10 +1,26 @@
 // app/api/admin/categories/route.ts
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
+import { isAuthenticated } from "@/helpers/server";
 
 export async function GET(request: Request) {
 	try {
+		// Check if the user is authenticated
+		const userAuthenticated = await isAuthenticated();
+
+		if (!userAuthenticated) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Unauthorized",
+					dara: null
+				},
+				{ status: 401 }
+			);
+		}
+
 		const { searchParams } = new URL(request.url);
+		// 1. Parse Filter, Range, and Sort Parameters from the URL
 		const filterStr = searchParams.get("filter") || "{}";
 		const filter = JSON.parse(decodeURIComponent(filterStr));
 

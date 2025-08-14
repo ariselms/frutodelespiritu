@@ -1,9 +1,11 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+import { isAuthenticated } from "@/helpers/server";
 
 // The `request` object contains all the information about the incoming request
 export async function GET(request: NextRequest) {
 	try {
+
 		const { searchParams } = new URL(request.url);
 
 		const page = Number(searchParams.get("page")) || 1;
@@ -79,6 +81,22 @@ export async function GET(request: NextRequest) {
 export async function POST(request: Request) {
 
   try {
+
+    const userAuthenticated = await isAuthenticated();
+
+    if (!userAuthenticated) {
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Unauthorized",
+          dara: null
+        },
+        { status: 401 }
+      );
+
+    }
+
 		const body = await request.json();
 
 		const { rows: newPublication } = await sql`

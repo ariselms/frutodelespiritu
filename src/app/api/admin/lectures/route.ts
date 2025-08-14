@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import slugify from "slugify";
 import { nanoid } from "nanoid";
-
+import { isAuthenticated } from "@/helpers/server";
 /**
  * Helper function to sanitize and build a WHERE clause from a filter object.
  * @param filter - The filter object from the 'filter' query parameter.
@@ -59,12 +59,24 @@ function buildWhereClause(filter: any): { clause: string; values: any[] } {
  */
 export async function GET(request: Request) {
 	try {
-		const { searchParams } = new URL(request.url);
+		// Check if the user is authenticated
+		const userAuthenticated = await isAuthenticated();
 
+		if (!userAuthenticated) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Unauthorized",
+					dara: null
+				},
+				{ status: 401 }
+			);
+		}
+
+		const { searchParams } = new URL(request.url);
 		// 1. Parse Filter, Range, and Sort Parameters from the URL
-		const filter = JSON.parse(
-			decodeURIComponent(searchParams.get("filter") || "{}")
-		);
+    const filterStr = searchParams.get("filter") || "{}";
+		const filter = JSON.parse(decodeURIComponent(filterStr));
 		const rangeStr = searchParams.get("range");
 		const sortStr = searchParams.get("sort");
 
@@ -106,7 +118,6 @@ export async function GET(request: Request) {
 			if (!["ASC", "DESC"].includes(sortOrder.toUpperCase())) {
 				sortOrder = "DESC"; // Fallback to a safe default
 			}
-
 		}
 		// 4. Build the WHERE clause from the filter
 		const { clause: whereClause, values: whereValues } =
@@ -136,19 +147,22 @@ export async function GET(request: Request) {
 			lectures.length > 0 ? offset + lectures.length - 1 : offset;
 		const contentRangeHeader = `lectures ${startIndex}-${endIndex}/${totalCount}`;
 
-		return NextResponse.json({
-      success: true,
-      message: "Lectures fetched successfully!",
-      data: lectures,
-      total: totalCount,
-    }, {
-			status: 200,
-			headers: {
-				"Content-Range": contentRangeHeader,
-				// Expose the header for CORS
-				"Access-Control-Expose-Headers": "Content-Range"
+		return NextResponse.json(
+			{
+				success: true,
+				message: "Lectures fetched successfully!",
+				data: lectures,
+				total: totalCount
+			},
+			{
+				status: 200,
+				headers: {
+					"Content-Range": contentRangeHeader,
+					// Expose the header for CORS
+					"Access-Control-Expose-Headers": "Content-Range"
+				}
 			}
-		});
+		);
 	} catch (error) {
 		console.error("Error fetching lectures:", error);
 		return NextResponse.json(
@@ -163,48 +177,69 @@ export async function GET(request: Request) {
  */
 export async function POST(request: Request) {
 	try {
+
+    // Check if the user is authenticated
+		const userAuthenticated = await isAuthenticated();
+
+		if (!userAuthenticated) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Unauthorized",
+					dara: null
+				},
+				{ status: 401 }
+			);
+		}
+
 		const body = await request.json();
 
-    const { title, summary, content, image_url, video_url, draft, is_featured, category_id, by_user_id } = body;
+		const {
+			title,
+			summary,
+			content,
+			image_url,
+			video_url,
+			draft,
+			is_featured,
+			category_id,
+			by_user_id
+		} = body;
 
-    console.log(body);
-
-    if (!title || !summary || !content || !image_url) {
+		if (!title || !summary || !content || !image_url) {
 			// Return the newly created record
 			return NextResponse.json(
 				{
 					success: true,
-					message: "Title, summary, content, and image_url are required fields.",
+					message:
+						"Title, summary, content, and image_url are required fields.",
 					data: null
 				},
 				{ status: 201 }
 			);
 		}
 
-    let slug = slugify(
-      title,
-      {
-        lower: true,
-        strict: true
-      }
-    );
+		let slug = slugify(title, {
+			lower: true,
+			strict: true
+		});
 
-    slug += `-${nanoid(6)}`;
+		slug += `-${nanoid(6)}`;
 
-    const lectureData = {
-      image_url,
-      title,
-      summary,
-      category_id,
-      by_user_id,
-      slug,
-      content,
-      video_url: video_url || null,
-      draft: draft || false,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-      is_featured: is_featured || false,
-    }
+		const lectureData = {
+			image_url,
+			title,
+			summary,
+			category_id,
+			by_user_id,
+			slug,
+			content,
+			video_url: video_url || null,
+			draft: draft || false,
+			created_at: new Date().toISOString(),
+			updated_at: new Date().toISOString(),
+			is_featured: is_featured || false
+		};
 
 		// Dynamically build the insert query from the request body
 		const columns = Object.keys(lectureData);
@@ -218,9 +253,10 @@ export async function POST(request: Request) {
         RETURNING *;
     `;
 
-		const { rows: newLectureRows } = await sql.query(insertQuery, values);
+		const { rows: newLecture } = await sql.query(insertQuery, values);
 
-		if (newLectureRows.length === 0) {
+		if (newLecture.length === 0) {
+
 			return NextResponse.json(
 				{
 					success: false,
@@ -229,24 +265,29 @@ export async function POST(request: Request) {
 				},
 				{ status: 500 }
 			);
-		}
 
-    console.log("New lecture created:", newLectureRows[0]);
+		}
 
 		// Return the newly created record
 		return NextResponse.json(
-    {
-      success: true,
-      message: "Lecture created successfully",
-      data: newLectureRows[0]
-    }, { status: 201 });
+			{
+				success: true,
+				message: "Lecture created successfully",
+				data: newLecture[0]
+			},
+			{ status: 201 }
+		);
 
 	} catch (error) {
 
 		console.error("Error creating lecture:", error);
 
-    return NextResponse.json(
-			{ message: "Error creating lecture" },
+		return NextResponse.json(
+			{
+        success: false,
+        message: "Error creating lecture",
+        data: null
+      },
 			{ status: 500 }
 		);
 

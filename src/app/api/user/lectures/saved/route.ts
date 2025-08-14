@@ -63,12 +63,16 @@ export async function DELETE(request: Request) {
       },
       { status: 200 }
     );
+
   } catch (error) {
+
     console.error("Error removing saved lecture:", error);
+
     return NextResponse.json({
       success: false,
       message: "Error eliminando lectura guardada.",
       data: null
     });
+
   }
 }
