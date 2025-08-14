@@ -2,7 +2,7 @@ import { createTheme } from "flowbite-react";
 
 export const OrangeLinkTheme = createTheme({
 	root: {
-		base: "bg-white px-2 py-2.5 sm:px-4 dark:border-gray-700 dark:bg-gray-800",
+		base: "bg-orange-100/30 dark:bg-gray-800 px-2 py-2.5 sm:px-4 dark:border-gray-700",
 		rounded: {
 			on: "rounded",
 			off: ""
