@@ -8,8 +8,6 @@ export const useDataProvider = () => {
 	// 1. Get the user from your context, just like in a component
 	const { user } = useAuthContext();
 
-  console.log(user);
-
 	// 2. Create the dataProvider using useMemo.
 	// This is important for performance, so the object is not rebuilt on every render.
 	// It will only be rebuilt if the 'user' object changes.
