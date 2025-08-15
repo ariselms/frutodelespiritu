@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { isAuthenticated } from "@/helpers/server";
 
+/**
+ * GET handler for fetching a list of categories.
+ */
 export async function GET(request: Request) {
 	try {
 		// Check if the user is authenticated
@@ -13,7 +16,7 @@ export async function GET(request: Request) {
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -70,6 +73,56 @@ export async function GET(request: Request) {
 			{
 				success: false,
 				message: "Error fetching categories",
+				data: null
+			},
+			{ status: 500 }
+		);
+	}
+}
+
+/**
+ * POST handler for creating a new category.
+ */
+export async function POST(request: Request) {
+	try {
+		// Check if the user is authenticated
+		const userAuthenticated = await isAuthenticated();
+
+		if (!userAuthenticated) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Unauthorized",
+					data: null
+				},
+				{ status: 401 }
+			);
+		}
+
+		const body = await request.json();
+
+		const { name, user_by_id } = body;
+
+		const { rows: newCategory } = await sql`
+      INSERT INTO categories (name, user_by_id)
+      VALUES (${name}, ${user_by_id})
+      RETURNING *;
+    `;
+
+		return NextResponse.json(
+			{
+				success: true,
+				message: "Category created successfully.",
+				data: newCategory[0]
+			},
+			{ status: 201 }
+		);
+	} catch (error) {
+		console.error("Error creating category:", error);
+		return NextResponse.json(
+			{
+				success: false,
+				message: "Error creating category",
 				data: null
 			},
 			{ status: 500 }

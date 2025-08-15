@@ -18,7 +18,7 @@ export async function GET(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -78,7 +78,7 @@ export async function PUT(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -88,10 +88,10 @@ export async function PUT(
 		const body = await request.json();
 		const { name } = body;
 
-		const { rows: updatedCategory } =
-			await sql`UPDATE categories SET name = ${name} WHERE id = ${id};`;
+		const { rowCount, rows: updatedCategory } =
+			await sql`UPDATE categories SET name = ${name} WHERE id = ${id} RETURNING *;`;
 
-		if (updatedCategory.length === 0) {
+		if (rowCount === 0) {
 			return NextResponse.json(
 				{
 					success: false,
@@ -106,7 +106,7 @@ export async function PUT(
 			{
 				success: true,
 				message: "Category updated successfully.",
-				data: updatedCategory[0]
+				data: body
 			},
 			{ status: 200 }
 		);
@@ -137,7 +137,7 @@ export async function DELETE(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -145,9 +145,9 @@ export async function DELETE(
 
 		const { id } = await params;
 
-		const { rows: deletedCategory } = await sql`DELETE FROM categories WHERE id = ${id};`;
+		const { rowCount, rows: deletedCategory } = await sql`DELETE FROM categories WHERE id = ${id} RETURNING *;`;
 
-		if (deletedCategory.length === 0) {
+		if (rowCount === 0) {
 			return NextResponse.json(
 				{
 					success: false,
@@ -158,11 +158,13 @@ export async function DELETE(
 			);
 		}
 
+    const deletedCategoryData = deletedCategory[0];
+
 		return NextResponse.json(
 			{
 				success: true,
 				message: "Category deleted successfully.",
-				data: deletedCategory[0]
+				data: deletedCategoryData
 			},
 			{ status: 200 }
 		);

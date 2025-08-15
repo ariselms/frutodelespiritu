@@ -40,7 +40,13 @@ export default function ReactAdminSuper() {
 				create={LecturesCreate}
 				options={{ label: "Lecturas" }}
 			/>
-			<Resource name="categories" />
+			<Resource
+        name="categories"
+        list={CategoriesList}
+        edit={CategoriesEdit}
+        create={CategoriesCreate}
+        options={{ label: "Categorías" }}
+      />
 		</Admin>
 	);
 }
@@ -126,6 +132,39 @@ export const LecturesCreate = () => {
 					<BooleanInput source="is_featured" />
 				</div>
 				<RichTextInput source="content" validate={required()} />
+			</SimpleForm>
+		</Create>
+	);
+};
+
+export const CategoriesList = () => (
+  <List>
+    <Datagrid>
+      <TextField source="name" />
+    </Datagrid>
+  </List>
+);
+
+export const CategoriesEdit = () => (
+  <Edit>
+    <SimpleForm>
+      <TextInput source="name" validate={required()} />
+    </SimpleForm>
+  </Edit>
+);
+
+export const CategoriesCreate = () => {
+	const { user } = useAuthContext();
+
+	const transform = (data: any) => ({
+		...data,
+		user_by_id: user ? user.id : null
+	});
+
+	return (
+		<Create transform={transform}>
+			<SimpleForm>
+				<TextInput source="name" validate={required()} />
 			</SimpleForm>
 		</Create>
 	);

@@ -67,7 +67,7 @@ export async function GET(request: Request) {
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -186,7 +186,7 @@ export async function POST(request: Request) {
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);

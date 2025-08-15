@@ -8,6 +8,8 @@ export const useDataProvider = () => {
 	// 1. Get the user from your context, just like in a component
 	const { user } = useAuthContext();
 
+  console.log(user);
+
 	// 2. Create the dataProvider using useMemo.
 	// This is important for performance, so the object is not rebuilt on every render.
 	// It will only be rebuilt if the 'user' object changes.
@@ -20,7 +22,7 @@ export const useDataProvider = () => {
 			getList: (resource: string, params: any) => {
 				// Now you have direct access to the 'user' object here.
 				// We apply the same logic as before.
-				if (resource === DataProvider.Lectures && user?.id) {
+				if ((resource === DataProvider.Lectures || DataProvider.Categories) && user?.id) {
 
 					const newFilter = {
 						...params.filter,

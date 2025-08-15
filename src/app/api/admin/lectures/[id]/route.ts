@@ -18,7 +18,7 @@ export async function GET(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -81,7 +81,7 @@ export async function PUT(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
@@ -149,14 +149,15 @@ export async function DELETE(
 				{
 					success: false,
 					message: "Unauthorized",
-					dara: null
+					data: null
 				},
 				{ status: 401 }
 			);
 		}
 
 		const { id } = await params;
-		const { rows: deletedLecture } = await sql`DELETE FROM lectures WHERE id = ${id};`;
+
+		const { rows: deletedLecture } = await sql`DELETE FROM lectures WHERE id = ${id} RETURNING *;`;
 
 		if (deletedLecture.length === 0) {
 			return NextResponse.json(
