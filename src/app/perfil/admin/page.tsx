@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import ReactAdminSuper from "@/components/admin/ReactAdminSuper";
 import ReactAdminEditor from "@/components/admin/ReactAdminEditor";
 import { MainLoader } from "@/components/Loaders";
+import styles from "@/components/admin/react-admin-styles.module.css";
 
 export default function AdminPage() {
 	const { user } = useAuthContext();
@@ -34,7 +35,7 @@ export default function AdminPage() {
 	// Once the effect has run and we've confirmed the user has the right role,
 	// render the correct admin panel.
 	if (user.role === "admin") {
-		return <ReactAdminSuper />;
+		return <div className={styles.ReactAdminContainer}>ADMINININ<ReactAdminSuper /></div>;
 	}
 
 	if (user.role === "editor") {

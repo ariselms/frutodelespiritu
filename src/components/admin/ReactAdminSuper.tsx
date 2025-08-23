@@ -26,6 +26,7 @@ import {
 import { VercelBlobInput } from "@/components/admin/VercelBlobInput"; // Import your new component
 import { useAuthContext } from "@/context/authContext";
 import { useDataProvider } from "@/hooks";
+import styles from "../admin/react-admin-styles.module.css";
 
 export default function ReactAdminSuper() {
 
