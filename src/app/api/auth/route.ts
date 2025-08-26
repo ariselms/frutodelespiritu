@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 					success: false,
 					message: codeExpiredMessage,
 					data: null
-				});
+				}, { status: 400 });
 			}
 
 			const decodedCode = atob(user.email_code_number);
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 					success: false,
 					message: invalidCodeMessage,
 					data: null
-				});
+				}, { status: 400 });
 			}
 
 			if (decodedCode === code) {
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 					success: true,
 					message: authenticationSuccessMessage,
 					data: user
-				});
+				}, { status: 200 });
 
 				serverResponse.cookies.set("session_token", user.session_token);
 
@@ -57,13 +57,24 @@ export async function POST(request: Request) {
 					success: false,
 					message: genericErrorMessage,
 					data: null
-				});
+				}, { status: 400 });
 			}
 		}
 
-		throw new Error(genericErrorMessage);
+		return NextResponse.json({
+			success: false,
+			message: "El usuario no existe",
+			data: null
+		}, { status: 400 });
+
 	} catch (error) {
 		console.error(error);
+
+		return NextResponse.json({
+			success: false,
+			message: error,
+			data: null
+		}, { status: 500 });
 	}
 }
 
