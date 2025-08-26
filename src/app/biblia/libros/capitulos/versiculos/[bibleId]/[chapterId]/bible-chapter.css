@@ -109,7 +109,7 @@ html.dark .bible-chapter {
 /* 3. Typography - Paragraphs and Text Elements (scoped to .bible-chapter) */
 .bible-chapter p {
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
   line-height: 1.6;
   color: var(--rich-text-color-heading);
   font-size: 18px;

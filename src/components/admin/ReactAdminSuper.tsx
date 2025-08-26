@@ -1,4 +1,5 @@
 "use client";
+
 import {
 	Admin,
 	Resource,
@@ -107,9 +108,7 @@ export const LecturesCreate = () => {
   })
 
 	return (
-		<Create
-			transform={transform} // Add this line to transform the data before sending it to the server}
-		>
+		<Create transform={transform}>
 			<SimpleForm>
 				{/* Custom Image Component to get Image URL in server */}
 				<VercelBlobInput

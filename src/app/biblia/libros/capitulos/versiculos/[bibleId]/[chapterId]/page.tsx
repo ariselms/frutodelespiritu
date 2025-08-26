@@ -125,6 +125,7 @@ export default async function SingleChapterPage({
 				const data = await response.json();
 
 				resolve(data); // Resolve the promise with the parsed JSON data
+
 			} catch (innerError) {
 				// Catch errors from `fetch` itself (e.g., network errors)
 				reject(innerError);

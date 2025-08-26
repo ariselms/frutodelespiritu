@@ -14,6 +14,18 @@ img .RaImageField-image{
   margin: 0 !important;
 }
 
+p.p span.v {
+  cursor: pointer !important;
+}
+
+p.p span.v:hover{
+  background-color: #f9d9be;
+}
+
+.dark p.p span.v:hover{
+  background-color: #1F2937;
+}
+
 /*
 REACT ADMIN CUSTOM STYLES END
 */
