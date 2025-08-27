@@ -97,7 +97,9 @@ export const FetchEndpoints = Object.freeze({
 		GetSpansihBookChapterVerses: (bibleId: string, chapterId: string) =>
 			`https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`,
 		SearchBibleVerses: (bibleKeywordSearch: string) =>
-			`https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`
+			`https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`,
+    GetBiblePassage: (bibleId: string, passage: string) =>
+      `https://api.scripture.api.bible/v1/bibles/${bibleId}/passages/${passage}`
 	}
 });
 

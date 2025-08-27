@@ -22,7 +22,6 @@ const parseSid = (sid: string) => {
 export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
-	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
 	// Effect for scrolling to a hash link
 	useEffect(() => {
@@ -47,22 +46,17 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 		if (!content) return;
 
 		const handleContainerClick = (event: MouseEvent) => {
-
 			const verseSpan = (event.target as Element).closest("span.v");
 
 			if (verseSpan) {
-
 				const verseSid = (verseSpan as HTMLElement).dataset.sid;
 
 				if (verseSid) {
-
 					setSelectedVerses((prevSelected) => {
-
 						const newSelection = new Set(prevSelected);
 
 						// Check if the verse is already selected (this is the REMOVAL path)
 						if (newSelection.has(verseSid)) {
-
 							newSelection.delete(verseSid); // First, remove the clicked verse
 
 							// If we have 1 or 0 verses left, there's nothing else to do
@@ -81,7 +75,7 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 							// Find the index of the first verse that breaks the sequence
 							let firstGapIndex = -1;
 
-              for (let i = 1; i < remainingSids.length; i++) {
+							for (let i = 1; i < remainingSids.length; i++) {
 								if (remainingSids[i].verse !== remainingSids[i - 1].verse + 1) {
 									firstGapIndex = i; // This is the start of the second "island"
 									break;
@@ -90,19 +84,17 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 
 							// If a gap was found, keep only the first block of verses
 							if (firstGapIndex !== -1) {
+								const firstBlock = remainingSids.slice(0, firstGapIndex);
 
-                const firstBlock = remainingSids.slice(0, firstGapIndex);
+								const finalSelection = new Set<string>();
 
-                const finalSelection = new Set<string>();
-
-                firstBlock.forEach((p) => {
+								firstBlock.forEach((p) => {
 									const sid = `${p.book} ${p.chapter}:${p.verse}`;
 									finalSelection.add(sid);
 								});
 
-                return finalSelection;
-
-              }
+								return finalSelection;
+							}
 
 							// If no gaps were found, the remaining selection is fine
 							return newSelection;
@@ -110,17 +102,14 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 							// --- This is the ADDING logic, which remains the same ---
 							newSelection.add(verseSid);
 
-							setIsDrawerOpen(true);
-
 							const parsedSids = Array.from(newSelection)
 								.map(parseSid)
 								.filter((p): p is NonNullable<typeof p> => p !== null);
 
 							if (parsedSids.length > 1) {
+								const first = parsedSids[0];
 
-                const first = parsedSids[0];
-
-                const isSameChapter = parsedSids.every(
+								const isSameChapter = parsedSids.every(
 									(p) => p.book === first.book && p.chapter === first.chapter
 								);
 
@@ -149,31 +138,71 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 		};
 	}, [htmlContent]);
 
-	// EFFECT 2: Apply visual styles when the selection changes
+	// EFFECT 2: Apply visual styles by wrapping verse content
 	useEffect(() => {
 		const content = contentRef.current;
 		if (!content) return;
 
-		content.querySelectorAll("p").forEach((p) => {
-			p.classList.remove("selected-verse", "bg-orange-100", "dark:bg-gray-900");
+		// --- 1. Cleanup Phase ---
+		// Find all previously created highlight wrappers
+		content.querySelectorAll("mark.verse-highlight").forEach((markElement) => {
+			const parent = markElement.parentNode;
+			// Move all children of the mark tag out into the parent
+			while (markElement.firstChild) {
+				parent?.insertBefore(markElement.firstChild, markElement);
+			}
+			// Remove the now-empty mark tag
+			parent?.removeChild(markElement);
 		});
 
+		// --- 2. Application Phase ---
+		// If there are selected verses, apply new highlights
 		if (selectedVerses.size > 0) {
 			selectedVerses.forEach((sid) => {
-				const verseElement = content.querySelector(`span[data-sid="${sid}"]`);
-				if (verseElement && verseElement.parentElement) {
-					verseElement.parentElement.classList.add(
-						"selected-verse",
-						"bg-orange-100",
-						"dark:bg-gray-900"
-					);
+				const startNode = content.querySelector(`span[data-sid="${sid}"]`);
+				if (!startNode) return;
+
+				// Find the parent paragraph to establish boundaries
+				const parentP = startNode.closest("p");
+				if (!parentP) return;
+
+				// Find all verse spans within this paragraph to find the end boundary
+				const allVerseSpansInP = Array.from(parentP.querySelectorAll("span.v"));
+				const startIndex = allVerseSpansInP.indexOf(startNode as Element);
+
+				// The end node is the *next* verse span, or null if this is the last one
+				const endNode =
+					startIndex !== -1 && startIndex < allVerseSpansInP.length - 1
+						? allVerseSpansInP[startIndex + 1]
+						: null;
+
+				// Collect all the nodes (text, elements) between the start and end span
+				const nodesToWrap = [];
+				let currentNode = startNode.nextSibling;
+				while (currentNode && currentNode !== endNode) {
+					nodesToWrap.push(currentNode);
+					currentNode = currentNode.nextSibling;
+				}
+
+				// If we found nodes to wrap, create a wrapper and move them inside
+				if (nodesToWrap.length > 0) {
+					const wrapper = document.createElement("mark");
+					// Add classes for styling and for easy cleanup later
+					wrapper.className =
+						"verse-highlight bg-orange-100 dark:bg-gray-900 rounded px-1";
+
+					// Insert the new wrapper right after the starting verse number span
+					parentP.insertBefore(wrapper, nodesToWrap[0]);
+
+					// Move each node into the new wrapper
+					nodesToWrap.forEach((node) => wrapper.appendChild(node));
 				}
 			});
 		}
 	}, [selectedVerses, htmlContent]);
 
 	// Derive modal visibility from state. This is the key!
-	const isModalVisible = selectedVerses.size > 0;
+	const isModalVisible: boolean = selectedVerses.size > 0;
 
 	return (
 		<>
@@ -182,12 +211,10 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 				ref={contentRef}
 				dangerouslySetInnerHTML={{ __html: htmlContent }}
 			/>
-			{/* Your Modal can go here, using selectedVerses.size > 0 to control visibility */}
 			{isModalVisible && (
-        <ModalNotesAndMemorization
-          selectedVerses={selectedVerses}
-          setIsDrawerOpen={setIsDrawerOpen}
-        />
+				<ModalNotesAndMemorization
+					selectedVerses={selectedVerses}
+				/>
 			)}
 		</>
 	);
