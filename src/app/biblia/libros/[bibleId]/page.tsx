@@ -73,25 +73,25 @@ export default async function BibleBooksPage({
 
 	if(books.message === "bad api-key") return <div className="text-center p-4 max-w-[80ch] mx-auto">Lo sentimos, hubo un error, intente nuevamente...</div>;
 
-	let pentateuco;
-	let historicos;
-	let poetiocs;
-	let profetas;
-	let evangelios;
-	let historico;
-	let cartas;
-	let revelaciones;
+		const pentateuco = books?.data.slice(0, 5);
+		const historicos = books?.data.slice(5, 17);
+		const poetiocs = books?.data.slice(17, 22);
+		const profetas = books?.data.slice(22, 39);
+		const evangelios = books?.data.slice(39, 43);
+		const historico = books?.data.slice(43, 44);
+		const cartas = books?.data.slice(44, 65);
+		const revelaciones = books?.data.slice(65, 66);
 
-	if(books.size > 0) {
-		pentateuco	= books?.data.slice(0, 5);
-		historicos	= books?.data.slice(5, 17);
-		poetiocs	= books?.data.slice(17, 22);
-		profetas	= books?.data.slice(22, 39);
-		evangelios	= books?.data.slice(39, 43);
-		historico	= books?.data.slice(43, 44);
-		cartas	= books?.data.slice(44, 65);
-		revelaciones	= books?.data.slice(65, 66);
-	}
+	// if(books.data.size > 0) {
+	// 	pentateuco	= books?.data.slice(0, 5);
+	// 	historicos	= books?.data.slice(5, 17);
+	// 	poetiocs	= books?.data.slice(17, 22);
+	// 	profetas	= books?.data.slice(22, 39);
+	// 	evangelios	= books?.data.slice(39, 43);
+	// 	historico	= books?.data.slice(43, 44);
+	// 	cartas	= books?.data.slice(44, 65);
+	// 	revelaciones	= books?.data.slice(65, 66);
+	// }
 
 	return (
 		<main>
