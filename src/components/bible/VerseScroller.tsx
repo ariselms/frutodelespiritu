@@ -5,6 +5,7 @@ import ModalNotesAndMemorization from "@/components/bible/ModalNotesAndMemorizat
 
 interface VerseScrollerProps {
 	htmlContent: string;
+  bibleId: string
 }
 
 // Helper function to parse a verse SID (e.g., "GEN 2:5")
@@ -19,7 +20,7 @@ const parseSid = (sid: string) => {
 	};
 };
 
-export function VerseScroller({ htmlContent }: VerseScrollerProps) {
+export function VerseScroller({ htmlContent, bibleId }: VerseScrollerProps) {
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 
@@ -214,6 +215,7 @@ export function VerseScroller({ htmlContent }: VerseScrollerProps) {
 			{isModalVisible && (
 				<ModalNotesAndMemorization
 					selectedVerses={selectedVerses}
+          bibleId={bibleId}
 				/>
 			)}
 		</>

@@ -183,7 +183,10 @@ export default async function SingleChapterPage({
 					</Link>
 					<BibleHeaderSection section={`${BibleChapter.data.reference}`} />
 					<BibleNavigationAndNotes BibleChapterData={BibleChapter.data} />
-					<VerseScroller htmlContent={BibleChapter.data.content} />
+					<VerseScroller
+            htmlContent={BibleChapter.data.content}
+            bibleId={bibleId}
+          />
 					<BibleNavigationAndNotes BibleChapterData={BibleChapter.data} />
 				</div>
 			</section>
