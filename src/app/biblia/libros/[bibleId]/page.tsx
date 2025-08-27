@@ -48,7 +48,6 @@ export default async function BibleBooksPage({
 }: {
 	params: Promise<{ bibleId: string }>;
 }) {
-
 	const { bibleId } = await params;
 
 	const [BibleInfo, BibleBooks] = await Promise.all([
@@ -71,20 +70,38 @@ export default async function BibleBooksPage({
 	const bibleInfo = await BibleInfo.json();
 	const books = await BibleBooks.json();
 
-	const pentateuco = books?.data.slice(0, 5);
-	const historicos = books?.data.slice(5, 17);
-	const poetiocs = books?.data.slice(17, 22);
-	const profetas = books?.data.slice(22, 39);
-	const evangelios = books?.data.slice(39, 43);
-	const historico = books?.data.slice(43, 44);
-	const cartas = books?.data.slice(44, 65);
-	const revelaciones = books?.data.slice(65, 66);
+	if (books.message === "bad api-key")
+		return (
+			<div className="text-center p-4 max-w-[80ch] mx-auto">
+				Lo sentimos, hubo un error, intente nuevamente...
+			</div>
+		);
+
+	let pentateuco = books?.data.slice(0, 5);
+	let historicos = books?.data.slice(5, 17);
+	let poetiocs = books?.data.slice(17, 22);
+	let profetas = books?.data.slice(22, 39);
+	let evangelios = books?.data.slice(39, 43);
+	let historico = books?.data.slice(43, 44);
+	let cartas = books?.data.slice(44, 65);
+	let revelaciones = books?.data.slice(65, 66);
+
+	if(books.data.length > 0) {
+		pentateuco	= books?.data.slice(0, 5);
+		historicos	= books?.data.slice(5, 17);
+		poetiocs	= books?.data.slice(17, 22);
+		profetas	= books?.data.slice(22, 39);
+		evangelios	= books?.data.slice(39, 43);
+		historico	= books?.data.slice(43, 44);
+		cartas	= books?.data.slice(44, 65);
+		revelaciones	= books?.data.slice(65, 66);
+	}
 
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
-					<BibleHeaderSection section={bibleInfo.data.nameLocal} />
+					<BibleHeaderSection section={bibleInfo?.data?.nameLocal} />
 
 					<h1 className="text-2xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-600 dark:text-gray-300">
 						Antiguo Testamento
