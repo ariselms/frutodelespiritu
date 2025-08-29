@@ -1,7 +1,11 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
 import { BibleResponseType } from "@/models/bibleTypes";
-import { BibleIdsPublic, FetchEndpoints, serverBaseUrl } from "@/static";
+import { BibleIdsPublic, FetchEndpoints } from "@/static";
+import BibleError from "@/components/BibleError";
+import { Alert } from "flowbite-react";
+import { HiEye, HiInformationCircle } from "react-icons/hi";
+
 
 export const metadata = {
 	title:
@@ -110,13 +114,9 @@ export default async function BibliaPage() {
 
 	if(RequestError !== null){
 		return (
-			<main>
-				<section className="w-full dark:bg-gray-800 text-gray-800">
-					<p className="py-8 text-black dark:text-white text-center max-w-[80ch] mx-auto p-4">
-						Lo sentimos, actualmente dependemos de un servicio externo para proveer los datos de la Biblia. Si lees este mensaje es que alcanzamos el limite de peticiones diarias. Estamos trabajando fuertemente para crear nuestra propia base de datos de la biblia. Por favor intenta de nuevo mas tarde y solicitamos su comprension y paciencia en este asunto. Lamentamos el inconveniente que pueda haber causado. 
-					</p>
-				</section>
-			</main>
+			<BibleError 
+				message="Lo sentimos, actualmente dependemos de un servicio externo para proveer los datos de la Biblia. Si lees este mensaje es que alcanzamos el limite de peticiones diarias. Estamos trabajando fuertemente para crear nuestra propia base de datos de la biblia. Por favor intenta de nuevo mas tarde y solicitamos su comprension y paciencia en este asunto. Lamentamos el inconveniente que pueda haber causado."
+			/>
 		)
 	}
 
