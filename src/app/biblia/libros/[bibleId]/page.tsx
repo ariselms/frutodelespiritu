@@ -1,6 +1,7 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
 import { FetchEndpoints, SeccionesBiblia } from "@/static";
+import BibleError from "@/components/BibleError";
 
 export const metadata = {
 	title: "La biblia en español | Fruto del Espíritu",
@@ -72,9 +73,9 @@ export default async function BibleBooksPage({
 
 	if (books.message === "bad api-key")
 		return (
-			<div className="text-center p-4 max-w-[80ch] mx-auto">
-				Lo sentimos, hubo un error, intente nuevamente...
-			</div>
+			<BibleError 
+				message="Lo sentimos, actualmente dependemos de un servicio externo para proveer los datos de la Biblia. Si lees este mensaje es que alcanzamos el limite de peticiones diarias. Estamos trabajando fuertemente para crear nuestra propia base de datos de la biblia. Por favor intenta de nuevo mas tarde y solicitamos su comprension y paciencia en este asunto. Lamentamos el inconveniente que pueda haber causado."
+			/>
 		);
 
 	let pentateuco = books?.data.slice(0, 5);

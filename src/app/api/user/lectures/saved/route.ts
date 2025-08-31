@@ -27,6 +27,15 @@ export async function GET(request: Request) {
 			);
 		}
 
+    return NextResponse.json(
+      {
+        success: false,
+        message: "No se encontraron lecturas.",
+        data: null
+      },
+      { status: 404 }
+    );
+
 	} catch (error) {
 
     console.error("Error fetching user lectures:", error);
@@ -36,8 +45,6 @@ export async function GET(request: Request) {
       message: "Error obteniendo lectura.",
       data: null
     });
-
-
 	}
 }
 
