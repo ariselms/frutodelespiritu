@@ -99,7 +99,7 @@ export default async function BibleBooksPage({
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
-					<BibleHeaderSection section={bibleInfo?.data?.nameLocal} />
+					<BibleHeaderSection section={bibleInfo?.name} />
 
 					<h1 className="text-2xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-600 dark:text-gray-300">
 						Antiguo Testamento
