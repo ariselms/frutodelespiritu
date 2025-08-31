@@ -2,7 +2,6 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
-import BibleError from "@/components/BibleError";
 
 // In a page.js or layout.js file, export a metadata object
 export const metadata = {
@@ -52,10 +51,6 @@ export default async function Home() {
 	return (
 		<main>
 			<MainJumbotron />
-			<section className="py-4 bg-orange-100 dark:bg-gray-800 border-t border-orange-300 dark:border-none">
-				<BibleError message="
-				Estamos conscientes de los problemas que nuestros usuarios están enfrentando con la lectura de la Biblia. Dependemos de un servicio externo con el cual no estamos contentos. En las próximas semanas estaremos desplegando actualizaciones en las cuales garantizaremos la disponibilidad de la biblia en todo momento siempre y cuando el internet esté disponible. Agradecemos su paciencia en este asunto y esperen mucho más de este sitio web. De igual manera estaremos desplegando la capacidad de guardar notas sobre la Biblia y crear colecciones de memorización. Gracias por su paciencia." />
-			</section>
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
 				description={
