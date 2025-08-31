@@ -77,7 +77,7 @@ export default function AddNoteOrMemorization({
 
 	return (
 		<form>
-			<Modal show={openModal} size="lg" onClose={onCloseModal} popup>
+			<Modal className="z-90" show={openModal} size="lg" onClose={onCloseModal} popup>
 				<ModalHeader />
 				<ModalBody>
 					<div className="space-y-6">

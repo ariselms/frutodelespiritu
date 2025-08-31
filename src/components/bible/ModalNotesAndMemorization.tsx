@@ -51,7 +51,7 @@ export default function ModalNotesAndMemorization({
 				className={`${isExtended} fixed left-0 right-0 top-0 bg-orange-50 dark:bg-gray-900 text-center text-black dark:text-white z-80 rounded-2xl border border-orange-700 dark:border-gray-600 m-2 overflow-hidden p-1`}>
 				<div className="relative w-full h-full mb-4">
 					<div className="absolute right-0 top-0 bottom-0 cursor-pointer flex flex-col items-center justify-end">
-						{isExtended === "h-70 md:h-60 lg:h-50" ? (
+						{isExtended === "h-70 md:h-46 lg:h-50" ? (
 							<svg
 								onClick={() => {
 									setIsExtended("h-[calc(100vh-16px)]");
@@ -74,7 +74,7 @@ export default function ModalNotesAndMemorization({
 						) : (
 							<svg
 								onClick={() => {
-									setIsExtended("h-70 md:h-60 lg:h-50");
+									setIsExtended("h-70 md:h-46 lg:h-50");
 								}}
 								className="w-10 h-10 text-orange-700 dark:text-white"
 								aria-hidden="true"
