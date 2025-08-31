@@ -31,7 +31,7 @@ export function BookPillBlock({
 					<Link
 						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold px-8 py-4 rounded-2xl transition-all"
 						key={l.id}
-						href={`/biblia/libros/capitulos/${l.bibleId}/${l.id}`}>
+						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
 						{l.name}
 					</Link>
 				))}

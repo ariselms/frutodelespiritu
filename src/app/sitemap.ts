@@ -12,61 +12,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     SELECT slug, updated_at FROM lectures
   `;
 
-  const BibleIds: string[] = BibleIdsPrivate;
+	let RequestError = null;
+	let spanishBibles: any[] = [];
 
-  const FetchPromises = BibleIds.map(async (bibleId: string) => {
+	try {
+		const url = "https://bible.helloao.org/api/available_translations.json";
 
-    const url = FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId);
+		const bibleRequest = await fetch(url);
 
-    try {
-      const request = await fetch(url, {
-        method: "GET",
-        headers: {
-          "api-key": `${process.env.BIBLE_API_KEY}`,
-          Accept: "application/json"
-        }
-      });
+		const bibleResponse = await bibleRequest.json();
 
-      if (!request.ok) {
-
-        const errorData = await request.json();
-
-        console.error(
-          `HTTP error! Status: ${request.status} for Bible ID: ${bibleId}`,
-          errorData
-        );
-
-        return {
-          bibleId: bibleId,
-          error: `Failed to fetch: ${request.status}`
-        };
-      }
-
-      const response = await request.json();
-
-      return {
-        bibleId: bibleId,
-        data: response.data
-      };
-
-    } catch (error) {
-
-      return {
-        bibleId: bibleId,
-        error: `Failed to fetch: ${error}`
-      };
-
-    }
-  });
-
-  const allBibleResponses = await Promise.all(FetchPromises);
-
-  const spanishBibles = allBibleResponses
-    .filter((res) => res && !res.error && res.data)
-    .map((res) => ({
-      bibleId: res.bibleId,
-      data: res.data
-    })) as BibleResponseType[];
+		if (bibleResponse.translations.length) {
+			spanishBibles = bibleResponse.translations.filter(
+				(bible: any) => bible.language === "spa"
+			);
+		}
+	} catch (error) {
+		console.error(error);
+	} finally {
+		RequestError = "Error al obtener la información de la Biblia";
+	}
 
   const staticRoutes = [
 		{
@@ -109,15 +74,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	}));
 
   const bibleEntries: MetadataRoute.Sitemap = spanishBibles.map((bible) => ({
-    url: `${serverBaseUrl}/biblia/libros/${bible.bibleId}`,
+    url: `${serverBaseUrl}/biblia/libros/${bible.id}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.6
   }));
-
-  console.log(staticRoutes)
-  console.log(postEntries)
-  console.log(bibleEntries)
 
 	return [...staticRoutes, ...postEntries, ...bibleEntries];
 }

@@ -4,7 +4,14 @@
 import { BibleSearch } from "@/components/bible/BibleSearch";
 import BibleHeaderSection from "@/components/layout/BibleSection";
 
-export default async function BuscarBibliaPage() {
+export default async function BuscarBibliaPage({
+	params
+}: {
+	params: Promise<{ bibleId: string }>;
+}) {
+
+  const {bibleId} = await params
+
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
@@ -14,7 +21,9 @@ export default async function BuscarBibliaPage() {
 			</section>
 			<section className="bg-white dark:bg-gray-800">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
-					<BibleSearch/>
+					<BibleSearch
+            bibleId={bibleId}
+          />
 				</div>
 			</section>
 		</main>

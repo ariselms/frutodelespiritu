@@ -1,43 +1,36 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
-import { BibleResponseType } from "@/models/bibleTypes";
-import { BibleIdsPublic, FetchEndpoints } from "@/static";
-import BibleError from "@/components/BibleError";
-import { Alert } from "flowbite-react";
-import { HiEye, HiInformationCircle } from "react-icons/hi";
-
+import { BibleDataType} from "@/models/bibleTypes";
 
 export const metadata = {
-	title:
-		"Biblia en español | Fruto del Espíritu",
-  description:
-    "Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+	title: "Biblia en español | Fruto del Espíritu",
+	description:
+		"Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
 	keywords: [
-    "devocionales",
-    "cristiano",
-    "reflexiones",
-    "estudios bíblicos",
-    "biblias en español",
+		"devocionales",
+		"cristiano",
+		"reflexiones",
+		"estudios bíblicos",
+		"biblias en español",
 		"la biblia en español",
 		"biblia en español",
 		"entiende la biblia",
 		"espiritu santo",
-    "aprende la biblia",
-    "libros de la biblia reina valera 1960 en orden",
-    "lista de libros de la biblia reina valera 1960",
-    "tres significados de mundo en la biblia",
-    "significados de mundo en la biblia"
+		"aprende la biblia",
+		"libros de la biblia reina valera 1960 en orden",
+		"lista de libros de la biblia reina valera 1960",
+		"tres significados de mundo en la biblia",
+		"significados de mundo en la biblia"
 	],
 	robots: {
 		index: true,
 		follow: true
 	},
 	openGraph: {
-    title:
-      "Biblia en español | Fruto del Espíritu",
-    description:
-      "Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-		url: "https://frutodelespiritu.com/lecturas",
+		title: "Biblia en español | Fruto del Espíritu",
+		description:
+			"Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+		url: "https://frutodelespiritu.com/biblia",
 		siteName: "Fruto del Espíritu",
 		type: "website",
 		locale: "es_US",
@@ -51,92 +44,39 @@ export const metadata = {
 };
 
 export default async function BibliaPage() {
-
 	let RequestError = null;
+  let spanishBibles: BibleDataType[] = [];
 
-	const BibleIds: string[] = BibleIdsPublic;
+  try {
+    const url = "https://bible.helloao.org/api/available_translations.json";
 
-	const FetchPromises = BibleIds.map(async (bibleId: string) => {
+    const bibleRequest = await fetch(url);
 
-		const url = FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId);
+    const bibleResponse = await bibleRequest.json();
 
-		try {
-			const request = await fetch(url, {
-				method: "GET",
-				headers: {
-					"api-key": `${process.env.BIBLE_API_KEY}`,
-					Accept: "application/json"
-				}
-			});
-
-			if (!request.ok) {
-
-        const errorData = await request.json();
-
-				console.error(
-					`HTTP error! Status: ${request.status} for Bible ID: ${bibleId}`,
-					errorData
-				);
-
-				RequestError = "Lo sentimos, ha ocurrido un error, intenta de nuevo mas tarde.";
-
-				return {
-					bibleId: bibleId,
-					error: `Failed to fetch: ${request.status}`
-				};
-			}
-
-			const response = await request.json();
-
-			return {
-				bibleId: bibleId,
-				data: response.data
-			};
-
-		} catch (error) {
-
-			return {
-				bibleId: bibleId,
-				error: `Failed to fetch: ${error}`
-			};
-
+    if (bibleResponse.translations.length) {
+      spanishBibles = bibleResponse.translations.filter(
+        (bible: any) => bible.language === "spa")
 		}
-	});
 
-	const allBibleResponses = await Promise.all(FetchPromises);
-
-	const spanishBibles = allBibleResponses
-		.filter((res) => res && !res.error && res.data)
-		.map((res) => ({
-			bibleId: res.bibleId,
-			data: res.data
-		})) as BibleResponseType[];
-
-	if(RequestError !== null){
-		return (
-			<BibleError 
-				message="Lo sentimos, actualmente dependemos de un servicio externo para proveer los datos de la Biblia. Si lees este mensaje es que alcanzamos el limite de peticiones diarias. Estamos trabajando fuertemente para crear nuestra propia base de datos de la biblia. Por favor intenta de nuevo mas tarde y solicitamos su comprension y paciencia en este asunto. Lamentamos el inconveniente que pueda haber causado."
-			/>
-		)
-	}
+  } catch (error) {
+    console.error(error);
+  } finally {
+    RequestError = "Error al obtener la información de la Biblia";
+  }
 
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
-
 					<BibleHeaderSection section="La Santa Biblia" />
 
 					{RequestError && <p>{RequestError}</p>}
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-						{spanishBibles?.map((bible: BibleResponseType) => (
-
-							<SpanishBibleItem key={bible.bibleId} bible={bible} />
-
+						{spanishBibles?.map((bible: BibleDataType) => (
+							<SpanishBibleItem key={bible.id} bible={bible} />
 						))}
-
 					</div>
 				</div>
 			</section>
