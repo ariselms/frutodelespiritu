@@ -99,7 +99,7 @@ export default async function BibleBooksPage({
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
-					<BibleHeaderSection section={bibleInfo?.data?.nameLocal} />
+					<BibleHeaderSection section={bibleInfo?.name} />
 
 					<h1 className="text-2xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-600 dark:text-gray-300">
 						Antiguo Testamento
@@ -107,28 +107,28 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Pentateuco"
-						seccionDescription={SeccionesBiblia.Pentateuco}
+						seccionDescription={SeccionesBiblia?.Pentateuco}
 						seccionImgUrl="/images/bible-icons/pentateucos.png"
 						libros={pentateuco}
 					/>
 
 					<BookPillBlock
 						seccion="Históricos"
-						seccionDescription={SeccionesBiblia.LibrosHistoricos}
+						seccionDescription={SeccionesBiblia?.LibrosHistoricos}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historicos}
 					/>
 
 					<BookPillBlock
 						seccion="Poeticos"
-						seccionDescription={SeccionesBiblia.LibrosPoeticos}
+						seccionDescription={SeccionesBiblia?.LibrosPoeticos}
 						seccionImgUrl="/images/bible-icons/poeticos.png"
 						libros={poetiocs}
 					/>
 
 					<BookPillBlock
 						seccion="Profetas"
-						seccionDescription={SeccionesBiblia.LibrosProfeticos}
+						seccionDescription={SeccionesBiblia?.LibrosProfeticos}
 						seccionImgUrl="/images/bible-icons/profetas.png"
 						libros={profetas}
 					/>
@@ -139,28 +139,28 @@ export default async function BibleBooksPage({
 
 					<BookPillBlock
 						seccion="Evangelios"
-						seccionDescription={SeccionesBiblia.Evangelios}
+						seccionDescription={SeccionesBiblia?.Evangelios}
 						seccionImgUrl="/images/bible-icons/evangelios.png"
 						libros={evangelios}
 					/>
 
 					<BookPillBlock
 						seccion="Historia"
-						seccionDescription={SeccionesBiblia.HistoriaNuevoTestamento}
+						seccionDescription={SeccionesBiblia?.HistoriaNuevoTestamento}
 						seccionImgUrl="/images/bible-icons/historia.png"
 						libros={historico}
 					/>
 
 					<BookPillBlock
 						seccion="Cartas"
-						seccionDescription={SeccionesBiblia.CartasApostolicas}
+						seccionDescription={SeccionesBiblia?.CartasApostolicas}
 						seccionImgUrl="/images/bible-icons/cartas.png"
 						libros={cartas}
 					/>
 
 					<BookPillBlock
 						seccion="Revelaciones"
-						seccionDescription={SeccionesBiblia.Apocalipsis}
+						seccionDescription={SeccionesBiblia?.Apocalipsis}
 						seccionImgUrl="/images/bible-icons/revelaciones.png"
 						libros={revelaciones}
 					/>
