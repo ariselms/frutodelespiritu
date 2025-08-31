@@ -109,4 +109,13 @@ export async function POST(request: Request) {
 			);
 		}
 	}
+
+  return NextResponse.json(
+    {
+      success: false,
+      message: "Error handling user",
+      data: null
+    },
+    { status: 500 }
+  );
 }
