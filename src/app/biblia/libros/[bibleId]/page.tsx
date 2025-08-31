@@ -1,7 +1,7 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
-import { FetchEndpoints, SeccionesBiblia } from "@/static";
-import BibleError from "@/components/BibleError";
+import { SeccionesBiblia } from "@/static";
+import { BibleBookType } from "@/models/bibleTypes";
 
 export const metadata = {
 	title: "La biblia en español | Fruto del Espíritu",
@@ -51,51 +51,34 @@ export default async function BibleBooksPage({
 }) {
 	const { bibleId } = await params;
 
-	const [BibleInfo, BibleBooks] = await Promise.all([
-		fetch(FetchEndpoints.BibleApiBase.GetSpanishBibles(bibleId), {
-			method: "GET",
-			headers: {
-				"api-key": `${process.env.BIBLE_API_KEY}`,
-				Accept: "application/json"
-			}
-		}),
-		fetch(FetchEndpoints.BibleApiBase.GetSpanishBibleBooks(bibleId), {
-			method: "GET",
-			headers: {
-				"api-key": `${process.env.BIBLE_API_KEY}`,
-				Accept: "application/json"
-			}
-		})
-	]);
+	const bibleInfoRequest = await fetch(
+		`https://bible.helloao.org/api/${bibleId}/books.json`
+	);
 
-	const bibleInfo = await BibleInfo.json();
-	const books = await BibleBooks.json();
+	const bibleInfoResponse = await bibleInfoRequest.json();
 
-	if (books.message === "bad api-key")
-		return (
-			<BibleError 
-				message="Lo sentimos, actualmente dependemos de un servicio externo para proveer los datos de la Biblia. Si lees este mensaje es que alcanzamos el limite de peticiones diarias. Estamos trabajando fuertemente para crear nuestra propia base de datos de la biblia. Por favor intenta de nuevo mas tarde y solicitamos su comprension y paciencia en este asunto. Lamentamos el inconveniente que pueda haber causado."
-			/>
-		);
+	const bibleInfo = await bibleInfoResponse.translation
 
-	let pentateuco = books?.data.slice(0, 5);
-	let historicos = books?.data.slice(5, 17);
-	let poetiocs = books?.data.slice(17, 22);
-	let profetas = books?.data.slice(22, 39);
-	let evangelios = books?.data.slice(39, 43);
-	let historico = books?.data.slice(43, 44);
-	let cartas = books?.data.slice(44, 65);
-	let revelaciones = books?.data.slice(65, 66);
+	const books = await bibleInfoResponse.books;
 
-	if(books.data.length > 0) {
-		pentateuco	= books?.data.slice(0, 5);
-		historicos	= books?.data.slice(5, 17);
-		poetiocs	= books?.data.slice(17, 22);
-		profetas	= books?.data.slice(22, 39);
-		evangelios	= books?.data.slice(39, 43);
-		historico	= books?.data.slice(43, 44);
-		cartas	= books?.data.slice(44, 65);
-		revelaciones	= books?.data.slice(65, 66);
+	let pentateuco:BibleBookType[] = books.slice(0, 5);
+	let historicos:BibleBookType[] = books.slice(5, 17);
+	let poetiocs:BibleBookType[] = books.slice(17, 22);
+	let profetas:BibleBookType[] = books.slice(22, 39);
+	let evangelios:BibleBookType[] = books.slice(39, 43);
+	let historico:BibleBookType[] = books.slice(43, 44);
+	let cartas:BibleBookType[] = books.slice(44, 65);
+	let revelaciones:BibleBookType[] = books.slice(65, 66);
+
+	if (books.length > 0) {
+		pentateuco = books.slice(0, 5);
+		historicos = books.slice(5, 17);
+		poetiocs = books.slice(17, 22);
+		profetas = books.slice(22, 39);
+		evangelios = books.slice(39, 43);
+		historico = books.slice(43, 44);
+		cartas = books.slice(44, 65);
+		revelaciones = books.slice(65, 66);
 	}
 
 	return (

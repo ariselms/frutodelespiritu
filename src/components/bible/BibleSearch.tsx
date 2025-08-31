@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { FetchEndpoints } from "@/static";
 
 // TODO: Create a type for categories if needed
-export function BibleSearch() {
+export function BibleSearch({bibleId}: {bibleId: string}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,7 +31,7 @@ export function BibleSearch() {
 	) => {
 		event?.preventDefault();
 
-    router.push(`/biblia/buscar?query=${bibleKeywordSearch.trim()}`);
+    router.push(`/biblia/${bibleId}/buscar?query=${bibleKeywordSearch.trim()}`);
 
 		try {
 			// url to request bible term:
@@ -101,7 +101,7 @@ export function BibleSearch() {
 					</div>
 				</div>
 			</form>
-			<BibleSearchResultList results={bibleKeywordResults?.verses} />
+			<BibleSearchResultList bibleId={bibleId} results={bibleKeywordResults?.verses} />
 		</>
 	);
 }

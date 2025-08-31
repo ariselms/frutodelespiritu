@@ -21,7 +21,7 @@ export interface BookPillBlockProps {
   seccion: string;
   seccionDescription: string;
   seccionImgUrl: string;
-  libros: ChapterType[];
+  libros: BibleBookType[];
 }
 
 export interface SearchResultType {
@@ -56,26 +56,39 @@ interface AudioBibleType {
 	// Add other properties if known, e.g., 'format', 'bitrate', etc.
 }
 
-interface BibleDataType {
+export interface BibleDataType {
 	id: string;
-	dblId: string;
-	relatedDbl: string | null;
 	name: string;
-	nameLocal: string;
-	abbreviation: string;
-	abbreviationLocal: string;
-	description: string;
-	descriptionLocal: string;
-	language: BibleLanguageType; // Assuming a BibleLanguageType object
-	countries: BibleCountryType[]; // Array of Country objects
-	type: string;
-	updatedAt: string; // ISO 8601 date string
-	copyright: string;
-	info: string; // This will contain the HTML string
-	audioBibles: AudioBibleType[]; // Array of AudioBible objects
+	website: string;
+	licenseUrl: string | null;
+	licenseNotes: string;
+	shortName: string;
+	englishName: string;
+	language: string; // Assuming a BibleLanguageType object
+	textDirection: string; // Array of Country objects
+	sha256: string;
+	availableFormats: string; // ISO 8601 date string
+	listOfBooksApiLink: string;
+	numberOfBooks: string; // This will contain the HTML string
+	totalNumberOfChapters: AudioBibleType[]; // Array of AudioBible objects
+}
+
+export interface BibleBookType {
+
+    id: string,
+    translationId: string,
+    name: string,
+    commonName: string,
+    title: string,
+    order: number,
+    numberOfChapters: number,
+    sha256: string,
+    firstChapterApiLink: string,
+    lastChapterApiLink: string,
+    totalNumberOfVerses: number
 }
 
 export interface BibleResponseType {
-	bibleId: string;
+	id: string;
 	data: BibleDataType;
 }

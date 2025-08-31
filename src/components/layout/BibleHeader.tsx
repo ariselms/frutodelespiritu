@@ -90,10 +90,10 @@ export default function BibleHeader() {
 				)}
 				<Link
 					className={`${
-						isActive(pathname, "/biblia/buscar") &&
+						isActive(pathname, `biblia/${bibleId}/buscar`) &&
 						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
 					} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
-					href="/biblia/buscar">
+					href={`/biblia/${bibleId}/buscar`}>
 					<Image
 						alt="Logo"
 						width={100}
