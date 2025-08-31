@@ -98,8 +98,6 @@ export default async function SingleChapterPage({
 
   const Chapter = bibleChapterResponse.chapter;
 
-  console.log(Chapter)
-
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800 pb-16">

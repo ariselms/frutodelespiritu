@@ -3,46 +3,101 @@ import { BookPillBlock } from "@/components/bible/BookPill";
 import { SeccionesBiblia } from "@/static";
 import { BibleBookType } from "@/models/bibleTypes";
 
-export const metadata = {
-	title: "La biblia en español | Fruto del Espíritu",
-	description:
-		"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-	keywords: [
-		"devocionales",
-		"cristiano",
-		"reflexiones",
-		"estudios bíblicos",
-		"biblias en espanol",
-		"la biblia en espanol",
-		"biblia en espanol",
-		"entiende la biblia",
-		"espiritu santo",
-		"aprende la biblia",
-		"libros de la biblia reina valera 1960 en orden",
-		"lista de libros de la biblia reina valera 1960",
-		"tres significados de mundo en la biblia",
-		"significados de mundo en la biblia"
-	],
-	robots: {
-		index: true,
-		follow: true
-	},
-	openGraph: {
-		title: "La biblia en espanol | Fruto del Espíritu",
-		description:
-			"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-		url: "https://frutodelespiritu.com/biblia/libros/592420522e16049f-01",
-		siteName: "Fruto del Espíritu",
-		type: "website",
-		locale: "es_US",
-		images: [
-			{
-				url: "https://frutodelespiritu.com/images/logo.png",
-				alt: "Fruto del Espíritu"
-			}
-		]
-	}
-};
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ bibleId: string }>;
+}) {
+	const { bibleId } = await params;
+
+  const bibleInfoRequest = await fetch(
+    `https://bible.helloao.org/api/${bibleId}/books.json`
+  );
+
+  const bibleInfoResponse = await bibleInfoRequest.json();
+
+  const bibleInfo = await bibleInfoResponse.translation;
+
+	return {
+		title: `${bibleInfo?.name} | Fruto del Espíritu`,
+		description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+		keywords: [
+			"devocionales",
+			"cristiano",
+			"reflexiones",
+			"estudios bíblicos",
+			"biblias en espanol",
+			"la biblia en espanol",
+			"biblia en espanol",
+			"entiende la biblia",
+			"espiritu santo",
+			"aprende la biblia",
+			"libros de la biblia reina valera 1960 en orden",
+			"lista de libros de la biblia reina valera 1960",
+			"tres significados de mundo en la biblia",
+			"significados de mundo en la biblia"
+		].concat(bibleInfo?.title?.split(" ")),
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `${bibleInfo?.name} | Fruto del Espíritu`,
+			description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+			url: `https://frutodelespiritu.com/biblia/libros/${bibleId}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: `${bibleInfo?.image_url}`,
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
+}
+
+// export const metadata = {
+// 	title: "La biblia en español | Fruto del Espíritu",
+// 	description:
+// 		"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+// 	keywords: [
+// 		"devocionales",
+// 		"cristiano",
+// 		"reflexiones",
+// 		"estudios bíblicos",
+// 		"biblias en espanol",
+// 		"la biblia en espanol",
+// 		"biblia en espanol",
+// 		"entiende la biblia",
+// 		"espiritu santo",
+// 		"aprende la biblia",
+// 		"libros de la biblia reina valera 1960 en orden",
+// 		"lista de libros de la biblia reina valera 1960",
+// 		"tres significados de mundo en la biblia",
+// 		"significados de mundo en la biblia"
+// 	],
+// 	robots: {
+// 		index: true,
+// 		follow: true
+// 	},
+// 	openGraph: {
+// 		title: "La biblia en espanol | Fruto del Espíritu",
+// 		description:
+// 			"Lista completa de todos los libros de la biblia en orden. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+// 		url: "https://frutodelespiritu.com/biblia/spa_r09",
+// 		siteName: "Fruto del Espíritu",
+// 		type: "website",
+// 		locale: "es_US",
+// 		images: [
+// 			{
+// 				url: "https://frutodelespiritu.com/images/logo.png",
+// 				alt: "Fruto del Espíritu"
+// 			}
+// 		]
+// 	}
+// };
 
 export default async function BibleBooksPage({
 	params

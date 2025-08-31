@@ -92,8 +92,6 @@ const customDataProvider = {
 		return baseDataProvider.getOne(resource, params).then((response) => {
 			const apiResponseData = response.data;
 
-			console.log("apiResponseData", apiResponseData);
-
 			if (apiResponseData && typeof apiResponseData !== "undefined") {
 				return {
 					data: apiResponseData.data // Send the single lecture object
@@ -132,9 +130,6 @@ const customDataProvider = {
 				method: "POST",
 				body: formData
 			}).then(({ json }) => {
-				console.log("API response received in dataProvider:", json);
-
-				// THE FIX IS HERE:
 				// We check if the response has the nested 'data' object and an 'id'.
 				if (json && json.data && json.data.id) {
 					// React Admin expects the final object to be { data: THE_RECORD }

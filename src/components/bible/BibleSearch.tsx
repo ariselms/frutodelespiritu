@@ -57,7 +57,7 @@ export function BibleSearch({bibleId}: {bibleId: string}) {
 
 			setBibleKeywordResults(data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
 

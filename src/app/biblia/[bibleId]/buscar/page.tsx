@@ -12,8 +12,6 @@ export default async function BuscarBibliaPage({
 
   const {bibleId} = await params
 
-  console.log(bibleId);
-
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">

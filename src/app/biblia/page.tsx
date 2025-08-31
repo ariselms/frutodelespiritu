@@ -30,7 +30,7 @@ export const metadata = {
 		title: "Biblia en español | Fruto del Espíritu",
 		description:
 			"Disponibles cuatro versiones de la biblia en español. Reina Valera 1960, Palabra de Dios para ti, The Holy Bible in Simple Spanish y la Versión Biblia Libre. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-		url: "https://frutodelespiritu.com/lecturas",
+		url: "https://frutodelespiritu.com/biblia",
 		siteName: "Fruto del Espíritu",
 		type: "website",
 		locale: "es_US",
@@ -45,7 +45,7 @@ export const metadata = {
 
 export default async function BibliaPage() {
 	let RequestError = null;
-  let spanishBibles: any[] = [];
+  let spanishBibles: BibleDataType[] = [];
 
   try {
     const url = "https://bible.helloao.org/api/available_translations.json";

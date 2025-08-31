@@ -105,7 +105,6 @@ export default function BibleHeader() {
             Buscar
           </Link>
         )}
-				{/* TODO: if the user is signed in, show notes */}
 			</nav>
 		</header>
 	);

@@ -3,8 +3,7 @@
 import React, { useEffect, useRef } from "react";
 
 export function ChapterDetails({ ChapterContent }: any) {
-
-  const contentRef = useRef<HTMLDivElement>(null);
+	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		// This effect runs after the component has mounted and htmlContent is rendered.
@@ -18,11 +17,13 @@ export function ChapterDetails({ ChapterContent }: any) {
 				// Remove the '#' prefix to get the actual ID (e.g., "9")
 				const targetId = hash.substring(1);
 
-	      const targetElement = contentRef.current.querySelectorAll(`[id="${targetId}"]`)[0];
+				const targetElement = contentRef.current.querySelectorAll(
+					`[id="${targetId}"]`
+				)[0];
 
-	      if (targetElement) {
-	        targetElement.scrollIntoView({ behavior: "smooth" });
-	      }
+				if (targetElement) {
+					targetElement.scrollIntoView({ behavior: "smooth" });
+				}
 			}
 		}, 100); // A small delay (e.g., 100ms) often helps ensure rendering is complete
 
@@ -44,22 +45,21 @@ export function ChapterDetails({ ChapterContent }: any) {
 				} else if (content.type === "verse") {
 					return (
 						<p key={content.number}>
-							<span id={content.number} data-number={content.number}>{content.number}</span>{" "}
+							<span id={content.number} data-number={content.number}>
+								{content.number}
+							</span>{" "}
 							{content.content.map((verse: any, index: number) => {
-                console.log(verse.noteId === true)
-								if(verse.text){
-                  console.log(verse.text)
-                  console.log(verse.wordsOfJesus);
-                  return <span className={`${verse.wordsOfJesus && 'jesus-said'}`} key={index}>{verse.text}</span>;
-                } else if(verse.noteId === undefined) {
-                  console.log(verse.noteId)
-                  return (
+								if (verse.text) {
+									return (
 										<span
+											className={`${verse.wordsOfJesus && "jesus-said"}`}
 											key={index}>
-											{verse}
+											{verse.text}
 										</span>
 									);
-                }
+								} else if (verse.noteId === undefined) {
+									return <span key={index}>{verse}</span>;
+								}
 							})}
 						</p>
 					);

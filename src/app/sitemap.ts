@@ -26,8 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			spanishBibles = bibleResponse.translations.filter(
 				(bible: any) => bible.language === "spa"
 			);
-
-      console.log(spanishBibles)
 		}
 	} catch (error) {
 		console.error(error);
@@ -81,10 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
     priority: 0.6
   }));
-
-  console.log(staticRoutes)
-  console.log(postEntries)
-  console.log(bibleEntries)
 
 	return [...staticRoutes, ...postEntries, ...bibleEntries];
 }

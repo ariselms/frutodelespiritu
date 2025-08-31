@@ -14,12 +14,10 @@ export default async function BibleChaptersPage({
 
 	const bibleInfoResponse = await bibleInfoRequest.json();
 
-
 	const CurrentBook = await bibleInfoResponse.books.filter(
 		(book: any) => book.id === bookId
 	)[0];
 
-	// --- CORRECTED CODE ---
 	const BookChapters = Array.from(
 		{ length: CurrentBook.numberOfChapters },
 		// Wrap the object in parentheses for an implicit return
