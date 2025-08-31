@@ -2,6 +2,8 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
+import { AlertBanner } from "@/components/AlertBanner";
+import { HiInformationCircle } from "react-icons/hi";
 
 // In a page.js or layout.js file, export a metadata object
 export const metadata = {
@@ -50,6 +52,10 @@ export const metadata = {
 export default async function Home() {
 	return (
 		<main>
+      <AlertBanner
+        type="info"
+        message="Contamos con sobre 8 biblias disponibles en español para tu beneficio. Gracias por tu paciencia."
+      />
 			<MainJumbotron />
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
