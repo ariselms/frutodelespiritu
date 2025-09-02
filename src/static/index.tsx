@@ -94,6 +94,11 @@ export const FetchEndpoints = Object.freeze({
 // Create a reusable type from the object's shape using `typeof`
 export type FetchEndpointsType = typeof FetchEndpoints;
 
+export const BibleCrudActions = Object.freeze({
+	note: "note",
+	memorization: "memorization"
+});
+
 export const DataProvider: any = Object.freeze({
   Lectures: "lectures",
   Articles: "articles",

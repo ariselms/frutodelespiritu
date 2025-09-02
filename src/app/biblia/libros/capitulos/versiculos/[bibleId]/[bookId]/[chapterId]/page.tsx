@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./bible-chapter.css";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
 import { ChapterDetails } from "@/components/bible/ChapterDetails";
-import { BibleBookType } from "@/models/bibleTypes";
+import { BibleBookType} from "@/models/bibleTypes";
 
 // export async function generateMetadata({
 // 	params
@@ -94,6 +94,7 @@ export default async function SingleChapterPage({
 
   // Bible data available as needed
   // const Bible: BibleDataType = bibleChapterResponse.translation;
+
   const Book: BibleBookType = bibleChapterResponse.book;
 
   const Chapter = bibleChapterResponse.chapter;

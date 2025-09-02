@@ -3,7 +3,7 @@ import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImages
 import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { HiInformationCircle } from "react-icons/hi";
+import { generateBibleReferences } from "@/helpers/referenceTagger";
 
 // In a page.js or layout.js file, export a metadata object
 export const metadata = {
@@ -50,6 +50,7 @@ export const metadata = {
 };
 
 export default async function Home() {
+
 	return (
 		<main>
       <AlertBanner
