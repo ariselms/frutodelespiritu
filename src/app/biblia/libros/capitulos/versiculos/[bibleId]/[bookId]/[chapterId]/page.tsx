@@ -3,82 +3,7 @@ import Link from "next/link";
 import "./bible-chapter.css";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
 import { ChapterDetails } from "@/components/bible/ChapterDetails";
-import { BibleBookType} from "@/models/bibleTypes";
-
-// export async function generateMetadata({
-// 	params
-// }: {
-// 	params: Promise<{ bibleId: string; chapterId: string }>;
-// }) {
-// 	const { bibleId, chapterId } = await params;
-
-// 	const BibleAPIKey = process.env.BIBLE_API_KEY;
-
-// 	const chapterUrl = FetchEndpoints.BibleApiBase.GetSpansihBookChapterVerses(bibleId, chapterId);
-
-// 	let BibleChapter;
-
-//   try {
-
-//     const chapterRequest = await fetch(chapterUrl, {
-//       method: "GET",
-//       headers: {
-//         "api-key": `${BibleAPIKey}`,
-//         Accept: "application/json"
-//       }
-//     });
-
-//     if (!chapterRequest.ok) {
-//       // Attempt to parse a more detailed error message from the response body
-//       const errorData = await chapterRequest.json();
-//       console.error(
-//         `Error fetching data for Bible ID: ${bibleId}`,
-//         errorData
-//       )
-//     }
-
-//     const data = await chapterRequest.json();
-
-//     // `chaptersRequestResult` already holds the resolved JSON data
-//     BibleChapter = data.data;
-
-//   } catch (error) {
-
-//       console.error(
-//         `Error fetching data for Bible ID: ${bibleId}`,
-//         error
-//       );
-
-//   }
-
-// 	return {
-// 		title: `${BibleChapter.reference} | Lee la biblia en Fruto del Espíritu`,
-// 		description: `${BibleChapter.reference} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-// 		keywords: [
-// 			`Capítulo completo de ${BibleChapter.reference}`,
-// 			`Versículos del libro de ${BibleChapter.reference}`,
-// 			`${BibleChapter.reference}`
-// 		],
-// 		robots: {
-// 			index: true,
-// 			follow: true
-// 		},
-// 		openGraph: {
-// 			title: `${BibleChapter.reference} | Lee la biblia en Fruto del Espíritu`,
-// 			description: `${BibleChapter.reference} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-// 			url: `https://frutodelespiritu.com/biblia/libros/capitulos/versiculos/592420522e16049f-01/${BibleChapter.id}`,
-// 			siteName: "Fruto del Espíritu",
-// 			type: "website",
-// 			locale: "es_US",
-// 			images: [
-// 				{
-// 					url: "https://frutodelespiritu.com/images/logo.png",
-// 					alt: "Fruto del Espíritu"
-// 				}
-// 			]
-// 		}
-// 	};
-// }
+import { BibleBookType, BibleDataType} from "@/models/bibleTypes";
 export default async function SingleChapterPage({
 	params
 }: {
@@ -92,8 +17,7 @@ export default async function SingleChapterPage({
 
   const bibleChapterResponse = await bibleChapterRequest.json();
 
-  // Bible data available as needed
-  // const Bible: BibleDataType = bibleChapterResponse.translation;
+  const Bible: BibleDataType = bibleChapterResponse.translation;
 
   const Book: BibleBookType = bibleChapterResponse.book;
 
