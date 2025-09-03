@@ -1,9 +1,7 @@
 // app/sitemap.ts
 import { MetadataRoute } from "next";
 import { sql } from "@vercel/postgres";
-import { BibleIdsPrivate } from "@/static";
-import { BibleResponseType } from "@/models/bibleTypes";
-import { FetchEndpoints, serverBaseUrl } from "@/static";
+import { serverBaseUrl } from "@/static";
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
