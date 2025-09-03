@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     SELECT slug, updated_at FROM lectures
   `;
 
-	let RequestError = null;
 	let spanishBibles: any[] = [];
 
 	try {
@@ -29,8 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		}
 	} catch (error) {
 		console.error(error);
-	} finally {
-		RequestError = "Error al obtener la información de la Biblia";
 	}
 
   const staticRoutes = [
@@ -53,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			priority: 0.8
 		},
 		{
-			url: `${serverBaseUrl}/biblia/buscar`,
+			url: `${serverBaseUrl}/biblia/spa_bes/buscar`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 0.8
