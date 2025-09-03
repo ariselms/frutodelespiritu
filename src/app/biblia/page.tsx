@@ -44,7 +44,6 @@ export const metadata = {
 };
 
 export default async function BibliaPage() {
-	let RequestError = null;
   let spanishBibles: BibleDataType[] = [];
 
   try {
@@ -61,8 +60,6 @@ export default async function BibliaPage() {
 
   } catch (error) {
     console.error(error);
-  } finally {
-    RequestError = "Error al obtener la información de la Biblia";
   }
 
 	return (
@@ -70,8 +67,6 @@ export default async function BibliaPage() {
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<BibleHeaderSection section="La Santa Biblia" />
-
-					{RequestError && <p>{RequestError}</p>}
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						{spanishBibles?.map((bible: BibleDataType) => (

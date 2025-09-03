@@ -3,82 +3,53 @@ import Link from "next/link";
 import "./bible-chapter.css";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
 import { ChapterDetails } from "@/components/bible/ChapterDetails";
-import { BibleBookType} from "@/models/bibleTypes";
+import { BibleBookType } from "@/models/bibleTypes";
 
-// export async function generateMetadata({
-// 	params
-// }: {
-// 	params: Promise<{ bibleId: string; chapterId: string }>;
-// }) {
-// 	const { bibleId, chapterId } = await params;
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ bibleId: string; bookId: string; chapterId: string }>;
+}) {
+	const { bibleId, bookId, chapterId } = await params;
 
-// 	const BibleAPIKey = process.env.BIBLE_API_KEY;
+	const bibleChapterRequest = await fetch(
+		`https://bible.helloao.org/api/${bibleId}/${bookId}/${chapterId}.json`
+	);
 
-// 	const chapterUrl = FetchEndpoints.BibleApiBase.GetSpansihBookChapterVerses(bibleId, chapterId);
+	const bibleChapterResponse = await bibleChapterRequest.json();
 
-// 	let BibleChapter;
+	const Book: BibleBookType = bibleChapterResponse.book;
 
-//   try {
+	const Chapter: any = bibleChapterResponse.chapter;
 
-//     const chapterRequest = await fetch(chapterUrl, {
-//       method: "GET",
-//       headers: {
-//         "api-key": `${BibleAPIKey}`,
-//         Accept: "application/json"
-//       }
-//     });
-
-//     if (!chapterRequest.ok) {
-//       // Attempt to parse a more detailed error message from the response body
-//       const errorData = await chapterRequest.json();
-//       console.error(
-//         `Error fetching data for Bible ID: ${bibleId}`,
-//         errorData
-//       )
-//     }
-
-//     const data = await chapterRequest.json();
-
-//     // `chaptersRequestResult` already holds the resolved JSON data
-//     BibleChapter = data.data;
-
-//   } catch (error) {
-
-//       console.error(
-//         `Error fetching data for Bible ID: ${bibleId}`,
-//         error
-//       );
-
-//   }
-
-// 	return {
-// 		title: `${BibleChapter.reference} | Lee la biblia en Fruto del Espíritu`,
-// 		description: `${BibleChapter.reference} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-// 		keywords: [
-// 			`Capítulo completo de ${BibleChapter.reference}`,
-// 			`Versículos del libro de ${BibleChapter.reference}`,
-// 			`${BibleChapter.reference}`
-// 		],
-// 		robots: {
-// 			index: true,
-// 			follow: true
-// 		},
-// 		openGraph: {
-// 			title: `${BibleChapter.reference} | Lee la biblia en Fruto del Espíritu`,
-// 			description: `${BibleChapter.reference} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-// 			url: `https://frutodelespiritu.com/biblia/libros/capitulos/versiculos/592420522e16049f-01/${BibleChapter.id}`,
-// 			siteName: "Fruto del Espíritu",
-// 			type: "website",
-// 			locale: "es_US",
-// 			images: [
-// 				{
-// 					url: "https://frutodelespiritu.com/images/logo.png",
-// 					alt: "Fruto del Espíritu"
-// 				}
-// 			]
-// 		}
-// 	};
-// }
+	return {
+		title: `${Book.name} ${Chapter.number} | Lee la biblia en Fruto del Espíritu`,
+		description: `${Book.name} ${Chapter.number} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+		keywords: [
+			`Capítulo completo de ${Book.name} ${Chapter.number}`,
+			`Versículos del libro de ${Book.name} ${Chapter.number}`,
+			`${Book.name} ${Chapter.number}`
+		],
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `${Book.name} ${Chapter.number} | Lee la biblia en Fruto del Espíritu`,
+			description: `${Book.name} ${Chapter.number} | Capítulo completo. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+			url: `https://frutodelespiritu.com/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: "https://frutodelespiritu.com/images/logo.png",
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
+}
 export default async function SingleChapterPage({
 	params
 }: {
@@ -86,18 +57,18 @@ export default async function SingleChapterPage({
 }) {
 	const { bibleId, bookId, chapterId } = await params;
 
-  const bibleChapterRequest = await fetch(
-    `https://bible.helloao.org/api/${bibleId}/${bookId}/${chapterId}.json`
-  );
+	const bibleChapterRequest = await fetch(
+		`https://bible.helloao.org/api/${bibleId}/${bookId}/${chapterId}.json`
+	);
 
-  const bibleChapterResponse = await bibleChapterRequest.json();
+	const bibleChapterResponse = await bibleChapterRequest.json();
 
-  // Bible data available as needed
-  // const Bible: BibleDataType = bibleChapterResponse.translation;
+	// Bible data available as needed
+	// const Bible: BibleDataType = bibleChapterResponse.translation;
 
-  const Book: BibleBookType = bibleChapterResponse.book;
+	const Book: BibleBookType = bibleChapterResponse.book;
 
-  const Chapter = bibleChapterResponse.chapter;
+	const Chapter = bibleChapterResponse.chapter;
 
 	return (
 		<main>
@@ -124,7 +95,7 @@ export default async function SingleChapterPage({
 					</Link>
 					<BibleHeaderSection section={`${Book?.name} ${Chapter?.number}`} />
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
-				  <ChapterDetails ChapterContent={Chapter.content} />
+					<ChapterDetails ChapterContent={Chapter.content} />
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 				</div>
 			</section>
