@@ -36,25 +36,24 @@ export function ChapterDetails({ ChapterContent }: any) {
 return (
 	<>
 		<div className="bible-chapter max-w-[80ch] mx-auto" ref={contentRef}>
-			{ChapterContent.map((content: any) => {
-				if (content.type === "heading") {
+			{ChapterContent.map((chapter: any) => {
+				if (chapter.type === "heading") {
 					return (
-						<h2 key={content.content[0]} id={content.content[0]}>
-							{content.content[0]}
+						<h2 key={chapter.content[0]} id={chapter.content[0]}>
+							{chapter.content[0]}
 						</h2>
 					);
 				}
-				if (content.type === "verse") {
+				if (chapter.type === "verse") {
 					return (
-						<p key={content.number}>
+						<p key={chapter.number}>
 							<span
 								className="v"
-								id={content.number}
-								data-number={content.number}>
-								{content.number}
+								id={chapter.number}
+								data-number={chapter.number}>
+								{chapter.number}
 							</span>{" "}
-							{content.content.map((verse: any, index: number) => {
-								// ✅ FIX 1: Specifically handle line break objects
+							{chapter.content.map((verse: any, index: number) => {
 								// If the verse object is a line break, render a <br /> tag.
 								if (verse && verse.lineBreak) {
 									return <br key={index} />;
@@ -75,7 +74,6 @@ return (
 									);
 								}
 
-								// ✅ FIX 2: Handle simple strings
 								// Check if 'verse' is a string before trying to render it.
 								if (typeof verse === "string") {
 									return <span key={index}>{verse}</span>;
