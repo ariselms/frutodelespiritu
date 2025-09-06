@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
-import { getBibleVersesAndBuildTheWholePassage } from "@/helpers/server";
 
 // POST: /api/bible/memorization
 // PRIVATE

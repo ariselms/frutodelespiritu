@@ -66,8 +66,6 @@ export default function AddNoteOrMemorization({
 				}
 			});
 
-      // console.log("selectedText", selectedText);
-
 			setBibleData({
 				by_user_id: user?.id,
 				bible_id: bibleId,
@@ -78,7 +76,7 @@ export default function AddNoteOrMemorization({
         passage_text: selectedText
 			});
 		}
-    console.log(passageId);
+
 	}, [passageId]);
 
 	// bibleData structure //
@@ -113,7 +111,6 @@ export default function AddNoteOrMemorization({
 			}
 
 			if (action === BibleCrudActions.memorization) {
-				console.log(bibleData?.passage_text);
 				// memorization_list //
 				// id int
 				// name string

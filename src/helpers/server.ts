@@ -75,7 +75,3 @@ export const isAuthenticated = async () => {
   return true;
 
 }
-
-export const getBibleVersesAndBuildTheWholePassage = async (book: string, chapter: number) => {
-  console.log("book", book);
-}

@@ -66,8 +66,6 @@ export default function UserLecturesPage() {
 
   const handleSavedLectureRemoved = async (lectureId: string) => {
 
-    console.log("Removing lecture with ID:", lectureId);
-
     try {
 
       const request = await fetch(`/api/user/lectures/saved?userId=${user.id}&lectureId=${lectureId}`, {

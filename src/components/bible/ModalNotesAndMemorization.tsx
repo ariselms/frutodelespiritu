@@ -59,7 +59,6 @@ export default function ModalNotesAndMemorization({
 			setApiSelectedVerses(new Set());
 		}
 
-    // console.log("apiSelectedVerses", apiSelectedVerses)
 	}, [selectedVerses]);
 
 	return (

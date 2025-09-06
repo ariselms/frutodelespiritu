@@ -214,8 +214,6 @@ function getRandomBibleVerseWithReference() {
 // Example usage:
 const randomVerse = getRandomBibleVerseWithReference();
 
-console.log(randomVerse)
-
 export default function ArticleDetailRandomVerse() {
 	return (
 		<div className="mb-8 mx-4 lg:mx-0 mt-8 lg:mt-0 bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 p-4 rounded-2xl text-black dark:text-white">
