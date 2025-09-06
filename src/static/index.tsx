@@ -34,6 +34,7 @@ export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 
 export const FooterNavigation = [];
 
+// TODO: CLEAN UP THIS
 export const FetchEndpoints = Object.freeze({
 	Articles: {
 		Post: "/api/articles",
@@ -106,20 +107,6 @@ export const DataProvider: any = Object.freeze({
   Users: "users",
 })
 
-export const BibleIdsPublic: string[] = [
-  process.env.NEXT_PUBLIC_BIBLE_RV60,
-  process.env.NEXT_PUBLIC_BIBLE_PALABRA_DE_DIOS,
-  process.env.NEXT_PUBLIC_LA_SANTA_BIBLIA_ESPANOL,
-  process.env.NEXT_PUBLIC_VERSION_BIBLIA_LIBRE
-].filter((id): id is string => typeof id === "string" && !!id);
-
-export const BibleIdsPrivate: string[] = [
-	process.env.BIBLE_RV60,
-	process.env.BIBLE_PALABRA_DE_DIOS,
-	process.env.LA_SANTA_BIBLIA_ESPANOL,
-	process.env.VERSION_BIBLIA_LIBRE
-].filter((id): id is string => typeof id === "string" && !!id);
-
 // Determine the base URL based on the environment
 let baseUrl;
 
@@ -155,3 +142,20 @@ export const SeccionesBiblia = {
 	Apocalipsis:
 		"Libro profético que revela el fin de los tiempos y la victoria final de Dios."
 };
+
+export const SpanishBibleApiIds = {
+	LaBibliaEnEspanolSencillo: "spa_bes",
+	SantaBibliaLibreParaElMundo: "spa_blm",
+	BiblicaOpenNuevaBibliaViva: "spa_onbv",
+	PalabraDeDiosParaTi: "spa_pdt",
+	LaBibliaEnEspanolProfesional: "spa_bep",
+	ReinaValera1909: "spa_r09",
+	ReinaValera1602: "spa_v2p",
+	VersionBibliaLibre: "spa_vbl"
+};
+export const SpanishBibleApiIdsArray = Object.values(SpanishBibleApiIds);
+
+export const BibleCheckTypes = Object.freeze({
+	BibleTranslation: "bible-translation",
+	BibleBook: "bible-book"
+});

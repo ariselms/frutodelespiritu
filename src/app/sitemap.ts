@@ -1,9 +1,7 @@
 // app/sitemap.ts
 import { MetadataRoute } from "next";
 import { sql } from "@vercel/postgres";
-import { BibleIdsPrivate } from "@/static";
-import { BibleResponseType } from "@/models/bibleTypes";
-import { FetchEndpoints, serverBaseUrl } from "@/static";
+import { serverBaseUrl } from "@/static";
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -12,7 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     SELECT slug, updated_at FROM lectures
   `;
 
-	let RequestError = null;
 	let spanishBibles: any[] = [];
 
 	try {
@@ -29,8 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		}
 	} catch (error) {
 		console.error(error);
-	} finally {
-		RequestError = "Error al obtener la información de la Biblia";
 	}
 
   const staticRoutes = [
@@ -53,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			priority: 0.8
 		},
 		{
-			url: `${serverBaseUrl}/biblia/buscar`,
+			url: `${serverBaseUrl}/biblia/spa_bes/buscar`,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 0.8

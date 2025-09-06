@@ -1,7 +1,10 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import { BookPillBlock } from "@/components/bible/BookPill";
-import { SeccionesBiblia } from "@/static";
+import { BibleCheckTypes, SeccionesBiblia } from "@/static";
 import { BibleBookType } from "@/models/bibleTypes";
+import {checkIfParamsExistOrSetDefault} from "@/helpers/index";
+import { SpanishBibleApiIds } from "@/static";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({
 	params
@@ -63,7 +66,14 @@ export default async function BibleBooksPage({
 }: {
 	params: Promise<{ bibleId: string }>;
 }) {
-	const { bibleId } = await params;
+	let { bibleId } = await params;
+
+  const idExists = checkIfParamsExistOrSetDefault(BibleCheckTypes.BibleTranslation, bibleId);
+
+  if (!idExists) {
+    bibleId = SpanishBibleApiIds.ReinaValera1909
+    redirect(`/biblia/libros/${bibleId}`)
+  }
 
 	const bibleInfoRequest = await fetch(
 		`https://bible.helloao.org/api/${bibleId}/books.json`

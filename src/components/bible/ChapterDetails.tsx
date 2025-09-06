@@ -3,6 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import ModalNotesAndMemorization from "@/components/bible/ModalNotesAndMemorization";
 import { useParams } from "next/navigation";
+import { useAuthContext } from "@/context/authContext";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import {toast} from "react-toastify";
+import { serverBaseUrl } from "@/static";
 
 // Helper function to parse a "Book Chapter:Verse" string
 const parseSid = (sid: string) => {
@@ -17,9 +22,13 @@ const parseSid = (sid: string) => {
 };
 
 export function ChapterDetails({ ChapterContent }: any) {
+  const { user } = useAuthContext();
+  const router = useRouter();
+  const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
   const { bibleId, bookId, chapterId } = useParams();
+
 	// Effect for scrolling to a hash link (no changes needed here)
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -45,12 +54,18 @@ export function ChapterDetails({ ChapterContent }: any) {
 		const firstVerse = ChapterContent.find(
 			(item: any) => item.type === "verse"
 		);
+
 		if (!firstVerse) return;
 
-		const currentBook = firstVerse.book || "Unknown Book";
-		const currentChapter = firstVerse.chapter || "1";
+		const currentBook = bookId;
+		const currentChapter = chapterId;
 
 		const handleContainerClick = (event: MouseEvent) => {
+      if (!user) {
+        const redirectUrl = serverBaseUrl + pathname;
+        toast.warning("Debes iniciar sesión para guardar notas y listas de memorización.");
+        router.push(`/log?redirectUrl=${redirectUrl}`);
+      }
 			const verseSpan = (event.target as Element).closest("span.v");
 			if (!verseSpan) return;
 
@@ -123,13 +138,12 @@ export function ChapterDetails({ ChapterContent }: any) {
 		return () => {
 			content.removeEventListener("click", handleContainerClick);
 		};
-	}, [ChapterContent]);
+	}, [ChapterContent, user]);
 
 	// EFFECT 2: Apply visual styles (this is correct)
 	useEffect(() => {
 		const content = contentRef.current;
 		if (!content) return;
-
 		// Cleanup phase
 		content.querySelectorAll("mark.verse-highlight").forEach((markElement) => {
 			const parent = markElement.parentNode;
@@ -165,7 +179,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 				if (nodesToWrap.length > 0) {
 					const wrapper = document.createElement("mark");
 					wrapper.className =
-						"verse-highlight bg-orange-100 dark:bg-gray-900 rounded px-1";
+						"verse-highlight bg-orange-100 dark:bg-gray-900 dark:text-gray-100 rounded px-1";
 
 					parentP.insertBefore(wrapper, nodesToWrap[0]);
 					nodesToWrap.forEach((node) => wrapper.appendChild(node));
@@ -174,57 +188,70 @@ export function ChapterDetails({ ChapterContent }: any) {
 		}
 	}, [selectedVerses, ChapterContent]);
 
-	return (
-		<>
-			<div className="bible-chapter max-w-[80ch] mx-auto" ref={contentRef}>
-				{ChapterContent.map((content: any) => {
-					if (content.type === "heading") {
-						return (
-							<h2 key={content.content[0]} id={content.content[0]}>
-								{content.content[0]}
-							</h2>
-						);
-					}
-					if (content.type === "verse") {
-						return (
-							<p key={content.number}>
-								<span
-									className="v"
-									id={content.number}
-									data-number={content.number}>
-									{content.number}
-								</span>{" "}
-								{content.content.map((verse: any, index: number) => {
-									if (verse.text) {
-										return (
-											<span
-												className={`${
-													verse.wordsOfJesus
-														? "text-red-600 dark:text-red-400"
-														: ""
-												}`}
-												key={index}>
-												{verse.text}
-											</span>
-										);
-									}
-									if (verse.noteId === undefined) {
-										return <span key={index}>{verse}</span>;
-									}
-									return null;
-								})}
-							</p>
-						);
-					}
-					return null;
-				})}
-			</div>
-      {selectedVerses.size > 0 && (
-        <ModalNotesAndMemorization
-          selectedVerses={selectedVerses}
-          bibleId={String(bibleId)}
-        />
-      )}
-		</>
-	);
+return (
+	<>
+		<div className="bible-chapter max-w-[80ch] mx-auto" ref={contentRef}>
+			{ChapterContent.map((content: any) => {
+				if (content.type === "heading") {
+					return (
+						<h2 key={content.content[0]} id={content.content[0]}>
+							{content.content[0]}
+						</h2>
+					);
+				}
+				if (content.type === "verse") {
+					return (
+						<p key={content.number}>
+							<span
+								className="v"
+								id={content.number}
+								data-number={content.number}>
+								{content.number}
+							</span>{" "}
+							{content.content.map((verse: any, index: number) => {
+								// ✅ FIX 1: Specifically handle line break objects
+								// If the verse object is a line break, render a <br /> tag.
+								if (verse && verse.lineBreak) {
+									return <br key={index} />;
+								}
+
+								// Handle objects that contain a 'text' property
+								if (verse && verse.text) {
+									return (
+										<span
+											className={`${
+												verse.wordsOfJesus
+													? "mx-1 text-red-600 dark:text-red-400"
+													: ""
+											}`}
+											key={index}>
+											{verse.text}
+										</span>
+									);
+								}
+
+								// ✅ FIX 2: Handle simple strings
+								// Check if 'verse' is a string before trying to render it.
+								if (typeof verse === "string") {
+									return <span key={index}>{verse}</span>;
+								}
+
+								// Ignore any other types of objects (like those with noteId)
+								return null;
+							})}
+						</p>
+					);
+				}
+				return null;
+			})}
+		</div>
+		{selectedVerses.size > 0 && (
+			<ModalNotesAndMemorization
+				selectedVerses={selectedVerses}
+				bibleId={String(bibleId)}
+				chapterContent={ChapterContent}
+			/>
+		)}
+	</>
+);
 }

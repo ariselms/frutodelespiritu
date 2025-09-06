@@ -1,12 +1,23 @@
 import BibleHeaderSection from "@/components/layout/BibleSection";
 import Link from "next/link";
+import { SpanishBibleApiIds } from "@/static";
+import { redirect } from "next/navigation";
+import { checkIfParamsExistOrSetDefault } from "@/helpers";
+import { BibleCheckTypes } from "@/static";
 
 export default async function BibleChaptersPage({
 	params
 }: {
 	params: Promise<{ bibleId: string; bookId: string }>;
 }) {
-	const { bibleId, bookId } = await params;
+	let { bibleId, bookId } = await params;
+
+  const idExists = checkIfParamsExistOrSetDefault(BibleCheckTypes.BibleTranslation, bibleId);
+
+  if (!idExists) {
+    bibleId = SpanishBibleApiIds.ReinaValera1909
+    redirect(`/biblia/libros/capitulos/${bibleId}/${bookId}`)
+  }
 
 	const bibleInfoRequest = await fetch(
 		`https://bible.helloao.org/api/${bibleId}/books.json`
@@ -18,7 +29,13 @@ export default async function BibleChaptersPage({
 		(book: any) => book.id === bookId
 	)[0];
 
-	const BookChapters = Array.from(
+  let BookChapters;
+
+  if(!CurrentBook || CurrentBook === undefined) {
+    redirect(`/biblia/libros/${bibleId}`);
+  }
+
+	BookChapters = Array.from(
 		{ length: CurrentBook.numberOfChapters },
 		// Wrap the object in parentheses for an implicit return
 		(_, index) => {
@@ -29,6 +46,7 @@ export default async function BibleChaptersPage({
       }
     }
 	);
+
 
 	return (
 		<main>

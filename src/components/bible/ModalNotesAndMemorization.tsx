@@ -4,10 +4,12 @@ import AddNoteOrMemorization from "@/components/forms/AddNoteOrMemorization";
 
 export default function ModalNotesAndMemorization({
 	selectedVerses,
-	bibleId
+	bibleId,
+  chapterContent
 }: {
 	selectedVerses: Set<string>;
 	bibleId: string;
+  chapterContent: any
 }) {
 	const [isExtended, setIsExtended] = useState<string>("h-70 md:h-46 lg:h-50");
 	const [apiSelectedVerses, setApiSelectedVerses] = useState<Set<string>>(
@@ -16,35 +18,49 @@ export default function ModalNotesAndMemorization({
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [action, setAction] = useState<string | null>(null);
 
+	// A helper function to parse your verse strings.
+	// Make sure this is defined in your component or imported.
+	const parseSid = (sid: string) => {
+		if (!sid) return null; // Handle undefined or null input
+		const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
+		if (!match) return null;
+
+		return {
+			book: match[1],
+			chapter: parseInt(match[2], 10),
+			verse: parseInt(match[3], 10),
+			original: sid // Keep the original string for later
+		};
+	};
+
 	// get the selectedVerses and sort it from low to high, then set get the lowest and the highest and set it to the apiSelectedVerses
 	useEffect(() => {
-		// sort the selectedVerses
-		const sortedSelectedVerses = Array.from(selectedVerses).sort();
-		// select the lowest and the highest
-		const lowestSelectedVerse = sortedSelectedVerses[0];
-		const highestSelectedVerse =
-			sortedSelectedVerses[sortedSelectedVerses.length - 1];
-		// assign values to
-		setApiSelectedVerses(new Set([lowestSelectedVerse, highestSelectedVerse]));
+		// 1. Convert the Set to an array and parse each verse string.
+		const parsedVerses = Array.from(selectedVerses)
+			.map(parseSid)
+			.filter((p) => p !== null); // Remove any items that failed to parse
+
+		// 2. Sort the array numerically based on the 'verse' number.
+		parsedVerses.sort((a, b) => a.verse - b.verse);
+
+		// 3. If there are any sorted verses, get the lowest and highest.
+		if (parsedVerses.length > 0) {
+			const lowestSelectedVerse = parsedVerses[0].original;
+			const highestSelectedVerse =
+				parsedVerses[parsedVerses.length - 1].original;
+
+			// 4. Update the state with the correct lowest and highest verses.
+			// Use a new Set to avoid issues if the highest and lowest are the same.
+			setApiSelectedVerses(
+				new Set([lowestSelectedVerse, highestSelectedVerse])
+			);
+		} else {
+			// Handle the case where the selection is empty.
+			setApiSelectedVerses(new Set());
+		}
+
+    // console.log("apiSelectedVerses", apiSelectedVerses)
 	}, [selectedVerses]);
-
-	const callBibleNoteModal = (
-		action: string,
-		passageId: string[],
-		bibleId: string
-	) => {
-		if (action === BibleCrudActions.note) {
-			// console.log("Add note to bible passage")
-		}
-
-		if (action === BibleCrudActions.memorization) {
-			// console.log("Add memorization to bible passage")
-		}
-
-		console.log("action", action);
-		console.log("passageId", passageId);
-		console.log("bibleId", bibleId);
-	};
 
 	return (
 		<>
@@ -94,7 +110,7 @@ export default function ModalNotesAndMemorization({
 							</svg>
 						)}
 					</div>
-					<p className="text-sm font-bold px-2 pt-2 text-orange-700 flex items-start justify-start mb-0 text-left">
+					<p className="text-sm font-bold px-2 pt-2 text-orange-700 dark:text-gray-200 flex items-start justify-start mb-0 text-left">
 						<svg
 							className="w-5 h-5 me-2"
 							aria-hidden="true"
@@ -114,7 +130,7 @@ export default function ModalNotesAndMemorization({
 							memorización.
 						</span>
 					</p>
-					<p className="text-sm font-bold px-2 text-orange-700 flex items-start justify-start mb-3 text-left">
+					<p className="text-sm font-bold px-2 text-orange-700 dark:text-gray-200 flex items-start justify-start mb-3 text-left">
 						<svg
 							className="w-5 h-5 me-2"
 							aria-hidden="true"
@@ -136,10 +152,8 @@ export default function ModalNotesAndMemorization({
 					</p>
 					<div>
 						<p className="text-lg mb-1 uppercase">
-							Has seleccionado:{" "}
-							{Array.from(apiSelectedVerses).map((verse) => (
-								<span key={verse}>{verse} </span>
-							))}
+							Has seleccionado: {Array.from(apiSelectedVerses)[0]} -{" "}
+							{Array.from(apiSelectedVerses)[1]}
 						</p>
 						<div className="flex flex-col md:flex-row flex-wrap items-center justify-center mb-4">
 							<button
@@ -168,6 +182,7 @@ export default function ModalNotesAndMemorization({
 				openModal={openModal}
 				setOpenModal={setOpenModal}
 				action={action}
+        chapterContent={chapterContent}
 			/>
 		</>
 	);
