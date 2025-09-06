@@ -33,38 +33,63 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 	// TODO: Completar la versión de buscar de la biblia
 
-	return (
+return (
+	<>
 		<div className="bible-chapter max-w-[80ch] mx-auto" ref={contentRef}>
-			{ChapterContent.map((content: any, index: number) => {
+			{ChapterContent.map((content: any) => {
 				if (content.type === "heading") {
 					return (
 						<h2 key={content.content[0]} id={content.content[0]}>
 							{content.content[0]}
 						</h2>
 					);
-				} else if (content.type === "verse") {
+				}
+				if (content.type === "verse") {
 					return (
 						<p key={content.number}>
-							<span id={content.number} data-number={content.number}>
+							<span
+								className="v"
+								id={content.number}
+								data-number={content.number}>
 								{content.number}
 							</span>{" "}
 							{content.content.map((verse: any, index: number) => {
-								if (verse.text) {
+								// ✅ FIX 1: Specifically handle line break objects
+								// If the verse object is a line break, render a <br /> tag.
+								if (verse && verse.lineBreak) {
+									return <br key={index} />;
+								}
+
+								// Handle objects that contain a 'text' property
+								if (verse && verse.text) {
 									return (
 										<span
-											className={`${verse.wordsOfJesus && "jesus-said"}`}
+											className={`${
+												verse.wordsOfJesus
+													? "mx-1 text-red-600 dark:text-red-400"
+													: ""
+											}`}
 											key={index}>
 											{verse.text}
 										</span>
 									);
-								} else if (verse.noteId === undefined) {
+								}
+
+								// ✅ FIX 2: Handle simple strings
+								// Check if 'verse' is a string before trying to render it.
+								if (typeof verse === "string") {
 									return <span key={index}>{verse}</span>;
 								}
+
+								// Ignore any other types of objects (like those with noteId)
+								return null;
 							})}
 						</p>
 					);
 				}
+				return null;
 			})}
 		</div>
-	);
+	</>
+);
 }
