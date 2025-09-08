@@ -72,7 +72,7 @@ export default async function BibleBooksPage({
 	searchParams
 }: {
 	params: Promise<{ bibleId: string }>;
-	searchParams: { [key: string]: string | string[] | undefined };
+	searchParams: any ;
 }) {
 	let { bibleId } = await params;
 	let view = await searchParams;
