@@ -12,61 +12,6 @@ import { redirect } from "next/navigation";
 import BibleTranslationsViewComponent from "@/components/bible/BibleTranslationsView";
 import { CompactBooksView } from "@/components/bible/CompactBooksView";
 
-export async function generateMetadata({
-	params
-}: {
-	params: Promise<{ bibleId: string }>;
-}) {
-	const { bibleId } = await params;
-
-	const bibleInfoRequest = await fetch(
-		`https://bible.helloao.org/api/${bibleId}/books.json`
-	);
-
-	const bibleInfoResponse = await bibleInfoRequest.json();
-
-	const bibleInfo = await bibleInfoResponse.translation;
-
-	return {
-		title: `${bibleInfo?.name} | Fruto del Espíritu`,
-		description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-		keywords: [
-			"devocionales",
-			"cristiano",
-			"reflexiones",
-			"estudios bíblicos",
-			"biblias en espanol",
-			"la biblia en espanol",
-			"biblia en espanol",
-			"entiende la biblia",
-			"espiritu santo",
-			"aprende la biblia",
-			"libros de la biblia reina valera 1960 en orden",
-			"lista de libros de la biblia reina valera 1960",
-			"tres significados de mundo en la biblia",
-			"significados de mundo en la biblia"
-		].concat(bibleInfo?.title?.split(" ")),
-		robots: {
-			index: true,
-			follow: true
-		},
-		openGraph: {
-			title: `${bibleInfo?.name} | Fruto del Espíritu`,
-			description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
-			url: `https://frutodelespiritu.com/biblia/libros/${bibleId}`,
-			siteName: "Fruto del Espíritu",
-			type: "website",
-			locale: "es_US",
-			images: [
-				{
-					url: `${bibleInfo?.image_url}`,
-					alt: "Fruto del Espíritu"
-				}
-			]
-		}
-	};
-}
-
 export default async function BibleBooksPage({
 	params,
 	searchParams
@@ -131,6 +76,8 @@ export default async function BibleBooksPage({
 		revelaciones = books.slice(65, 66);
 	}
 
+  console.log("booksView", pentateuco);
+
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
@@ -143,7 +90,7 @@ export default async function BibleBooksPage({
 						bibleId={bibleId}
 					/>
 
-					{booksView === BibleTranslationsView.detailed && (
+					{booksView === BibleTranslationsView.detailed ? (
 						<>
 							<h1 className="text-2xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-600 dark:text-gray-300">
 								Antiguo Testamento
@@ -209,16 +156,66 @@ export default async function BibleBooksPage({
 								libros={revelaciones}
 							/>
 						</>
-					)}
-
-
-          {booksView === BibleTranslationsView.compact && (
-            <>
-              <CompactBooksView libros={books} />
-            </>
+					) : (
+            <CompactBooksView libros={books} />
           )}
 				</div>
 			</section>
 		</main>
 	);
+}
+
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ bibleId: string }>;
+}) {
+	const { bibleId } = await params;
+
+	const bibleInfoRequest = await fetch(
+		`https://bible.helloao.org/api/${bibleId}/books.json`
+	);
+
+	const bibleInfoResponse = await bibleInfoRequest.json();
+
+	const bibleInfo = await bibleInfoResponse.translation;
+
+	return {
+		title: `${bibleInfo?.name} | Fruto del Espíritu`,
+		description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+		keywords: [
+			"devocionales",
+			"cristiano",
+			"reflexiones",
+			"estudios bíblicos",
+			"biblias en espanol",
+			"la biblia en espanol",
+			"biblia en espanol",
+			"entiende la biblia",
+			"espiritu santo",
+			"aprende la biblia",
+			"libros de la biblia reina valera 1960 en orden",
+			"lista de libros de la biblia reina valera 1960",
+			"tres significados de mundo en la biblia",
+			"significados de mundo en la biblia"
+		].concat(bibleInfo?.title?.split(" ")),
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `${bibleInfo?.name} | Fruto del Espíritu`,
+			description: `Lee la biblia ${bibleInfo?.name} en el nuevo y rediseñado Fruto del Espíritu. Contamos con 8 versiones de la biblia en español. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.`,
+			url: `https://frutodelespiritu.com/biblia/libros/${bibleId}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: `${bibleInfo?.image_url}`,
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
 }
