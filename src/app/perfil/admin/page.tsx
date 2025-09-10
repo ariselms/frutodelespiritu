@@ -35,7 +35,7 @@ export default function AdminPage() {
 	// Once the effect has run and we've confirmed the user has the right role,
 	// render the correct admin panel.
 	if (user.role === "admin") {
-		return <div className={styles.ReactAdminContainer}>ADMINININ<ReactAdminSuper /></div>;
+		return <div className={styles.ReactAdminContainer}><ReactAdminSuper /></div>;
 	}
 
 	if (user.role === "editor") {
