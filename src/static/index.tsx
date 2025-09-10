@@ -159,3 +159,8 @@ export const BibleCheckTypes = Object.freeze({
 	BibleTranslation: "bible-translation",
 	BibleBook: "bible-book"
 });
+
+export const BibleTranslationsView = Object.freeze({
+  compact: "Compacta",
+  detailed: "Detallada"
+})

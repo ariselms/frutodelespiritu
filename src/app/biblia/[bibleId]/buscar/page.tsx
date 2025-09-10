@@ -1,6 +1,3 @@
-// TODO: use bible passages API to search for a specific bible passage
-// TODO: add the functionality to create cards to share on Social Media
-
 import { BibleSearch } from "@/components/bible/BibleSearch";
 import BibleHeaderSection from "@/components/layout/BibleSection";
 
@@ -10,7 +7,7 @@ export default async function BuscarBibliaPage({
 	params: Promise<{ bibleId: string }>;
 }) {
 
-  const {bibleId} = await params
+  const { bibleId } = await params
 
 	return (
 		<main>

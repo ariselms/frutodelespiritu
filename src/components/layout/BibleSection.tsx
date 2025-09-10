@@ -6,9 +6,8 @@ export default function BibleHeaderSection({
 	section: string;
 }) {
 	return (
-    <section className="pt-4 pb-8">
+    <section className="pb-4">
 			<div className="max-w-screen-xl px-4 py-0 mx-auto flex items-center justify-center">
-        <Image width={60} height={60} src="/images/bible.svg" alt="mockup" className="mr-2" />
         <h1 className="ml-2 max-w-2xl text-3xl font-extrabold tracking-tight leading-none  text-orange-700 dark:text-white">
           {section}
         </h1>
