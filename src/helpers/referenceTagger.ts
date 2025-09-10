@@ -248,11 +248,11 @@ export function generateBibleReferences() {
 const fullBibleArray = generateBibleReferences();
 
 // Log the total number of references and a sample from the beginning and end
-console.log(
-	`Successfully generated an array with ${fullBibleArray.length} references.`
-);
-console.log("\n--- Sample from the Beginning ---");
-console.log(fullBibleArray.slice(0, 10));
+// console.log(
+// 	`Successfully generated an array with ${fullBibleArray.length} references.`
+// );
+// console.log("\n--- Sample from the Beginning ---");
+// console.log(fullBibleArray.slice(0, 10));
 
-console.log("\n--- Sample from the End ---");
-console.log(fullBibleArray.slice(-10));
+// console.log("\n--- Sample from the End ---");
+// console.log(fullBibleArray.slice(-10));

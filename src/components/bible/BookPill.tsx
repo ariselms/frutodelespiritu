@@ -25,10 +25,10 @@ export function BookPillBlock({
 			<p className="max-w-3xl mx-auto text-center text-lg mb-4 text-gray-900 dark:text-gray-100">
 				{seccionDescription}
 			</p>
-			<div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 h-full max-w-3xl mx-auto gap-1.5">
+			<div className="p-4 grid grid-cols-2 sm:grid-cols-3 h-full max-w-3xl mx-auto gap-1.5">
 				{libros?.map((l: any) => (
 					<Link
-						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold px-8 py-4 rounded-2xl transition-all text-xs flex items-center justify-center"
+						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold px-8 py-4 rounded-2xl transition-all text-xs md:text-base flex items-center justify-center"
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
 						{l.name.toUpperCase()}

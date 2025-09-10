@@ -76,8 +76,6 @@ export default async function BibleBooksPage({
 		revelaciones = books.slice(65, 66);
 	}
 
-  console.log("booksView", pentateuco);
-
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">

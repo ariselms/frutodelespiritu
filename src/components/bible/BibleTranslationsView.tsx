@@ -17,7 +17,6 @@ export default function BibleTranslationsViewComponent({
 	const [view, setView] = useState(booksView);
 
   useEffect(() => {
-		console.log("booksView", view);
 
 		if (view === translations.detailed) {
 			router.push(
