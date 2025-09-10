@@ -10,7 +10,7 @@ export function CompactBooksView({
 			<div className="p-4 grid grid-cols-3 sm:grid-cols-6 md:grid-cols-10 h-full max-w-3xl mx-auto gap-1.5">
 				{libros?.map((l: any) => (
 					<Link
-						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold px-8 py-4 rounded-2xl flex items-center justify-center"
+						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold px-8 py-4 rounded-2xl flex items-center justify-center"
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
 						{l.id}
