@@ -29,7 +29,7 @@ export default function BibleHeader() {
 						src="/images/animated/static-bible-books.png"
 						className="w-8 h-8 mr-0"
 					/>
-					Versiones
+					Traducciones
 				</Link>
 				{bibleId && (
 					<Link
