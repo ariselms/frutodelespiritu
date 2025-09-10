@@ -32,7 +32,7 @@ export default function BibleTranslationsViewComponent({
 	}, [view]);
 
 	return (
-		<div className="flex items-center justify-center">
+		<div className="flex items-center justify-center mb-8">
 			<ButtonGroup>
 				{/* add the translations in a select input */}
 				<Button

@@ -90,73 +90,77 @@ export default async function BibleBooksPage({
 
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<h1 className="text-2xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-600 dark:text-gray-300">
-								Antiguo Testamento
-							</h1>
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl ">
+								<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-500 dark:text-gray-300">
+									Antiguo Testamento
+								</h3>
 
-							<BookPillBlock
-								seccion="Pentateuco"
-								seccionDescription={SeccionesBiblia.Pentateuco}
-								seccionImgUrl="/images/bible-icons/pentateucos.png"
-								libros={pentateuco}
-							/>
+								<BookPillBlock
+									seccion="Pentateuco"
+									seccionDescription={SeccionesBiblia.Pentateuco}
+									seccionImgUrl="/images/bible-icons/pentateucos.png"
+									libros={pentateuco}
+								/>
 
-							<BookPillBlock
-								seccion="Históricos"
-								seccionDescription={SeccionesBiblia.LibrosHistoricos}
-								seccionImgUrl="/images/bible-icons/historia.png"
-								libros={historicos}
-							/>
+								<BookPillBlock
+									seccion="Históricos"
+									seccionDescription={SeccionesBiblia.LibrosHistoricos}
+									seccionImgUrl="/images/bible-icons/historia.png"
+									libros={historicos}
+								/>
 
-							<BookPillBlock
-								seccion="Poeticos"
-								seccionDescription={SeccionesBiblia.LibrosPoeticos}
-								seccionImgUrl="/images/bible-icons/poeticos.png"
-								libros={poetiocs}
-							/>
+								<BookPillBlock
+									seccion="Poeticos"
+									seccionDescription={SeccionesBiblia.LibrosPoeticos}
+									seccionImgUrl="/images/bible-icons/poeticos.png"
+									libros={poetiocs}
+								/>
 
-							<BookPillBlock
-								seccion="Profetas"
-								seccionDescription={SeccionesBiblia.LibrosProfeticos}
-								seccionImgUrl="/images/bible-icons/profetas.png"
-								libros={profetas}
-							/>
+								<BookPillBlock
+									seccion="Profetas"
+									seccionDescription={SeccionesBiblia.LibrosProfeticos}
+									seccionImgUrl="/images/bible-icons/profetas.png"
+									libros={profetas}
+								/>
+							</div>
 
-							<h1 className="text-2xl lg:text-3xl font-bold text-center mt-16 mb-8 text-gray-600 dark:text-gray-300">
-								Nuevo Testamento
-							</h1>
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl mt-4">
+								<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-500 dark:text-gray-300">
+									Nuevo Testamento
+								</h3>
 
-							<BookPillBlock
-								seccion="Evangelios"
-								seccionDescription={SeccionesBiblia.Evangelios}
-								seccionImgUrl="/images/bible-icons/evangelios.png"
-								libros={evangelios}
-							/>
+								<BookPillBlock
+									seccion="Evangelios"
+									seccionDescription={SeccionesBiblia.Evangelios}
+									seccionImgUrl="/images/bible-icons/evangelios.png"
+									libros={evangelios}
+								/>
 
-							<BookPillBlock
-								seccion="Historia"
-								seccionDescription={SeccionesBiblia.HistoriaNuevoTestamento}
-								seccionImgUrl="/images/bible-icons/historia.png"
-								libros={historico}
-							/>
+								<BookPillBlock
+									seccion="Historia"
+									seccionDescription={SeccionesBiblia.HistoriaNuevoTestamento}
+									seccionImgUrl="/images/bible-icons/historia.png"
+									libros={historico}
+								/>
 
-							<BookPillBlock
-								seccion="Cartas"
-								seccionDescription={SeccionesBiblia.CartasApostolicas}
-								seccionImgUrl="/images/bible-icons/cartas.png"
-								libros={cartas}
-							/>
+								<BookPillBlock
+									seccion="Cartas"
+									seccionDescription={SeccionesBiblia.CartasApostolicas}
+									seccionImgUrl="/images/bible-icons/cartas.png"
+									libros={cartas}
+								/>
 
-							<BookPillBlock
-								seccion="Revelaciones"
-								seccionDescription={SeccionesBiblia.Apocalipsis}
-								seccionImgUrl="/images/bible-icons/revelaciones.png"
-								libros={revelaciones}
-							/>
+								<BookPillBlock
+									seccion="Revelaciones"
+									seccionDescription={SeccionesBiblia.Apocalipsis}
+									seccionImgUrl="/images/bible-icons/revelaciones.png"
+									libros={revelaciones}
+								/>
+							</div>
 						</>
 					) : (
-            <CompactBooksView libros={books} />
-          )}
+						<CompactBooksView libros={books} />
+					)}
 				</div>
 			</section>
 		</main>

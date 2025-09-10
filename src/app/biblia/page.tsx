@@ -26,7 +26,7 @@ export default async function BibliaPage() {
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<BibleHeaderSection section="La Santa Biblia" />
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
 						{spanishBibles?.map((bible: BibleDataType) => (
 							<SpanishBibleItem key={bible.id} bible={bible} />
 						))}
