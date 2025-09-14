@@ -19,3 +19,15 @@ export const checkIfParamsExistOrSetDefault = (checkType: string, paramId: strin
   }
 
 }
+
+export const parseSid = (sid: string) => {
+	const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
+	if (!match) return null;
+
+	return {
+		book: match[1],
+		chapter: parseInt(match[2], 10),
+		verse: parseInt(match[3], 10),
+    original: sid
+	};
+};

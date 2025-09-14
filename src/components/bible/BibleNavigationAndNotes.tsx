@@ -31,7 +31,7 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
 							clipRule="evenodd"
 						/>
 					</svg>
-          {prevParams[1]} {prevParams[2]}
+					{prevParams[2]}
 				</Link>
 			)}
 
@@ -39,7 +39,7 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${nextParams[0]}/${nextParams[1]}/${nextParams[2]}`}
 					className="rounded-2xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all">
-					{nextParams[1]} {nextParams[2]}
+					{nextParams[2]}
 					<svg
 						className="w-6 h-6 text-orange-700 dark:text-white"
 						aria-hidden="true"

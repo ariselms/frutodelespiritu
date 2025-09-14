@@ -77,11 +77,21 @@ html.dark .bible-chapter {
 .bible-chapter h4,
 .bible-chapter h5,
 .bible-chapter h6 {
-  margin-top: 0;
+  margin-top: 0.5em;
   margin-bottom: 0.5em;
   font-weight: 700;
   line-height: 1.2;
   color: var(--rich-text-color-heading); /* Use variable */
+}
+
+/* Apply the same as above but not to the first element */
+.bible-chapter h1:first-of-type,
+.bible-chapter h2:first-of-type,
+.bible-chapter h3:first-of-type,
+.bible-chapter h4:first-of-type,
+.bible-chapter h5:first-of-type,
+.bible-chapter h6:first-of-type {
+  margin-top: 0;
 }
 
 .bible-chapter h1 {
