@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@vercel/analytics": "^1.5.0",
     "@vercel/blob": "^1.1.1",
     "@vercel/postgres": "^0.10.0",
     "bible-kit": "^0.0.3",
