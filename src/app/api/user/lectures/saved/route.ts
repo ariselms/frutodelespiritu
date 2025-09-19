@@ -16,6 +16,8 @@ export async function GET(request: Request) {
       ORDER BY lectures.created_at DESC
     `;
 
+    console.log("User lectures: ", userLectures);
+
 		if (userLectures.length > 0) {
 			return NextResponse.json(
 				{
@@ -29,11 +31,11 @@ export async function GET(request: Request) {
 
     return NextResponse.json(
       {
-        success: false,
-        message: "No se encontraron lecturas.",
-        data: null
+        success: true,
+        message: "No hay lecturas guardadas por este usuario.",
+        data: []
       },
-      { status: 404 }
+      { status: 200 }
     );
 
 	} catch (error) {

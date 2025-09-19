@@ -15,7 +15,7 @@ export default function ProfileSection({
 	isProfile?: boolean
 }) {
 	return (
-		<section className="py-16 px-4 xl:px-0">
+		<section className="py-8 px-4 xl:px-0 bg-orange-50 dark:bg-gray-900 border-t border-orange-100 dark:border-t  dark:border-t-gray-700">
 			<div className="container mx-auto flex flex-col items-start lg:flex-row">
 				<div className="flex-2 p-2">
 					<div className="mb-4">
@@ -39,7 +39,7 @@ export default function ProfileSection({
 				</div>
 				<div className="flex-1 w-full p-2">
 					{isProfile && (
-						<div className="flex flex-col justify-between rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 w-fit-content mt-8 lg:mt-0">
+						<div className="flex flex-col justify-between rounded-2xl p-4 bg-orange-50 dark:bg-gray-700 border border-orange-100 dark:border-gray-600 w-fit-content mt-8 lg:mt-0">
 							<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 								Edita tu perfil
 							</h5>

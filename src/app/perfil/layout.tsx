@@ -22,11 +22,11 @@ export default async function ProfileLayout({
       WHERE session_token = ${value}
       AND session_expiration > NOW()`;
 
-	user = userDb[0];
+  if (!userDb[0]) {
+    redirect("/log");
+  }
 
-	if (!user) {
-		redirect("/log");
-	}
+	user = userDb[0];
 
 	if (user.session_expiration < new Date()) {
 		redirect("/log");

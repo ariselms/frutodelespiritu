@@ -32,7 +32,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-6 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border-2">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-6 bg-orange-50 dark:bg-gray-700 border-orange-100 dark:border-gray-600 rounded-2xl border-2">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"

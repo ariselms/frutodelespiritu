@@ -51,7 +51,7 @@ export async function GET(request: Request) {
       memory_list.by_user_id = ${Number(userId)}
   `;
 
-	console.log(userMemorizationLists);
+	console.log("Server: ", userMemorizationLists);
 
 	return NextResponse.json(
 		{
@@ -78,10 +78,15 @@ export async function POST(request: Request) {
 		);
 	}
 
+  const { searchParams } = new URL(request.url);
+
+  const userId = Number(searchParams.get("userId"));
+
 	try {
 		const body = await request.json();
 
 		const { selectedMemorizationList, memorizationData } = body;
+
 		const {
 			by_user_id,
 			bible_id,
@@ -96,24 +101,23 @@ export async function POST(request: Request) {
 
 		// check if the memorization list exist
 		if (selectedMemorizationList !== "") {
-
-      // get the memorization list id
-      const { rows: memorizationList } = await sql`
+			// get the memorization list id
+			const { rows: memorizationList } = await sql`
         SELECT * FROM memory_list
         WHERE
           name = ${selectedMemorizationList}
       `;
 
-      if (memorizationList.length === 0) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "La lista de memorización no existe.",
-            data: null
-          },
-          { status: 400 }
-        );
-      }
+			if (memorizationList.length === 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "La lista de memorización no existe.",
+						data: null
+					},
+					{ status: 400 }
+				);
+			}
 
 			// save memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
@@ -128,19 +132,19 @@ export async function POST(request: Request) {
           ${passage_text}) RETURNING *
       `;
 
-      if(rowCount === 0) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Error al guardar el item de memorización.",
-            data: null
-          },
-          { status: 500 }
-        );
-      }
+			if (rowCount === 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "Error al guardar el item de memorización.",
+						data: null
+					},
+					{ status: 500 }
+				);
+			}
 
-      // insert memory_list_item_join relation
-      const { rows: newMemoryListItemJoin, rowCount: joinRowCount } = await sql`
+			// insert memory_list_item_join relation
+			const { rows: newMemoryListItemJoin, rowCount: joinRowCount } = await sql`
         INSERT INTO memory_list_item_join (memory_list_id, memory_item_id)
         VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id}) RETURNING *
       `;
@@ -153,18 +157,37 @@ export async function POST(request: Request) {
 				},
 				{ status: 200 }
 			);
-		} else if (name && description) {
+		}
+
+		if (name !== "" && description !== "") {
+			console.log(by_user_id, name, description);
+
 			// if memorization list does not exist, create a new list
 			const { rows: newMemorization, rowCount } = await sql`
         INSERT INTO memory_list (by_user_id, name, description)
-        VALUES (${by_user_id}, ${name}, ${description}) RETURNING *
+        VALUES (${Number(userId)}, ${name}, ${description})
       `;
+
+			console.log("Server New Memorization: ", newMemorization);
+
+			if (rowCount === 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "Error al crear la lista de memorización.",
+						data: null
+					},
+					{ status: 500 }
+				);
+			}
+
+			console.log("Server: ", newMemorization);
 
 			return NextResponse.json(
 				{
 					success: true,
 					message: "Memorización creada correctamente.",
-					data: null
+					data: newMemorization
 				},
 				{ status: 200 }
 			);
@@ -172,16 +195,19 @@ export async function POST(request: Request) {
 	} catch (error) {
 		console.error("Error creating memorization:", error);
 
-    if(error instanceof Error && error.message.includes("duplicate key value")) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Ya has guardado este pasaje bíblico para memorizar.",
-          data: null
-        },
-        { status: 400 }
-      );
-    }
+		if (
+			error instanceof Error &&
+			error.message.includes("duplicate key value")
+		) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Ya has guardado este pasaje bíblico para memorizar.",
+					data: null
+				},
+				{ status: 400 }
+			);
+		}
 
 		return NextResponse.json(
 			{

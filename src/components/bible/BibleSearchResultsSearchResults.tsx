@@ -36,7 +36,7 @@ export const SearchResultItem = ({ result, bibleId }: { result: any; bibleId: st
   const verseId = bibleVerseParts[2];
 
 	return (
-		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-300 dark:border-gray-600 rounded-2xl p-4 flex flex-col justify-between">
+		<div className="bg-orange-50 dark:bg-gray-700 border border-orange-100 dark:border-gray-600 rounded-2xl p-4 flex flex-col justify-between">
 			<div>
 				<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
 					{result.reference}
@@ -45,7 +45,7 @@ export const SearchResultItem = ({ result, bibleId }: { result: any; bibleId: st
 			</div>
 			<Link
 				href={`/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}#${verseId}`}
-				className="inline-block text-center rounded-2xl text-orange-700 dark:text-gray-100 bg-orange-200 dark:bg-gray-800 px-4 py-2 border border-orange-300 dark:border-gray-600 mt-8">
+				className="inline-block text-center rounded-2xl text-orange-700 dark:text-gray-100 bg-orange-200 dark:bg-gray-800 px-4 py-2 border border-orange-100 dark:border-gray-600 mt-8">
 				Leer contexto
 			</Link>
 		</div>

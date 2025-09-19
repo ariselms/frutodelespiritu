@@ -26,22 +26,21 @@ export default function UserLecturesPage() {
 
   const [idForDelete, setIdForDelete] = useState<number | null>(null);
 
-
   const fetchUserLectures = async () => {
 
     setLoading(true);
 
     try {
 
-      const request = await fetch(`/api/user/lectures/saved?userId=${user.id}`);
+      const requestUserLectures = await fetch(`/api/user/lectures/saved?userId=${user.id}`);
 
-      if (!request.ok) {
+      const responseUserLectures = await requestUserLectures.json();
+
+      if (!responseUserLectures.success) {
         throw new Error("Failed to fetch user lectures");
       }
 
-      const response = await request.json();
-
-      setUserLectures(response.data);
+      setUserLectures(responseUserLectures.data);
 
     } catch (error) {
 
