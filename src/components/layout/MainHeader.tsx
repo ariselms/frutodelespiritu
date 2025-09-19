@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarCollapse,
-  NavbarLink,
-  NavbarToggle,
+	Navbar,
+	NavbarBrand,
+	NavbarCollapse,
+	NavbarLink,
+	NavbarToggle
 } from "flowbite-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,21 +19,19 @@ import { useAuthContext } from "@/context/authContext";
 import { useEffect } from "react";
 
 export default function MainHeader() {
-  const pathname = usePathname();
+	const pathname = usePathname();
 
-  const {user, persistUser} = useAuthContext();
+	const { user, persistUser } = useAuthContext();
 
-  useEffect(() => {
+	useEffect(() => {
+		persistUser();
+	}, [pathname]);
 
-    persistUser();
-
-  }, [pathname]);
-
-  return (
+	return (
 		<Navbar
 			theme={OrangeLinkTheme}
 			fluid
-			className="relative bg-orange-50 py-4 border-b border-orange-300 dark:bg-gray-900 dark:border-gray-700 z-20">
+			className="relative bg-orange-50 py-4 border-b border-orange-100 dark:bg-gray-900 dark:border-gray-700 z-20">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
@@ -46,8 +44,11 @@ export default function MainHeader() {
 					className={`${
 						isActive(pathname, "/") &&
 						"text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-500"
-					} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
-					Fruto del Espíritu
+					} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold flex items-center ms-`}>
+					<span>Fruto del Espíritu </span>
+					<span className="text-xs inline-block bg-orange-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
+						Beta
+					</span>
 				</span>
 			</NavbarBrand>
 			<NavbarToggle />

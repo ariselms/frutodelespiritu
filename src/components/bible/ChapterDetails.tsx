@@ -192,7 +192,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 	return (
 		<>
-			<div className="bible-chapter max-w-[80ch] mx-auto" ref={contentRef}>
+			<div className="bible-chapter max-w-[80ch] mx-auto my-4" ref={contentRef}>
 				{ChapterContent.map((content: any) => {
 					if (content.type === "heading") {
 						return (

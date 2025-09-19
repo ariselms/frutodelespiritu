@@ -44,7 +44,7 @@ export default async function SingleChapterPage({
 						</svg>
 						Capítulos de {Book?.name}
 					</Link>
-					<BibleHeaderSection section={`${Book?.name} ${Chapter?.number}`} />
+					{/* <BibleHeaderSection section={`${Book?.name} ${Chapter?.number}`} /> */}
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 					<ChapterDetails ChapterContent={Chapter.content} />
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
