@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarCollapse,
-  NavbarLink,
-  NavbarToggle,
+	Navbar,
+	NavbarBrand,
+	NavbarCollapse,
+	NavbarLink,
+	NavbarToggle
 } from "flowbite-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,17 +19,15 @@ import { useAuthContext } from "@/context/authContext";
 import { useEffect } from "react";
 
 export default function MainHeader() {
-  const pathname = usePathname();
+	const pathname = usePathname();
 
-  const {user, persistUser} = useAuthContext();
+	const { user, persistUser } = useAuthContext();
 
-  useEffect(() => {
+	useEffect(() => {
+		persistUser();
+	}, [pathname]);
 
-    persistUser();
-
-  }, [pathname]);
-
-  return (
+	return (
 		<Navbar
 			theme={OrangeLinkTheme}
 			fluid
