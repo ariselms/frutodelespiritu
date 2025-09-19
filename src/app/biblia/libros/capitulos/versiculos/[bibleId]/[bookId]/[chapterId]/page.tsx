@@ -1,4 +1,3 @@
-import BibleHeaderSection from "@/components/layout/BibleSection";
 import Link from "next/link";
 import "./bible-chapter.css";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
