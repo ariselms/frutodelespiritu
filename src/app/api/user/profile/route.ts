@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { put } from "@vercel/blob";
 
-
 export async function POST(request: Request): Promise<NextResponse> {
 
 	const { searchParams } = new URL(request.url);
