@@ -90,7 +90,7 @@ export default async function BibleBooksPage({
 
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-100 dark:border-gray-600 rounded-2xl ">
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-200 dark:border-gray-600 rounded-2xl ">
                 <BibleTestament era="Antiguo" />
 
 								<BookPillBlock
@@ -122,7 +122,7 @@ export default async function BibleBooksPage({
 								/>
 							</div>
 
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-100 dark:border-gray-600 rounded-2xl mt-4">
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-200 dark:border-gray-600 rounded-2xl mt-4">
 								<BibleTestament era="Nuevo" />
 
 								<BookPillBlock

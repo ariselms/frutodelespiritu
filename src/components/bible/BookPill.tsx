@@ -9,7 +9,7 @@ export function BookPillBlock({
 }: BookPillBlockProps) {
 
 	return (
-		<div className="mb-4 border-b border-orange-100 dark:border-gray-600 last:border-b-0 pt-3 pb-4">
+		<div className="mb-4 border-b border-orange-200 dark:border-gray-600 last:border-b-0 pt-3 pb-4">
 			<div className="flex items-center justify-center mb-2">
 				<Image
 					alt={seccion}
