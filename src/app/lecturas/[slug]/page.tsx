@@ -7,6 +7,7 @@ import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
 import {ShareButtons} from "@/components/ShareButtons";
 import { SaveLecturebutton } from "@/components/SaveLectureButton";
+import ReferenceTagger from "@/components/bible/ReferenceTagger";
 
 export async function generateMetadata({
 	params
@@ -122,11 +123,15 @@ export default async function SingleLecturePage({
 					</p>
 				</div>
 			</header>
-			<div className="rich-text-content flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
-				<div
-					className="pr-8 flex-2"
-					dangerouslySetInnerHTML={{ __html: FetchedDetailedArticled.content }}
-				/>
+			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-800 shadow shadow-orange-300 dark:shadow-gray-700 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
+					<div className="rich-text-content">
+						<div
+							className="pr-8 flex-2"
+							dangerouslySetInnerHTML={{
+								__html: FetchedDetailedArticled.content
+							}}
+						/>
+					</div>
 				<aside
 					className="hidden lg:block flex-1"
 					aria-labelledby="sidebar-label">
@@ -136,16 +141,12 @@ export default async function SingleLecturePage({
 						</h3>
 						<ArticleDetailRandomVerse />
 						<ShareButtons />
-						<SaveLecturebutton
-              lectureId={FetchedDetailedArticled.id}
-            />
+						<SaveLecturebutton lectureId={FetchedDetailedArticled.id} />
 					</div>
 				</aside>
 			</div>
 			<div className="lg:hidden py-8 lg:py-16 mt-0 lg:mt-32">
-				<SaveLecturebutton
-          lectureId={FetchedDetailedArticled.id}
-        />
+				<SaveLecturebutton lectureId={FetchedDetailedArticled.id} />
 				<ShareButtons />
 				<ArticleDetailRandomVerse />
 			</div>
