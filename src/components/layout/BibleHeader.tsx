@@ -14,8 +14,13 @@ export default function BibleHeader() {
 	const { bibleId, bookId, chapterId } = params;
 
 	return (
+<<<<<<< HEAD
 		<header className="bg-orange-50 dark:bg-gray-900 border-b-4 dark:border-b-3 border-orange-700 dark:border-gray-800">
 			<nav className="max-w-5xl mx-auto flex items-end justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-orange-50 dark:text-gray-300 overflow-auto">
+=======
+		<header className="max-w-5xl mx-auto flex items-end justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-orange-50 dark:text-gray-300 overflow-auto">
+			<nav className="max-w-5xl mx-auto flex items-end justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-orange-50 dark:text-gray-300">
+>>>>>>> preview
 				<Link
 					className={`${
 						isActive(pathname, "/biblia") &&
