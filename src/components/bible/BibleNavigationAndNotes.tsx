@@ -11,8 +11,6 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
 	const prevParams = cleanedPrevPath && cleanedPrevPath.split("/");
   const nextParams = cleanedNextPath && cleanedNextPath.split("/");
 
-  console.log(BibleChapterData)
-
 	return (
 		<nav className="flex items-center justify-between mb-4 xl:-mb-10">
 			{previousChapterParams && (

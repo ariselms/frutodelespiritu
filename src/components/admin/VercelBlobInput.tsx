@@ -23,7 +23,7 @@ export const VercelBlobInput = (props: {
 		try {
 			const newBlob = await upload(file.name, file, {
 				access: "public",
-				handleUploadUrl: "/api/admin/upload" // The new API route you just created
+				handleUploadUrl: "/api/admin/upload", // The new API route you just created
 			});
 
 			// Update the form value with the final URL
