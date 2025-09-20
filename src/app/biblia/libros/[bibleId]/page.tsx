@@ -17,7 +17,7 @@ export default async function BibleBooksPage({
 	searchParams
 }: {
 	params: Promise<{ bibleId: string }>;
-	searchParams: any ;
+	searchParams: any;
 }) {
 	let { bibleId } = await params;
 	let view = await searchParams;
@@ -90,10 +90,8 @@ export default async function BibleBooksPage({
 
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl ">
-								<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-500 dark:text-gray-300">
-									Antiguo Testamento
-								</h3>
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-100 dark:border-gray-600 rounded-2xl ">
+								<BibleTestament era="Antiguo" />
 
 								<BookPillBlock
 									seccion="Pentateuco"
@@ -124,10 +122,8 @@ export default async function BibleBooksPage({
 								/>
 							</div>
 
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-300 dark:border-gray-600 rounded-2xl mt-4">
-								<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-gray-500 dark:text-gray-300">
-									Nuevo Testamento
-								</h3>
+							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-100 dark:border-gray-600 rounded-2xl mt-4">
+								<BibleTestament era="Nuevo" />
 
 								<BookPillBlock
 									seccion="Evangelios"
@@ -221,3 +217,11 @@ export async function generateMetadata({
 		}
 	};
 }
+
+const BibleTestament = ({ era }: { era: string }) => {
+	return (
+		<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-orange-950 dark:text-white underline">
+			{era} Testamento
+		</h3>
+	);
+};
