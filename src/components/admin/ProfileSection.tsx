@@ -2,20 +2,16 @@ import { UserProfileForm } from "@/components/forms/UserProfileForm";
 import Image from "next/image";
 
 export default function ProfileSection({
-  imageUrl,
 	sectionName,
-	sectionEmail,
 	sectionDescription,
 	isProfile = false
 }: {
-  imageUrl?: string;
 	sectionName: string;
-	sectionEmail?: string;
 	sectionDescription: string;
-	isProfile?: boolean
+	isProfile?: boolean;
 }) {
 	return (
-		<section className="py-8 px-4 xl:px-0 bg-orange-50 dark:bg-gray-900 border-t border-orange-100 dark:border-t  dark:border-t-gray-700">
+		<section className="py-8 px-4 xl:px-0">
 			<div className="container mx-auto flex flex-col items-start lg:flex-row">
 				<div className="w-full md:w-6/12 p-2">
 					{isProfile && (
@@ -29,6 +25,8 @@ export default function ProfileSection({
 							<UserProfileForm />
 						</div>
 					)}
+          <h1 className="text-2xl font-extrabold tracking-tight leading-none md:text-3xl text-orange-700 dark:text-white">{sectionName}</h1>
+          <p className="max-w-[80ch] text-gray-700 dark:text-gray-200">{sectionDescription}</p>
 				</div>
 			</div>
 		</section>

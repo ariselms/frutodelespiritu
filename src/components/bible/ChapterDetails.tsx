@@ -34,11 +34,9 @@ export function ChapterDetails({ ChapterContent }: any) {
 		}, 100);
 		return () => clearTimeout(timer);
 	}, [ChapterContent]);
-
-	// EFFECT 1: Set up the delegated event listener with corrected selection logic
-	useEffect(() => {
-		const content = contentRef.current;
-		if (!content || !ChapterContent || ChapterContent.length === 0) return;
+	// useEffect(() => {
+	// 	const content = contentRef.current;
+	// 	if (!content || !ChapterContent || ChapterContent.length === 0) return;
 
 		const firstVerse = ChapterContent.find(
 			(item: any) => item.type === "verse"

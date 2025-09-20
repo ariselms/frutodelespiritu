@@ -76,20 +76,6 @@ export const FetchEndpoints = Object.freeze({
 		DeleteSession: "/api/auth",
 		PersistUser: "/api/auth"
 	},
-	BibleApiBase: {
-		GetSpanishBibles: (bibleId: string) =>
-			`https://api.scripture.api.bible/v1/bibles/${bibleId}`,
-		GetSpanishBibleBooks: (bibleId: string) =>
-			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books`,
-		GetSpanishBookInfo: (bibleId: string, bookId: string) =>
-			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}`,
-		GetSpanishBookChapters: (bibleId: string, bookId: string) =>
-			`https://api.scripture.api.bible/v1/bibles/${bibleId}/books/${bookId}/chapters`,
-		GetSpansihBookChapterVerses: (bibleId: string, chapterId: string) =>
-			`https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`,
-		SearchBibleVerses: (bibleKeywordSearch: string) =>
-			`https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`
-	}
 });
 
 // Create a reusable type from the object's shape using `typeof`
