@@ -1,26 +1,30 @@
-import { NavigationItemType, NavigationItemTypeWithAuth } from "@/models/navigationTypes";
-
+import {
+	NavigationItemType,
+	NavigationItemTypeWithAuth
+} from "@/models/navigationTypes";
 export const MainNavigation: NavigationItemType[] = [
-  { name: 'Lecturas', href: '/lecturas' },
-  { name: 'Biblia', href: '/biblia' },
+	{ name: "Lecturas", href: "/lecturas" },
+	{ name: "Biblia", href: "/biblia" }
 ];
-
 export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 	{
 		name: "Biblia",
-		description: "Administra tus notas y documentos relacionados con la Biblia. Esta función estará disponible pronto.",
+		description:
+			"Administra tus notas y documentos relacionados con la Biblia. Esta función estará disponible pronto.",
 		href: "/perfil/biblia",
 		requiresAdmin: false
 	},
 	{
 		name: "Lecturas",
-		description: "Administra tus lecturas guardadas, así como tus recortes y notas relacionadas a las lecturas. Esta función estará muy pronto.",
+		description:
+			"Administra tus lecturas guardadas, así como tus recortes y notas relacionadas a las lecturas. Esta función estará muy pronto.",
 		href: "/perfil/lecturas",
 		requiresAdmin: false
 	},
 	{
 		name: "Órdenes",
-		description: "Administra tus órdenes y revisa tu historial de compras. Esta función estará disponible en el 2026.",
+		description:
+			"Administra tus órdenes y revisa tu historial de compras. Esta función estará disponible en el 2026.",
 		href: "/perfil/ordenes",
 		requiresAdmin: false
 	},
@@ -31,9 +35,7 @@ export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 		requiresAdmin: true
 	}
 ];
-
 export const FooterNavigation = [];
-
 // TODO: CLEAN UP THIS
 export const FetchEndpoints = Object.freeze({
 	Articles: {
@@ -69,47 +71,42 @@ export const FetchEndpoints = Object.freeze({
 		GetByName: (name: string) => `/api/categories/name/${name}`
 	},
 	Log: {
-		Post: "/api/log",
+		Post: "/api/log"
 	},
 	Auth: {
 		Post: "/api/auth",
 		DeleteSession: "/api/auth",
 		PersistUser: "/api/auth"
 	},
+	BibleApiBase: {
+		SearchBibleVerses: (bibleKeywordSearch: string) =>
+			`https://api.scripture.api.bible/v1/bibles/592420522e16049f-01/search?query=${bibleKeywordSearch}&limit=20`
+	}
 });
-
 // Create a reusable type from the object's shape using `typeof`
 export type FetchEndpointsType = typeof FetchEndpoints;
-
 export const BibleCrudActions = Object.freeze({
 	note: "note",
 	memorization: "memorization"
 });
-
 export const DataProvider: any = Object.freeze({
-  Lectures: "lectures",
-  Articles: "articles",
-  Categories: "categories",
-  Users: "users",
-})
-
+	Lectures: "lectures",
+	Articles: "articles",
+	Categories: "categories",
+	Users: "users"
+});
 // Determine the base URL based on the environment
 let baseUrl;
-
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === "development") {
 	baseUrl = "http://localhost:3000";
 }
-
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
 	baseUrl = "https://frutodelespiritu-dev.vercel.app";
 }
-
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
 	baseUrl = "https://frutodelespiritu.com";
 }
-
 export const serverBaseUrl = baseUrl;
-
 export const SeccionesBiblia = {
 	Pentateuco:
 		"Los primeros cinco libros del Antiguo Testamento, también conocidos como la Torá.",
@@ -128,7 +125,6 @@ export const SeccionesBiblia = {
 	Apocalipsis:
 		"Libro profético que revela el fin de los tiempos y la victoria final de Dios."
 };
-
 export const SpanishBibleApiIds = {
 	LaBibliaEnEspanolSencillo: "spa_bes",
 	SantaBibliaLibreParaElMundo: "spa_blm",
@@ -140,13 +136,11 @@ export const SpanishBibleApiIds = {
 	VersionBibliaLibre: "spa_vbl"
 };
 export const SpanishBibleApiIdsArray = Object.values(SpanishBibleApiIds);
-
 export const BibleCheckTypes = Object.freeze({
 	BibleTranslation: "bible-translation",
 	BibleBook: "bible-book"
 });
-
 export const BibleTranslationsView = Object.freeze({
-  compact: "Compacta",
-  detailed: "Detallada"
-})
+	compact: "Compacta",
+	detailed: "Detallada"
+});
