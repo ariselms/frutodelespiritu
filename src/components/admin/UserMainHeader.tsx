@@ -34,8 +34,12 @@ export function UserMainHeader() {
 					<Image
 						width={100}
 						height={100}
-						src="/images/animated/static-user.png"
-						className="mr-3 h-10 w-10 sm:h-9"
+						src={user?.image_url}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+								"/images/animated/static-user.png";
+            }}
+						className="mr-3 h-10 w-10 sm:h-9 rounded-2xl"
 						alt="Flowbite React Logo"
 					/>
 					<span
