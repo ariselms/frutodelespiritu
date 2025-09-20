@@ -1,5 +1,4 @@
 import { UserProfileForm } from "@/components/forms/UserProfileForm";
-
 export default function ProfileSection({
 	sectionEmail,
 	imageUrl,
@@ -28,7 +27,6 @@ export default function ProfileSection({
 							<UserProfileForm />
 						</div>
 					)}
-
 					{!isProfile && (
 						<>
 							<h1 className="text-2xl font-extrabold tracking-tight leading-none md:text-3xl text-orange-700 dark:text-white">

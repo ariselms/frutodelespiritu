@@ -51,8 +51,6 @@ export async function GET(request: Request) {
       memory_list.by_user_id = ${Number(userId)}
   `;
 
-	console.log("Server: ", userMemorizationLists);
-
 	return NextResponse.json(
 		{
 			success: true,
@@ -180,8 +178,6 @@ export async function POST(request: Request) {
 					{ status: 500 }
 				);
 			}
-
-			console.log("Server: ", newMemorization);
 
 			return NextResponse.json(
 				{
