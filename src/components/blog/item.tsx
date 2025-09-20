@@ -72,7 +72,10 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 							width={40}
 							height={40}
 							alt=""
-							src={article.author_image_url || "/images/church.svg"}
+							src={article.author_image_url as string}
+              onError={(e) => {
+                e.currentTarget.src = "/images/church.svg"
+              }}
 							className="size-10 rounded-2xl bg-gray-50"
 						/>
 						<div className="text-sm/6">
