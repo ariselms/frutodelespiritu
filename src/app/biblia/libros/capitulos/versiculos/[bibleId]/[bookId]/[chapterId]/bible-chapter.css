@@ -77,7 +77,7 @@ html.dark .bible-chapter {
 .bible-chapter h4,
 .bible-chapter h5,
 .bible-chapter h6 {
-  margin-top: 0;
+  margin-top: 0.5em;
   margin-bottom: 0.5em;
   font-weight: 700;
   line-height: 1.2;

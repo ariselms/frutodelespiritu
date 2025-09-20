@@ -12,7 +12,7 @@ export function BibleNavigationAndNotes({ BibleChapterData }: { BibleChapterData
   const nextParams = cleanedNextPath && cleanedNextPath.split("/");
 
 	return (
-		<nav className="flex items-center justify-between mb-8 xl:mb-10">
+		<nav className="flex items-center justify-between mb-6 last:mt-6 max-w-[80ch]">
 			{previousChapterParams && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${prevParams[0]}/${prevParams[1]}/${prevParams[2]}`}
