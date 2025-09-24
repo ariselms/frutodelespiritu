@@ -1,9 +1,12 @@
 import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
-import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
+import {
+	ContentLeftTwoImagesRightDescription,
+	ContentRightTwoImagesLeftDescription
+} from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { generateBibleReferences } from "@/helpers/referenceTagger";
+import { ScrollTriggerFadeInUp } from "@/components/animations/gsap";
 
 // In a page.js or layout.js file, export a metadata object
 export const metadata = {
@@ -50,14 +53,15 @@ export const metadata = {
 };
 
 export default async function Home() {
-
 	return (
 		<main>
-      <AlertBanner
-        type="info"
-        message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
-      />
-			<MainJumbotron />
+			<ScrollTriggerFadeInUp>
+				<AlertBanner
+					type="info"
+					message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
+				/>
+				<MainJumbotron />
+			</ScrollTriggerFadeInUp>
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
 				description={
