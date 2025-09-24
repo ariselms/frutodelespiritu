@@ -97,7 +97,7 @@ export default function AddNoteOrMemorization({
 
 		try {
 			if (action === BibleCrudActions.note) {
-				console.log("TODO: Create endpoints for bible notes.");
+				// console.log("TODO: Create endpoints for bible notes.");
 				// bible_note //
 				// id int
 				// title string

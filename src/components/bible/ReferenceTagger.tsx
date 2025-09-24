@@ -130,9 +130,9 @@ const ReferenceTagger = ({ children, translation = "spa_pdt" }: ReferenceTaggerP
         const bookKey = book.trim().toLowerCase();
         const apiBook = bookMappings[bookKey];
 
-        console.log("Translation: ", translation);
-        console.log("API Book: ", apiBook);
-        console.log("Chapter: ", chapter);
+        // console.log("Translation: ", translation);
+        // console.log("API Book: ", apiBook);
+        // console.log("Chapter: ", chapter);
 
         if (apiBook) {
           try {
