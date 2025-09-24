@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // but for a self-contained component, you can do it here.
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export function ScrollTriggerFadeInUp({ children }: { children: React.ReactNode }) {
+export function FadeInMoveUp({ children }: { children: React.ReactNode }) {
 
 	const container = useRef(null);
 
@@ -23,14 +23,14 @@ export function ScrollTriggerFadeInUp({ children }: { children: React.ReactNode 
 				y: 16,
 				duration: .5,
 				ease: "power3.out",
-				stagger: 0.1, // Now stagger works correctly!
-				scrollTrigger: {
-					// Trigger the entire sequence when the parent container is visible.
-					// You can also use a class that elements have in common to trigger the animation.
-					trigger: ".fade-in-move-up",
-					toggleActions: "play none none none",
-					once: true
-				}
+				stagger: 0.15, // Now stagger works correctly!
+				// scrollTrigger: {
+				// 	// Trigger the entire sequence when the parent container is visible.
+				// 	// You can also use a class that elements have in common to trigger the animation.
+				// 	trigger: ".fade-in-move-up",
+				// 	toggleActions: "play none none none",
+				// 	once: true
+				// }
 			});
 		},
 		// Scope is great for cleanup, it will remove the animation when the component unmounts
