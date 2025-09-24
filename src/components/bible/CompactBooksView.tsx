@@ -20,5 +20,4 @@ export function CompactBooksView({
 		</div>
 	);
 }
-
 //  bg-orange-200 border border-orange-300 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all
