@@ -8,7 +8,7 @@ export default function ContentLeftTwoImagesRight({
   firstImgUrlAlt = "",
 }: ContentAndTwoImagesProps) {
   return (
-		<section className="page-section bg-orange-50 dark:bg-gray-800 border-y border-orange-300 dark:border-gray-800 pt-10 pb-16">
+		<section className="bg-orange-50 dark:bg-gray-800 border-y border-orange-300 dark:border-gray-800 pt-10 pb-16">
 			<div className="gap-16 py-8 px-4 mx-auto max-w-screen-xl flex flex-col-reverse items-center lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
 				<div className="font-light text-gray-800 sm:text-lg dark:text-gray-300">
 					<h2 className="mb-4 text-4xl tracking-tight font-extrabold">

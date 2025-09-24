@@ -160,6 +160,7 @@ export default async function ReflexionesPage({
 			<JumbotronSection
 				section={JumbotronTitle}
 				imageSrc="/images/bible-with-flowers.svg"
+        description="Estudios bìblicos y reflexiones para meditar, aprender y crecer en la fe."
 			/>
 
 			<ArticleList articles={articles}>

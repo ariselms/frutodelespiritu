@@ -57,7 +57,7 @@ export default async function BibleChaptersPage({
 						{BookChapters?.map((book: any) => (
 							<Link
 								key={book.id}
-								className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold py-2 rounded-2xl text-center"
+								className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold py-2 rounded-2xl text-center border border-none dark:border-gray-700"
 								href={`/biblia/libros/capitulos/versiculos/${bibleId}/${book.bookId}/${book.number}`}>
 								{book.number}
 							</Link>

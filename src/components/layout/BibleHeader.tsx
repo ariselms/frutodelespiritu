@@ -21,7 +21,7 @@ export default function BibleHeader() {
 					className={`${
 						isActive(pathname, "/biblia") &&
 						"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-					} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+					} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
 					href="/biblia">
 					<LordIconHover
 						size={32}
@@ -35,7 +35,7 @@ export default function BibleHeader() {
 						className={`${
 							isActive(pathname, `/biblia/libros/${bibleId}`) &&
 							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
 						href={`/biblia/libros/${bibleId}`}>
 						<LordIconHover
 							size={32}
@@ -53,7 +53,7 @@ export default function BibleHeader() {
 								`/biblia/libros/capitulos/${bibleId}/${bookId}`
 							) &&
 							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
 						href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
 						<LordIconHover
 							size={32}
@@ -71,7 +71,7 @@ export default function BibleHeader() {
 								`/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}`
 							) &&
 							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
 						href={`/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}`}>
 						<Image
 							alt="Logo"
@@ -86,9 +86,9 @@ export default function BibleHeader() {
 				{bibleId && (
 					<Link
 						className={`${
-							isActive(pathname, `biblia/${bibleId}/buscar`) &&
+							isActive(pathname, `/biblia/${bibleId}/buscar`) &&
 							"bg-orange-700 dark:bg-gray-800 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around`}
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
 						href={`/biblia/${bibleId}/buscar`}>
 						<LordIconHover
 							size={32}
