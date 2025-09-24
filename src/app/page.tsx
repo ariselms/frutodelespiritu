@@ -2,7 +2,7 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { FadeInMoveUp } from "@/components/animations/gsap";
+import { FadeInMoveUp, ScrollTriggerPinSection } from "@/components/animations/gsap";
 import {
 	ContentLeftTwoImagesRightDescription,
 	ContentRightTwoImagesLeftDescription
@@ -17,52 +17,54 @@ export default async function Home() {
 			/>
 			<FadeInMoveUp>
 				<MainJumbotron />
-				<ContentLeftTwoImagesRight
-					title="Lee La Biblia"
-					description={
-						<ContentLeftTwoImagesRightDescription
-							firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-							btnLink="/biblia"
-							btnText="Lee la Biblia"
-						/>
-					}
-					firstImgUrl="/images/bible.svg"
-					firstImgUrlAlt="Biblia"
-					secondImgUrl="/images/church.svg"
-					secondImgUrlAlt="Iglesia"
-				/>
-				<ContentRightTwoImagesLeft
-					title="Estudios"
-					description={
-						<ContentRightTwoImagesLeftDescription
-							firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-							btnLink="/lecturas?category=1"
-							btnText="Estudios"
-						/>
-					}
-					firstImgUrl="/images/reading.svg"
-					firstImgUrlAlt="Biblia"
-					secondImgUrl="/images/studying.svg"
-					secondImgUrlAlt="Iglesia"
-				/>
-				<ContentLeftTwoImagesRight
-					title="Reflexiones"
-					description={
-						<ContentLeftTwoImagesRightDescription
-							firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-							btnLink="/lecturas?category=2"
-							btnText="Reflexiones"
-						/>
-					}
-					firstImgUrl="/images/cross-in-hand.svg"
-					firstImgUrlAlt="Biblia"
-					secondImgUrl="/images/cross-with-flowers.svg"
-					secondImgUrlAlt="Iglesia"
-				/>
 			</FadeInMoveUp>
+      <ScrollTriggerPinSection>
+			<ContentLeftTwoImagesRight
+				title="Lee La Biblia"
+				description={
+					<ContentLeftTwoImagesRightDescription
+						firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
+						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+						btnLink="/biblia"
+						btnText="Lee la Biblia"
+					/>
+				}
+				firstImgUrl="/images/bible.svg"
+				firstImgUrlAlt="Biblia"
+				secondImgUrl="/images/church.svg"
+				secondImgUrlAlt="Iglesia"
+			/>
+			<ContentRightTwoImagesLeft
+				title="Estudios"
+				description={
+					<ContentRightTwoImagesLeftDescription
+						firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
+						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+						btnLink="/lecturas?category=1"
+						btnText="Estudios"
+					/>
+				}
+				firstImgUrl="/images/reading.svg"
+				firstImgUrlAlt="Biblia"
+				secondImgUrl="/images/studying.svg"
+				secondImgUrlAlt="Iglesia"
+			/>
+			<ContentLeftTwoImagesRight
+				title="Reflexiones"
+				description={
+					<ContentLeftTwoImagesRightDescription
+						firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
+						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+						btnLink="/lecturas?category=2"
+						btnText="Reflexiones"
+					/>
+				}
+				firstImgUrl="/images/cross-in-hand.svg"
+				firstImgUrlAlt="Biblia"
+				secondImgUrl="/images/cross-with-flowers.svg"
+				secondImgUrlAlt="Iglesia"
+			/>
+      </ScrollTriggerPinSection>
 		</main>
 	);
 }

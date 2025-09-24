@@ -43,3 +43,39 @@ export function FadeInMoveUp({ children }: { children: React.ReactNode }) {
 		</div>
 	);
 }
+
+export function ScrollTriggerPinSection({ children }: { children: React.ReactNode }) {
+  const container = useRef(null);
+
+  // useGsap to setup an animation with ScrollTrigger to pin a section that has the class of home-sect
+  useGSAP(
+    () => {
+      let sections = document.querySelectorAll(".page-section");
+      sections.forEach((section, i) => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            pin: true,
+            pinSpacing: false,
+            scrub: true,
+            start: () => "top top",
+            end: () => "+=100%",
+          }
+        });
+        tl.addLabel("initial");
+        tl.to(section.querySelectorAll(".page-section"), {
+          ease: "none",
+          x: 0,
+          stagger: 0.2
+        });
+      });
+    },
+    // Scope is great for cleanup, it will remove the animation when the component unmounts
+    { scope: container }
+  )
+  return (
+    <div ref={container}>
+      { children }
+    </div>
+  );
+}
