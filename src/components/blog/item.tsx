@@ -3,20 +3,6 @@ import { ArticleType } from "@/models/articlesTypes";
 import Image from "next/image";
 import Link from "next/link";
 
-export function ArticleSection() {
-	return (
-		<div className="mx-auto max-w-screen-sm text-center mb-16">
-			<h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-				Aprendizaje y crecimiento
-			</h2>
-			<p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-200">
-				Descubre artículos y recursos que te ayudarán a profundizar en tu fe y a
-				crecer espiritualmente.
-			</p>
-		</div>
-	);
-}
-
 export function ArticleItem({ article }: { article: ArticleType }) {
 	// Ensure it's a Date object if it's coming as a string
 	const creation_date = new Date(article.updated_at);
@@ -101,9 +87,8 @@ export function ArticleList({
 	return (
 		<section className="bg-white dark:bg-gray-800 border border-t-orange-300 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<ArticleSection />
 				{children}
-				<div className="mt-16 space-y-4 lg:space-y-8 lg:mt-20">
+				<div className="space-y-4 mt-8 lg:mt-16">
 					{articles?.map((article: ArticleType) => (
 						<ArticleItem key={article.id} article={article} />
 					))}

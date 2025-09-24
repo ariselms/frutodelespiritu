@@ -2,7 +2,7 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { FadeInMoveUp, ScrollTriggerPinSection } from "@/components/animations/gsap";
+import { FadeInMoveUp } from "@/components/animations/gsap";
 import {
 	ContentLeftTwoImagesRightDescription,
 	ContentRightTwoImagesLeftDescription
@@ -18,7 +18,6 @@ export default async function Home() {
 			<FadeInMoveUp>
 				<MainJumbotron />
 			</FadeInMoveUp>
-      <ScrollTriggerPinSection>
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
 				description={
@@ -64,7 +63,6 @@ export default async function Home() {
 				secondImgUrl="/images/cross-with-flowers.svg"
 				secondImgUrlAlt="Iglesia"
 			/>
-      </ScrollTriggerPinSection>
 		</main>
 	);
 }

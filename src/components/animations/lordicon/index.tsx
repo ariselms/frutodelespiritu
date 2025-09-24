@@ -1,9 +1,14 @@
 "use client";
 
-import { useRef } from "react";
+// Make sure to import these from React
+import React, { useRef, forwardRef, useImperativeHandle } from "react";
+import { useRouter } from "next/navigation";
 import { Player } from "@lordicon/react";
-// Assuming 'lock.json' is in a folder accessible by your component
-import ICON_SRC from "@/lotties/bible-open.json";
+
+// Define the shape of the methods we will expose
+export type LordIconClickHandle = {
+  triggerAnimation: () => void;
+};
 
 export function LordIconHover({
   size = 96,
@@ -25,12 +30,6 @@ export function LordIconHover({
 		playerRef.current?.playFromBeginning();
 	};
 
-	// 3. (Optional but recommended) Define a handler to reset the icon when the mouse leaves.
-	// This makes the icon static again, ready for the next hover.
-	const handleMouseLeave = () => {
-		playerRef.current?.goToFirstFrame();
-	};
-
   // 4. (Optional but recommended) Define an onClick handler to trigger the animation.
 	// const handleClick = () => {
 	// 	playerRef?.current?.playFromBeginning();
@@ -41,7 +40,6 @@ export function LordIconHover({
 		<div
       className="cursor-pointer flex flex-col items-center justify-center"
 			onMouseEnter={handleMouseEnter}
-			onMouseLeave={handleMouseLeave}
 			// onClick={handleClick}
       >
 			<Player
@@ -55,3 +53,43 @@ export function LordIconHover({
 		</div>
 	);
 }
+
+// Wrap the component in forwardRef
+export const LordIconClick = forwardRef<
+  LordIconClickHandle,
+  {
+    size?: number;
+    ICON_SRC: any;
+    state: string;
+    text?: string;
+    route?: string;
+  }
+>(({ size = 96, ICON_SRC, state, text, route }, ref) => {
+  const { push } = useRouter();
+  const playerRef = useRef<Player>(null);
+
+  // Expose the playFromBeginning function via a ref
+  useImperativeHandle(ref, () => ({
+    triggerAnimation() {
+      playerRef.current?.playFromBeginning();
+    },
+  }));
+
+  return (
+    // We no longer need the onClick handler here
+    <div className="flex flex-col items-center justify-center">
+      <Player
+        ref={playerRef}
+        icon={ICON_SRC}
+        size={size}
+        state={state}
+        onComplete={() => {
+          if (route) {
+            push(route);
+          }
+        }}
+      />
+      {text}
+    </div>
+  );
+});
