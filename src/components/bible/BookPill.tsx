@@ -27,7 +27,7 @@ export function BookPillBlock({
 			<div className="p-4 grid grid-cols-2 sm:grid-cols-3 h-full max-w-3xl mx-auto gap-1.5">
 				{libros?.map((l: any) => (
 					<Link
-						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold py-2 rounded-2xl transition-all text-xs md:text-base flex items-center justify-center border dark:border-gray-600"
+						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold py-2.5 rounded-2xl transition-all text-xs md:text-base flex items-center justify-center border dark:border-gray-600"
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
 						{l.name.toUpperCase()}

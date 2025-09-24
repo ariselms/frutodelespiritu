@@ -148,10 +148,10 @@ const customDataProvider = {
 
 		// This is the fallback for forms that DON'T have a file upload.
 		// We still need to unwrap the response here too.
-		console.log("Using fallback create (no file upload)");
+		// console.log("Using fallback create (no file upload)");
 
 		return baseDataProvider.create(resource, params).then((response) => {
-			console.log("API response in fallback:", response);
+			// console.log("API response in fallback:", response);
 
 			// So we need to look for response.data and then use record.data as the final object
 			const record = response.data?.data;

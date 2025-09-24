@@ -2,7 +2,6 @@ import { BibleCheckTypes } from "@/static";
 import { SpanishBibleApiIdsArray } from "@/static";
 
 export const isActive = (urlPathname: string, linkPathName: string) => {
-  console.log(urlPathname, linkPathName);
 
   return urlPathname === linkPathName;
 

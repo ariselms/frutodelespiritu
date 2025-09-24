@@ -118,7 +118,17 @@ export default function AddNoteOrMemorization({
 
 		try {
 			if (action === BibleCrudActions.note) {
-				console.log("TODO: Create endpoints for bible notes.");
+				// console.log("TODO: Create endpoints for bible notes.");
+				// bible_note //
+				// id int
+				// title string
+				// passage_id string
+				// bible_id string
+				// passage_text string
+				// passage_note text
+				// by_user_id reference int
+				// created_at timestamp now
+				// updated_at timestamp now
 			}
 
 			if (action === BibleCrudActions.memorization) {
