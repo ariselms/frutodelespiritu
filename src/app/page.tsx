@@ -1,9 +1,71 @@
 import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
-import { ContentLeftTwoImagesRightDescription, ContentRightTwoImagesLeftDescription } from "@/components/content/ContentHelpers";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { generateBibleReferences } from "@/helpers/referenceTagger";
+import { FadeInMoveUp } from "@/components/animations/gsap";
+import {
+	ContentLeftTwoImagesRightDescription,
+	ContentRightTwoImagesLeftDescription
+} from "@/components/content/ContentHelpers";
+
+export default async function Home() {
+	return (
+		<main>
+			<AlertBanner
+				type="info"
+				message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
+			/>
+			<FadeInMoveUp>
+				<MainJumbotron />
+				<ContentLeftTwoImagesRight
+					title="Lee La Biblia"
+					description={
+						<ContentLeftTwoImagesRightDescription
+							firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/biblia"
+							btnText="Lee la Biblia"
+						/>
+					}
+					firstImgUrl="/images/bible.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/church.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+				<ContentRightTwoImagesLeft
+					title="Estudios"
+					description={
+						<ContentRightTwoImagesLeftDescription
+							firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/lecturas?category=1"
+							btnText="Estudios"
+						/>
+					}
+					firstImgUrl="/images/reading.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/studying.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+				<ContentLeftTwoImagesRight
+					title="Reflexiones"
+					description={
+						<ContentLeftTwoImagesRightDescription
+							firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/lecturas?category=2"
+							btnText="Reflexiones"
+						/>
+					}
+					firstImgUrl="/images/cross-in-hand.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/cross-with-flowers.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+			</FadeInMoveUp>
+		</main>
+	);
+}
 
 // In a page.js or layout.js file, export a metadata object
 export const metadata = {
@@ -48,61 +110,3 @@ export const metadata = {
 		]
 	}
 };
-
-export default async function Home() {
-
-	return (
-		<main>
-      <AlertBanner
-        type="info"
-        message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
-      />
-			<MainJumbotron />
-			<ContentLeftTwoImagesRight
-				title="Lee La Biblia"
-				description={
-					<ContentLeftTwoImagesRightDescription
-						firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/biblia"
-						btnText="Lee la Biblia"
-					/>
-				}
-				firstImgUrl="/images/bible.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/church.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
-			<ContentRightTwoImagesLeft
-				title="Estudios"
-				description={
-					<ContentRightTwoImagesLeftDescription
-						firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/lecturas?category=1"
-						btnText="Estudios"
-					/>
-				}
-				firstImgUrl="/images/reading.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/studying.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
-			<ContentLeftTwoImagesRight
-				title="Reflexiones"
-				description={
-					<ContentLeftTwoImagesRightDescription
-						firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/lecturas?category=2"
-						btnText="Reflexiones"
-					/>
-				}
-				firstImgUrl="/images/cross-in-hand.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/cross-with-flowers.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
-		</main>
-	);
-}

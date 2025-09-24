@@ -37,7 +37,7 @@ export default function SubscriberForm() {
   };
 
 	return (
-		<form onSubmit={handleEmailSubmit}>
+		<form className="fade-in-move-up" onSubmit={handleEmailSubmit}>
 			<div className="flex items-center mb-3">
 				<div className="relative w-auto mr-3">
 					<label
@@ -61,8 +61,8 @@ export default function SubscriberForm() {
 						type="email"
 						name="email"
 						id="member_email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
 						required
 					/>
 				</div>

@@ -8,7 +8,7 @@ export default function ContentRightTwoImagesLeft({
   firstImgUrlAlt = "",
 }: ContentAndTwoImagesProps) {
   return (
-		<section className="dark:bg-gray-900 pt-10 pb-16">
+		<section className="fade-in-move-up dark:bg-gray-900 pt-10 pb-16">
 			<div className="gap-16 py-8 px-4 mx-auto max-w-screen-xl flex flex-col items-center lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
 				<div className="relative flex justify-center">
 					<svg
