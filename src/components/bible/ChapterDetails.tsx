@@ -4,19 +4,30 @@ import React, { useEffect, useRef, useState } from "react";
 import ModalNotesAndMemorization from "@/components/bible/ModalNotesAndMemorization";
 import { useParams } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";
 import { serverBaseUrl } from "@/static";
-import {parseSid} from "@/helpers";
+import { useRouter, usePathname } from "next/navigation";
+
+// Helper function to parse a "Book Chapter:Verse" string
+const parseSid = (sid: string) => {
+	const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
+	if (!match) return null;
+
+	return {
+		book: match[1],
+		chapter: parseInt(match[2], 10),
+		verse: parseInt(match[3], 10)
+	};
+};
 
 export function ChapterDetails({ ChapterContent }: any) {
-	const { user } = useAuthContext();
-	const router = useRouter();
-	const pathname = usePathname();
+
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
+  const router  = useRouter();
+  const pathname = usePathname();
+  const { user } = useAuthContext();
 
 	// Effect for scrolling to a hash link (no changes needed here)
 	useEffect(() => {

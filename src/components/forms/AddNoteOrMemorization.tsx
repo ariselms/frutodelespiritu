@@ -1,7 +1,12 @@
 "use client";
 import { memo, useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
-import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalHeader,
+} from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 import { useFetchUserMemorizationLists } from "@/hooks";
 import {

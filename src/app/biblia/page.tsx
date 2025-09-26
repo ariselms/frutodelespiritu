@@ -3,6 +3,7 @@ import { SpanishBibleItem } from "@/components/bible/SpanishBibleList";
 import { BibleDataType} from "@/models/bibleTypes";
 
 export default async function BibliaPage() {
+  // TODO: Move this into a single function
   let spanishBibles: BibleDataType[] = [];
 
   try {
