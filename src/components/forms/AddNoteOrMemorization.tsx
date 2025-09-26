@@ -76,15 +76,6 @@ export default function AddNoteOrMemorization({
 
 	}, [passageId]);
 
-	// bibleData structure //
-	// bibleData.by_user_id: string;
-	// bibleData.bible_id: string;
-	// bibleData.book_id: string;
-	// bibleData.chapter_id: string;
-	// bibleData.verse_from: string;
-	// bibleData.verse_to: string;
-	// bibleData.passage_text: string;
-
 	function onCloseModal() {
 		setOpenModal(false);
 	}
