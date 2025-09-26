@@ -14,7 +14,7 @@ export default function UserBiblePage() {
 						<MemorizationListComponent />
 					</TabItem>
 					<TabItem title="Notas de la Biblia" icon={FaStickyNote}>
-						This is bible notes
+						Esta función estará disponible pronto.
 					</TabItem>
 				</Tabs>
 			</article>

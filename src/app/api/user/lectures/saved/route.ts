@@ -16,8 +16,6 @@ export async function GET(request: Request) {
       ORDER BY lectures.created_at DESC
     `;
 
-    console.log("User lectures: ", userLectures);
-
 		if (userLectures.length > 0) {
 			return NextResponse.json(
 				{

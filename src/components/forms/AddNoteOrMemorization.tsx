@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
@@ -132,6 +132,7 @@ export default function AddNoteOrMemorization({
 			}
 
 			if (action === BibleCrudActions.memorization) {
+
 				const memorizationPostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
@@ -148,6 +149,8 @@ export default function AddNoteOrMemorization({
 
 				const memorizationPostResponse = await memorizationPostRequest.json();
 
+        console.log(memorizationPostResponse);
+
 				if (memorizationPostResponse.success) {
 					console.log(memorizationPostResponse.message);
 					// close the modal
@@ -160,6 +163,7 @@ export default function AddNoteOrMemorization({
           toast.success("Memorización guardada correctamente");
 
 				} else {
+
           toast.error(memorizationPostResponse.message);
 
           return;

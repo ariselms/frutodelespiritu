@@ -97,6 +97,9 @@ export async function POST(request: Request) {
 			description
 		} = memorizationData;
 
+    console.log("List: ", selectedMemorizationList);
+    console.log("Item: ", memorizationData);
+
 		// check if the memorization list exist
 		if (selectedMemorizationList !== "") {
 			// get the memorization list id
@@ -119,7 +122,8 @@ export async function POST(request: Request) {
 
 			// save memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
-        INSERT INTO memory_item (by_user_id, bible_id, book_id, chapter_id, verse_from, verse_to, passage_text)
+        INSERT INTO
+          memory_item (by_user_id, bible_id, book_id, chapter_id, verse_from, verse_to, passage_text)
         VALUES (
           ${by_user_id},
           ${bible_id},
@@ -142,10 +146,23 @@ export async function POST(request: Request) {
 			}
 
 			// insert memory_list_item_join relation
-			const { rows: newMemoryListItemJoin, rowCount: joinRowCount } = await sql`
-        INSERT INTO memory_list_item_join (memory_list_id, memory_item_id)
-        VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id}) RETURNING *
+			const { rowCount: joinRowCount } = await sql`
+        INSERT INTO
+          memory_list_item_join (memory_list_id, memory_item_id)
+          VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id})
+        RETURNING *
       `;
+
+      if (joinRowCount === 0) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Error al guardar memorización.",
+            data: null
+          },
+          { status: 500 }
+        );
+      }
 
 			return NextResponse.json(
 				{
@@ -161,12 +178,10 @@ export async function POST(request: Request) {
 			console.log(by_user_id, name, description);
 
 			// if memorization list does not exist, create a new list
-			const { rows: newMemorization, rowCount } = await sql`
+			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO memory_list (by_user_id, name, description)
         VALUES (${Number(userId)}, ${name}, ${description})
       `;
-
-			console.log("Server New Memorization: ", newMemorization);
 
 			if (rowCount === 0) {
 				return NextResponse.json(
@@ -183,7 +198,7 @@ export async function POST(request: Request) {
 				{
 					success: true,
 					message: "Memorización creada correctamente.",
-					data: newMemorization
+					data: newMemorizationList
 				},
 				{ status: 200 }
 			);
