@@ -200,7 +200,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 									{content.number}
 								</span>{" "}
 								{content.content.map((verse: any, index: number) => {
-									// ✅ FIX 1: Specifically handle line break objects
+									// Specifically handle line break objects
 									// If the verse object is a line break, render a <br /> tag.
 									if (verse && verse.lineBreak) {
 										return <br key={index} />;
@@ -221,7 +221,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 										);
 									}
 
-									// ✅ FIX 2: Handle simple strings
+									// Handle simple strings
 									// Check if 'verse' is a string before trying to render it.
 									if (typeof verse === "string") {
 										return <span key={index}>{verse}</span>;
