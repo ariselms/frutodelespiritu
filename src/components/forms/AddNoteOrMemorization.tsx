@@ -7,12 +7,9 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import {
 	Button,
-	Checkbox,
-	Label,
 	Modal,
 	ModalBody,
 	ModalHeader,
-	TextInput
 } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 
