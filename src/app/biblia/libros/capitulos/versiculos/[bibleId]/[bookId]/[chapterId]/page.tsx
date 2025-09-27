@@ -26,9 +26,9 @@ export default async function SingleChapterPage({
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800 pb-4">
 				<div className="max-w-[80ch] mx-auto py-8 px-2 xl:px-0">
-					<div className="flex items-center justify-between mb-8">
+					<div className="flex flex-col items-center sm:flex sm:flex-row sm:items-center sm:justify-between mb-8">
 						<Link
-							className="rounded-2xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1.75 font-bold text-orange-700 dark:text-gray-50 inline-flex items-center transition-all"
+							className="rounded-2xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1.75 font-bold text-orange-700 dark:text-gray-50 inline-flex items-center transition-all text-xs sm:text-sm md:text-base"
 							href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
 							<svg
 								className="w-6 h-6 text-orange-700 bolder dark:text-white mr-2"
@@ -46,9 +46,7 @@ export default async function SingleChapterPage({
 							</svg>
 							Capítulos de {Book?.name}
 						</Link>
-            <InLectureBibleSelection
-              chapterDetails={bibleChapterResponse}
-            />
+						<InLectureBibleSelection chapterDetails={bibleChapterResponse} />
 					</div>
 					{/* <BibleHeaderSection section={`${Book?.name} ${Chapter?.number}`} /> */}
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />

@@ -1,19 +1,14 @@
 "use client";
 import { memo, useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
-import {
-	Button,
-	Modal,
-	ModalBody,
-	ModalHeader,
-} from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 import { useFetchUserMemorizationLists } from "@/hooks";
 import {
 	MemorizationSubmissionType,
 	MemorizationListType
 } from "@/models/memorizationTypes";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 export default function AddNoteOrMemorization({
 	bibleId,
@@ -30,45 +25,46 @@ export default function AddNoteOrMemorization({
 	action: string | null;
 	chapterContent: any;
 }) {
-  // user object
+	// user object
 	const { user } = useAuthContext();
 
-  // memorization data contains the memory_item information
+	// memorization data contains the memory_item information
 	const [memorizationData, setMemorizationData] =
 		useState<MemorizationSubmissionType | null>(null);
 
-  // user memorization lists to relate to the memory_item
-	const [userMemorizationLists, setUserMemorizationLists] = useState<MemorizationListType[]>([]);
+	// user memorization lists to relate to the memory_item
+	const [userMemorizationLists, setUserMemorizationLists] = useState<
+		MemorizationListType[]
+	>([]);
 
-  // memorizartion list the user will select to save the memory_item
-  const [selectedMemorizationList, setSelectedMemorizationList] =
-			useState<string>("");
+	// memorizartion list the user will select to save the memory_item
+	const [selectedMemorizationList, setSelectedMemorizationList] =
+		useState<string>("");
 
-  // new memorization list name
+	// new memorization list name
 	const [newMemorizationList, setNewMemorizationList] = useState<string>("");
 
-  // state to control the add memorization list form modal
+	// state to control the add memorization list form modal
 	const [isAddMemorizationListFormOpen, setIsAddMemorizationListFormOpen] =
 		useState<boolean>(false);
 
 	// set the bible data
 	useEffect(() => {
 		if (bibleId && passageId && chapterContent && user) {
-
-      // get the book name from the passageId
+			// get the book name from the passageId
 			const bookName = passageId[0]?.split(" ")[0];
 
-      // get the chapter number from the passageId
+			// get the chapter number from the passageId
 			const chapterNumber = passageId[0]?.split(":")[0]?.split(" ")[1];
 
-      // get the initial verse number from the passageId
+			// get the initial verse number from the passageId
 			const verseFrom = Number(passageId[0]?.split(":")[1]);
 
-      // get the last verse number from the passageId, if there is no last verse, set it to the initial verse number
+			// get the last verse number from the passageId, if there is no last verse, set it to the initial verse number
 			const verseTo =
 				passageId.length > 1 ? Number(passageId[1]?.split(":")[1]) : verseFrom;
 
-      // get the selected text from the chapterContent based on the verseFrom and verseTo
+			// get the selected text from the chapterContent based on the verseFrom and verseTo
 			const selectedText = chapterContent.filter((verse: any) => {
 				let selectedVerses: string[] = [];
 				if (
@@ -93,14 +89,12 @@ export default function AddNoteOrMemorization({
 		}
 	}, [passageId]);
 
-  // fetch user memorization lists
+	// fetch user memorization lists
 	const getUserMemorizationLists: () => Promise<string[] | null> = async () => {
+		if (!user?.id) return null;
 
-    if(!user?.id) return null;
-
-		const responseUserMemorizationLists: any = await useFetchUserMemorizationLists(
-			user?.id
-		);
+		const responseUserMemorizationLists: any =
+			await useFetchUserMemorizationLists(user?.id);
 
 		if (!responseUserMemorizationLists.success) {
 			console.error("Error fetching user memorization lists");
@@ -137,7 +131,6 @@ export default function AddNoteOrMemorization({
 			}
 
 			if (action === BibleCrudActions.memorization) {
-
 				const memorizationPostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
@@ -146,15 +139,15 @@ export default function AddNoteOrMemorization({
 							"Content-Type": "application/json"
 						},
 						body: JSON.stringify({
-              selectedMemorizationList,
-              memorizationData
-            })
+							selectedMemorizationList,
+							memorizationData
+						})
 					}
 				);
 
 				const memorizationPostResponse = await memorizationPostRequest.json();
 
-        console.log(memorizationPostResponse);
+				console.log(memorizationPostResponse);
 
 				if (memorizationPostResponse.success) {
 					console.log(memorizationPostResponse.message);
@@ -165,13 +158,11 @@ export default function AddNoteOrMemorization({
 					// clear the memorizationData
 					setMemorizationData(null);
 
-          toast.success("Memorización guardada correctamente");
-
+					toast.success("Memorización guardada correctamente");
 				} else {
+					toast.error(memorizationPostResponse.message);
 
-          toast.error(memorizationPostResponse.message);
-
-          return;
+					return;
 				}
 			}
 		} catch (error) {
@@ -179,11 +170,11 @@ export default function AddNoteOrMemorization({
 		}
 	};
 
-  // TODO: pass the getUserMemorizationLists to the AddNewMemorizationListForm component and call it after creating a new list to refresh the lists
+	// TODO: pass the getUserMemorizationLists to the AddNewMemorizationListForm component and call it after creating a new list to refresh the lists
 
-  // TODO: when a new memorization item is created show a success message and close all of the modals
+	// TODO: when a new memorization item is created show a success message and close all of the modals
 
-  // TODO: upon page load, lookup for any user memorization items to highlight or note the verses that the user has already saved in a memory list
+	// TODO: upon page load, lookup for any user memorization items to highlight or note the verses that the user has already saved in a memory list
 
 	return (
 		<>
