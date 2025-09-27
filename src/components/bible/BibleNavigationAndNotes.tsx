@@ -40,7 +40,7 @@ export function BibleNavigationAndNotes({
 					{prevParams[2]}
 				</Link>
 			)}
-			<h1 className="max-w-2xl font-extrabold tracking-tight leading-none  text-orange-700 dark:text-white text-center text-xs sm:text-base">
+			<h1 className="max-w-2xl font-extrabold tracking-tight leading-none  text-orange-700 dark:text-white text-center text-xl">
 				{BibleChapterData?.book?.name} {BibleChapterData?.chapter?.number}
 			</h1>
 			{nextChapterParams && (
