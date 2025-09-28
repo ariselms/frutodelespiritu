@@ -15,8 +15,8 @@ export default function BibleHeader() {
 	// bible id, chapter id
 	const { bibleId, bookId, chapterId } = params;
 	return (
-		<header className="bg-orange-50 dark:bg-gray-900 border-b border-orange-300 dark:border-b dark:border-gray-700">
-			<nav className="max-w-5xl mx-auto flex items-end justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-orange-50 dark:text-gray-300 overflow-auto">
+		<header className="bg-orange-50 dark:bg-gray-900 border-b border-orange-300 dark:border-b dark:border-gray-700 w-full">
+			<nav className="max-w-5xl mx-auto flex items-end justify-start sm:justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-orange-50 dark:text-gray-300 overflow-y-scroll w-full">
 				<Link
 					className={`${
 						isActive(pathname, "/biblia") &&
