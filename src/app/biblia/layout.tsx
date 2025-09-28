@@ -12,9 +12,9 @@ export default function BibleRootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<div>
-        <BibleHeader />
-				{children}
-		</div>
+		<>
+			<BibleHeader />
+			{children}
+		</>
 	);
 }
