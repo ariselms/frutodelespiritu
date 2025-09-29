@@ -18,7 +18,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row px-4 pt-4 pb-6 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row px-4 p-4 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
