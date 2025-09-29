@@ -124,7 +124,7 @@ const bibleVersesWithReference = [
 	{
 		verse_or_passage: "Lucas 6:31",
 		text: "Y como queréis que hagan los hombres con vosotros, así también haced vosotros con ellos.",
-		reference: "spa_r09/LUC/6#31"
+		reference: "spa_r09/LUK/6#31"
 	},
 	{
 		verse_or_passage: "Santiago 1:5",
@@ -184,7 +184,7 @@ const bibleVersesWithReference = [
 	{
 		verse_or_passage: "Zacarías 4:6",
 		text: "Entonces respondió y me habló diciendo: Esta es palabra de Jehová a Zorobabel, que dice: No con ejército, ni con fuerza, sino con mi Espíritu, ha dicho Jehová de los ejércitos.",
-		reference: "spa_r09/ZAC/4#6"
+		reference: "spa_r09/ZEC/4#6"
 	},
 	{
 		verse_or_passage: "Mateo 28:19-20",
