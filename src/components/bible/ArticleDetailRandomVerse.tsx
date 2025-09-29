@@ -124,7 +124,7 @@ const bibleVersesWithReference = [
 	{
 		verse_or_passage: "Lucas 6:31",
 		text: "Y como queréis que hagan los hombres con vosotros, así también haced vosotros con ellos.",
-		reference: "spa_r09/LUC/6#31"
+		reference: "spa_r09/LUK/6#31"
 	},
 	{
 		verse_or_passage: "Santiago 1:5",
