@@ -6,48 +6,6 @@ import { ArticleList } from "@/components/blog/item";
 import { sql } from "@vercel/postgres";
 import { ArticleType, CategoryType } from "@/models/articlesTypes";
 
-export const metadata = {
-	title:
-		"Reflexiones | Fruto del Espíritu",
-  description:
-    "Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-	keywords: [
-    "devocionales",
-    "cristiano",
-    "reflexiones",
-    "estudios bíblicos",
-    "biblias en espanol",
-		"la biblia en espanol",
-		"biblia en espanol",
-		"entiende la biblia",
-		"espiritu santo",
-    "aprende la biblia",
-    "libros de la biblia reina valera 1960 en orden",
-    "lista de libros de la biblia reina valera 1960",
-    "tres significados de mundo en la biblia",
-    "significados de mundo en la biblia"
-	],
-	robots: {
-		index: true,
-		follow: true
-	},
-	openGraph: {
-		title: "Reflexiones | Fruto del Espíritu",
-		description:
-			"Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
-		url: "https://frutodelespiritu.com/lecturas",
-		siteName: "Fruto del Espíritu",
-		type: "website",
-		locale: "es_US",
-		images: [
-			{
-				url: "https://frutodelespiritu.com/images/logo.png",
-				alt: "Fruto del Espíritu"
-			}
-		]
-	}
-};
-
 // Server Components receive `searchParams` as a prop
 export default async function ReflexionesPage({
 	searchParams
@@ -179,3 +137,44 @@ export default async function ReflexionesPage({
 		</main>
 	);
 }
+
+export const metadata = {
+	title: "Reflexiones | Fruto del Espíritu",
+	description:
+		"Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+	keywords: [
+		"devocionales",
+		"cristiano",
+		"reflexiones",
+		"estudios bíblicos",
+		"biblias en espanol",
+		"la biblia en espanol",
+		"biblia en espanol",
+		"entiende la biblia",
+		"espiritu santo",
+		"aprende la biblia",
+		"libros de la biblia reina valera 1960 en orden",
+		"lista de libros de la biblia reina valera 1960",
+		"tres significados de mundo en la biblia",
+		"significados de mundo en la biblia"
+	],
+	robots: {
+		index: true,
+		follow: true
+	},
+	openGraph: {
+		title: "Reflexiones | Fruto del Espíritu",
+		description:
+			"Utiliza nuestras reflexiones (devocionales) para meditar sobre la Palabra de Dios o entra más profunto al conocimiento del Todopoderoso a través de los Estudios Bíblicos. También puedes guardar estudios y reflexiones para el futuro. Descúbre mucho más en el nuevo y rediseñado Fruto del Espíritu.",
+		url: "https://frutodelespiritu.com/lecturas",
+		siteName: "Fruto del Espíritu",
+		type: "website",
+		locale: "es_US",
+		images: [
+			{
+				url: "https://frutodelespiritu.com/images/logo.png",
+				alt: "Fruto del Espíritu"
+			}
+		]
+	}
+};

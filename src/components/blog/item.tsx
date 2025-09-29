@@ -18,7 +18,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-6 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row px-4 pt-4 pb-6 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
@@ -50,26 +50,6 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 						<p className="mt-5 text-base text-gray-800 dark:text-gray-100">
 							{article.summary}
 						</p>
-					</div>
-				</div>
-				<div className="mt-6 flex pt-6">
-					<div className="relative flex items-center gap-x-4">
-						<Image
-							width={40}
-							height={40}
-							alt=""
-							src={article.author_image_url as string}
-              onError={(e) => {
-                e.currentTarget.src = "/images/church.svg"
-              }}
-							className="size-10 rounded-2xl bg-gray-50"
-						/>
-						<div className="text-sm/6">
-							<p className="font-semibold text-gray-900 dark:text-gray-100">
-								<span className="absolute inset-0" />
-								Autor: {article.author_name}
-							</p>
-						</div>
 					</div>
 				</div>
 			</div>
