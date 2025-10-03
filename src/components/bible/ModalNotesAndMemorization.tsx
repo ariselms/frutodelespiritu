@@ -64,7 +64,7 @@ export default function ModalNotesAndMemorization({
 	return (
 		<>
 			<div
-				className={`${isExtended} fixed left-0 right-0 top-0 bg-orange-50 dark:bg-gray-900 text-center text-black dark:text-white z-80 rounded-2xl border border-orange-700 dark:border-gray-600 m-2 overflow-hidden p-1`}>
+				className={`${isExtended} fixed left-0 right-0 top-0 bg-sky-50 dark:bg-gray-900 text-center text-black dark:text-white z-80 rounded-2xl border border-sky-700 dark:border-gray-600 m-2 overflow-hidden p-1`}>
 				<div className="relative w-full h-full mb-4">
 					<div className="absolute right-0 top-0 bottom-0 cursor-pointer flex flex-col items-center justify-end">
 						{isExtended === "h-70 md:h-46 lg:h-50" ? (
@@ -72,7 +72,7 @@ export default function ModalNotesAndMemorization({
 								onClick={() => {
 									setIsExtended("h-[calc(100vh-16px)]");
 								}}
-								className="w-10 h-10 text-orange-700 dark:text-white"
+								className="w-10 h-10 text-sky-700 dark:text-white"
 								aria-hidden="true"
 								xmlns="http://www.w3.org/2000/svg"
 								width="24"
@@ -92,7 +92,7 @@ export default function ModalNotesAndMemorization({
 								onClick={() => {
 									setIsExtended("h-70 md:h-46 lg:h-50");
 								}}
-								className="w-10 h-10 text-orange-700 dark:text-white"
+								className="w-10 h-10 text-sky-700 dark:text-white"
 								aria-hidden="true"
 								xmlns="http://www.w3.org/2000/svg"
 								width="24"
@@ -109,7 +109,7 @@ export default function ModalNotesAndMemorization({
 							</svg>
 						)}
 					</div>
-					<p className="text-sm font-bold px-2 pt-2 text-orange-700 dark:text-gray-200 flex items-start justify-start mb-0 text-left">
+					<p className="text-sm font-bold px-2 pt-2 text-sky-700 dark:text-gray-200 flex items-start justify-start mb-0 text-left">
 						<svg
 							className="w-5 h-5 me-2"
 							aria-hidden="true"
@@ -129,7 +129,7 @@ export default function ModalNotesAndMemorization({
 							memorización.
 						</span>
 					</p>
-					<p className="text-sm font-bold px-2 text-orange-700 dark:text-gray-200 flex items-start justify-start mb-3 text-left">
+					<p className="text-sm font-bold px-2 text-sky-700 dark:text-gray-200 flex items-start justify-start mb-3 text-left">
 						<svg
 							className="w-5 h-5 me-2"
 							aria-hidden="true"
@@ -160,7 +160,7 @@ export default function ModalNotesAndMemorization({
 									setOpenModal(true);
 									setAction(BibleCrudActions.memorization);
 								}}
-								className="uppercase my-1 mx-1 inline-block p-2 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 dark:bg-gray-50 hover:bg-orange-600 dark:hover:bg-gray-300 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+								className="uppercase my-1 mx-1 inline-block p-2 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 dark:bg-gray-50 hover:bg-sky-600 dark:hover:bg-gray-300 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 								Añadir a lista de memorización
 							</button>
 							<button
@@ -168,7 +168,7 @@ export default function ModalNotesAndMemorization({
 									setOpenModal(true);
 									setAction(BibleCrudActions.note);
 								}}
-								className="uppercase my-2 mx-1 inline-block p-2 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 dark:bg-gray-50 hover:bg-orange-600 dark:hover:bg-gray-300 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+								className="uppercase my-2 mx-1 inline-block p-2 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 dark:bg-gray-50 hover:bg-sky-600 dark:hover:bg-gray-300 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 								Añadir con nota
 							</button>
 						</div>

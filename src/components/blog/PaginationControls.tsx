@@ -53,13 +53,13 @@ export function PaginationControls({
 				<button
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={!canGoPrev} // Disable if on the first page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-orange-600 hover:bg-orange-700 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-white dark:text-black dark:hover:bg-gray-100 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Anterior {/* Changed to Spanish "Anterior" */}
 				</button>
 				<button
 					onClick={() => handlePageChange(currentPage + 1)}
 					disabled={!canGoNext} // Disable if on the last page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-orange-600 hover:bg-orange-700 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-white dark:text-black dark:hover:bg-gray-100 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Siguiente {/* Changed to Spanish "Siguiente" */}
 				</button>
 			</div>

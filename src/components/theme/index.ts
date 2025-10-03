@@ -2,7 +2,7 @@ import { createTheme } from "flowbite-react";
 
 export const OrangeLinkTheme = createTheme({
 	root: {
-		base: "bg-orange-100 dark:bg-gray-800 px-2 py-2.5 sm:px-4 border-orange-300 dark:border-gray-700 border-b",
+		base: "bg-sky-100 dark:bg-gray-900 px-2 py-2.5 sm:px-4 border-sky-100 dark:border-gray-700 border-b",
 		rounded: {
 			on: "rounded",
 			off: ""
@@ -23,7 +23,7 @@ export const OrangeLinkTheme = createTheme({
 		base: "flex items-center"
 	},
 	collapse: {
-		base: "w-full md:block md:w-auto",
+		base: "w-full md:block md:w-auto justify-center",
 		list: "mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium",
 		hidden: {
 			on: "hidden",
@@ -33,8 +33,8 @@ export const OrangeLinkTheme = createTheme({
 	link: {
 		base: "block py-2 pl-3 pr-4 md:p-0",
 		active: {
-			on: "bg-gray-700 md:bg-transparent md:text-orange-600 md:dark:text-orange-500 mb-3 md:mb-0",
-			off: "text-gray-700 rounded-0 border-0 md:border-0  md:hover:text-orange-600 md:hover:bg-transparent  dark:text-gray-300  md:dark:hover:text-orange-500 mb-3 md:mb-0 hover:bg-gray-700 hover:text-white dark:hover:bg-transparent dark:hover:text-white"
+			on: "bg-transparent text-sky-700 hover:text-sky-800 dark:hover:text-white dark:hover:underline md:text-sky-700 md:hover:text-sky-800 md:dark:text-white mb-3 last:mb-0 md:mb-0 dark:underline",
+			off: "text-gray-700 border-0 hover:text-sky-700 dark:text-gray-200  dark:hover:text-white dark:hover:underline mb-3 last:mb-0 md:mb-0 hover:bg-sky-50 dark:hover:bg-gray-900 md:hover:text-sky-700 transition-all"
 		},
 		disabled: {
 			on: "text-gray-300 hover:cursor-not-allowed dark:text-gray-600",
@@ -42,7 +42,7 @@ export const OrangeLinkTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-2xl p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
+		base: "inline-flex items-center rounded-2xl p-2 text-sm text-sky-700 hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-sky-700 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -82,7 +82,7 @@ export const ModalUserProfileTheme = createTheme({
 	content: {
 		base: "relative h-full w-full p-4 md:h-auto",
 		inner:
-			"relative flex max-h-[90dvh] flex-col rounded-2xl shadow-2xl  bg-white dark:bg-gray-800 border border-orange-300 dark:border-gray-600"
+			"relative flex max-h-[90dvh] flex-col rounded-2xl shadow-2xl  bg-white dark:bg-gray-800 border border-sky-100 dark:border-gray-600"
 	},
 	body: {
 		base: "flex-1 overflow-auto p-6",

@@ -12,7 +12,7 @@
   --rich-text-color-primary: #333;
   --rich-text-color-heading: #222;
   --rich-text-color-secondary: #555;
-  --rich-text-color-link: #ff6900;
+  --rich-text-color-link: #f0f9ff;
   --rich-text-color-link-visited: #551a8b;
   --rich-text-color-border: #ccc;
   --rich-text-color-background-light: #eee; /* For code, mark */
@@ -129,9 +129,9 @@ html.dark .bible-chapter {
 
 span[data-number]{
   display: inline-block;
-  background-color: #FFF8F1;
-  color: #B43403;
-  border: 1px solid #FDBA8C;
+  background-color: #f0f9ff;
+  color: black;
+  border: 1px solid #dff2fe;
   border-radius: 4px;
   margin-right: .3rem;
   padding: 0 .5rem;

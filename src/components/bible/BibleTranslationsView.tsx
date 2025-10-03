@@ -41,8 +41,8 @@ export default function BibleTranslationsViewComponent({
 					onClick={() => setView(translations.detailed)}
 					className={`${
 						view === translations.detailed &&
-						"bg-orange-700 text-orange-50 dark:bg-gray-900 text:white hover:text-orange-100 hover:bg-orange-800 dark:hover:bg-gray-900"
-					} cursor-pointer hover:bg-orange-600 hover:text-orange-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
+						"bg-sky-700 text-sky-50 dark:bg-gray-900 text:white hover:text-sky-100 hover:bg-sky-800 dark:hover:bg-gray-900"
+					} cursor-pointer hover:bg-sky-800 hover:text-sky-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
 					Vista {translations.detailed}
 				</Button>
 				<Button
@@ -51,8 +51,8 @@ export default function BibleTranslationsViewComponent({
 					onClick={() => setView(translations.compact)}
 					className={`${
 						view === translations.compact &&
-						"bg-orange-700 text-orange-50 dark:bg-gray-900 text:white hover:text-orange-100 hover:bg-orange-800 dark:hover:bg-gray-900"
-					} cursor-pointer hover:bg-orange-600 hover:text-orange-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
+						"bg-sky-700 text-sky-50 dark:bg-gray-900 text:white hover:text-sky-100 hover:bg-sky-800 dark:hover:bg-gray-900"
+					} cursor-pointer hover:bg-sky-800 hover:text-sky-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
 					Vista {translations.compact}
 				</Button>
 			</ButtonGroup>

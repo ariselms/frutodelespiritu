@@ -22,7 +22,7 @@ export function RecentArticles() {
 				</p>
 				<a
 					href="#"
-					className="inline-flex items-center font-medium underline underline-offset-4 text-orange-600 dark:text-orange-500 hover:no-underline">
+					className="inline-flex items-center font-medium underline underline-offset-4 text-sky-600 dark:text-sky-500 hover:no-underline">
 					Read in 2 minutes
 				</a>
 			</div>

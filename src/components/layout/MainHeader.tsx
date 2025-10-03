@@ -31,7 +31,7 @@ export default function MainHeader() {
 		<Navbar
 			theme={OrangeLinkTheme}
 			fluid
-			className="relative bg-orange-50 py-4 border-b border-orange-300 dark:bg-gray-900 dark:border-gray-700 z-20">
+			className="relative bg-sky-50 border-none py-4 z-20">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
@@ -43,16 +43,16 @@ export default function MainHeader() {
 				<span
 					className={`${
 						isActive(pathname, "/") &&
-						"text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-500"
-					} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold flex items-center ms-`}>
+						"text-sky-700 hover:text-sky-800 dark:text-white dark:underline dark:hover:text-gray-200"
+					} text-gray-700 hover:text-sky-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
 					<span>Fruto del Espíritu </span>
-					<span className="text-xs inline-block bg-orange-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
+					<span className="text-xs inline-block bg-sky-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
 						Beta
 					</span>
 				</span>
 			</NavbarBrand>
 			<NavbarToggle />
-			<NavbarCollapse className="items-center">
+			<NavbarCollapse>
 				<div className="flex-col md:flex md:flex-row md:items-center gap-4">
 					{MainNavigation.map((nav: NavigationItemType) => (
 						<NavbarLink
@@ -60,7 +60,7 @@ export default function MainHeader() {
 							as={Link}
 							href={nav.href}
 							active={isActive(pathname, nav.href)}
-							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
+							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
 							{nav.name}
 						</NavbarLink>
 					))}
@@ -69,7 +69,7 @@ export default function MainHeader() {
 							as={Link}
 							href="/perfil"
 							active={isActive(pathname, "/perfil")}
-							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
+							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
 							Admin
 						</NavbarLink>
 					) : (
@@ -77,12 +77,12 @@ export default function MainHeader() {
 							as={Link}
 							href="/log"
 							active={isActive(pathname, "/log")}
-							className="dark:text-gray-300  dark:hover:text-white rounded-2xl px-3 py-2 text-sm font-medium">
+							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
 							Iniciar Sesión
 						</NavbarLink>
 					)}
-					<div className="px-3">
-						<DarkThemeToggle />
+					<div className="text-center">
+						<DarkThemeToggle className="text-sky-700 cursor-pointer hover:bg-transparent focus:ring-1 focus:ring-sky-700" />
 					</div>
 				</div>
 			</NavbarCollapse>
