@@ -18,7 +18,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row px-4 p-4 bg-orange-50 dark:bg-gray-700 border-orange-300 dark:border-gray-600 rounded-2xl border">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row px-4 p-4 bg-sky-50 dark:bg-gray-700 border-sky-100 dark:border-gray-600 rounded-2xl border">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
@@ -31,7 +31,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 			<div className="flex flex-col justify-between">
 				<div>
 					<div className="flex items-center gap-x-4 text-xs">
-						<span className="relative z-10 rounded-2xl bg-orange-100 border border-orange-700 dark:border-gray-50 dark:bg-gray-900 px-3 py-1.5 font-medium text-orange-700 dark:text-gray-50  transition-colors duration-200">
+						<span className="relative z-10 rounded-2xl bg-sky-100 border border-sky-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
 							{article.category_name}
 						</span>
 						<time
@@ -41,7 +41,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 						</time>
 					</div>
 					<div className="group relative max-w-xl">
-						<h3 className="mt-3 text-xl font-semibold text-orange-700 dark:text-gray-50 group-hover:text-gray-600 dark:group-hover:text-gray-200">
+						<h3 className="mt-3 text-xl font-semibold text-sky-700 dark:text-white group-hover:text-sky-800 dark:group-hover:text-gray-200 dark:underline">
 							<Link href={`/lecturas/${article.slug}`}>
 								<span className="absolute inset-0" />
 								{article.title}
@@ -65,7 +65,7 @@ export function ArticleList({
 	articles: ArticleType[];
 }) {
 	return (
-		<section className="bg-white dark:bg-gray-800 border border-t-orange-300 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
+		<section className="bg-white dark:bg-gray-800 border border-t-sky-100 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{children}
 				<div className="space-y-4 mt-8 lg:mt-16">

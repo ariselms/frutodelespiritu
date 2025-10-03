@@ -19,8 +19,8 @@ const parseSid = (sid: string) => {
 export function ChapterDetails({ ChapterContent }: any) {
 
 	const contentRef = useRef<HTMLDivElement>(null);
-	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
-	const { bibleId, bookId, chapterId } = useParams();
+	const [selectedVerses] = useState<Set<string>>(new Set());
+	const { bibleId } = useParams();
 
 	// Effect for scrolling to a hash link (no changes needed here)
 	useEffect(() => {

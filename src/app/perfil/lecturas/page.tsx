@@ -117,13 +117,13 @@ export default function UserLecturesPage() {
 				)}
 
 				{userLectures.length > 0 ? (
-					<List className="max-w-5xl divide-y divide-orange-200 dark:divide-gray-700 w-full">
+					<List className="max-w-5xl divide-y divide-sky-200 dark:divide-gray-700 w-full">
 						{userLectures.map((lecture: ArticleType) => (
 							<ListItem
 								className="w-full flex items-center justify-between list-none py-2"
 								key={lecture.id}>
 								<Link
-									className="text-orange-600 dark:text-white underline"
+									className="text-sky-600 dark:text-white underline"
 									href={`/lecturas/${lecture.slug}`}>
 									{lecture.title}
 								</Link>

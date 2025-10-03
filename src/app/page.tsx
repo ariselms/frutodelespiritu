@@ -15,9 +15,8 @@ export default async function Home() {
 				type="info"
 				message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
 			/>
-			<FadeInMoveUp>
-				<MainJumbotron />
-			</FadeInMoveUp>
+			<MainJumbotron />
+
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
 				description={
