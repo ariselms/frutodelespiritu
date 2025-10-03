@@ -35,7 +35,7 @@ export function UserMainHeader() {
 					<Image
 						width={100}
 						height={100}
-						src={user?.image_url}
+						src={user?.image_url || "/images/animated/static-user.png"}
 						onError={(e) => {
 							(e.target as HTMLImageElement).src =
 								"/images/animated/static-user.png";
