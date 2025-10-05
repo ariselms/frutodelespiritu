@@ -9,7 +9,7 @@ export function BookPillBlock({
 	libros
 }: BookPillBlockProps) {
 	return (
-		<div className="mb-4 border-b border-orange-200 dark:border-gray-600 last:border-b-0 pt-3 pb-4">
+		<div className="mb-4 border-b border-sky-200 dark:border-gray-600 last:border-b-0 pt-3 pb-4">
 			<div className="flex items-center justify-center mb-2">
 				<Image
 					alt={seccion}
@@ -28,7 +28,7 @@ export function BookPillBlock({
 			<div className="p-4 grid grid-cols-2 sm:grid-cols-3 h-full max-w-3xl mx-auto gap-1.5">
 				{libros?.map((l: any) => (
 					<Link
-						className="bg-orange-700 hover:bg-orange-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold py-2.5 rounded-2xl transition-all text-xs md:text-base flex items-center justify-center border dark:border-gray-600"
+						className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-800 dark:hover:bg-gray-900 text-white font-bold py-2.5 rounded-2xl transition-all text-xs md:text-base flex items-center justify-center border dark:border-gray-600"
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
 						{l.name.toUpperCase()}
@@ -38,4 +38,4 @@ export function BookPillBlock({
 		</div>
 	);
 }
-//  bg-orange-200 border border-orange-100 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-orange-300  dark:focus:ring-gray-800 transition-all
+//  bg-sky-200 border border-sky-100 hover:bg-sky-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 transition-all

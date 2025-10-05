@@ -2,7 +2,6 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { FadeInMoveUp } from "@/components/animations/gsap";
 import {
 	ContentLeftTwoImagesRightDescription,
 	ContentRightTwoImagesLeftDescription
@@ -10,14 +9,15 @@ import {
 
 export default async function Home() {
 	return (
-		<main>
-			<AlertBanner
+		<main className="relative">
+
+      <AlertBanner
 				type="info"
 				message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
 			/>
-			<FadeInMoveUp>
-				<MainJumbotron />
-			</FadeInMoveUp>
+
+			<MainJumbotron />
+
 			<ContentLeftTwoImagesRight
 				title="Lee La Biblia"
 				description={

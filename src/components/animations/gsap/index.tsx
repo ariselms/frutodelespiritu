@@ -27,7 +27,7 @@ export function FadeInMoveUp({ children }: { children: React.ReactNode }) {
 				// scrollTrigger: {
 				// 	// Trigger the entire sequence when the parent container is visible.
 				// 	// You can also use a class that elements have in common to trigger the animation.
-				// 	trigger: ".fade-in-move-up",
+				// 	trigger: ".",
 				// 	toggleActions: "play none none none",
 				// 	once: true
 				// }

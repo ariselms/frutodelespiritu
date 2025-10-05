@@ -98,9 +98,9 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 			<button
         type="button"
 				onClick={handleSaveLecture}
-				className="rounde-2xl px-5 py-3 text-sm font-medium text-orange-700 dark:text-gray-100 rounded-2xl cursor-pointer bg-orange-100 dark:bg-gray-800 border border-orange-100 dark:border-gray-600 focus:ring-4 focus:ring-orange-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
+				className="rounde-2xl px-5 py-3 text-sm font-medium text-sky-700 dark:text-gray-100 rounded-2xl cursor-pointer bg-sky-100 dark:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
 				<svg
-					className="text-orange-700 lg:text-white dark:text-gray-100 m-1"
+					className="text-sky-700 lg:text-white dark:text-gray-100 m-1"
 					aria-hidden="true"
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

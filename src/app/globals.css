@@ -17,3 +17,18 @@ img .RaImageField-image{
 /*
 REACT ADMIN CUSTOM STYLES END
 */
+
+/*
+GRADIENTS
+*/
+.main-gradient-light{
+  background-color:rgb(0, 174, 255);
+  background-image:
+  radial-gradient(at 40% 20%, hsla(210,100%,74%,1) 0px, transparent 50%),
+  radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+  radial-gradient(at 0% 50%, hsla(220,85%,74%,1) 0px, transparent 50%),
+  radial-gradient(at 80% 50%, hsla(243,100%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 0% 100%, hsla(187,100%,77%,1) 0px, transparent 50%),
+  radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%),
+  radial-gradient(at 0% 0%, hsla(237,100%,76%,1) 0px, transparent 50%);
+}

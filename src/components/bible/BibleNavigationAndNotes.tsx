@@ -21,9 +21,9 @@ export function BibleNavigationAndNotes({
 			{previousChapterParams && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${prevParams[0]}/${prevParams[1]}/${prevParams[2]}`}
-					className="rounded-2xl border border-orange-100 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
+					className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-50 hover:bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-black dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
 					<svg
-						className="w-6 h-6 text-orange-700 bolder dark:text-white"
+						className="w-6 h-6 text-black bolder dark:text-white"
 						aria-hidden="true"
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
@@ -40,17 +40,17 @@ export function BibleNavigationAndNotes({
 					{prevParams[2]}
 				</Link>
 			)}
-			<h1 className="max-w-2xl font-extrabold tracking-tight leading-none  text-orange-700 dark:text-white text-center text-xl">
+			<h1 className="max-w-2xl font-extrabold tracking-tight leading-none  text-black dark:text-white text-center text-xl">
 				{BibleChapterData?.book?.name} {BibleChapterData?.chapter?.number}
 			</h1>
 			{nextChapterParams && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${nextParams[0]}/${nextParams[1]}/${nextParams[2]}`}
-					className="rounded-2xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
+					className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-50 hover:bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-black dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
 					{nextParams[1] !== BibleChapterData?.book?.id && nextParams[1]}{" "}
 					{nextParams[2]}
 					<svg
-						className="w-6 h-6 text-orange-700 dark:text-white"
+						className="w-6 h-6 text-black dark:text-white"
 						aria-hidden="true"
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"

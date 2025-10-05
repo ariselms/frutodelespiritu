@@ -18,6 +18,5 @@ export interface BtnLinkBtnTextProps {
 
 export interface JumbotronSectionProps {
     section: string,
-    imageSrc: string,
     description?: string
 }

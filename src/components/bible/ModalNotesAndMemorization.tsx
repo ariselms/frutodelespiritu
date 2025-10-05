@@ -5,14 +5,14 @@ import { parseSid } from "@/helpers";
 
 export default function ModalNotesAndMemorization({
 	selectedVerses,
-  setSelectedVerses,
+	setSelectedVerses,
 	bibleId,
-  chapterContent
+	chapterContent
 }: {
 	selectedVerses: Set<string>;
-  setSelectedVerses: React.Dispatch<React.SetStateAction<Set<string>>>;
+	setSelectedVerses: React.Dispatch<React.SetStateAction<Set<string>>>;
 	bibleId: string;
-  chapterContent: any
+	chapterContent: any;
 }) {
 	const [apiSelectedVerses, setApiSelectedVerses] = useState<Set<string>>(
 		new Set()
@@ -45,15 +45,14 @@ export default function ModalNotesAndMemorization({
 			// Handle the case where the selection is empty.
 			setApiSelectedVerses(new Set());
 		}
-
 	}, [selectedVerses]);
 
-  const handleCloseModal = () => {
-    // clear the selectedVerses
-    setSelectedVerses(new Set());
-    // clear the apiSelectedVerses
-    setApiSelectedVerses(new Set());
-  }
+	const handleCloseModal = () => {
+		// clear the selectedVerses
+		setSelectedVerses(new Set());
+		// clear the apiSelectedVerses
+		setApiSelectedVerses(new Set());
+	};
 
 	return (
 		<div className="fixed left-0 right-0 top-0 z-20 flex justify-center">

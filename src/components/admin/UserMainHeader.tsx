@@ -16,6 +16,7 @@ import { SignOutButton } from "@/components/SignOutButton";
 import { OrangeLinkTheme } from "@/components/theme";
 
 export function UserMainHeader() {
+
 	const pathname = usePathname();
 
 	const { user } = useAuthContext();
@@ -35,18 +36,18 @@ export function UserMainHeader() {
 						width={100}
 						height={100}
 						src={user?.image_url || "/images/animated/static-user.png"}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src =
+						onError={(e) => {
+							(e.target as HTMLImageElement).src =
 								"/images/animated/static-user.png";
-            }}
+						}}
 						className="mr-3 h-10 w-10 sm:h-9 rounded-2xl"
 						alt="Flowbite React Logo"
 					/>
 					<span
 						className={`${
 							isActive(pathname, "/perfil") &&
-							"text-orange-700 hover:text-orange-600 dark:text-orange-500 dark:hover:text-orange-600"
-						} text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
+							"text-sky-700 hover:text-sky-800 dark:text-sky-500 dark:hover:text-sky-600"
+						} hover:text-sky-800 text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
 						{user?.name || "Perfil"}
 					</span>
 				</NavbarBrand>

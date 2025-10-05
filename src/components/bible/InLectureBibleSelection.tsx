@@ -71,7 +71,7 @@ export default function InLectureBibleSelection({
 
 	return (
 		<Dropdown
-			className="rounded-2xl border border-orange-300 dark:border-gray-600 bg-orange-50 hover:bg-orange-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 font-bold text-orange-700 dark:text-gray-50 flex items-center transition-all sm:mt-0 text-xs sm:text-base md:text-lg"
+			className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-50 hover:bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 font-bold text-black dark:text-gray-50 flex items-center transition-all sm:mt-0 text-xs sm:text-base md:text-lg cursor-pointer"
 			label={`${currentBible}`}
 			dismissOnClick={true}>
 			{isLoading && <DropdownItem>Loading...</DropdownItem>}

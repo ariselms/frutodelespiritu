@@ -21,13 +21,12 @@ const parseSid = (sid: string) => {
 };
 
 export function ChapterDetails({ ChapterContent }: any) {
-
+  const { user } = useAuthContext();
+  const router = useRouter();
+  const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
-  const router  = useRouter();
-  const pathname = usePathname();
-  const { user } = useAuthContext();
 
 	// Effect for scrolling to a hash link (no changes needed here)
 	useEffect(() => {

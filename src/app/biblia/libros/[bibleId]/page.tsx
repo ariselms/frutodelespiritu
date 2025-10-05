@@ -76,7 +76,7 @@ export default async function BibleBooksPage({
 					/>
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-200 dark:border-gray-600 rounded-2xl ">
+							<div className="bg-sky-50 dark:bg-gray-700 border-1 border-sky-200 dark:border-gray-600 rounded-2xl ">
 								<BibleTestament era="Antiguo" />
 								<BookPillBlock
 									seccion="Pentateuco"
@@ -103,7 +103,7 @@ export default async function BibleBooksPage({
 									libros={profetas}
 								/>
 							</div>
-							<div className="bg-orange-50 dark:bg-gray-700 border-1 border-orange-200 dark:border-gray-600 rounded-2xl mt-4">
+							<div className="bg-sky-50 dark:bg-gray-700 border-1 border-sky-200 dark:border-gray-600 rounded-2xl mt-4">
 								<BibleTestament era="Nuevo" />
 								<BookPillBlock
 									seccion="Evangelios"
@@ -191,7 +191,7 @@ export async function generateMetadata({
 }
 const BibleTestament = ({ era }: { era: string }) => {
 	return (
-		<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-orange-950 dark:text-white underline">
+		<h3 className="text-3xl lg:text-3xl font-bold text-center mt-4 mb-8 text-sky-950 dark:text-white underline">
 			{era} Testamento
 		</h3>
 	);

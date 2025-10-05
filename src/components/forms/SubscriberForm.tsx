@@ -37,7 +37,7 @@ export default function SubscriberForm() {
   };
 
 	return (
-		<form className="fade-in-move-up" onSubmit={handleEmailSubmit}>
+		<form className="" onSubmit={handleEmailSubmit}>
 			<div className="flex items-center mb-3">
 				<div className="relative w-auto mr-3">
 					<label
@@ -56,7 +56,7 @@ export default function SubscriberForm() {
 						</svg>
 					</div>
 					<input
-						className="block bg-orange-50 dark:bg-gray-700 md:w-96 w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-2xl  focus:ring-orange-500 focus:border-orange-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+						className="block bg-sky-50 dark:bg-gray-700 md:w-96 w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-2xl  focus:ring-sky-500 focus:border-sky-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
 						placeholder="Ingresa tu correo electrónico"
 						type="email"
 						name="email"
@@ -70,7 +70,7 @@ export default function SubscriberForm() {
 					<input
 						type="submit"
 						value="Suscríbete"
-						className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
+						className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
 						name="member_submit"
 						id="member_submit"
 					/>
