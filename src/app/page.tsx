@@ -2,7 +2,6 @@ import MainJumbotron from "@/components/JumbotronMain";
 import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
 import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
 import { AlertBanner } from "@/components/AlertBanner";
-import { FadeInMoveUp } from "@/components/animations/gsap";
 import {
 	ContentLeftTwoImagesRightDescription,
 	ContentRightTwoImagesLeftDescription
