@@ -85,7 +85,7 @@ export default async function BibleBooksPage({
 					/>
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl ">
+							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl">
 								<BibleTestament era="Antiguo" />
 								<BookPillBlock
 									seccion="Pentateuco"
@@ -112,7 +112,7 @@ export default async function BibleBooksPage({
 									libros={profetas}
 								/>
 							</div>
-							<div className="bg-sky-50 dark:bg-gray-700 border-1 border-sky-200 dark:border-gray-600 rounded-2xl mt-4">
+							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl mt-4">
 								<BibleTestament era="Nuevo" />
 								<BookPillBlock
 									seccion="Evangelios"
