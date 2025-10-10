@@ -216,19 +216,19 @@ const randomVerse = getRandomBibleVerseWithReference();
 
 export default function ArticleDetailRandomVerse() {
 	return (
-		<div className="mb-8 mx-4 lg:mx-0 mt-8 lg:mt-0 bg-sky-50 dark:bg-gray-700 border-1 border-sky-100 dark:border-gray-600 p-4 rounded-2xl text-black dark:text-white">
-			<h4 className="text-center">Versículo Destacado</h4>
-			<div className="my-10">
+		<div className="mb-8 mx-4 lg:mx-0 mt-8 lg:mt-0 bg-sky-50 dark:bg-gray-800 border-1 border-sky-200 dark:border-gray-600 p-4 rounded-2xl text-black dark:text-white">
+			<h4 className="text-center uppercase font-bold">Versículo Destacado</h4>
+			<div className="mt-4 mb-8">
 				<p className="text-sm font-extrabold">{randomVerse.verse_or_passage}</p>
 				<p className="text-sm">{randomVerse.text}</p>
 			</div>
 			<Link
-				className="inline-block px-5 py-3 text-sm font-medium text-center text-sky-700 dark:text-gray-100 rounded-2xl cursor-pointer bg-sky-100 dark:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 w-full"
+				className="inline-block px-5 py-3 text-sm font-medium text-center text-sky-50 dark:text-gray-100 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 w-full"
 				href={`/biblia/libros/capitulos/versiculos/${randomVerse.reference}`}>
 				Leer Contexto
 			</Link>
 			<Link
-				className="inline-block mt-5 mb-2 px-5 py-3 text-sm font-medium text-center text-sky-700 dark:text-gray-100 rounded-2xl cursor-pointer bg-sky-100 dark:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 w-full"
+				className="inline-block mt-4 px-5 py-3 text-sm font-medium text-center text-sky-50 dark:text-gray-100 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 w-full"
 				href="/biblia">
 				Abrir Biblia
 			</Link>

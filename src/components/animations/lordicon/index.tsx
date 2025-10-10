@@ -38,18 +38,14 @@ export function LordIconHover({
 	return (
 		// 4. Attach the event handlers to a wrapper div.
 		<div
-      className="cursor-pointer flex flex-col items-center justify-center"
+			className="cursor-pointer flex flex-row items-center justify-between"
 			onMouseEnter={handleMouseEnter}
 			// onClick={handleClick}
-      >
-			<Player
-				// 5. Assign the ref to the Player component.
-				ref={playerRef}
-				icon={ICON_SRC}
-				size={size}
-				state={state}
-			/>
-      {text}
+		>
+			<div className="mr-0.5">
+				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
+			</div>
+			<span className="ml-0.5">{text}</span>
 		</div>
 	);
 }

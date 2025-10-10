@@ -1,8 +1,8 @@
 import { createTheme } from "flowbite-react";
 
-export const OrangeLinkTheme = createTheme({
+export const BlueNavTheme = createTheme({
 	root: {
-		base: "bg-sky-100 dark:bg-gray-900 px-2 py-2.5 sm:px-4 border-sky-100 dark:border-gray-700 border-b",
+		base: "bg-sky-50 dark:bg-gray-950 border-b border-sky-100 dark:border-gray-900 px-2 py-4 sm:px-4",
 		rounded: {
 			on: "rounded",
 			off: ""
@@ -33,8 +33,8 @@ export const OrangeLinkTheme = createTheme({
 	link: {
 		base: "block py-2 pl-3 pr-4 md:p-0",
 		active: {
-			on: "bg-transparent text-sky-50 hover:text-sky-100 dark:hover:text-white dark:hover:underline md:text-sky-50 md:hover:text-sky-100 md:dark:text-white mb-3 last:mb-0 md:mb-0 underline underline-offset-2",
-			off: "text-sky-200 border-0 hover:text-sky-100 dark:text-gray-200  dark:hover:text-white dark:hover:underline mb-3 last:mb-0 md:mb-0 hover:bg-transparent dark:hover:bg-gray-900 md:hover:text-sky-100 transition-all hover:underline underline-offset-2"
+			on: "bg-transparent text-sky-700 hover:text-sky-800 dark:hover:text-white dark:hover:underline  md:text-sky-700 md:hover:text-sky-800 md:dark:text-white mb-3 last:mb-0 md:mb-0 dark:underline dark:underline-offset-4 transition-all",
+			off: "text-gray-700 border-0 hover:text-sky-700 dark:text-gray-200  dark:hover:text-white dark:hover:underline dark:hover:underline-offset-4 mb-3 last:mb-0 md:mb-0 hover:bg-sky-50 dark:hover:bg-transparent md:hover:text-sky-700 transition-all"
 		},
 		disabled: {
 			on: "text-gray-300 hover:cursor-not-allowed dark:text-gray-600",
@@ -42,7 +42,7 @@ export const OrangeLinkTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-2xl p-2 text-sm text-sky-50 hover:bg-sky-500 hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-sky-700 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-700",
+		base: "inline-flex items-center rounded-2xl p-2 text-sm text-sky-700 hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-sky-700 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -52,7 +52,7 @@ export const ModalUserProfileTheme = createTheme({
 	root: {
 		base: "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
 		show: {
-			on: "flex bg-gray-100/80 dark:bg-gray-900/80",
+			on: "flex backdrop-blur",
 			off: "hidden"
 		},
 		sizes: {
@@ -82,7 +82,7 @@ export const ModalUserProfileTheme = createTheme({
 	content: {
 		base: "relative h-full w-full p-4 md:h-auto",
 		inner:
-			"relative flex max-h-[90dvh] flex-col rounded-2xl shadow-2xl  bg-white dark:bg-gray-800 border border-sky-100 dark:border-gray-600"
+			"relative flex max-h-[90dvh] flex-col rounded-2xl shadow-2xl backdrop-blur  bg-sky-100/70 dark:bg-gray-900/50 border border-sky-100 dark:border-gray-600"
 	},
 	body: {
 		base: "flex-1 overflow-auto p-6",
@@ -93,7 +93,7 @@ export const ModalUserProfileTheme = createTheme({
 		popup: "border-b-0 p-2",
 		title: "text-xl font-medium text-gray-900 dark:text-white",
 		close: {
-			base: "ml-auto inline-flex items-center rounded-2xl bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
+			base: "ml-auto inline-flex items-center rounded-2xl bg-transparent p-1.5 text-sm text-red-600 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-50 dark:hover:text-red-500 cursor-pointer",
 			icon: "h-5 w-5"
 		}
 	},
@@ -104,36 +104,35 @@ export const ModalUserProfileTheme = createTheme({
 });
 
 export const DropdownBibleSelectionTheme = createTheme({
-	"arrowIcon": "ml-2 h-4 w-4",
-	"content": "py-1 focus:outline-none",
-	"floating": {
-		"animation": "transition-opacity",
-		"arrow": {
-			"base": "absolute z-10 h-2 w-2 rotate-45",
-			"style": {
-				"dark": "bg-gray-900 dark:bg-gray-700",
-				"light": "bg-white",
-				"auto": "bg-white dark:bg-gray-700"
+	arrowIcon: "ml-2 h-4 w-4",
+	content: "py-1 focus:outline-none",
+	floating: {
+		animation: "transition-opacity",
+		arrow: {
+			base: "absolute z-10 h-2 w-2 rotate-45",
+			style: {
+				dark: "bg-gray-900 dark:bg-gray-700",
+				light: "bg-white",
+				auto: "bg-white dark:bg-gray-700"
 			},
-			"placement": "-4px"
+			placement: "-4px"
 		},
-		"base": "z-10 w-fit divide-y divide-gray-100 rounded shadow focus:outline-none",
-		"content": "py-1 text-sm text-gray-700 dark:text-gray-200",
-		"divider": "my-1 h-px bg-gray-100 dark:bg-gray-600",
-		"header": "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200",
-		"hidden": "invisible opacity-0",
-		"item": {
-			"container": "",
-			"base": "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-sky-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-2xl",
-			"icon": "mr-2 h-4 w-4"
+		base: "z-10 w-fit divide-y divide-gray-100 rounded shadow focus:outline-none",
+		content: "py-1 text-sm text-gray-700 dark:text-gray-200",
+		divider: "my-1 h-px bg-gray-100 dark:bg-gray-600",
+		header: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200",
+		hidden: "invisible opacity-0",
+		item: {
+			container: "",
+			base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-sky-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-2xl",
+			icon: "mr-2 h-4 w-4"
 		},
-		"style": {
-			"dark": "bg-gray-900 text-white dark:bg-gray-700",
-			"light": "border border-gray-200 bg-white text-gray-900",
-			"auto": "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white"
+		style: {
+			dark: "bg-gray-900 text-white dark:bg-gray-700",
+			light: "border border-gray-200 bg-white text-gray-900",
+			auto: "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white"
 		},
-		"target": "w-fit"
+		target: "w-fit"
 	},
-	"inlineWrapper": "flex items-center"
-
-})
+	inlineWrapper: "flex items-center"
+});

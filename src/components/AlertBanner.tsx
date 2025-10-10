@@ -12,8 +12,8 @@ export async function AlertBanner({type = "info", message}: {type?: string, mess
 			<div className="max-w-7xl mx-auto">
 				<Alert
 					color={type}
-					className="backdrop-blur-lg bg-sky-200/50 dark:bg-gray-900 mx-auto border border-sky-50/50 dark:border-none">
-					<div className="flex items-start md:items-center flex-wrap gap-x-3 mb-2">
+					className="bg-sky-200 dark:bg-gray-900 mx-auto border border-sky-300 dark:border-none">
+					<div className="flex items-start md:items-center flex-wrap gap-x-3 mb-3">
 						<HiInformationCircle className="text-black dark:text-white h-8 w-8 mb-1 md:mb-0 flex-1" />
 						<p className="text-black dark:text-white inline-block font-medium mb-3 md:mb-0 flex-8 md:flex-20 max-w-[80ch]">
 							{message}

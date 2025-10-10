@@ -13,7 +13,7 @@ import { DarkThemeToggle } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import { MainNavigation } from "@/static";
 import { NavigationItemType } from "@/models/navigationTypes";
-import { OrangeLinkTheme } from "../theme";
+import { BlueNavTheme } from "../theme";
 import { isActive } from "@/helpers";
 import { useAuthContext } from "@/context/authContext";
 import { useEffect } from "react";
@@ -29,9 +29,9 @@ export default function MainHeader() {
 
 	return (
 		<Navbar
-			theme={OrangeLinkTheme}
+			theme={BlueNavTheme}
 			fluid
-			className="relative bg-sky-50 dark:bg-gray-950 border-none py-4 z-20">
+			className="relative bg-sky-50 dark:bg-gray-950 py-4 z-20 border-b border-sky-200">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
@@ -42,13 +42,11 @@ export default function MainHeader() {
 				/>
 				<span
 					className={`${
-						isActive(pathname, "/")
-							? "text-sky-50 hover:text-sky-100 dark:text-white dark:hover:text-gray-200 underline-offset-3" // Active styles
-							: "text-sky-200 hover:text-sky-200 dark:text-gray-300 hover:dark:text-white" // Inactive styles
-					} self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`} // Common styles
-				>
+						isActive(pathname, "/") &&
+						"text-sky-700 hover:text-sky-800 dark:text-white dark:underline dark:hover:text-gray-200"
+					} text-gray-700 hover:text-sky-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
 					<span>Fruto del Espíritu </span>
-					<span className="text-xs inline-block bg-sky-700 dark:bg-gray-50 px-3 py-1 ms-2 text-sky-50 dark:text-gray-800 rounded-2xl no-underline">
+					<span className="text-xs inline-block bg-sky-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
 						Beta
 					</span>
 				</span>
@@ -84,7 +82,7 @@ export default function MainHeader() {
 						</NavbarLink>
 					)}
 					<div className="text-center">
-						<DarkThemeToggle className="text-sky-50 hover:bg-sky-500 cursor-pointer focus:ring-sky-700" />
+						<DarkThemeToggle className="text-sky-700 cursor-pointer hover:bg-transparent focus:ring-1 focus:ring-sky-700" />
 					</div>
 				</div>
 			</NavbarCollapse>

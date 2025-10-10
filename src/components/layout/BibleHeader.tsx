@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { isActive } from "@/helpers";
 import { useParams, usePathname } from "next/navigation";
@@ -17,7 +18,9 @@ export default function BibleHeader() {
 
 	return (
 		<header className="bg-sky-50 dark:bg-gray-950 border-b border-sky-100 dark:border-b dark:border-gray-700 w-full">
+
 			<nav className="max-w-5xl mx-auto flex items-end justify-start sm:justify-center gap-1 md:gap-2 lg:gap-4 pt-8 text-sky-50 dark:text-gray-300 w-full overflow-auto">
+
 				<Link
 					className={`${
 						isActive(pathname, "/biblia") &&
@@ -31,6 +34,7 @@ export default function BibleHeader() {
 						text="Traducciones"
 					/>
 				</Link>
+
 				{bibleId && (
 					<Link
 						className={`${
@@ -46,6 +50,7 @@ export default function BibleHeader() {
 						/>
 					</Link>
 				)}
+
 				{bookId && (
 					<Link
 						className={`${
@@ -64,6 +69,7 @@ export default function BibleHeader() {
 						/>
 					</Link>
 				)}
+
 				{chapterId && (
 					<Link
 						className={`${
@@ -72,18 +78,19 @@ export default function BibleHeader() {
 								`/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}`
 							) &&
 							"bg-sky-700 dark:bg-gray-900 px-4 py-2 rounded-t-2xl dark:text-gray-50"
-						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex flex-col text-center items-center justify-around border border-b-0 border-x border-t dark:border-gray-600`}
+						} px-4 py-2 bg-gray-500 rounded-t-2xl text-white dark:text-gray-50 text-sm md:text-base min-h-20 sm:min-h-16 lg:min-h-12 flex text-center items-center justify-between border border-b-0 border-x border-t dark:border-gray-600`}
 						href={`/biblia/libros/capitulos/versiculos/${bibleId}/${bookId}/${chapterId}`}>
 						<Image
 							alt="Logo"
 							width={100}
 							height={100}
 							src="/images/animated/static-reading.png"
-							className="w-8 h-8 mr-0"
+							className="w-8 h-8 mr-0.5"
 						/>
-						Lectura
+						<span>Lectura</span>
 					</Link>
 				)}
+
 				{bibleId && (
 					<Link
 						className={`${
@@ -99,6 +106,7 @@ export default function BibleHeader() {
 						/>
 					</Link>
 				)}
+
 			</nav>
 		</header>
 	);
