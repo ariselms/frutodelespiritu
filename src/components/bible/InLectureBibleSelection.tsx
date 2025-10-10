@@ -1,10 +1,10 @@
 "use client";
 
 import { Dropdown, DropdownItem } from "flowbite-react";
-import { HiBookOpen } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import { BibleDataType } from "@/models/bibleTypes";
 import { useParams, useRouter } from "next/navigation";
+import { DropdownBibleSelectionTheme } from "@/components/theme/";
 
 export default function InLectureBibleSelection({
 	chapterDetails
@@ -27,13 +27,13 @@ export default function InLectureBibleSelection({
 
 				try {
 
-          // TODO: Move this into a single function
-          // Also used in BibliaPage() .page.tsx
-          const url = "https://bible.helloao.org/api/available_translations.json";
+					// TODO: Move this into a single function
+					// Also used in BibliaPage() .page.tsx
+					const url = "https://bible.helloao.org/api/available_translations.json";
 
-          const bibleRequest = await fetch(url);
+					const bibleRequest = await fetch(url);
 
-          const bibleResponse = await bibleRequest.json();
+					const bibleResponse = await bibleRequest.json();
 
 					if (bibleResponse?.translations?.length) {
 						const filteredBibles = bibleResponse.translations.filter(
@@ -49,10 +49,15 @@ export default function InLectureBibleSelection({
 						);
 					}
 				} catch (err: any) {
+
 					console.error("Error fetching or parsing bibles:", err);
+
 					setCurrentBible("Error loading");
+
 				} finally {
+
 					setIsLoading(false);
+
 				}
 			};
 
@@ -71,7 +76,8 @@ export default function InLectureBibleSelection({
 
 	return (
 		<Dropdown
-			className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-50 hover:bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 font-bold text-black dark:text-gray-50 flex items-center transition-all sm:mt-0 text-xs sm:text-base md:text-lg cursor-pointer"
+			theme={DropdownBibleSelectionTheme}
+			className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 font-bold text-sky-50 dark:text-gray-50 flex items-center transition-all px-4 py-2 sm:mt-0 text-xs sm:text-base md:text-lg cursor-pointer"
 			label={`${currentBible}`}
 			dismissOnClick={true}>
 			{isLoading && <DropdownItem>Loading...</DropdownItem>}
@@ -79,6 +85,19 @@ export default function InLectureBibleSelection({
 			{!isLoading &&
 				spanishBibles.map((bible) => (
 					<DropdownItem
+						onMouseEnter={
+							// add change to background color and text color on hover
+							(e) => (
+								e.currentTarget.style.backgroundColor = "#f0f9ff", 
+								e.currentTarget.style.color = "#111827"
+							)
+						}
+						onMouseLeave={
+							(e) => (
+								e.currentTarget.style.backgroundColor = "transparent",
+								e.currentTarget.style.color = "inherit"
+							)
+						}
 						onClick={() => handleBibleSelection({ bId: bible.id })}
 						key={bible.id}>
 						{bible.name}

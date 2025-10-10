@@ -5,22 +5,26 @@ import { BibleSearchResultList } from "./BibleSearchResultsSearchResults";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FetchEndpoints } from "@/static";
 
-// TODO: Create a type for categories if needed
-export function BibleSearch({bibleId}: {bibleId: string}) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+// TODO: CREATE AN ENDPOINT FOR SEARCHING IN THE SELECTED BIBLES
+// TODO: ADD THE SELECTED BIBLE COMPONENT TO THIS PAGE
+
+export function BibleSearch({ bibleId }: { bibleId: string }) {
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [bibleKeywordSearch, setBibleKeywordSearch] = useState(
-    searchParams.get("query") || ""
-  );
+		searchParams.get("query") || ""
+	);
 
-  const [bibleKeywordResults, setBibleKeywordResults] = useState<any>();
+	const [bibleKeywordResults, setBibleKeywordResults] = useState<any>();
 
-  useEffect(() => {
-    if (bibleKeywordSearch) {
-      handleKeywordSearchSubmit()
-    }
-  }, []);
+	useEffect(() => {
+		if (bibleKeywordSearch) {
+			handleKeywordSearchSubmit()
+		}
+	}, []);
 
 	const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setBibleKeywordSearch(event.target.value);
@@ -31,15 +35,17 @@ export function BibleSearch({bibleId}: {bibleId: string}) {
 	) => {
 		event?.preventDefault();
 
-    router.push(`/biblia/${bibleId}/buscar?query=${bibleKeywordSearch.trim()}`);
+		router.push(`/biblia/${bibleId}/buscar?query=${bibleKeywordSearch.trim()}`);
 
 		try {
+			setIsLoading(true);
+
 			// url to request bible term:
 			const url = FetchEndpoints.BibleApiBase.SearchBibleVerses(
-        bibleKeywordSearch.trim()
-      );
+				bibleKeywordSearch.trim()
+			);
 
-			const request = await fetch(url, {
+			const requestBibleSearch = await fetch(url, {
 				method: "GET",
 				headers: {
 					"api-key": `${process.env.NEXT_PUBLIC_BIBLE_API_KEY}`,
@@ -47,17 +53,31 @@ export function BibleSearch({bibleId}: {bibleId: string}) {
 				}
 			});
 
-			if (!request.ok) {
-				const errorData = await request.json();
-				console.error(`HTTP error! Status: ${request.status}`, errorData);
+			// 1. Call .json() only ONCE and await its result
+			const responseData = await requestBibleSearch.json();
+
+			if (!responseData || !responseData.data) {
+				setBibleKeywordResults(null);
 				return;
 			}
 
-			const { data } = await request.json();
+			// 2. Now you can use the 'responseData' variable as much as you want
+			console.log("Full response:", responseData);
+
+			const { data } = responseData; // Destructure the data from the variable
+
+			console.log("Data to be set in state:", data);
 
 			setBibleKeywordResults(data);
+
 		} catch (error) {
+
 			console.error(error);
+
+		} finally {
+
+			setIsLoading(false);
+
 		}
 	};
 
@@ -101,7 +121,29 @@ export function BibleSearch({bibleId}: {bibleId: string}) {
 					</div>
 				</div>
 			</form>
-			<BibleSearchResultList bibleId={bibleId} results={bibleKeywordResults?.verses} />
+
+			{isLoading && <p className="text-black dark:text-white mt-4">Buscando resultados...</p>}
+
+			{!isLoading && bibleKeywordResults?.verses?.length === 0 || bibleKeywordResults === null && (
+				<p className="text-black dark:text-white mt-4">No se encontraron resultados.</p>
+			)}
+
+			{!isLoading && bibleKeywordResults?.verses?.length === 1 && (
+				<p className="text-black dark:text-white mt-4">Se encontró 1 resultado.</p>
+			)}
+
+			{!isLoading &&
+				bibleKeywordResults?.verses?.length > 1 && (
+					<p className="text-black dark:text-white mt-4">
+						Mostrando {bibleKeywordResults?.verses?.length} resultados.
+					</p>
+			)}
+
+			<BibleSearchResultList 
+				bibleId={bibleId} 
+				results={bibleKeywordResults?.verses} 
+			/>
+
 		</>
 	);
 }

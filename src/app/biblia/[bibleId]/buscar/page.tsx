@@ -7,7 +7,7 @@ export default async function BuscarBibliaPage({
 	params: Promise<{ bibleId: string }>;
 }) {
 
-  const { bibleId } = await params
+	const { bibleId } = await params
 
 	return (
 		<main>
@@ -19,8 +19,8 @@ export default async function BuscarBibliaPage({
 			<section className="bg-white dark:bg-gray-800">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<BibleSearch
-            bibleId={bibleId}
-          />
+						bibleId={bibleId}
+					/>
 				</div>
 			</section>
 		</main>
