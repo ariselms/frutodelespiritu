@@ -30,17 +30,11 @@ export function LordIconHover({
 		playerRef.current?.playFromBeginning();
 	};
 
-  // 4. (Optional but recommended) Define an onClick handler to trigger the animation.
-	// const handleClick = () => {
-	// 	playerRef?.current?.playFromBeginning();
-	// };
-
 	return (
-		// 4. Attach the event handlers to a wrapper div.
+		// 3. Attach the event handlers to a wrapper div.
 		<div
 			className="cursor-pointer flex flex-row items-center justify-between"
 			onMouseEnter={handleMouseEnter}
-			// onClick={handleClick}
 		>
 			<div className="mr-0.5">
 				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
