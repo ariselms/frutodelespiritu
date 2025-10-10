@@ -28,7 +28,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
 
-	// Effect for scrolling to a hash link (no changes needed here)
+	// Effect for scrolling to a hash link
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			const hash = window.location.hash;
@@ -61,19 +61,19 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 		const handleContainerClick = (event: MouseEvent) => {
 
-			// if (!user) {
+			if (!user) {
 
-			// 	const redirectUrl = serverBaseUrl + pathname;
+				const redirectUrl = serverBaseUrl + pathname;
 
-			// 	toast.warning(
-			// 		"Debes iniciar sesión para guardar notas y listas de memorización."
-			// 	);
+				toast.warning(
+					"Debes iniciar sesión para guardar notas y listas de memorización."
+				);
 
-			// 	router.push(`/log?redirectUrl=${redirectUrl}`);
+				router.push(`/log?redirectUrl=${redirectUrl}`);
 
-      //   return;
+        return;
 
-			// }
+			}
 
 			const verseSpan = (event.target as Element).closest("span.v");
 
@@ -152,11 +152,11 @@ export function ChapterDetails({ ChapterContent }: any) {
 			});
 		};
 
-		// content.addEventListener("click", handleContainerClick);
+		content.addEventListener("click", handleContainerClick);
 
 		return () => {
 
-			// content.removeEventListener("click", handleContainerClick);
+			content.removeEventListener("click", handleContainerClick);
 
 		};
 
@@ -228,24 +228,35 @@ export function ChapterDetails({ ChapterContent }: any) {
 	return (
 		<>
 			<div className="bible-chapter max-w-[80ch] mx-auto my-4" ref={contentRef}>
+
 				{ChapterContent.map((content: any) => {
+
 					if (content.type === "heading") {
+
 						return (
 							<h2 key={content.content[0]} id={content.content[0]}>
-								{content.content[0]}
-							</h2>
+
+            		{content.content[0]}
+
+            	</h2>
 						);
+
 					}
 					if (content.type === "verse") {
+
 						return (
-							<p key={content.number}>
-								<span
+
+            <p key={content.number}>
+
+                <span
 									className="v"
 									id={content.number}
 									data-number={content.number}>
 									{content.number}
 								</span>{" "}
+
 								{content.content.map((verse: any, index: number) => {
+
 									// Specifically handle line break objects
 									// If the verse object is a line break, render a <br /> tag.
 									if (verse && verse.lineBreak) {
@@ -279,16 +290,21 @@ export function ChapterDetails({ ChapterContent }: any) {
 							</p>
 						);
 					}
+
 					return null;
+
 				})}
 			</div>
+
 			{selectedVerses.size > 0 && (
+
 				<ModalNotesAndMemorization
 					selectedVerses={selectedVerses}
           setSelectedVerses={setSelectedVerses}
 					bibleId={String(bibleId)}
 					chapterContent={ChapterContent}
 				/>
+
 			)}
 		</>
 	);
