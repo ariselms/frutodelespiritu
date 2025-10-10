@@ -21,7 +21,7 @@ export default async function BibleBooksPage({
 	let { bibleId } = await params;
 	let view = await searchParams;
 	let booksView = view?.booksView;
-	
+
 	if (
 		booksView &&
 		booksView !== BibleTranslationsView.detailed &&
@@ -39,12 +39,12 @@ export default async function BibleBooksPage({
 		BibleCheckTypes.BibleTranslation,
 		bibleId
 	);
-	
+
 	if (!idExists) {
 		bibleId = SpanishBibleApiIds.ReinaValera1909;
 		redirect(`/biblia/libros/${bibleId}`);
 	}
-	
+
 	const bibleInfoRequest = await fetch(
 		`https://bible.helloao.org/api/${bibleId}/books.json`
 	);
@@ -52,7 +52,7 @@ export default async function BibleBooksPage({
 	const bibleInfoResponse = await bibleInfoRequest.json();
 	const bibleInfo = await bibleInfoResponse.translation;
 	const books = await bibleInfoResponse.books;
-	
+
 	let pentateuco: BibleBookType[] = books.slice(0, 5);
 	let historicos: BibleBookType[] = books.slice(5, 17);
 	let poetiocs: BibleBookType[] = books.slice(17, 22);
@@ -61,7 +61,7 @@ export default async function BibleBooksPage({
 	let historico: BibleBookType[] = books.slice(43, 44);
 	let cartas: BibleBookType[] = books.slice(44, 65);
 	let revelaciones: BibleBookType[] = books.slice(65, 66);
-	
+
 	if (books.length > 0) {
 		pentateuco = books.slice(0, 5);
 		historicos = books.slice(5, 17);
@@ -72,7 +72,7 @@ export default async function BibleBooksPage({
 		cartas = books.slice(44, 65);
 		revelaciones = books.slice(65, 66);
 	}
-	
+
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800">
@@ -85,7 +85,7 @@ export default async function BibleBooksPage({
 					/>
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
-							<div className="bg-sky-50 dark:bg-gray-700 border-1 border-sky-200 dark:border-gray-600 rounded-2xl ">
+							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl ">
 								<BibleTestament era="Antiguo" />
 								<BookPillBlock
 									seccion="Pentateuco"

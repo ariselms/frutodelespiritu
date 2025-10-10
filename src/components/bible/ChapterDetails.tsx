@@ -136,54 +136,71 @@ export function ChapterDetails({ ChapterContent }: any) {
 		};
 
 		content.addEventListener("click", handleContainerClick);
+
 		return () => {
 			content.removeEventListener("click", handleContainerClick);
 		};
+
 	}, [ChapterContent, user]);
 
 	// EFFECT 2: Apply visual styles (this is correct)
 	useEffect(() => {
 		const content = contentRef.current;
+
 		if (!content) return;
-		// Cleanup phase
+
+    // Cleanup phase
 		content.querySelectorAll("mark.verse-highlight").forEach((markElement) => {
+
 			const parent = markElement.parentNode;
-			if (parent) {
+
+      if (parent) {
 				while (markElement.firstChild) {
 					parent.insertBefore(markElement.firstChild, markElement);
 				}
 				parent.removeChild(markElement);
 			}
+
 		});
 
 		// Application phase
 		if (selectedVerses.size > 0) {
+
 			selectedVerses.forEach((sid) => {
-				const parsed = parseSid(sid);
-				if (!parsed) return;
+
+        const parsed = parseSid(sid);
+
+        if (!parsed) return;
 
 				const verseNumberSpan = content.querySelector(
 					`span[data-number="${parsed.verse}"]`
 				);
-				if (!verseNumberSpan) return;
+
+        if (!verseNumberSpan) return;
 
 				const parentP = verseNumberSpan.parentElement;
-				if (!parentP) return;
+
+        if (!parentP) return;
 
 				const nodesToWrap = [];
-				let currentNode = verseNumberSpan.nextSibling;
-				while (currentNode) {
+
+        let currentNode = verseNumberSpan.nextSibling;
+
+        while (currentNode) {
 					nodesToWrap.push(currentNode);
 					currentNode = currentNode.nextSibling;
 				}
 
 				if (nodesToWrap.length > 0) {
-					const wrapper = document.createElement("mark");
-					wrapper.className =
+
+          const wrapper = document.createElement("mark");
+
+          wrapper.className =
 						"verse-highlight bg-orange-100 dark:bg-gray-900 dark:text-gray-100 rounded px-1";
 
 					parentP.insertBefore(wrapper, nodesToWrap[0]);
-					nodesToWrap.forEach((node) => wrapper.appendChild(node));
+
+          nodesToWrap.forEach((node) => wrapper.appendChild(node));
 				}
 			});
 		}

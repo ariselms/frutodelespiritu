@@ -17,7 +17,7 @@ export const SpanishBibleItem = ({ bible }: { bible: BibleDataType }) => {
 	};
 	return (
 		<div
-			className="bg-sky-50 dark:bg-gray-700 border border-sky-100 dark:border-gray-600 rounded-2xl p-4 flex flex-col h-full"
+			className="bg-sky-50 dark:bg-gray-900/50 border border-sky-200 dark:border-gray-600 rounded-2xl p-4 flex flex-col h-full"
 			key={bible.id}>
 			<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">
 				{bible.name}
@@ -25,7 +25,7 @@ export const SpanishBibleItem = ({ bible }: { bible: BibleDataType }) => {
 			{/* 3. Add the onClick handler to the button div */}
 			<div
 				onClick={handleButtonClick}
-				className="py-4 px-8 text-lg text-white font-bold uppercase dark:text-gray-50 rounded-2xl cursor-pointer bg-sky-700 border border-sky-100 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-sky-300 dark:focus:ring-gray-800 transition-all flex items-center justify-center mt-auto gap-4">
+				className="py-2 px-8 text-lg text-white font-bold uppercase dark:text-gray-50 rounded-2xl cursor-pointer bg-sky-700 border border-sky-100 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-sky-300 dark:focus:ring-gray-800 transition-all flex items-center justify-center mt-auto gap-4">
 				{/* 4. Pass the ref to the LordIconClick component */}
 				<LordIconClick
 					ref={lordIconRef}
