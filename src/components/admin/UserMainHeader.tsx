@@ -13,7 +13,7 @@ import {
 	NavbarToggle
 } from "flowbite-react";
 import { SignOutButton } from "@/components/SignOutButton";
-import { OrangeLinkTheme } from "@/components/theme";
+import { BlueNavTheme } from "@/components/theme";
 
 export function UserMainHeader() {
 
@@ -30,7 +30,7 @@ export function UserMainHeader() {
 
 	return (
 		<header>
-			<Navbar theme={OrangeLinkTheme}>
+			<Navbar theme={BlueNavTheme}>
 				<NavbarBrand as={Link} href="/perfil">
 					<Image
 						width={100}
@@ -46,8 +46,8 @@ export function UserMainHeader() {
 					<span
 						className={`${
 							isActive(pathname, "/perfil") &&
-							"text-sky-700 hover:text-sky-800 dark:text-sky-500 dark:hover:text-sky-600"
-						} hover:text-sky-800 text-gray-700 dark:text-gray-300  self-center whitespace-nowrap text-xl font-semibold `}>
+							"text-sky-700 hover:text-sky-800 dark:text-white dark:hover:text-white dark:underline underline-offset-4"
+						} hover:text-sky-800 text-gray-700 dark:text-gray-300 dark:hover:text-white  self-center whitespace-nowrap text-xl font-semibold `}>
 						{user?.name || "Perfil"}
 					</span>
 				</NavbarBrand>

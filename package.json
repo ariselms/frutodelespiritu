@@ -13,6 +13,8 @@
     "@gsap/react": "^2.1.2",
     "@lordicon/react": "^1.11.0",
     "@lottiefiles/react-lottie-player": "^3.6.0",
+    "@tanstack/react-table": "^8.21.3",
+    "@vercel/analytics": "^1.5.0",
     "@vercel/blob": "^1.1.1",
     "@vercel/postgres": "^0.10.0",
     "bible-kit": "^0.0.3",

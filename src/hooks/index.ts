@@ -20,8 +20,10 @@ export const useDataProvider = () => {
 			getList: (resource: string, params: any) => {
 				// Now you have direct access to the 'user' object here.
 				// We apply the same logic as before.
-				if ((resource === DataProvider.Lectures || DataProvider.Categories) && user?.id) {
-
+				if (
+					(resource === DataProvider.Lectures || DataProvider.Categories) &&
+					user?.id
+				) {
 					const newFilter = {
 						...params.filter,
 						by_user_id: user.id
@@ -30,7 +32,6 @@ export const useDataProvider = () => {
 					const newParams = { ...params, filter: newFilter };
 
 					return customDataProvider.getList(resource, newParams);
-
 				}
 
 				// For all other cases, use the original getList method
@@ -40,4 +41,22 @@ export const useDataProvider = () => {
 	}, [user]); // The dependency array ensures this runs only when 'user' changes
 
 	return dataProvider;
+};
+
+export const useFetchUserMemorizationLists = async (userId: string) => {
+	try {
+		const requestUserMemorizationLists = await fetch(
+			`/api/user/${userId}/memorization?userId=${userId}`
+		);
+		const responseUserMemorizationLists =
+			await requestUserMemorizationLists.json();
+
+		if (!responseUserMemorizationLists.success) {
+			throw new Error("Error fetching user memorization lists");
+		}
+
+		return responseUserMemorizationLists;
+	} catch (error) {
+		console.error("Error fetching user memorization lists:", error);
+	}
 };

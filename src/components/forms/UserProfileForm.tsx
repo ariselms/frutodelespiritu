@@ -143,7 +143,7 @@ export function UserProfileForm() {
 	return (
 		<>
 			<Button
-				className="flex items-center justify-center py-4 text-sm text-white dark:text-gray-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 border border-sky-100 dark:bg-gray-950 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-sky-300 dark:focus:ring-gray-800 transition-all mt-6 flex-1 font-bold uppercase"
+				className="flex items-center justify-center py-4 text-sm text-white dark:text-gray-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 border border-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-sky-300 dark:focus:ring-gray-800 transition-all mt-6 flex-1 font-bold uppercase"
 				onClick={() => setOpenModal(true)}>
 				<svg
 					className="fill-white dark:fill-gray-200 w-6 h-6 text-gray-800 dark:text-white mr-2"
@@ -171,9 +171,9 @@ export function UserProfileForm() {
 				dismissible>
 				<ModalHeader />
 				<ModalBody>
-					<form onSubmit={handleUserProfileUpdate} className="space-y-6">
+					<form onSubmit={handleUserProfileUpdate} className="space-y-6 ">
 						<h3 className="text-xl font-medium text-gray-900 dark:text-white">
-							Your Profile Information
+							Tu información de perfil
 						</h3>
 						{/* name */}
 						<div>
@@ -194,7 +194,7 @@ export function UserProfileForm() {
 						<p className="mb-1 text-gray-900 dark:text-white">
 							Dirección Residencial
 						</p>
-						<div className="border border-gray-300 dark:border-gray-600 rounded-md p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div className="border border-gray-300 dark:border-gray-600 rounded-2xl px-4 pt-4 pb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
 								<div className="mb-2 block">
 									<Label htmlFor="address_street">Calle</Label>
@@ -352,7 +352,7 @@ export function UserProfileForm() {
 						</div>
 						<div className="w-full mt-8 mb-8">
 							<button
-								className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-  -800 cursor-pointer transition-all mt-4"
+								className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 								type="submit">
 								Actualizar Perfil
 							</button>

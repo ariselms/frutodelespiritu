@@ -4,12 +4,14 @@ export default async function UserBibleNotesLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <>
     <div className="bg-white dark:bg-gray-950 text-black dark:text-white border-b border-sky-100 dark:border-gray-700">
       <ProfileSection
         sectionName="Biblia"
-        sectionDescription="Administra tus notas y documentos relacionados con la Biblia. Esta función estará disponible pronto."
+        sectionDescription="Administra tus listas de memorias y notas."
       />
     </div>
     {children}

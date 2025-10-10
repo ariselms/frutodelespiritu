@@ -1,66 +1,69 @@
 import MainJumbotron from "@/components/JumbotronMain";
-import ContentLeftTwoImagesRight from "@/components/content/ContentLeftTwoImagesRight";
-import ContentRightTwoImagesLeft from "@/components/content/ContentRightTwoImagesLeft";
+import HomePageCard from "@/components/content/HomePageCards";
 import { AlertBanner } from "@/components/AlertBanner";
 import {
-	ContentLeftTwoImagesRightDescription,
-	ContentRightTwoImagesLeftDescription
+	HomePageCardDescription
 } from "@/components/content/ContentHelpers";
 
 export default async function Home() {
 	return (
-		<main>
+		<main className="relative">
 			<AlertBanner
 				type="info"
 				message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
 			/>
+
 			<MainJumbotron />
 
-			<ContentLeftTwoImagesRight
-				title="Lee La Biblia"
-				description={
-					<ContentLeftTwoImagesRightDescription
-						firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/biblia"
-						btnText="Lee la Biblia"
-					/>
-				}
-				firstImgUrl="/images/bible.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/church.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
-			<ContentRightTwoImagesLeft
-				title="Estudios"
-				description={
-					<ContentRightTwoImagesLeftDescription
-						firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/lecturas?category=1"
-						btnText="Estudios"
-					/>
-				}
-				firstImgUrl="/images/reading.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/studying.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
-			<ContentLeftTwoImagesRight
-				title="Reflexiones"
-				description={
-					<ContentLeftTwoImagesRightDescription
-						firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
-						secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-						btnLink="/lecturas?category=2"
-						btnText="Reflexiones"
-					/>
-				}
-				firstImgUrl="/images/cross-in-hand.svg"
-				firstImgUrlAlt="Biblia"
-				secondImgUrl="/images/cross-with-flowers.svg"
-				secondImgUrlAlt="Iglesia"
-			/>
+			<div className="bg-white dark:bg-gray-800 pb-28">
+				<HomePageCard
+					title="Lee La Biblia"
+					description={
+						<HomePageCardDescription
+							firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/biblia"
+							btnText="Lee la Biblia"
+						/>
+					}
+					firstImgUrl="/images/bible.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/church.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+
+				<HomePageCard
+					title="Estudios"
+					description={
+						<HomePageCardDescription
+							firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/lecturas?category=1"
+							btnText="Estudios"
+						/>
+					}
+					firstImgUrl="/images/reading.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/studying.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+
+				<HomePageCard
+					title="Reflexiones"
+					description={
+						<HomePageCardDescription
+							firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
+							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							btnLink="/lecturas?category=2"
+							btnText="Reflexiones"
+						/>
+					}
+					firstImgUrl="/images/cross-in-hand.svg"
+					firstImgUrlAlt="Biblia"
+					secondImgUrl="/images/cross-with-flowers.svg"
+					secondImgUrlAlt="Iglesia"
+				/>
+			</div>
 		</main>
 	);
 }

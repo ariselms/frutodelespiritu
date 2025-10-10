@@ -13,7 +13,7 @@ import { DarkThemeToggle } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import { MainNavigation } from "@/static";
 import { NavigationItemType } from "@/models/navigationTypes";
-import { OrangeLinkTheme } from "../theme";
+import { BlueNavTheme } from "../theme";
 import { isActive } from "@/helpers";
 import { useAuthContext } from "@/context/authContext";
 import { useEffect } from "react";
@@ -29,9 +29,9 @@ export default function MainHeader() {
 
 	return (
 		<Navbar
-			theme={OrangeLinkTheme}
+			theme={BlueNavTheme}
 			fluid
-			className="relative bg-sky-50 dark:bg-gray-950 border-none py-4 z-20">
+			className="relative bg-sky-50 dark:bg-gray-950 py-4 z-20 border-b border-sky-200">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}

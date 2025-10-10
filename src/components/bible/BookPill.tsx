@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookPillBlockProps } from "@/models/bibleTypes";
+
 export function BookPillBlock({
 	seccion,
 	seccionDescription,

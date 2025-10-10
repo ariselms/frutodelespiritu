@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MainHeader from "@/components/layout/MainHeader";
@@ -6,6 +5,7 @@ import MainFooter from "@/components/layout/MainFooter";
 import { ThemeModeScript } from "flowbite-react";
 import { AuthContextProvider } from "@/context/authContext";
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -24,6 +24,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className="dark" lang="es" suppressHydrationWarning>
+      <Analytics />
 			<head>
 				<ThemeModeScript />
 				<link rel="apple-touch-icon" sizes="180x180" href="/ios/180.png" />
