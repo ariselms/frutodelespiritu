@@ -83,7 +83,7 @@ export default function BibleHeader() {
 							size={32}
 							ICON_SRC={LOTTIE_GLASSES_HOVER_SEARCHING}
 							state="hover-searching"
-							text={`Capítulo ${chapterId}`}
+							text={`${bookId} ${chapterId}`}
 						/>
 					</Link>
 				)}
