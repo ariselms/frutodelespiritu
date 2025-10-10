@@ -60,26 +60,38 @@ export function ChapterDetails({ ChapterContent }: any) {
 		const currentChapter = chapterId;
 
 		const handleContainerClick = (event: MouseEvent) => {
-			if (!user) {
-				const redirectUrl = serverBaseUrl + pathname;
-				toast.warning(
-					"Debes iniciar sesión para guardar notas y listas de memorización."
-				);
-				router.push(`/log?redirectUrl=${redirectUrl}`);
-			}
+
+			// if (!user) {
+
+			// 	const redirectUrl = serverBaseUrl + pathname;
+
+			// 	toast.warning(
+			// 		"Debes iniciar sesión para guardar notas y listas de memorización."
+			// 	);
+
+			// 	router.push(`/log?redirectUrl=${redirectUrl}`);
+
+      //   return;
+
+			// }
+
 			const verseSpan = (event.target as Element).closest("span.v");
+
 			if (!verseSpan) return;
 
 			const verseNumber = (verseSpan as HTMLElement).dataset.number;
-			if (!verseNumber) return;
+
+      if (!verseNumber) return;
 
 			const verseSid = `${currentBook} ${currentChapter}:${verseNumber}`;
 
 			setSelectedVerses((prevSelected) => {
-				const newSelection = new Set(prevSelected);
+
+        const newSelection = new Set(prevSelected);
 
 				// --- SCENARIO 1: The verse is already selected (TRUNCATE LOGIC) ---
 				if (newSelection.has(verseSid)) {
+
 					const parsedSids = Array.from(newSelection)
 						.map(parseSid)
 						.filter((p): p is NonNullable<typeof p> => p !== null);
@@ -87,19 +99,22 @@ export function ChapterDetails({ ChapterContent }: any) {
 					parsedSids.sort((a, b) => a.verse - b.verse);
 
 					const clickedVerseInfo = parseSid(verseSid);
-					if (!clickedVerseInfo) return prevSelected;
+
+          if (!clickedVerseInfo) return prevSelected;
 
 					const truncateIndex = parsedSids.findIndex(
 						(p) => p.verse === clickedVerseInfo.verse
 					);
 
-					// *** THE ONLY CHANGE IS HERE ***
 					// Keep verses from the beginning *up to (but not including)* the clicked verse.
 					const finalSids = parsedSids.slice(0, truncateIndex); // Removed the "+ 1"
 
 					const finalSelectionSet = new Set<string>();
+
 					finalSids.forEach((p) => {
+
 						finalSelectionSet.add(`${p.book} ${p.chapter}:${p.verse}`);
+
 					});
 
 					return finalSelectionSet;
@@ -107,6 +122,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 				// --- SCENARIO 2: The verse is new (GAP-FILLING LOGIC) ---
 				else {
+
 					newSelection.add(verseSid);
 
 					const parsedSids = Array.from(newSelection)
@@ -130,15 +146,18 @@ export function ChapterDetails({ ChapterContent }: any) {
 							}
 						}
 					}
+
 					return newSelection;
 				}
 			});
 		};
 
-		content.addEventListener("click", handleContainerClick);
+		// content.addEventListener("click", handleContainerClick);
 
 		return () => {
-			content.removeEventListener("click", handleContainerClick);
+
+			// content.removeEventListener("click", handleContainerClick);
+
 		};
 
 	}, [ChapterContent, user]);
