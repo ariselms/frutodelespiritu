@@ -107,6 +107,7 @@ if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
 	baseUrl = "https://frutodelespiritu.com";
 }
 export const serverBaseUrl = baseUrl;
+
 export const SeccionesBiblia = {
 	Pentateuco:
 		"Los primeros cinco libros del Antiguo Testamento, también conocidos como la Torá.",
@@ -123,8 +124,11 @@ export const SeccionesBiblia = {
 	CartasApostolicas:
 		"Cartas de los apóstoles a las iglesias para instruir, animar y corregir su fe.",
 	Apocalipsis:
-		"Libro profético que revela el fin de los tiempos y la victoria final de Dios."
+		"Libro profético que revela el fin de los tiempos y la victoria final de Dios.",
+  LibrosCatolicos:
+    "Libros católicos que contienen la historia de la iglesia católica y sus enseñanzas."
 };
+
 export const SpanishBibleApiIds = {
 	LaBibliaEnEspanolSencillo: "spa_bes",
 	SantaBibliaLibreParaElMundo: "spa_blm",

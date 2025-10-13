@@ -4,19 +4,19 @@ import { BibleBookType } from "@/models/bibleTypes";
 export function CompactBooksView({
 	libros
 } : {libros: BibleBookType[]}) {
+  console.log(libros);
 	return (
 		<div className="mb-8 mt-4">
-			<div className="p-4 grid grid-cols-3 sm:grid-cols-6 md:grid-cols-10 h-full max-w-3xl mx-auto gap-1.5">
+			<div className="p-4 grid grid-cols-2 md:grid-cols-3 h-full max-w-3xl mx-auto gap-1.5">
 				{libros?.map((l: any) => (
 					<Link
-						className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold px-8 py-4 rounded-2xl flex items-center justify-center dark:border dark:border-gray-700"
+						className="px-0.5 py-2.5 text-sm text-center bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold rounded-2xl dark:border dark:border-gray-700"
 						key={l.id}
 						href={`/biblia/libros/capitulos/${l.translationId}/${l.id}`}>
-						{l.id}
+						{l.name.toUpperCase()}
 					</Link>
 				))}
 			</div>
 		</div>
 	);
 }
-//  bg-sky-200 border border-sky-100 hover:bg-sky-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-600 focus:ring-4 focus:ring-sky-300  dark:focus:ring-gray-800 transition-all

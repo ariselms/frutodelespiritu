@@ -156,7 +156,7 @@ export default function LogPage() {
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-gray-800 cursor-pointer">
+						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100">
 						{processing ? (
 							<>
 								<Spinner size="sm" className="mr-2" light />
@@ -198,7 +198,7 @@ export default function LogPage() {
 					</div>
 					<button
 						type="submit"
-						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-gray-800 cursor-pointer">
+						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100">
 						{processing ? (
 							<>
 								<Spinner size="sm" className="mr-2" light />

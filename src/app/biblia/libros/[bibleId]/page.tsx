@@ -61,6 +61,11 @@ export default async function BibleBooksPage({
 	let historico: BibleBookType[] = books.slice(43, 44);
 	let cartas: BibleBookType[] = books.slice(44, 65);
 	let revelaciones: BibleBookType[] = books.slice(65, 66);
+  let catholic;
+
+  if(books.length > 66){
+    catholic = books.slice(66, books.length);
+  };
 
 	if (books.length > 0) {
 		pentateuco = books.slice(0, 5);
@@ -78,15 +83,18 @@ export default async function BibleBooksPage({
 			<section className="w-full dark:bg-gray-800 text-gray-800">
 				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0">
 					<BibleHeaderSection section={bibleInfo?.name} />
+
 					<BibleTranslationsViewComponent
 						booksView={booksView}
 						translations={BibleTranslationsView}
 						bibleId={bibleId}
 					/>
+
 					{booksView === BibleTranslationsView.detailed ? (
 						<>
 							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl">
 								<BibleTestament era="Antiguo" />
+
 								<BookPillBlock
 									seccion="Pentateuco"
 									seccionDescription={SeccionesBiblia.Pentateuco}
@@ -112,8 +120,10 @@ export default async function BibleBooksPage({
 									libros={profetas}
 								/>
 							</div>
+
 							<div className="bg-sky-50 dark:bg-gray-900/50 border-1 border-sky-200 dark:border-gray-600 rounded-2xl mt-4">
 								<BibleTestament era="Nuevo" />
+
 								<BookPillBlock
 									seccion="Evangelios"
 									seccionDescription={SeccionesBiblia.Evangelios}
@@ -138,6 +148,15 @@ export default async function BibleBooksPage({
 									seccionImgUrl="/images/bible-icons/revelaciones.png"
 									libros={revelaciones}
 								/>
+
+								{catholic && (
+									<BookPillBlock
+										seccion="Libros Católicos"
+										seccionDescription={SeccionesBiblia.LibrosCatolicos}
+										seccionImgUrl="/images/bible-icons/catolicos.png"
+										libros={catholic}
+									/>
+								)}
 							</div>
 						</>
 					) : (
