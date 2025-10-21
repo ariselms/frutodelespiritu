@@ -21,7 +21,7 @@
   --rich-text-color-background-table-header: #f2f2f2; /* For table headers */
   --rich-text-color-button-primary: #007bff;
   --rich-text-color-button-primary-hover: #0056b3;
-  --mark-theme-light: #f9d9be
+  --mark-theme-light: #dff2fe
 }
 
 /* Dark theme overrides when html has 'dark' class */
@@ -95,27 +95,27 @@ html.dark .bible-chapter {
 }
 
 .bible-chapter h1 {
-  font-size: 2.5em;
-}
-
-.bible-chapter h2 {
   font-size: 2em;
 }
 
+.bible-chapter h2 {
+  font-size: 1.55em;
+}
+
 .bible-chapter h3 {
-  font-size: 1.75em;
+  font-size: 1.35em;
 }
 
 .bible-chapter h4 {
-  font-size: 1.5em;
+  font-size: 1.15em;
 }
 
 .bible-chapter h5 {
-  font-size: 1.25em;
+  font-size: .95em;
 }
 
 .bible-chapter h6 {
-  font-size: 1em;
+  font-size: .75em;
 }
 
 /* 3. Typography - Paragraphs and Text Elements (scoped to .bible-chapter) */
@@ -140,7 +140,7 @@ html.dark .bible-chapter {
 span[data-number]{
   display: inline-block;
   background-color: #0069a8;
-  color: #f0f9ff;
+  color: #dff2fe ;
   border: 1px solid #dff2fe;
   border-radius: 4px;
   margin-right: .3rem;

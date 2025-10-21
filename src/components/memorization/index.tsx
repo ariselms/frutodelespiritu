@@ -212,15 +212,11 @@ export default function MemorizationListComponent() {
 
 	const columns: ColumnDef<MemorizationList>[] = [
 		{
-			header: "ID",
-			accessorKey: "id"
-		},
-		{
 			header: "Nombre",
 			accessorKey: "name",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full px-2 py-1.5 text-sm text-gray-900 border border-orange-200 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+					className="block w-full px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -236,7 +232,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "description",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full px-2 py-1.5 text-sm text-gray-900 border border-orange-200 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500"
+					className="block w-full px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -256,12 +252,12 @@ export default function MemorizationListComponent() {
 						onClick={() => {
 							setOpenDeletionModal(true);
 						}}
-						className="text-orange-700 dark:text-orange-500 hover:underline cursor-pointer text-center w-full my-1 md:my-0">
+						className="text-red-700 hover:text-red-800 dark:text-red-500 hover:dark:text-red-600 underline underline-offset-4 transition-colors cursor-pointer text-center w-full my-1 md:my-0">
 						Eliminar
 					</button>
 					<Link
-            href={`/perfil/biblia/memorias/${row.original.id}`}
-            className="text-orange-700 dark:text-orange-500 hover:underline cursor-pointer text-center w-full my-1 md:my-0">
+						href={`/perfil/biblia/memorias/${row.original.id}`}
+						className="text-sky-700 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 cursor-pointer text-center w-full my-1 md:my-0 transition-colors">
 						Ver Lista
 					</Link>
 				</div>
@@ -301,7 +297,7 @@ export default function MemorizationListComponent() {
 
 	return (
 		<>
-			<div className="bg-orange-50/50 dark:bg-gray-700 p-2 border border-orange-200 dark:border-gray-600">
+			<div className="bg-sky-50/50 dark:bg-gray-700 p-2 border border-sky-200 dark:border-gray-600 w-full">
 				<h2 className="text-2xl font-bold mb-4">Tus Listas de Memorización</h2>
 
 				{/* Form for creating a new list */}
@@ -314,7 +310,7 @@ export default function MemorizationListComponent() {
 						value={newListItem.name}
 						onChange={onChangeNewListItem}
 						placeholder="Nombre de la nueva lista"
-						className="block w-full px-2 py-2 text-sm text-gray-900 border border-orange-200 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
+						className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 						required
 					/>
 					{newListItem.name.length > 3 && (
@@ -324,13 +320,13 @@ export default function MemorizationListComponent() {
 							value={newListItem.description}
 							onChange={onChangeNewListItem}
 							placeholder="Breve descripcion de la nueva lista"
-							className="block w-full px-2 py-2 text-sm text-gray-900 border border-orange-200 rounded-2xl bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-orange-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
+							className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 							required
 						/>
 					)}
 					<button
 						onClick={handleCreate}
-						className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+						className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 						Crear Nueva Lista
 					</button>
 				</form>
@@ -338,8 +334,11 @@ export default function MemorizationListComponent() {
 				<div className="overflow-x-auto">
 					{memorizationLists.length > 0 ? (
 						<>
-              <p className="text-sm text-gray-500 dark:text-gray-300">Para actualizar la información, solo cambia el valor de la celda y luego salga del campo.</p>
-							<table className="min-w-full border border-orange-200 dark:border-gray-600">
+							<p className="text-sm text-gray-500 dark:text-gray-300">
+								Para actualizar la información, solo cambia el valor de la celda
+								y luego salga del campo.
+							</p>
+							<table className="min-w-full border border-sky-200 dark:border-gray-600">
 								<thead>
 									{memorizationListTable
 										.getHeaderGroups()
@@ -349,7 +348,7 @@ export default function MemorizationListComponent() {
 													<th
 														key={header.id}
 														onClick={header.column.getToggleSortingHandler()}
-														className="border border-orange-200 dark:border-gray-600 px-4 py-2 text-left bg-orange-100 dark:bg-gray-800 cursor-pointer">
+														className="border border-sky-200 dark:border-gray-600 px-4 py-2 text-left bg-sky-100 dark:bg-gray-800 cursor-pointer">
 														{flexRender(
 															header.column.columnDef.header,
 															header.getContext()
@@ -370,11 +369,11 @@ export default function MemorizationListComponent() {
 									{memorizationListTable.getRowModel().rows.map((row) => (
 										<tr
 											key={row.id}
-											className="hover:bg-orange-50 dark:hover:bg-gray-600 transition-all">
+											className="hover:bg-sky-50 dark:hover:bg-gray-600 transition-all">
 											{row.getVisibleCells().map((cell) => (
 												<td
 													key={cell.id}
-													className="border border-orange-200 dark:border-gray-600 px-4 py-2">
+													className="border border-sky-200 dark:border-gray-600 px-4 py-2">
 													{flexRender(
 														cell.column.columnDef.cell,
 														cell.getContext()
@@ -383,26 +382,30 @@ export default function MemorizationListComponent() {
 											))}
 											{/* Modal for deleting a list */}
 											<Modal
-												className="bg-orange-50/10 dark:bg-gray-700/20"
+												className="bg-sky-50/10 dark:bg-gray-700/20"
 												show={openDeletionModal}
 												onClose={() => setOpenDeletionModal(false)}>
-												<div className="bg-orange-50/50 dark:bg-gray-700/50 border-orange-200 shadow-xl shadow-orange-100/20s dark:shadow-gray-800 dark:border-gray-600 rounded-2xl">
-													<ModalHeader className="border-b-orange-200 dark:border-gray-600">
-														Confirma Eliminar Lista de Memorización
+												<div className="bg-sky-50/50 dark:bg-gray-700/50 border-sky-200 shadow-xl shadow-sky-100/20s dark:shadow-gray-800 dark:border-gray-600 rounded-2xl">
+													<ModalHeader className="text-sky-950 dark:text-gray-50 border-b-sky-100 dark:border-gray-600">
+														Confirma eliminar lista de memorización
 													</ModalHeader>
-													<ModalBody>
-														<p className="text-black dark:text-gray-100 font-bold mb-4">
-															¿Deseas{row.original.name}
+													<ModalBody className="text-center">
+														<p className="text-black dark:text-gray-50 mb-3">
+															¿Estas seguro de eliminar la lista de
+															memorización?
 														</p>
-														<p className="text-sm text-orange-600 dark:text-orange-400">
+														<p className="text-black dark:text-gray-50 mb-3 text-lg">
+															{row.original.name}
+														</p>
+														<p className="text-black dark:text-gray-50">
 															Esta acción eliminará la lista de memorización y
 															el contenido. Luego de oprimir confirmar no se
 															puede deshacer.
 														</p>
 													</ModalBody>
-													<ModalFooter className="border-t-orange-200 dark:border-gray-600">
+													<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
 														<button
-															className="p-2 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-orange-700 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in"
+															className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
 															onClick={() => handleDelete(row.original.id)}>
 															Confirmar
 														</button>

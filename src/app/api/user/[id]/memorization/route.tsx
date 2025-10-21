@@ -23,6 +23,8 @@ export async function GET(request: Request) {
 
 	const userId = Number(searchParams.get("userId"));
 
+  console.log(userId);
+
 	if (!userId) {
 		return NextResponse.json(
 			{
@@ -86,9 +88,11 @@ export async function POST(request: Request) {
 		const { selectedMemorizationList, memorizationData } = body;
 
 		const {
+      bible_name, // full bible version name
+			bible_id, // bible id (abbreviation)
 			by_user_id,
-			bible_id,
-			book_id,
+      bible_book, // bible book name
+			book_id, // book id (abbreviation)
 			chapter_id,
 			verse_from,
 			verse_to,
@@ -97,18 +101,18 @@ export async function POST(request: Request) {
 			description
 		} = memorizationData;
 
-    console.log("List: ", selectedMemorizationList);
-    console.log("Item: ", memorizationData);
-
-		// check if the memorization list exist
+		// check if the selected memorization list exists
 		if (selectedMemorizationList !== "") {
+
 			// get the memorization list id
 			const { rows: memorizationList } = await sql`
         SELECT * FROM memory_list
         WHERE
-          name = ${selectedMemorizationList}
+          name = ${selectedMemorizationList} AND
+          by_user_id = ${by_user_id}
       `;
 
+      // if the memorization list does not exist, return an error
 			if (memorizationList.length === 0) {
 				return NextResponse.json(
 					{
@@ -120,15 +124,17 @@ export async function POST(request: Request) {
 				);
 			}
 
-			// save memory_item
+			// insert new memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
         INSERT INTO
-          memory_item (by_user_id, bible_id, book_id, chapter_id, verse_from, verse_to, passage_text)
+          memory_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text)
         VALUES (
           ${by_user_id},
+          ${bible_name},
           ${bible_id},
+          ${bible_book},
           ${book_id},
-          ${chapter_id},
+          ${String(chapter_id)},
           ${verse_from},
           ${verse_to},
           ${passage_text}) RETURNING *
@@ -174,10 +180,10 @@ export async function POST(request: Request) {
 			);
 		}
 
+    // if there is no name or description, means that a new memorization list needs to be created
 		if (name !== "" && description !== "") {
-			console.log(by_user_id, name, description);
 
-			// if memorization list does not exist, create a new list
+			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO memory_list (by_user_id, name, description)
         VALUES (${Number(userId)}, ${name}, ${description})

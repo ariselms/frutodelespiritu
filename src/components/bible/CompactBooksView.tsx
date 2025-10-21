@@ -4,7 +4,7 @@ import { BibleBookType } from "@/models/bibleTypes";
 export function CompactBooksView({
 	libros
 } : {libros: BibleBookType[]}) {
-  console.log(libros);
+
 	return (
 		<div className="mb-8 mt-4">
 			<div className="p-4 grid grid-cols-2 md:grid-cols-3 h-full max-w-3xl mx-auto gap-1.5">

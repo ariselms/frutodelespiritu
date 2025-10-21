@@ -1,8 +1,8 @@
 import { BibleCrudActions } from "@/static";
 import { useEffect, useState } from "react";
-import AddNoteOrMemorization from "@/components/forms/AddNoteOrMemorization";
+import AddNoteOrMemorizationForm from "@/components/forms/AddNoteOrMemorizationForm";
 import { parseSid } from "@/helpers";
-
+// TODO: DELETE THIS FILE IF IT IS NOT BEING USED
 export default function ModalNotesAndMemorization({
 	selectedVerses,
 	setSelectedVerses,
@@ -41,6 +41,7 @@ export default function ModalNotesAndMemorization({
 			setApiSelectedVerses(
 				new Set([lowestSelectedVerse, highestSelectedVerse])
 			);
+
 		} else {
 			// Handle the case where the selection is empty.
 			setApiSelectedVerses(new Set());
@@ -106,7 +107,7 @@ export default function ModalNotesAndMemorization({
 					</div>
 				</div>
 			</div>
-			<AddNoteOrMemorization
+			<AddNoteOrMemorizationForm
 				bibleId={bibleId}
 				passageId={Array.from(apiSelectedVerses)}
 				openModal={openModal}

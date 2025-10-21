@@ -29,8 +29,6 @@ export async function DELETE(
 
 	const { rows: deletedList } = await sql`DELETE FROM memory_list WHERE id = ${listId} RETURNING *;`;
 
-  console.log("Deleted list: ", deletedList);
-
 	if (deletedList.length === 0) {
 		return NextResponse.json(
 			{

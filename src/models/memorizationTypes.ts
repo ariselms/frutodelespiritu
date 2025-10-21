@@ -1,7 +1,9 @@
 export type MemorizationSubmissionType = {
-	by_user_id: string;
-	bible_id: string;
+	bible_name: string;
+  bible_id: string;
+  bible_book: string;
 	book_id: string;
+	by_user_id: string;
 	chapter_id: string;
 	verse_from: string;
 	verse_to: string;

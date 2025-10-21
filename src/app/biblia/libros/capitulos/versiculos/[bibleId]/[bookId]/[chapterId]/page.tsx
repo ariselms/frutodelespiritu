@@ -1,5 +1,5 @@
-import Link from "next/link";
 import "./bible-chapter.css";
+import Link from "next/link";
 import { BibleNavigationAndNotes } from "@/components/bible/BibleNavigationAndNotes";
 import { ChapterDetails } from "@/components/bible/ChapterDetails";
 import { BibleBookType } from "@/models/bibleTypes";
@@ -21,6 +21,8 @@ export default async function SingleChapterPage({
 	const Book: BibleBookType = bibleChapterResponse.book;
 
 	const Chapter = bibleChapterResponse.chapter;
+
+  const Translation = bibleChapterResponse.translation;
 
 	return (
 		<main>
@@ -49,7 +51,12 @@ export default async function SingleChapterPage({
 						<InLectureBibleSelection chapterDetails={bibleChapterResponse} />
 					</div>
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
-					<ChapterDetails ChapterContent={Chapter.content} />
+					<ChapterDetails
+            BibleName={Translation.name}
+            ChapterInfo={Chapter}
+            ChapterContent={Chapter.content}
+            Book={Book}
+          />
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 				</div>
 			</section>

@@ -1,4 +1,6 @@
 import { sql } from "@vercel/postgres";
+import { MemoryOrBibleNoteList } from "@/components/bible/MemoryOrBibleNoteList";
+import Link from "next/link";
 
 export default async function ({
 	params
@@ -9,7 +11,7 @@ export default async function ({
 
   const { listId } = await params
 
-  const {rows: memoryList} = await sql`SELECT * FROM memory_list WHERE id = ${listId}`
+  const {rows: memoryList} = await sql`SELECT * FROM memory_list WHERE id = ${listId}`;
 
   const { rows: memoryListItems } = await sql`
     SELECT
@@ -24,17 +26,33 @@ export default async function ({
       ml.id = ${listId};
   `;
 
-  if(memoryList.length > 0 && memoryListItems.length > 0) {
-    memoryListData = {listInfo: memoryList[0], listItems: memoryListItems}
+  if(memoryList && memoryListItems) {
+
+    memoryListData = {
+      listInfo: memoryList[0],
+      listItems: memoryListItems.length > 0 ? memoryListItems : []
+    };
+
   }
 
-  console.log("Memory List Data: ", memoryListData);
-
-
 	return (
-		<>
-			<h1>Lista: {memoryListData.listInfo.name}</h1>
-			<p>{memoryListData.listInfo.description}</p>
-		</>
+		<div className="w-full bg-white dark:bg-gray-950 text-sky-950 dark:text-gray-50">
+			<section className="container mx-auto p-4 text-lg">
+				<Link
+					href="/perfil/biblia"
+					className="text-sky-900 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 mt-4 mb-7 inline-block">
+					&larr; Volver a Mis Listas de Memorización
+				</Link>
+				<h1>
+					<strong>Nombre de Lista:</strong> {memoryListData?.listInfo?.name}
+				</h1>
+				<p>
+					<strong>Descripción:</strong> {memoryListData?.listInfo?.description}
+				</p>
+			</section>
+			<section className="container mx-auto p-4 text-lg">
+				<MemoryOrBibleNoteList memoryListItems={memoryListData.listItems} />
+			</section>
+		</div>
 	);
 }

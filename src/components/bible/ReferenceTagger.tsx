@@ -130,10 +130,6 @@ const ReferenceTagger = ({ children, translation = "spa_pdt" }: ReferenceTaggerP
         const bookKey = book.trim().toLowerCase();
         const apiBook = bookMappings[bookKey];
 
-        // console.log("Translation: ", translation);
-        // console.log("API Book: ", apiBook);
-        // console.log("Chapter: ", chapter);
-
         if (apiBook) {
           try {
             // 1. Constructs the correct CHAPTER-ONLY URL for the helloao API.

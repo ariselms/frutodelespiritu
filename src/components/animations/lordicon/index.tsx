@@ -39,13 +39,13 @@ export function LordIconHover({
 			<div className="mr-0.5">
 				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
 			</div>
-			<span className="ml-0.5">{text}</span>
+			<span>{text}</span>
 		</div>
 	);
 }
 
 // Wrap the component in forwardRef
-export const LordIconClick = forwardRef<
+export const LordIconClickRedirect = forwardRef<
   LordIconClickHandle,
   {
     size?: number;

@@ -1,12 +1,13 @@
-"use client"; // This directive marks the component as a Client Component
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import ModalNotesAndMemorization from "@/components/bible/ModalNotesAndMemorization";
 import { useParams } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { serverBaseUrl } from "@/static";
 import { useRouter, usePathname } from "next/navigation";
+import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemoryItem";
+import { BibleBookType } from "@/models/bibleTypes";
 
 // Helper function to parse a "Book Chapter:Verse" string
 const parseSid = (sid: string) => {
@@ -20,13 +21,14 @@ const parseSid = (sid: string) => {
 	};
 };
 
-export function ChapterDetails({ ChapterContent }: any) {
-  const { user } = useAuthContext();
-  const router = useRouter();
-  const pathname = usePathname();
+export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } : { ChapterContent: any[]; Book: BibleBookType; ChapterInfo: any, BibleName: string}) {
+	const { user } = useAuthContext();
+	const router = useRouter();
+	const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
+	const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
 	// Effect for scrolling to a hash link
 	useEffect(() => {
@@ -57,12 +59,12 @@ export function ChapterDetails({ ChapterContent }: any) {
 		if (!firstVerse) return;
 
 		const currentBook = bookId;
+
 		const currentChapter = chapterId;
 
 		const handleContainerClick = (event: MouseEvent) => {
-
+      // Update the following to use a modal instead of redirecting the user right away
 			if (!user) {
-
 				const redirectUrl = serverBaseUrl + pathname;
 
 				toast.warning(
@@ -71,8 +73,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 				router.push(`/log?redirectUrl=${redirectUrl}`);
 
-        return;
-
+				return;
 			}
 
 			const verseSpan = (event.target as Element).closest("span.v");
@@ -81,17 +82,16 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 			const verseNumber = (verseSpan as HTMLElement).dataset.number;
 
-      if (!verseNumber) return;
+			if (!verseNumber) return;
 
 			const verseSid = `${currentBook} ${currentChapter}:${verseNumber}`;
 
 			setSelectedVerses((prevSelected) => {
 
-        const newSelection = new Set(prevSelected);
+				const newSelection = new Set(prevSelected);
 
 				// --- SCENARIO 1: The verse is already selected (TRUNCATE LOGIC) ---
 				if (newSelection.has(verseSid)) {
-
 					const parsedSids = Array.from(newSelection)
 						.map(parseSid)
 						.filter((p): p is NonNullable<typeof p> => p !== null);
@@ -100,7 +100,7 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 					const clickedVerseInfo = parseSid(verseSid);
 
-          if (!clickedVerseInfo) return prevSelected;
+					if (!clickedVerseInfo) return prevSelected;
 
 					const truncateIndex = parsedSids.findIndex(
 						(p) => p.verse === clickedVerseInfo.verse
@@ -112,17 +112,16 @@ export function ChapterDetails({ ChapterContent }: any) {
 					const finalSelectionSet = new Set<string>();
 
 					finalSids.forEach((p) => {
-
 						finalSelectionSet.add(`${p.book} ${p.chapter}:${p.verse}`);
-
 					});
+
+					setIsDrawerOpen(true);
 
 					return finalSelectionSet;
 				}
 
 				// --- SCENARIO 2: The verse is new (GAP-FILLING LOGIC) ---
 				else {
-
 					newSelection.add(verseSid);
 
 					const parsedSids = Array.from(newSelection)
@@ -147,6 +146,8 @@ export function ChapterDetails({ ChapterContent }: any) {
 						}
 					}
 
+					setIsDrawerOpen(true);
+
 					return newSelection;
 				}
 			});
@@ -155,11 +156,8 @@ export function ChapterDetails({ ChapterContent }: any) {
 		content.addEventListener("click", handleContainerClick);
 
 		return () => {
-
 			content.removeEventListener("click", handleContainerClick);
-
 		};
-
 	}, [ChapterContent, user]);
 
 	// EFFECT 2: Apply visual styles (this is correct)
@@ -168,95 +166,90 @@ export function ChapterDetails({ ChapterContent }: any) {
 
 		if (!content) return;
 
-    // Cleanup phase
+		// Cleanup phase
 		content.querySelectorAll("mark.verse-highlight").forEach((markElement) => {
-
 			const parent = markElement.parentNode;
 
-      if (parent) {
+			if (parent) {
 				while (markElement.firstChild) {
 					parent.insertBefore(markElement.firstChild, markElement);
 				}
 				parent.removeChild(markElement);
 			}
-
 		});
 
 		// Application phase
 		if (selectedVerses.size > 0) {
-
 			selectedVerses.forEach((sid) => {
+				const parsed = parseSid(sid);
 
-        const parsed = parseSid(sid);
-
-        if (!parsed) return;
+				if (!parsed) return;
 
 				const verseNumberSpan = content.querySelector(
 					`span[data-number="${parsed.verse}"]`
 				);
 
-        if (!verseNumberSpan) return;
+				if (!verseNumberSpan) return;
 
 				const parentP = verseNumberSpan.parentElement;
 
-        if (!parentP) return;
+				if (!parentP) return;
 
 				const nodesToWrap = [];
 
-        let currentNode = verseNumberSpan.nextSibling;
+				let currentNode = verseNumberSpan.nextSibling;
 
-        while (currentNode) {
+				while (currentNode) {
 					nodesToWrap.push(currentNode);
 					currentNode = currentNode.nextSibling;
 				}
 
 				if (nodesToWrap.length > 0) {
+					const wrapper = document.createElement("mark");
 
-          const wrapper = document.createElement("mark");
-
-          wrapper.className =
+					wrapper.className =
 						"verse-highlight bg-orange-100 dark:bg-gray-900 dark:text-gray-100 rounded px-1";
 
 					parentP.insertBefore(wrapper, nodesToWrap[0]);
 
-          nodesToWrap.forEach((node) => wrapper.appendChild(node));
+					nodesToWrap.forEach((node) => wrapper.appendChild(node));
 				}
 			});
 		}
 	}, [selectedVerses, ChapterContent]);
 
+	// EFFECT 3: On Load, Create a function that fetches global notes and memorization items for the current chapter and pre-select verses accordingly, if any, to display a brain icon next to the last verse of the individual selection. For example, if the user has notes in the chapter for verses 2, 3, 4, 5, and 8, then verses 2-5 should be selected and verse 5 should have a brain icon next to it. Verse 8 should be selected and have a brain icon next to it as well.
+	// STEP 1: Fetch user notes and memorization items for the current chapter
+	// STEP 2: Parse the response to identify verses with notes or memorization items
+	// STEP 3: Update the selectedVerses state to include these verses
+	// STEP 4: Ensure that the last verse in each contiguous selection has a brain icon next to it
+	// NOTE: Each verse looks like that. The chapter number is in the span data-number attribute.
+  // <p><span class="v" id="7" data-number="7">7</span> <span>Cuando vio que muchos fariseos y saduceos acudían a su bautismo, les dijo: ¡Generación de víboras! ¿Quién les enseñó a huir de la ira que viene?</span></p>
+  // Consider to also on load, check for the chapter and if there are any popular verses, kind of give it a highlight or a different color to indicate that those verses are popular among users, this will encourage users to read those verses and engage more with the content as well as use the save note or memory list feature.
+  // Consider to work with the API and how to fetch the most popular verses by selecting the verses with the most notes or memorization items across all users for that specific chapter.
+
+
 	return (
 		<>
 			<div className="bible-chapter max-w-[80ch] mx-auto my-4" ref={contentRef}>
-
 				{ChapterContent.map((content: any) => {
-
 					if (content.type === "heading") {
-
 						return (
 							<h2 key={content.content[0]} id={content.content[0]}>
-
-            		{content.content[0]}
-
-            	</h2>
+								{content.content[0]}
+							</h2>
 						);
-
 					}
 					if (content.type === "verse") {
-
 						return (
-
-            <p key={content.number}>
-
-                <span
+							<p key={content.number}>
+								<span
 									className="v"
 									id={content.number}
 									data-number={content.number}>
 									{content.number}
 								</span>{" "}
-
 								{content.content.map((verse: any, index: number) => {
-
 									// Specifically handle line break objects
 									// If the verse object is a line break, render a <br /> tag.
 									if (verse && verse.lineBreak) {
@@ -292,19 +285,28 @@ export function ChapterDetails({ ChapterContent }: any) {
 					}
 
 					return null;
-
 				})}
 			</div>
 
 			{selectedVerses.size > 0 && (
-
-				<ModalNotesAndMemorization
-					selectedVerses={selectedVerses}
-          setSelectedVerses={setSelectedVerses}
-					bibleId={String(bibleId)}
-					chapterContent={ChapterContent}
-				/>
-
+				<>
+					<AddNoteOrMemoryItem
+            bibleBook={Book}
+						selectedVerses={selectedVerses}
+						setSelectedVerses={setSelectedVerses}
+						bibleId={String(bibleId)}
+						chapterContent={ChapterContent}
+						isDrawerOpen={isDrawerOpen}
+            chapterInfo={ChapterInfo}
+            bibleName={BibleName}
+					/>
+					{/* <ModalNotesAndMemorization
+						selectedVerses={selectedVerses}
+						setSelectedVerses={setSelectedVerses}
+						bibleId={String(bibleId)}
+						chapterContent={ChapterContent}
+					/> */}
+				</>
 			)}
 		</>
 	);
