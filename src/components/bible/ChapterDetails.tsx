@@ -300,12 +300,6 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
             chapterInfo={ChapterInfo}
             bibleName={BibleName}
 					/>
-					{/* <ModalNotesAndMemorization
-						selectedVerses={selectedVerses}
-						setSelectedVerses={setSelectedVerses}
-						bibleId={String(bibleId)}
-						chapterContent={ChapterContent}
-					/> */}
 				</>
 			)}
 		</>
