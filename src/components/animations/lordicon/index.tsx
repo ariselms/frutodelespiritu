@@ -36,10 +36,10 @@ export function LordIconHover({
 			className="cursor-pointer flex flex-row items-center justify-between"
 			onMouseEnter={handleMouseEnter}
 		>
-			<div className="mr-0.5">
+			<div className="mr-0.3">
 				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
 			</div>
-			<span>{text}</span>
+			<span className="text-sm md:text-base">{text}</span>
 		</div>
 	);
 }

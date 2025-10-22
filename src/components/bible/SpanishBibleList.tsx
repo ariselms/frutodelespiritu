@@ -2,7 +2,6 @@
 // You'll need useRef from React
 import React, { useRef } from "react";
 import { BibleDataType } from "@/models/bibleTypes";
-// Import the handle type we defined
 import {
 	LordIconClickRedirect,
 	LordIconClickHandle

@@ -72,8 +72,10 @@ export function MemoryOrBibleNoteList({
 							// --- 4. UPDATED RENDERING LOGIC ---
 							// Render each verse object in a separate paragraph
 							return verses.map((verse) => (
-								<p key={verse.number} className="mb-2 max-w-[80ch]">
-									<sup className="font-bold mr-1">{verse.number}</sup>
+								<p key={verse.number} className="mb-2 max-w-[80ch] text-sm md:text-base">
+									<sup className="font-bold mr-1">
+										{verse.number}
+									</sup>
 
 									{/*
 									 * Loop over the verse.content array.
@@ -96,7 +98,7 @@ export function MemoryOrBibleNoteList({
 												key={index}
 												className={
 													item.wordsOfJesus
-														? "text-red-600 dark:text-red-400"
+														? "text-red-600 dark:text-red-400 text-sm md:text-base"
 														: ""
 												}>
 												{item.text}{" "}
@@ -119,20 +121,20 @@ export function MemoryOrBibleNoteList({
 
 					return (
 						<AccordionPanel key={listItem.id}>
-							<AccordionTitle className="bg-sky-50 hover:bg-sky-100 border-sky-100 dark:bg-gray-900 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200">
+							<AccordionTitle className="bg-sky-50 hover:bg-sky-100 border-sky-100 dark:bg-gray-900 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200 text-sm md:text-base">
 								<span className="text-sky-700 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-800">
 									{listItem.bible_book} {listItem.chapter_id}:
 									{listItem.verse_from}
 									{listItem.verse_to !== listItem.verse_from &&
 										`-${listItem.verse_to}`}{" "}
-									({listItem.bible_name})
 								</span>
+								<div>{listItem.bible_name}</div>
 							</AccordionTitle>
 							<AccordionContent className="text-gray-500 dark:text-gray-100 dark:bg-gray-800">
 								{getPassageContent()}
 								<div className="flex items-center justify-end">
 									<LordIconHover
-										size={32}
+										size={24}
 										ICON_SRC={LOTTIE_TRASH_MORPH_TRASH_IN}
 										state="morph-trash-in"
 										text="Eliminar"
