@@ -218,7 +218,7 @@ export const NotesAndMemoryTabTheme = createTheme({
 	tablist: {
 		base: "flex text-center",
 		variant: {
-			default: "flex-wrap border-b-0",
+			default: "flex-wrap border-b border-sky-200 dark:border-gray-600",
 			underline:
 				"-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
 			pills:
@@ -227,12 +227,12 @@ export const NotesAndMemoryTabTheme = createTheme({
 				"grid w-full grid-flow-col divide-x divide-gray-200 rounded-none text-sm font-medium shadow dark:divide-gray-700 dark:text-gray-400"
 		},
 		tabitem: {
-			base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+			base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 border-x border-t border-sky-200 dark:border-gray-600",
 			variant: {
 				default: {
 					base: "rounded-t-lg",
 					active: {
-						on: "bg-sky-50 text-sky-700 hover:text-sky-800 dark:bg-gray-700 dark:text-gray-50 dark:hover:text-gray-100 cursor-pointer",
+						on: "bg-sky-50 text-sky-700 hover:text-sky-800 dark:bg-gray-900/50 dark:text-gray-50 dark:hover:text-gray-100 cursor-pointer",
 						off: "hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300 cursor-pointer"
 					}
 				},

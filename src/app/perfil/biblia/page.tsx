@@ -15,10 +15,15 @@ export default function UserBiblePage() {
 					className="mb-0"
 					aria-label="Full width tabs"
 					variant="default">
-					<TabItem active title="Listas de Memorización" icon={FaBrain}>
+					<TabItem
+						active
+						title="Listas de Memorización"
+						icon={FaBrain}>
 						<MemorizationListComponent />
 					</TabItem>
-					<TabItem title="Notas de la Biblia" icon={FaStickyNote}>
+					<TabItem
+						title="Notas de la Biblia"
+						icon={FaStickyNote}>
 						<NotesListComponent />
 					</TabItem>
 				</Tabs>

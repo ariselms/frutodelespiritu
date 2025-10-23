@@ -43,8 +43,8 @@ export default function MainHeader() {
 				<span
 					className={`${
 						isActive(pathname, "/") &&
-						"text-sky-700 hover:text-sky-800 dark:text-white dark:underline dark:hover:text-gray-200"
-					} text-gray-700 hover:text-sky-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
+						"text-sky-700 hover:text-sky-800 dark:text-white dark:underline dark:underline-offset-4 dark:hover:text-gray-200"
+					} text-gray-700 hover:text-sky-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline dark:hover:underline-offset-4  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
 					<span>Fruto del Espíritu </span>
 					<span className="text-xs inline-block bg-sky-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
 						Beta

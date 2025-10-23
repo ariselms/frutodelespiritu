@@ -17,9 +17,9 @@ import { toast } from "react-toastify";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "flowbite-react";
 import Link from "next/link";
 
-// Define the type for your data
+// Type for memorization list
 interface MemorizationList {
-	id: string; // or number, depending on your database schema
+	id: string;
 	name: string;
 	description: string;
 }
@@ -57,8 +57,10 @@ export default function MemorizationListComponent() {
 		description: ""
 	});
 	const [openDeletionModal, setOpenDeletionModal] = useState(false);
-	const [updatedMemorizationList, setUpdatedMemorizationList] =
-		useState<MemorizationList | null>(null);
+	const [deletingItemId, setDeletingItemId] = useState<{
+		id: string;
+		name: string;
+	} | null>(null);
 
 	// CRUD Functions
 	const handleCreate = async (e: React.FormEvent) => {
@@ -69,6 +71,7 @@ export default function MemorizationListComponent() {
 
 			if (newListItem.name === "" || newListItem.description === "") {
 				toast.warning("Todos los campos son requeridos");
+
 				return;
 			}
 
@@ -89,8 +92,6 @@ export default function MemorizationListComponent() {
 				await requestNewMemorizationListItem.json();
 
 			if (responseNewMemorizationListItem.success) {
-				const newItem = responseNewMemorizationListItem.data;
-
 				setNewListItem({
 					by_user_id: user?.id,
 					bible_id: "",
@@ -116,9 +117,7 @@ export default function MemorizationListComponent() {
 		try {
 			const requestUserListDeletion = await fetch(
 				`/api/user/${user?.id}/memorization/${id}`,
-				{
-					method: "DELETE"
-				}
+				{ method: "DELETE" }
 			);
 
 			const responseUserListDeletion = await requestUserListDeletion.json();
@@ -158,7 +157,6 @@ export default function MemorizationListComponent() {
 			const responseMemoryListItem = await requestUpdateMemoryListItem.json();
 
 			if (responseMemoryListItem.success) {
-				// ✅ SUCCESS! NOW UPDATE THE STATE
 				toast.success("Lista actualizada!");
 				setMemorizationLists((prevLists) =>
 					prevLists.map((list) =>
@@ -214,7 +212,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "name",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -230,7 +228,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "description",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -248,7 +246,10 @@ export default function MemorizationListComponent() {
 				<div className="flex-col items-center justify-center md:flex md:flex-row">
 					<button
 						onClick={() => {
-							setOpenDeletionModal(true);
+							setDeletingItemId({
+								id: row.original.id,
+								name: row.original.name
+							});
 						}}
 						className="text-red-700 hover:text-red-800 dark:text-red-500 hover:dark:text-red-600 underline underline-offset-4 transition-colors cursor-pointer text-center w-full my-1 md:my-0">
 						Eliminar
@@ -287,14 +288,14 @@ export default function MemorizationListComponent() {
 	if (isLoading) {
 		return (
 			<div className="flex justify-center items-center py-8">
-				<Spinner size="xl" color="warning" />
+				<Spinner size="xl" />
 				<span className="ml-2">Cargando listas de memorización...</span>
 			</div>
 		);
 	}
 
 	return (
-		<div className="bg-sky-50 dark:bg-gray-700 px-2 py-8 w-full">
+		<div className="bg-sky-50 dark:bg-gray-900/50 px-2 py-8 w-full border-x border-b border-sky-200 dark:border-gray-600">
 			<h2 className="text-xl font-bold mb-4">Tus Listas de Memorización</h2>
 
 			{/* Form for creating a new list */}
@@ -307,7 +308,7 @@ export default function MemorizationListComponent() {
 					value={newListItem.name}
 					onChange={onChangeNewListItem}
 					placeholder="Nombre de la nueva lista"
-					className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
+					className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 					required
 				/>
 				{newListItem.name.length > 3 && (
@@ -317,7 +318,7 @@ export default function MemorizationListComponent() {
 						value={newListItem.description}
 						onChange={onChangeNewListItem}
 						placeholder="Breve descripcion de la nueva lista"
-						className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
+						className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
 						required
 					/>
 				)}
@@ -357,7 +358,7 @@ export default function MemorizationListComponent() {
 											<th
 												key={header.id}
 												onClick={header.column.getToggleSortingHandler()}
-												className="border border-sky-200 dark:border-gray-600 px-4 py-2 text-left bg-sky-100 dark:bg-gray-800 cursor-pointer">
+												className="border border-sky-200 dark:border-gray-600 px-4 py-2 text-left bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 cursor-pointer transition-colors">
 												{flexRender(
 													header.column.columnDef.header,
 													header.getContext()
@@ -378,7 +379,7 @@ export default function MemorizationListComponent() {
 								{memorizationListTable.getRowModel().rows.map((row) => (
 									<tr
 										key={row.id}
-										className="hover:bg-sky-50 dark:hover:bg-gray-600 transition-all">
+										className="hover:bg-sky-50 dark:hover:bg-gray-800 transition-colors">
 										{row.getVisibleCells().map((cell) => (
 											<td
 												key={cell.id}
@@ -389,37 +390,6 @@ export default function MemorizationListComponent() {
 												)}
 											</td>
 										))}
-										{/* Modal for deleting a list */}
-										<Modal
-											className="bg-sky-50/10 dark:bg-gray-700/20"
-											show={openDeletionModal}
-											onClose={() => setOpenDeletionModal(false)}>
-											<div className="bg-sky-50/50 dark:bg-gray-700/50 border-sky-200 shadow-xl shadow-sky-100/20s dark:shadow-gray-800 dark:border-gray-600 rounded-2xl">
-												<ModalHeader className="text-sky-950 dark:text-gray-50 border-b-sky-100 dark:border-gray-600">
-													Confirma eliminar lista de memorización
-												</ModalHeader>
-												<ModalBody className="text-center">
-													<p className="text-black dark:text-gray-50 mb-3">
-														¿Estas seguro de eliminar la lista de memorización?
-													</p>
-													<p className="text-black dark:text-gray-50 mb-3 text-lg">
-														{row.original.name}
-													</p>
-													<p className="text-black dark:text-gray-50">
-														Esta acción eliminará la lista de memorización y el
-														contenido. Luego de oprimir confirmar no se puede
-														deshacer.
-													</p>
-												</ModalBody>
-												<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
-													<button
-														className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
-														onClick={() => handleDelete(row.original.id)}>
-														Confirmar
-													</button>
-												</ModalFooter>
-											</div>
-										</Modal>
 									</tr>
 								))}
 							</tbody>
@@ -437,6 +407,42 @@ export default function MemorizationListComponent() {
 						cuando leas la biblia a través de tus memorias guardadas.
 					</p>
 				)}
+				{/* Modal for deleting a list */}
+				<Modal
+					className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+					show={deletingItemId !== null}
+					onClose={() => setDeletingItemId(null)}>
+					<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600">
+						Confirma eliminar lista de memorización
+					</ModalHeader>
+
+					<ModalBody>
+						<p className="text-black dark:text-gray-50 text-lg mb-3">
+							¿Estas seguro de eliminar la lista de memorización?
+						</p>
+						<p className="text-black dark:text-gray-50 mb-6 text-lg underline underline-offset-4">
+							{deletingItemId?.name}
+						</p>
+						<p className="text-gray-600 dark:text-gray-400">
+							Esta acción eliminará la lista de memorización y el contenido.
+							Luego de oprimir confirmar no se puede deshacer.
+						</p>
+					</ModalBody>
+
+					<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+						<button
+							className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
+							onClick={() => {
+								if (deletingItemId) {
+									handleDelete(deletingItemId.id);
+									// Close the modal after starting the delete
+									setDeletingItemId(null);
+								}
+							}}>
+							Confirmar
+						</button>
+					</ModalFooter>
+				</Modal>
 			</div>
 		</div>
 	);

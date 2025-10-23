@@ -36,7 +36,7 @@ export default async function ({
   }
 
 	return (
-		<div className="w-full bg-white dark:bg-gray-950 text-sky-950 dark:text-gray-50">
+		<div className="w-full bg-white dark:bg-gray-800 text-sky-950 dark:text-gray-50">
 			<section className="container mx-auto p-4 text-lg">
 				<Link
 					href="/perfil/biblia"
@@ -51,7 +51,9 @@ export default async function ({
 				</p>
 			</section>
 			<section className="container mx-auto p-4 text-lg">
-				<MemoryOrBibleNoteList memoryListItems={memoryListData.listItems} />
+				<MemoryOrBibleNoteList
+          memoryListItems={memoryListData.listItems}
+          memoryListInfo={memoryListData.listInfo}/>
 			</section>
 		</div>
 	);
