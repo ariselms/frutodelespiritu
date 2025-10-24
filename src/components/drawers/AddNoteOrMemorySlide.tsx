@@ -5,7 +5,7 @@ import { BibleCrudActions } from "@/static";
 import AddNoteOrMemorizationForm from "../forms/AddNoteOrMemorizationForm";
 import { BibleBookType } from "@/models/bibleTypes";
 
-export default function AddNoteOrMemoryItem({
+export default function AddNoteOrMemorySlide({
 	selectedVerses,
 	setSelectedVerses,
 	bibleId,

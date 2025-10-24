@@ -81,7 +81,9 @@ export async function GET(
 // PRIVATE
 // Add a new memorization to the database
 export async function POST(request: Request) {
-	try {
+
+  try {
+
 		const body = await request.json();
 		const { book, chapter, verse, content } = body;
 
@@ -99,8 +101,11 @@ export async function POST(request: Request) {
 			},
 			{ status: 201 }
 		);
+
 	} catch (error) {
+
 		console.error("Error adding memorization:", error);
+
 		return NextResponse.json(
 			{ success: false, message: "Error adding memorization" },
 			{ status: 500 }

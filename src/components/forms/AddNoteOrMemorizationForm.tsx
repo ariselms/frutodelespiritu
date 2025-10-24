@@ -374,8 +374,8 @@ export default function AddNoteOrMemorizationForm({
 												type="submit">
 												Guardar{" "}
 												{action === BibleCrudActions.memorization
-													? "Guardar memorización"
-													: "Guardar nota"}
+													? "memorización"
+													: "nota"}
 											</Button>
 									)}
 
@@ -443,10 +443,10 @@ const AddNewMemorizationListForm = ({
 
 		if (memorizationPostResponse.success) {
 
-
 			setIsAddMemorizationListFormOpen(false);
 			setNewMemorizationList({ name: "", description: "" });
 			getUserMemorizationLists();
+
 		} else {
 			console.error(
 				"Error creating new memorization list:",

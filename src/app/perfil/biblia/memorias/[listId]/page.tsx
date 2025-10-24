@@ -51,9 +51,11 @@ export default async function ({
 				</p>
 			</section>
 			<section className="container mx-auto p-4 text-lg">
+
 				<MemoryOrBibleNoteList
           memoryListItems={memoryListData.listItems}
           memoryListInfo={memoryListData.listInfo}/>
+
 			</section>
 		</div>
 	);

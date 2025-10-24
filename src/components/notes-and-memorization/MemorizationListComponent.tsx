@@ -56,7 +56,7 @@ export default function MemorizationListComponent() {
 		name: "",
 		description: ""
 	});
-	const [openDeletionModal, setOpenDeletionModal] = useState(false);
+
 	const [deletingItemId, setDeletingItemId] = useState<{
 		id: string;
 		name: string;
@@ -113,10 +113,10 @@ export default function MemorizationListComponent() {
 		}
 	};
 
-	const handleDelete = async (id: string) => {
+	const handleDelete = async (listId: string) => {
 		try {
 			const requestUserListDeletion = await fetch(
-				`/api/user/${user?.id}/memorization/${id}`,
+				`/api/user/${user?.id}/memorization/${listId}`,
 				{ method: "DELETE" }
 			);
 
@@ -124,8 +124,6 @@ export default function MemorizationListComponent() {
 
 			if (responseUserListDeletion.success) {
 				fetchMemorizationLists();
-
-				setOpenDeletionModal(false);
 
 				toast.success("Lista eliminada!");
 			}

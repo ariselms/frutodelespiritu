@@ -23,8 +23,6 @@ export async function GET(request: Request) {
 
 	const userId = Number(searchParams.get("userId"));
 
-  console.log(userId);
-
 	if (!userId) {
 		return NextResponse.json(
 			{
@@ -83,6 +81,7 @@ export async function POST(request: Request) {
   const userId = Number(searchParams.get("userId"));
 
 	try {
+
 		const body = await request.json();
 
 		const { selectedMemorizationList, memorizationData } = body;
@@ -104,7 +103,7 @@ export async function POST(request: Request) {
 		// check if the selected memorization list exists
 		if (selectedMemorizationList !== "") {
 
-			// get the memorization list id
+			// get the memorization list id to use in new memory_list_item_join
 			const { rows: memorizationList } = await sql`
         SELECT * FROM memory_list
         WHERE
@@ -112,7 +111,7 @@ export async function POST(request: Request) {
           by_user_id = ${by_user_id}
       `;
 
-      // if the memorization list does not exist, return an error
+			// if the memorization list does not exist, return an error
 			if (memorizationList.length === 0) {
 				return NextResponse.json(
 					{
@@ -123,6 +122,32 @@ export async function POST(request: Request) {
 					{ status: 400 }
 				);
 			}
+
+      // check if the user have saved the same memory item before
+      const { rows: memoryItemExist } = await sql`
+        SELECT * FROM memory_item
+        WHERE
+          by_user_id = ${by_user_id} AND
+          bible_name = ${bible_name} AND
+          bible_id = ${bible_id} AND
+          bible_book = ${bible_book} AND
+          book_id = ${book_id} AND
+          chapter_id = ${chapter_id} AND
+          verse_from = ${verse_from} AND
+          verse_to = ${verse_to} AND
+          passage_text = ${passage_text}
+      `;
+
+      if (memoryItemExist.length > 0) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Esta selección ya ha sido guardada.",
+            data: null
+          },
+          { status: 400 }
+        );
+      }
 
 			// insert new memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
@@ -159,16 +184,16 @@ export async function POST(request: Request) {
         RETURNING *
       `;
 
-      if (joinRowCount === 0) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Error al guardar memorización.",
-            data: null
-          },
-          { status: 500 }
-        );
-      }
+			if (joinRowCount === 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "Error al guardar memorización.",
+						data: null
+					},
+					{ status: 500 }
+				);
+			}
 
 			return NextResponse.json(
 				{
@@ -186,7 +211,11 @@ export async function POST(request: Request) {
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO memory_list (by_user_id, name, description)
-        VALUES (${Number(userId)}, ${name}, ${description})
+        VALUES (
+          ${Number(userId)},
+          ${name},
+          ${description}
+        )
       `;
 
 			if (rowCount === 0) {
@@ -208,8 +237,10 @@ export async function POST(request: Request) {
 				},
 				{ status: 200 }
 			);
+
 		}
 	} catch (error) {
+
 		console.error("Error creating memorization:", error);
 
 		if (

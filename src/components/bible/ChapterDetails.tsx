@@ -6,7 +6,7 @@ import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { serverBaseUrl } from "@/static";
 import { useRouter, usePathname } from "next/navigation";
-import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemoryItem";
+import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemorySlide";
 import { BibleBookType } from "@/models/bibleTypes";
 
 // Helper function to parse a "Book Chapter:Verse" string

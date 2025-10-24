@@ -35,9 +35,8 @@ export async function DELETE(
     AND by_user_id = ${userId}
     AND bible_id = ${bibleId} RETURNING *;`;
 
-  console.log(deletedMemoryItem);
-
 	if (deletedMemoryItem.length === 0) {
+
 		return NextResponse.json(
 			{
 				success: false,
@@ -46,30 +45,27 @@ export async function DELETE(
 			},
 			{ status: 404 }
 		);
+
 	}
 
-	if (deletedMemoryItem.length > 0) {
-		const { rows: newMemoryItemsList } = await sql`
-      SELECT * FROM memory_item
-      WHERE by_user_id = ${userId}
-      AND bible_id = ${bibleId}
-    `;
+  if(deletedMemoryItem.length > 0) {
 
-		return NextResponse.json(
-			{
-				success: false,
-				message: "Versículos borrados correctamente",
-				data: newMemoryItemsList
-			},
-			{ status: 500 }
-		);
-	}
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Versículos eliminados correctamente.",
+        data: deletedMemoryItem
+      },
+      { status: 200 }
+    );
+
+  }
 
 	return NextResponse.json(
 		{
-			success: true,
-			message: "Hubo un error, intentelo de nuevo",
-			data: null
+			success: false,
+			message: "Hubo un error. Inténtalo de nuevo.",
+			data: deletedMemoryItem
 		},
 		{ status: 500 }
 	);
