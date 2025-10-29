@@ -11,45 +11,39 @@ import {
 	ModalBody,
 	ModalFooter
 } from "flowbite-react";
-import { MemoryListItem } from "@/models/memoryListAndItems";
+import {
+	MemoryItemType,
+  NoteItemType,
+  Verse
+} from "@/models/memorizationAndNotesTypes";
 import { useAuthContext } from "@/context/authContext";
 import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
 
-// --- Type Definitions ---
-type VerseTextObject = {
-	text: string;
-	wordsOfJesus: boolean;
-};
-type VerseContentItem = string | VerseTextObject;
-type Verse = {
-	type: "verse";
-	number: number;
-	content: VerseContentItem[];
-};
-
-export function MemoryOrBibleNoteList({
-	memoryListItems,
-	memoryListInfo
+export function MemoryOrNoteItemList({
+	memoryOrNoteListItems,
 }: {
-	memoryListItems: MemoryListItem[] | [];
-	memoryListInfo: any;
+	memoryOrNoteListItems:
+    MemoryItemType[] |
+    NoteItemType[] |
+    null;
 }) {
 	const { user } = useAuthContext();
 
-	// FIX 3: State now holds the full MemoryListItem object or null
-	const [deletingItem, setDeletingItem] = useState<MemoryListItem | null>(null);
+	// add state to track the item being deleted using the id and name
+	const [deletingMemoryOrNoteItem, setDeletingMemoryOrNoteItem] = useState<MemoryItemType | NoteItemType | null>(null);
 
-	const [memoryList, setMemoryList] = useState<MemoryListItem[]>([]);
+  // add state to the memory or note list
+	const [memoryOrNoteList, setMemoryOrNoteList] = useState<MemoryItemType[] | NoteItemType[]>([]);
 
-	// FIX 2: Simplified useEffect to sync prop to state
+	// simplified useEffect to sync prop to state
 	useEffect(() => {
-		if (memoryListItems !== null) {
-			setMemoryList(memoryListItems);
+		if (memoryOrNoteListItems !== null) {
+			setMemoryOrNoteList(memoryOrNoteListItems);
 		}
-	}, [memoryListItems]); // Only depends on the prop
+	}, [memoryOrNoteListItems]); // Only depends on the prop
 
-	const handleDeletingMemoryItem = async (
+	const handleDeletingMemoryOrNoteItem = async (
 		memoryItemId: string,
 		bibleId: string
 	) => {
@@ -65,7 +59,7 @@ export function MemoryOrBibleNoteList({
 
 			if (responseDeleteMemoryItem.success) {
 				// update the local state to trigger a re-render
-				setMemoryList((currentList) =>
+				setMemoryOrNoteList((currentList) =>
 					currentList.filter((item) => String(item.id) !== memoryItemId)
 				);
 
@@ -83,29 +77,42 @@ export function MemoryOrBibleNoteList({
 		}
 	};
 
-	if (memoryList?.length === 0) {
+	if (memoryOrNoteList?.length === 0) {
 		return (
-			<p className="text-gray-400 dark:text-gray-300 max-w-[80ch]">
-				No hay elementos en esta lista. Visita la sección de la biblia y
-				comienza a leer para agregar versículos a tu lista de memoria.
-			</p>
+			<div className="max-w-[80ch]">
+				<p className="text-gray-500 dark:text-gray-300 mb-3">
+					No hay elementos en esta lista. Visita la sección de la biblia, elije
+					una traducción y comienza a leer para agregar versículos a tu lista de
+					memoria. Las listas de memoria ayudan a recordar y comprender el
+					contenido de la biblia.
+				</p>
+				<p>
+					<a
+						className="text-sky-700 hover:text-sky-800"
+						href="/biblia">
+						Abrir biblias disponibles 📖
+					</a>
+				</p>
+			</div>
 		);
 	}
 
 	return (
 		<>
 			<Accordion collapseAll>
-				{memoryList?.map((listItem: MemoryListItem) => {
+
+				{memoryOrNoteList?.map((listItem: MemoryItemType | NoteItemType) => {
+
 					// Safely parse the complex, malformed string
 					const getPassageContent = () => {
+
 						if (!listItem.passage_text) return <p>No text available.</p>;
 
 						try {
-							const correctedJsonString = `[${listItem.passage_text.slice(
-								1,
-								-1
-							)}]`;
+							const correctedJsonString = `[${listItem.passage_text.slice(1, -1)}]`;
+
 							const verseStrings: string[] = JSON.parse(correctedJsonString);
+
 							const verses: Verse[] = verseStrings.map((str) =>
 								JSON.parse(str)
 							);
@@ -113,20 +120,24 @@ export function MemoryOrBibleNoteList({
 							return verses.map((verse) => (
 								<p
 									key={verse.number}
-									className="mb-2 max-w-[80ch] text-sm md:text-base">
+									className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-2 max-w-[80ch]">
+
 									<sup className="font-bold mr-1">{verse.number}</sup>
+
 									{verse.content.map((item, index) => {
+
 										if (typeof item === "string") {
 											return (
 												<React.Fragment key={index}>{item} </React.Fragment>
 											);
 										}
+
 										return (
 											<span
 												key={index}
 												className={
 													item.wordsOfJesus
-														? "text-red-600 dark:text-red-400 text-sm md:text-base"
+														? "text-red-600 dark:text-red-400"
 														: ""
 												}>
 												{item.text}{" "}
@@ -150,24 +161,24 @@ export function MemoryOrBibleNoteList({
 					return (
 						<AccordionPanel key={listItem.id}>
 							<AccordionTitle className="bg-sky-50 hover:bg-sky-100 border-sky-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200 text-sm md:text-base">
-								<span className="text-sky-700 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-800">
+								<p className="text-sky-700 hover:text-sky-800 dark:text-gray-50 dark:hover:text-gray-100">
 									{listItem.bible_book} {listItem.chapter_id}:
 									{listItem.verse_from}
 									{listItem.verse_to !== listItem.verse_from &&
 										`-${listItem.verse_to}`}{" "}
-								</span>
-								<div>{listItem.bible_name}</div>
+								</p>
+								<p className="text-sm text-sky-600 dark:text-gray-400">Biblia {listItem.bible_name}</p>
 							</AccordionTitle>
 							<AccordionContent className="text-gray-500 dark:text-gray-100 dark:bg-gray-800">
 								{getPassageContent()}
 								<div
-									className="flex items-center justify-end"
+									className="items-center justify-start inline-block mt-5 px-2 py-1 rounded-2xl border-2 border-red-500 text-red-500 bg-red-50 font-bold cursor-pointer"
 									// FIX 3: Pass the entire listItem to state
-									onClick={() => setDeletingItem(listItem)}>
+									onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
 									<LordIconHover
 										size={24}
 										ICON_SRC={LOTTIE_TRASH_MORPH_TRASH_IN}
-										state="morph-trash-in"
+										state="morph-trash-out"
 										text="Eliminar"
 									/>
 								</div>
@@ -180,8 +191,8 @@ export function MemoryOrBibleNoteList({
 			{/* Modal for deleting a lecture */}
 			<Modal
 				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
-				show={deletingItem !== null}
-				onClose={() => setDeletingItem(null)}
+				show={deletingMemoryOrNoteItem !== null}
+				onClose={() => setDeletingMemoryOrNoteItem(null)}
 				popup>
 				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
 					Confirma remover versículos
@@ -193,14 +204,14 @@ export function MemoryOrBibleNoteList({
 
 					{/* FIX 3: Display human-readable verse reference */}
 					<p className="text-black dark:text-gray-50 mb-6 text-lg underline underline-offset-4">
-						{deletingItem?.bible_book} {deletingItem?.chapter_id}:
-						{deletingItem?.verse_from}
-						{deletingItem?.verse_to !== deletingItem?.verse_from &&
-							`-${deletingItem?.verse_to}`}
+						{deletingMemoryOrNoteItem?.bible_book} {deletingMemoryOrNoteItem?.chapter_id}:
+						{deletingMemoryOrNoteItem?.verse_from}
+						{deletingMemoryOrNoteItem?.verse_to !== deletingMemoryOrNoteItem?.verse_from &&
+							`-${deletingMemoryOrNoteItem?.verse_to}`}
 					</p>
 
 					<p className="text-gray-600 dark:text-gray-400">
-						Esta acción removerá la lectura de tu lista de favoritas. Luego de
+						Esta acción removerá este contenido de la lista. Luego de
 						oprimir confirmar no se puede deshacer.
 					</p>
 				</ModalBody>
@@ -209,13 +220,13 @@ export function MemoryOrBibleNoteList({
 					<button
 						className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
 						onClick={() => {
-							if (deletingItem) {
+							if (deletingMemoryOrNoteItem) {
 								// FIX 3: Get ID and bibleId from the state object
-								handleDeletingMemoryItem(
-									String(deletingItem.id),
-									String(deletingItem.bible_id)
+								handleDeletingMemoryOrNoteItem(
+									String(deletingMemoryOrNoteItem.id),
+									String(deletingMemoryOrNoteItem.bible_id)
 								);
-								setDeletingItem(null); // Close modal on confirm
+								setDeletingMemoryOrNoteItem(null); // Close modal on confirm
 							}
 						}}>
 						Confirmar

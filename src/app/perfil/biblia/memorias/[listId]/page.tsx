@@ -1,13 +1,15 @@
 import { sql } from "@vercel/postgres";
-import { MemoryOrBibleNoteList } from "@/components/bible/MemoryOrBibleNoteList";
+import { MemoryOrNoteItemList } from "@/components/bible/MemoryOrNoteItemList";
 import Link from "next/link";
+import { LordIconRevealOnLoad } from "@/components/animations/lordicon";
+import LOTTIE_BRAIN_IN_REVEAL from "@/lotties/brain-in-reveal.json";
 
 export default async function ({
 	params
 }: {
 	params: Promise<{ listId: string}>;
 }) {
-  let memoryListData: any = {};
+  let memoryOrNotelist: any = {};
 
   const { listId } = await params
 
@@ -28,7 +30,7 @@ export default async function ({
 
   if(memoryList && memoryListItems) {
 
-    memoryListData = {
+    memoryOrNotelist = {
       listInfo: memoryList[0],
       listItems: memoryListItems.length > 0 ? memoryListItems : []
     };
@@ -40,22 +42,31 @@ export default async function ({
 			<section className="container mx-auto p-4 text-lg">
 				<Link
 					href="/perfil/biblia"
-					className="text-sky-900 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 mt-4 mb-7 inline-block">
+					className="text-sky-900 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 mt-4 mb-7 flex items-center">
 					&larr; Volver a Mis Listas de Memorización
+          <LordIconRevealOnLoad
+            size={48}
+            ICON_SRC={LOTTIE_BRAIN_IN_REVEAL}
+            state="in-reveal"
+            text=""
+          />
 				</Link>
-				<h1>
-					<strong>Nombre de Lista:</strong> {memoryListData?.listInfo?.name}
+
+				<h1 className="text-2xl mb-2">
+					<span className="flex items-center">
+						{memoryOrNotelist?.listInfo?.name}
+					</span>
 				</h1>
-				<p>
-					<strong>Descripción:</strong> {memoryListData?.listInfo?.description}
+
+				<p className="text-gray-500 dark:text-gray-300">
+					{memoryOrNotelist?.listInfo?.description}
 				</p>
 			</section>
+
 			<section className="container mx-auto p-4 text-lg">
-
-				<MemoryOrBibleNoteList
-          memoryListItems={memoryListData.listItems}
-          memoryListInfo={memoryListData.listInfo}/>
-
+				<MemoryOrNoteItemList
+					memoryOrNoteListItems={memoryOrNotelist.listItems}
+				/>
 			</section>
 		</div>
 	);

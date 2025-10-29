@@ -26,9 +26,7 @@ interface MemorizationList {
 
 export default function MemorizationListComponent() {
 	const { user } = useAuthContext();
-	const [memorizationLists, setMemorizationLists] = useState<
-		MemorizationList[]
-	>([]);
+	const [memorizationLists, setMemorizationLists] = useState<MemorizationList[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [pagination, setPagination] = useState({

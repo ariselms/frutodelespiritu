@@ -1,79 +1,90 @@
 // TODO: Break everything in to smaller components
 // TODO: Complete endpoints and error handling when performing CRUD operations
+import { useEffect, useState } from "react";
+import { useAuthContext } from "@/context/authContext";
 import {
 	useReactTable,
 	getCoreRowModel,
 	getSortedRowModel,
 	flexRender,
 	getPaginationRowModel,
-	ColumnDef
+	ColumnDef,
+	SortingState
 } from "@tanstack/react-table";
-import { useAuthContext } from "@/context/authContext";
-import type { SortingState } from "@tanstack/react-table";
-import { Spinner } from "flowbite-react";
-import { useEffect, useState } from "react";
-import MemorizationListPaginationComponent from "./TanStackPaginationComponent";
+import {
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	Spinner
+} from "flowbite-react";
+import MemorizationListPaginationComponent from "@/components/notes-and-memorization/TanStackPaginationComponent";
 import { toast } from "react-toastify";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "flowbite-react";
 import Link from "next/link";
-
-// Type for memorization list
-interface MemorizationList {
-	id: string;
-	name: string;
-	description: string;
-}
+import { DeleteUserListOrNoteType, NoteOrMemoryListType } from "@/models/memorizationAndNotesTypes";
+import { LordIconHover } from "@/components/animations/lordicon";
+import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
+import LOTTIE_EYE_WATCHING_HOVER_BLINK from "@/lotties/glasses-eye-blink-hover-searching.json";
 
 export default function MemorizationListComponent() {
 	const { user } = useAuthContext();
-	const [memorizationLists, setMemorizationLists] = useState<
-		MemorizationList[]
-	>([]);
+
+	// loading state
 	const [isLoading, setIsLoading] = useState(false);
+
+	// pagination
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [pagination, setPagination] = useState({
 		pageIndex: 0,
 		pageSize: 10
 	});
-	const [newListItem, setNewListItem] = useState<{
-		by_user_id: string;
-		bible_id: string;
-		book_id: string;
-		chapter_id: string;
-		verse_from: string;
-		verse_to: string;
-		passage_text: string;
-		name: string;
-		description: string;
-	}>({
+
+	// user memorization lists
+	const [userMemorizationLists, setUserMemorizationLists] = useState<NoteOrMemoryListType[]>([]);
+
+  // new user list
+	const [newUserList, setNewUserList] = useState<NoteOrMemoryListType>({
+		id: null,
 		by_user_id: user?.id,
-		bible_id: "",
-		book_id: "",
-		chapter_id: "",
-		verse_from: "",
-		verse_to: "",
-		passage_text: "",
 		name: "",
 		description: ""
 	});
 
-	const [deletingItemId, setDeletingItemId] = useState<{
-		id: string;
-		name: string;
-	} | null>(null);
+  // deleting list info
+	const [deletingListIdAndName, setDeletingListAndNameId] = useState<DeleteUserListOrNoteType | null>(null);
 
 	// CRUD Functions
 	const handleCreate = async (e: React.FormEvent) => {
+
 		e.preventDefault();
 
 		try {
-			if (!newListItem) return;
 
-			if (newListItem.name === "" || newListItem.description === "") {
+			if (!newUserList) return;
+
+			if (
+        newUserList.name === "" ||
+        newUserList.description === ""
+      ) {
+
 				toast.warning("Todos los campos son requeridos");
 
 				return;
 			}
+
+			const memorizationData: any = {
+				bible_name: "", // full bible version name
+				bible_id: "", // bible id (abbreviation)
+				by_user_id: user?.id,
+				bible_book: "", // bible book name
+				book_id: "", // book id (abbreviation)
+				chapter_id: "",
+				verse_from: "",
+				verse_to: "",
+				passage_text: "",
+				name: newUserList.name,
+				description: newUserList.description
+			};
 
 			// Replace with your actual POST endpoint
 			const requestNewMemorizationListItem = await fetch(
@@ -82,7 +93,7 @@ export default function MemorizationListComponent() {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						memorizationData: newListItem,
+						memorizationData: memorizationData,
 						selectedMemorizationList: ""
 					})
 				}
@@ -92,19 +103,18 @@ export default function MemorizationListComponent() {
 				await requestNewMemorizationListItem.json();
 
 			if (responseNewMemorizationListItem.success) {
-				setNewListItem({
+				setNewUserList({
+					id: null,
 					by_user_id: user?.id,
-					bible_id: "",
-					book_id: "",
-					chapter_id: "",
-					verse_from: "",
-					verse_to: "",
-					passage_text: "",
 					name: "",
 					description: ""
 				}); // Reset the input field
 
-				fetchMemorizationLists();
+        // Update the userMemorizationLists state
+				setUserMemorizationLists((prevLists) => [
+					...prevLists,
+					responseNewMemorizationListItem.data
+				]);
 
 				toast.success("Lista creada!");
 			}
@@ -123,7 +133,9 @@ export default function MemorizationListComponent() {
 			const responseUserListDeletion = await requestUserListDeletion.json();
 
 			if (responseUserListDeletion.success) {
-				fetchMemorizationLists();
+				setUserMemorizationLists((prevLists) =>
+					prevLists.filter((list) => list.id !== listId)
+				);
 
 				toast.success("Lista eliminada!");
 			}
@@ -133,8 +145,8 @@ export default function MemorizationListComponent() {
 	};
 
 	const handleUpdate = async (
-		originalItem: MemorizationList,
-		updatedItem: MemorizationList
+		originalItem: NoteOrMemoryListType,
+		updatedItem: NoteOrMemoryListType
 	) => {
 		try {
 			if (
@@ -156,7 +168,7 @@ export default function MemorizationListComponent() {
 
 			if (responseMemoryListItem.success) {
 				toast.success("Lista actualizada!");
-				setMemorizationLists((prevLists) =>
+				setUserMemorizationLists((prevLists) =>
 					prevLists.map((list) =>
 						list.id === updatedItem.id ? updatedItem : list
 					)
@@ -172,8 +184,8 @@ export default function MemorizationListComponent() {
 	};
 
 	const onChangeNewListItem = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setNewListItem({
-			...newListItem,
+		setNewUserList({
+			...newUserList,
 			[e.target.name]: e.target.value
 		});
 	};
@@ -192,7 +204,7 @@ export default function MemorizationListComponent() {
 					await requestUserMemorizationLists.json();
 
 				if (responseUserMemorizationLists.success) {
-					setMemorizationLists(responseUserMemorizationLists.data);
+					setUserMemorizationLists(responseUserMemorizationLists.data);
 				} else {
 					console.error(responseUserMemorizationLists.message);
 				}
@@ -204,7 +216,7 @@ export default function MemorizationListComponent() {
 		}
 	};
 
-	const columns: ColumnDef<MemorizationList>[] = [
+	const columns: ColumnDef<NoteOrMemoryListType>[] = [
 		{
 			header: "Nombre",
 			accessorKey: "name",
@@ -241,22 +253,42 @@ export default function MemorizationListComponent() {
 			header: "Acciones",
 			id: "actions",
 			cell: ({ row }) => (
-				<div className="flex-col items-center justify-center md:flex md:flex-row">
-					<button
-						onClick={() => {
-							setDeletingItemId({
-								id: row.original.id,
-								name: row.original.name
-							});
-						}}
-						className="text-red-700 hover:text-red-800 dark:text-red-500 hover:dark:text-red-600 underline underline-offset-4 transition-colors cursor-pointer text-center w-full my-1 md:my-0">
-						Eliminar
-					</button>
+				<div className="flex-col items-center justify-center md:flex md:flex-row gap-2">
 					<Link
 						href={`/perfil/biblia/memorias/${row.original.id}`}
-						className="text-sky-700 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 cursor-pointer text-center w-full my-1 md:my-0 transition-colors inline-block">
-						Ver Lista
+						className="cursor-pointer text-center w-full mb-3 md:mb-0 transition-colors inline-block flex-1">
+						<div
+							className="items-center justify-start px-2 py-1 rounded-2xl border border-sky-200 dark:border-gray-600 text-sky-700 dark:text-gray-100 bg-sky-100 dark:bg-gray-800 font-bold cursor-pointer"
+							// FIX 3: Pass the entire listItem to state
+						>
+							<LordIconHover
+								size={24}
+								ICON_SRC={LOTTIE_EYE_WATCHING_HOVER_BLINK}
+								state="hover-searching"
+								text="Abrir"
+							/>
+						</div>
 					</Link>
+					<button
+						className="flex-1"
+						onClick={() => {
+							setDeletingListAndNameId({
+								id: row.original.id as string,
+								name: row.original.name as string
+							});
+						}}>
+						<div
+							className="items-center justify-start px-2 py-1 rounded-2xl text-red-500 bg-red-50 border border-red-200 dark:border-gray-600 dark:bg-gray-800 font-bold cursor-pointer"
+							// FIX 3: Pass the entire listItem to state
+						>
+							<LordIconHover
+								size={24}
+								ICON_SRC={LOTTIE_TRASH_MORPH_TRASH_IN}
+								state="morph-trash-out"
+								text="Eliminar"
+							/>
+						</div>
+					</button>
 				</div>
 			)
 		}
@@ -267,7 +299,7 @@ export default function MemorizationListComponent() {
 	}, [user?.id]);
 
 	const memorizationListTable = useReactTable({
-		data: memorizationLists,
+		data: userMemorizationLists,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 
@@ -299,21 +331,21 @@ export default function MemorizationListComponent() {
 			{/* Form for creating a new list */}
 			<form
 				onSubmit={handleCreate}
-				className="mb-4 flex items-center flex-wrap">
+				className="mb-8 flex items-center flex-wrap">
 				<input
 					type="text"
 					name="name"
-					value={newListItem.name}
+					value={newUserList.name}
 					onChange={onChangeNewListItem}
 					placeholder="Nombre de la nueva lista"
 					className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 					required
 				/>
-				{newListItem.name.length > 3 && (
+				{newUserList.name.length > 3 && (
 					<input
 						type="text"
 						name="description"
-						value={newListItem.description}
+						value={newUserList.description}
 						onChange={onChangeNewListItem}
 						placeholder="Breve descripcion de la nueva lista"
 						className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
@@ -328,9 +360,9 @@ export default function MemorizationListComponent() {
 			</form>
 
 			<div className="overflow-x-auto">
-				{memorizationLists.length > 0 ? (
+				{userMemorizationLists.length > 0 ? (
 					<>
-						<p className="text-sm text-gray-500 dark:text-gray-300 mb-2 flex items-center">
+						<p className="text-sm text-gray-500 dark:text-gray-300 mb-4 flex items-center">
 							<svg
 								className="w-10 h-10 sm:w-6 sm:h-6 text-gray-500 dark:text-gray-300 mr-1"
 								aria-hidden="true"
@@ -408,8 +440,8 @@ export default function MemorizationListComponent() {
 				{/* Modal for deleting a list */}
 				<Modal
 					className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
-					show={deletingItemId !== null}
-					onClose={() => setDeletingItemId(null)}>
+					show={deletingListIdAndName !== null}
+					onClose={() => setDeletingListAndNameId(null)}>
 					<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600">
 						Confirma eliminar lista de memorización
 					</ModalHeader>
@@ -419,7 +451,7 @@ export default function MemorizationListComponent() {
 							¿Estas seguro de eliminar la lista de memorización?
 						</p>
 						<p className="text-black dark:text-gray-50 mb-6 text-lg underline underline-offset-4">
-							{deletingItemId?.name}
+							{deletingListIdAndName?.name}
 						</p>
 						<p className="text-gray-600 dark:text-gray-400">
 							Esta acción eliminará la lista de memorización y el contenido.
@@ -431,10 +463,10 @@ export default function MemorizationListComponent() {
 						<button
 							className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
 							onClick={() => {
-								if (deletingItemId) {
-									handleDelete(deletingItemId.id);
+								if (deletingListIdAndName) {
+									handleDelete(deletingListIdAndName.id);
 									// Close the modal after starting the delete
-									setDeletingItemId(null);
+									setDeletingListAndNameId(null);
 								}
 							}}>
 							Confirmar

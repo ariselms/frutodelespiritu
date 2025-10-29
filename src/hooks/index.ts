@@ -60,3 +60,20 @@ export const useFetchUserMemorizationLists = async (userId: string) => {
 		console.error("Error fetching user memorization lists:", error);
 	}
 };
+
+export const useFetchUserNoteLists = async (userId: string) => {
+  try {
+    const requestUserNoteLists = await fetch(
+      `/api/user/${userId}/note?userId=${userId}`
+    );
+    const responseUserNoteLists = await requestUserNoteLists.json();
+
+    if (!responseUserNoteLists.success) {
+      throw new Error("Error fetching user note lists");
+    }
+
+    return responseUserNoteLists;
+  } catch (error) {
+    console.error("Error fetching user note lists:", error);
+  }
+};

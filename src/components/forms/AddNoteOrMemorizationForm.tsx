@@ -3,11 +3,11 @@ import { memo, useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
-import { useFetchUserMemorizationLists } from "@/hooks";
+import { useFetchUserMemorizationLists, useFetchUserNoteLists } from "@/hooks";
 import {
-	MemorizationSubmissionType,
-	MemorizationListType
-} from "@/models/memorizationTypes";
+	MemoryItemType,
+	NoteOrMemoryListType,
+} from "@/models/memorizationAndNotesTypes";
 import { toast } from "react-toastify";
 import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
 import { BottomModalTheme } from "@/components/theme/index";
@@ -34,28 +34,33 @@ export default function AddNoteOrMemorizationForm({
   chapterInfo: any;
   bibleName: string;
 }) {
-
 	// user object
 	const { user } = useAuthContext();
 
 	// memorization data contains the memory_item information
-	const [memorizationData, setMemorizationData] =
-		useState<MemorizationSubmissionType | null>(null);
+	const [bibleData, setBibleData] = useState<MemoryItemType | null>(
+		null
+	);
+
+	const [userNoteLists, setUserNoteLists] = useState<NoteOrMemoryListType[]>([]);
 
 	// user memorization lists to relate to the memory_item
 	const [userMemorizationLists, setUserMemorizationLists] = useState<
-		MemorizationListType[]
+		NoteOrMemoryListType[]
 	>([]);
 
 	// memorizartion list the user will select to save the memory_item
 	const [selectedMemorizationList, setSelectedMemorizationList] =
 		useState<string>("");
 
-  // new memorization list name
-  const [newMemorizationList, setNewMemorizationList] = useState<{ name: string; description: string }>({
-    name: "",
-    description: ""
-  });
+	// new memorization list name
+	const [newMemorizationList, setNewMemorizationList] = useState<{
+		name: string;
+		description: string;
+	}>({
+		name: "",
+		description: ""
+	});
 
 	// state to control the add memorization list form modal
 	const [isAddMemorizationListFormOpen, setIsAddMemorizationListFormOpen] =
@@ -63,9 +68,7 @@ export default function AddNoteOrMemorizationForm({
 
 	// set the bible data
 	useEffect(() => {
-
 		if (bibleId && passageId && chapterContent && user) {
-
 			// get the initial verse number from the passageId
 			const verseFrom = Number(passageId[0]?.split(":")[1]);
 
@@ -86,9 +89,10 @@ export default function AddNoteOrMemorizationForm({
 				}
 			});
 
-			setMemorizationData({
-        bible_name: bibleName,
-        bible_book: bibleBook?.name,
+			setBibleData({
+        id: null,
+				bible_name: bibleName,
+				bible_book: bibleBook?.name,
 				by_user_id: user?.id,
 				bible_id: bibleId,
 				book_id: bibleBook.id,
@@ -112,6 +116,8 @@ export default function AddNoteOrMemorizationForm({
 			return;
 		}
 
+		console.log(responseUserMemorizationLists);
+
 		setUserMemorizationLists(responseUserMemorizationLists.data);
 
 		return responseUserMemorizationLists;
@@ -119,18 +125,55 @@ export default function AddNoteOrMemorizationForm({
 
 	useEffect(() => {
 		if (user?.id) {
-			getUserMemorizationLists();
+      getUserMemorizationLists();
 		}
+
+    return () => {
+      setUserMemorizationLists([]);
+    };
 	}, [user?.id]);
 
-	const onFormSubmission = async (e: React.FormEvent) => {
+	// TODO: NEED TO CHANGE THIS TO FETCH USER NOTE LISTS
+	// fetch user note lists
+	// const getUserNoteLists: () => Promise<string[] | null> = async () => {
+	// 	if (!user?.id) return null;
 
-    if(!user) return;
+	// 	const responseUserNoteLists: any =
+	// 		await useFetchUserNoteLists(user?.id);
+
+	// 	if (!responseUserNoteLists.success) {
+	// 		console.error("Error fetching user memorization lists");
+	// 		return;
+	// 	}
+
+	// 	setUserNoteLists(responseUserNoteLists.data);
+
+	// 	return responseUserNoteLists;
+	// };
+
+	// useEffect(() => {
+	// 	if (user?.id) {
+	// 		getUserNoteLists();
+	// 	}
+  // 	return () => {
+  // 		setUserNoteLists([]);
+  // 	};
+	// }, [user?.id]);
+
+
+
+	const onFormSubmission = async (e: React.FormEvent) => {
+		if (!user) return;
 
 		e.preventDefault();
 
 		try {
 			if (action === BibleCrudActions.note) {
+				console.log(bibleData);
+
+				console.log(userNoteLists);
+
+				return;
 				//
 				// bible_note //
 				// id int
@@ -145,7 +188,6 @@ export default function AddNoteOrMemorizationForm({
 			}
 
 			if (action === BibleCrudActions.memorization) {
-
 				const memorizationPostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
@@ -155,7 +197,11 @@ export default function AddNoteOrMemorizationForm({
 						},
 						body: JSON.stringify({
 							selectedMemorizationList,
-							memorizationData
+							memorizationData: {
+                ...bibleData,
+                name: newMemorizationList.name,
+                description: newMemorizationList.description
+              }
 						})
 					}
 				);
@@ -163,13 +209,12 @@ export default function AddNoteOrMemorizationForm({
 				const memorizationPostResponse = await memorizationPostRequest.json();
 
 				if (memorizationPostResponse.success) {
-
 					// close the modal
 					setOpenModal(false);
 					// clear the selectedMemorizationList
 					setSelectedMemorizationList("");
-					// clear the memorizationData
-					setMemorizationData(null);
+					// clear the bibleData
+					setBibleData(null);
 
 					toast.success("Memorización guardada correctamente");
 
@@ -180,11 +225,8 @@ export default function AddNoteOrMemorizationForm({
 					return;
 				}
 			}
-
 		} catch (error) {
-
 			console.error(error);
-
 		}
 	};
 
@@ -194,11 +236,10 @@ export default function AddNoteOrMemorizationForm({
 
 	// TODO: upon page load, lookup for any user memorization items to highlight or note the verses that the user has already saved in a memory list
 
-  // TODO: Create a feature to PIN functionalities in the home page, for example, if the user uses more often the notes feature, then show that in the home page as a quick access button, or the saved lectures feature and notes and memory lists in the bible section. It will have a config section in the admin panel
+	// TODO: Create a feature to PIN functionalities in the home page, for example, if the user uses more often the notes feature, then show that in the home page as a quick access button, or the saved lectures feature and notes and memory lists in the bible section. It will have a config section in the admin panel
 
 	return (
 		<>
-
 			<Drawer
 				className="bg-white/50 dark:bg-black/50 backdrop-blur-lg border border-t-sky-200 dark:border-t-gray-600"
 				theme={BottomModalTheme}
@@ -206,7 +247,6 @@ export default function AddNoteOrMemorizationForm({
 				onClose={() => setOpenModal(false)}
 				backdrop={false}
 				position="bottom">
-
 				<DrawerHeader
 					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-sky-100 dark:border-gray-600 mb-6"
 					title={
@@ -220,89 +260,72 @@ export default function AddNoteOrMemorizationForm({
 				<DrawerItems className="overflow-y-auto max-h-[65vh]">
 					<div className="max-w-[80ch] mx-auto py-0 px-2 xl:px-0">
 						<div className="text-black dark:text-white">
-
 							<h3 className="text-lg mb-1 font-bold">
 								{action === BibleCrudActions.note
 									? "Añadir nota a pasaje biblico"
 									: "Información del pasaje a memorizar"}
 							</h3>
-
 							<p className="mb-1">
 								<span className="mr-1 font-bold">Biblia:</span>
-								{memorizationData?.bible_name} ({memorizationData?.bible_id})
+								{bibleData?.bible_name} ({bibleData?.bible_id})
 							</p>
-
 							<p className="mb-2">
 								<span className="mr-1 font-bold">Pasaje:</span>
-								{memorizationData?.bible_book} {memorizationData?.chapter_id}{" "}
-								{" : "}
-								{memorizationData?.verse_from}
-								{memorizationData?.verse_to !== memorizationData?.verse_from
-									? `-${memorizationData?.verse_to}`
+								{bibleData?.bible_book} {bibleData?.chapter_id} {" : "}
+								{bibleData?.verse_from}
+								{bibleData?.verse_to !== bibleData?.verse_from
+									? `-${bibleData?.verse_to}`
 									: ""}
 							</p>
-
 							{
 								<div>
-									{memorizationData?.passage_text.map(
+									{bibleData?.passage_text.map((verse: any, index: number) => {
+										if (verse?.number) {
+											return (
+												<p key={index}>
+													<span className="w mr-1.5 font-bold">
+														{verse?.number}
+													</span>
 
-										(verse: any, index: number) => {
+													{verse?.content.map((text: any, index: number) => {
+														if (verse && verse.lineBreak) {
+															return <br key={index} />;
+														}
 
-											if (verse?.number) {
+														if (typeof text === "string") {
+															return (
+																<span key={index} className="w mx-1">
+																	{text}
+																</span>
+															);
+														}
 
-												return (
-
-													<p key={index}>
-
-														<span className="w mr-1.5 font-bold">
-															{verse?.number}
-														</span>
-
-														{verse?.content.map((text: any, index: number) => {
-
-															if (verse && verse.lineBreak) {
-																return <br key={index} />;
-															}
-
-															if (typeof text === "string") {
-																return (
-																	<span key={index} className="w mx-1">
-																		{text}
-																	</span>
-																);
-															}
-
-															if (text?.text) {
-																return (
-																	<span
-																		className={`${
-																			text?.wordsOfJesus
-																				? "mx-1 text-red-600 dark:text-red-400"
-																				: ""
-																		}`}
-																		key={index}>
-																		{text?.text}{" "}
-																	</span>
-																);
-															}
-														})}
-													</p>
-												);
-											}
+														if (text?.text) {
+															return (
+																<span
+																	className={`${
+																		text?.wordsOfJesus
+																			? "mx-1 text-red-600 dark:text-red-400"
+																			: ""
+																	}`}
+																	key={index}>
+																	{text?.text}{" "}
+																</span>
+															);
+														}
+													})}
+												</p>
+											);
 										}
-									)}
+									})}
 								</div>
 							}
 							<form
 								className="max-w-xl  mx-auto pb-6"
 								onSubmit={onFormSubmission}>
-
 								{userMemorizationLists.length > 0 &&
-
 									action === BibleCrudActions.memorization && (
-
 										<div className="mt-6 mb-2">
-
 											<label
 												className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
 												htmlFor="memorizationList">
@@ -310,13 +333,12 @@ export default function AddNoteOrMemorizationForm({
 											</label>
 
 											<select
-												className="p-2 text-sm font-medium text-black dark:text-white rounded-2xl cursor-pointer border border-sky-700 focus:ring-4 focus:ring-sky-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full md:w-3/4"
+												className="p-2 text-sm font-medium text-black dark:text-white rounded-2xl cursor-pointer border border-sky-700 focus:ring-4 focus:ring-sky-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 												id="memorizationList"
 												value={selectedMemorizationList || ""}
 												onChange={(e) =>
 													setSelectedMemorizationList(e.target.value)
 												}>
-
 												<option value="" disabled>
 													Selecciona una lista
 												</option>
@@ -329,22 +351,21 @@ export default function AddNoteOrMemorizationForm({
 														{list?.name}
 													</option>
 												))}
-
 											</select>
 										</div>
 									)}
 
 								{userMemorizationLists.length === 0 ? (
-									<p className="text-gray-900 dark:text-gray-100 block my-2 w-full md:w-3/4">
+									<p className="text-gray-900 dark:text-gray-100 block my-2 w-full">
 										Aún no tienes ninguna lista de memorización. Crea una lista
 										oprimiendo el botón para poder guardar este pasaje.
 									</p>
 								) : null}
 
-								<div className="w-full md:w-3/4">
+								<div className="w-full">
 									{action === BibleCrudActions.memorization && (
 										<Button
-                    className="p-4 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full"
+											className="p-4 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full"
 											onClick={() => setIsAddMemorizationListFormOpen(true)}
 											type="button">
 											<svg
@@ -366,19 +387,51 @@ export default function AddNoteOrMemorizationForm({
 											Crear nueva lista de memorización
 										</Button>
 									)}
+									{action === BibleCrudActions.note && (
+										<div className="mt-6 mb-2">
+											<div className="mb-3">
+												<label
+													className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+													htmlFor="note_title">
+													Título de la nota
+												</label>
 
-									{action === BibleCrudActions.memorization &&
-										selectedMemorizationList !== "" && (
-											<Button
-												className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
-												type="submit">
-												Guardar{" "}
-												{action === BibleCrudActions.memorization
-													? "memorización"
-													: "nota"}
-											</Button>
+												<input
+													type="text"
+													className="p-2 text-sm font-medium text-black dark:text-white rounded-2xl cursor-pointer border border-sky-700 focus:ring-4 focus:ring-sky-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+													id="note_title"
+													value="note_title"
+													onChange={(e) =>
+														setSelectedMemorizationList(e.target.value)
+													}></input>
+											</div>
+
+											<div className="mb-3">
+												<label
+													className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+													htmlFor="note_content">
+													Contenido
+												</label>
+
+												<textarea
+													rows={5}
+													className="p-2 text-sm font-medium text-black dark:text-white rounded-2xl cursor-pointer border border-sky-700 focus:ring-4 focus:ring-sky-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+													id="note_content"
+													value="note_content"
+													onChange={(e) =>
+														setSelectedMemorizationList(e.target.value)
+													}></textarea>
+											</div>
+										</div>
 									)}
-
+									<Button
+										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+										type="submit">
+										Guardar{" "}
+										{action === BibleCrudActions.memorization
+											? "memorización"
+											: "nota"}
+									</Button>
 								</div>
 							</form>
 						</div>
@@ -420,9 +473,17 @@ const AddNewMemorizationListForm = ({
 		e.preventDefault();
 
 		const memorizationDataToSubmit = {
+      bible_name : "", // full bible version name
+			bible_id: "", // bible id (abbreviation)
 			by_user_id: String(userId),
-			name: newMemorizationList.name,
-			description: newMemorizationList.description
+			bible_book: "", // bible book name
+			book_id: "", // book id (abbreviation)
+			chapter_id: "",
+			verse_from: "",
+			verse_to: "",
+			passage_text: "",
+      name: newMemorizationList.name,
+			description: newMemorizationList.description,
 		};
 
 		const memorizationPostRequest = await fetch(

@@ -45,17 +45,17 @@ export async function GET(request: Request) {
 		});
 	}
 
-	const { rows: userMemorizationLists } = await sql`
-    SELECT * FROM memory_list
+	const { rows: userNoteLists } = await sql`
+    SELECT * FROM note_list
     WHERE
-      memory_list.by_user_id = ${Number(userId)}
+      note_list.by_user_id = ${Number(userId)}
   `;
 
 	return NextResponse.json(
 		{
 			success: true,
-			message: "Memorizaciones solicitadas correctamente.",
-			data: userMemorizationLists
+			message: "Notas solicitadas correctamente.",
+			data: userNoteLists
 		},
 		{ status: 200 }
 	);
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
 		const body = await request.json();
 
-		const { selectedMemorizationList, memorizationData } = body;
+		const { selectedNoteList, bibleData } = body;
 
 		const {
       bible_name, // full bible version name
@@ -98,16 +98,16 @@ export async function POST(request: Request) {
 			passage_text,
 			name,
 			description
-		} = memorizationData;
+		} = bibleData;
 
 		// check if the selected memorization list exists
-		if (selectedMemorizationList !== "") {
+		if (selectedNoteList !== "") {
 
 			// get the memorization list id to use in new memory_list_item_join
 			const { rows: memorizationList } = await sql`
         SELECT * FROM memory_list
         WHERE
-          name = ${selectedMemorizationList} AND
+          name = ${selectedNoteList} AND
           by_user_id = ${by_user_id}
       `;
 
@@ -216,7 +216,6 @@ export async function POST(request: Request) {
           ${name},
           ${description}
         )
-        RETURNING *
       `;
 
 			if (rowCount === 0) {
@@ -234,7 +233,7 @@ export async function POST(request: Request) {
 				{
 					success: true,
 					message: "Memorización creada correctamente.",
-					data: newMemorizationList[0]
+					data: newMemorizationList
 				},
 				{ status: 200 }
 			);
