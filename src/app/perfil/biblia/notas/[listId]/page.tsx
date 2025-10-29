@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { MemoryOrBibleNoteList } from "@/components/bible/MemoryOrNoteItemList";
+import { MemoryOrNoteItemList } from "@/components/bible/MemoryOrNoteItemList";
 import Link from "next/link";
 
 export default async function ({
@@ -45,15 +45,14 @@ export default async function ({
 					<strong>Nombre de Lista:</strong> {memoryOrNotelist?.listInfo?.name}
 				</h1>
 				<p>
-					<strong>Descripción:</strong> {memoryOrNotelist?.listInfo?.description}
+					<strong>Descripción:</strong>{" "}
+					{memoryOrNotelist?.listInfo?.description}
 				</p>
 			</section>
 			<section className="container mx-auto p-4 text-lg">
-
-				<MemoryOrBibleNoteList
-          memoryOrNoteListItems={memoryOrNotelist.listItems}
-        />
-
+				<MemoryOrNoteItemList
+					memoryOrNoteListItems={memoryOrNotelist.listItems}
+				/>
 			</section>
 		</div>
 	);
