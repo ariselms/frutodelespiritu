@@ -20,7 +20,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { list } from "@vercel/blob";
+import 'swiper/css/effect-fade';
 
 export default function BibleMemoryMode({
 	bibleData
@@ -32,11 +32,13 @@ export default function BibleMemoryMode({
 	if (openMemoryModeMode) {
 		return (
 			<>
-				<button
-					onClick={() => setOpenBibleMode(false)}
-					className="absolute right-8 top-8 text-red-500 dark:text-red-400 z-60 text-xl cursor-pointer p-4 hover:bg-sky-100 dark:hover:bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center">
-					X
-				</button>
+				{bibleData.length > 0 && (
+					<button
+						onClick={() => setOpenBibleMode(false)}
+						className="absolute right-8 top-8 text-red-500 dark:text-red-400 z-60 text-xl cursor-pointer hover:bg-sky-100 dark:hover:bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center">
+						X
+					</button>
+				)}
 				<section className="fixed inset-0 z-50 h-screen w-screen backdrop-blur-md bg-sky-50/50 dark:bg-gray-950/50">
 					<Swiper
 						className="h-full w-full bg-transparent --swiper-navigation-size:32px"
@@ -45,6 +47,7 @@ export default function BibleMemoryMode({
 						spaceBetween={0}
 						slidesPerView={1}
 						navigation
+            pagination={{ clickable: true }}
 						scrollbar={{ draggable: false }}
 						onSwiper={(swiper) => console.log(swiper)}
 						onSlideChange={() => console.log("slide change")}>
@@ -63,7 +66,7 @@ export default function BibleMemoryMode({
 		<button
 			onClick={() => setOpenBibleMode(true)}
 			className="relative flex items-center">
-			<span className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-tl-2xl rounded-bl-2xl cursor-pointer">
+			<span className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-tl-2xl rounded-bl-2xl cursor-pointer">
 				MODO DE MEMORIZACIÓN
 			</span>
 			<LordIconRevealOnLoad
@@ -80,7 +83,7 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 	const [showText, setShowText] = useState(false);
 
 	return (
-		<div className="h-full flex flex-col items-center justify-center dark:text-white">
+		<div className="h-full flex flex-col items-center justify-center dark:text-white py-10">
 			{!showText ? (
 				<div className="flex flex-col items-center justify-center">
 					<h4>{bibleDataItem.bible_name.toUpperCase()}</h4>
@@ -93,11 +96,11 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 					</p>
 				</div>
 			) : (
-        <BiblePassageText listItem={bibleDataItem} />
+				<BiblePassageText listItem={bibleDataItem} />
 			)}
 
 			<button
-				className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-2xl cursor-pointer mt-20"
+				className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-2xl cursor-pointer mt-16"
 				onClick={() => setShowText(!showText)}>
 				{showText ? "Ocultar" : "Mostrar"}
 			</button>
@@ -116,39 +119,47 @@ export function BiblePassageText({ listItem }: { listItem: any }) {
 
 			const verses: Verse[] = verseStrings.map((str) => JSON.parse(str));
 
-			return verses.map((verse) => (
-				<p
-					key={verse.number}
-					className="text-lg md:text-xl text-gray-700 dark:text-gray-200 max-w-[75%] xl:max-w-[80ch]">
+			return (
+				<>
+					<span className="block mb-8">
+						{listItem.bible_name.toUpperCase()}
+					</span>
 
-					<span className="block mb-4">{listItem.bible_name.toUpperCase()}</span>
-
-					<span className="block mb-2 font-bold text-2xl">
-						{listItem.bible_book} {listItem.chapter_id}:
-						{listItem.verse_from}{" "}
+					<span className="block mb-4 font-bold text-2xl">
+						{listItem.bible_book} {listItem.chapter_id}:{listItem.verse_from}{" "}
 						{listItem.verse_to !== listItem.verse_from &&
 							`-${listItem.verse_to}`}
 					</span>
 
-					<sup className="font-bold mr-1">{verse.number}</sup>
+					<div className="max-w-[75%] xl:max-w-[80ch] overflow-auto">
+						{verses.map((verse) => (
+							<p
+								key={verse.number}
+								className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
+								<sup className="font-bold mr-1">{verse.number}</sup>
 
-					{verse.content.map((item, index) => {
-						if (typeof item === "string") {
-							return <React.Fragment key={index}>{item} </React.Fragment>;
-						}
+								{verse.content.map((item, index) => {
+									if (typeof item === "string") {
+										return <React.Fragment key={index}>{item} </React.Fragment>;
+									}
 
-						return (
-							<span
-								key={index}
-								className={
-									item.wordsOfJesus ? "text-red-600 dark:text-red-400" : ""
-								}>
-								{item.text}
-							</span>
-						);
-					})}
-				</p>
-			));
+									return (
+										<span
+											key={index}
+											className={
+												item.wordsOfJesus
+													? "text-red-600 dark:text-red-400"
+													: ""
+											}>
+											{item.text}
+										</span>
+									);
+								})}
+							</p>
+						))}
+					</div>
+				</>
+			);
 		} catch (error) {
 			console.error(
 				"Failed to parse passage_text:",
@@ -159,5 +170,5 @@ export function BiblePassageText({ listItem }: { listItem: any }) {
 		}
 	};
 
-  return <>{getPassageContent()}</>;
+	return <>{getPassageContent()}</>;
 }

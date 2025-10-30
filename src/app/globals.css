@@ -18,34 +18,36 @@ REACT ADMIN CUSTOM STYLES END
 */
 
 /*
-GRADIENTS AND PATTERNS START
+SWIPER CUSTOM STYLES START
 */
 
-.main-gradient-light {
-	background-color: #e5e5f7;
-	opacity: 0.8;
-	background: radial-gradient(
-			circle,
-			transparent 20%,
-			#e5e5f7 20%,
-			#e5e5f7 80%,
-			transparent 80%,
-			transparent
-		),
-		radial-gradient(
-				circle,
-				transparent 20%,
-				#e5e5f7 20%,
-				#e5e5f7 80%,
-				transparent 80%,
-				transparent
-			)
-			25px 25px,
-		linear-gradient(#f0f9ff 2px, transparent 2px) 0 -1px,
-		linear-gradient(90deg, #f0f9ff 2px, #e5e5f7 2px) -1px 0;
-	background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+.dark div.swiper-button-prev, div.swiper-button-next{
+  height: 20px;
+  width: 20px;
+  /* for the color use the tailwind sky-blue-700 */
+  color:  theme('colors.gray.50');
 }
 
+.dark .swiper-pagination-bullet-active {
+  /* for the color use the tailwind sky-blue-700 */
+  background:  theme('colors.gray.50');
+}
+
+.dark .swiper-pagination-bullet {
+  background: theme('colors.gray.300');
+}
+
+div.swiper-button-prev, div.swiper-button-next{
+  height: 20px;
+  width: 20px;
+  /* for the color use the tailwind sky-blue-700 */
+  color:  theme('colors.sky.700');
+}
+
+span.swiper-pagination-bullet-active {
+  /* for the color use the tailwind sky-blue-700 */
+  background:  theme('colors.sky.700');
+}
 /*
-GRADIENTS AND PATTERNS END
+SWIPER CUSTOM STYLES END
 */

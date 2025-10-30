@@ -19,6 +19,7 @@ import {
 import { useAuthContext } from "@/context/authContext";
 import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
+import Link from "next/link";
 
 export function MemoryOrNoteItemList({
 	memoryOrNoteListItems,
@@ -87,11 +88,11 @@ export function MemoryOrNoteItemList({
 					contenido de la biblia.
 				</p>
 				<p>
-					<a
+					<Link
 						className="text-sky-700 hover:text-sky-800"
 						href="/biblia">
 						Abrir biblias disponibles 📖
-					</a>
+					</Link>
 				</p>
 			</div>
 		);
