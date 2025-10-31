@@ -193,6 +193,7 @@ export default async function SingleLecturePage({
 					</div>
 				</div>
 			</section>
+
 		</main>
 	);
 }
