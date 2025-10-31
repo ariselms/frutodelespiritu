@@ -47,7 +47,9 @@ export default async function ({
 						&larr; Volver a Mis Listas de Memorización
 					</Link>
 
-					<BibleMemoryMode bibleData={memoryOrNotelist?.listItems} />
+					{memoryOrNotelist?.listItems?.length > 0 && (						
+						<BibleMemoryMode bibleData={memoryOrNotelist?.listItems} />
+					)}
 				</div>
 
 				<h1 className="text-2xl my-4 md:mt-0 md:mb-2">
