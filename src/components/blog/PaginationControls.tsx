@@ -20,8 +20,9 @@ export function PaginationControls({
 
 	// Calculate the starting and ending item numbers for the "Showing X to Y" text
 	const startItem = (currentPage - 1) * itemsPerPage + 1;
-	// Ensure endItem does not exceed totalItems
-	const endItem = Math.min(currentPage * itemsPerPage, searchResultItems ?? 0);
+
+
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems ?? 0);
 
 	const handlePageChange = (newPage: number) => {
 		// Ensure the new page is within valid bounds
@@ -39,10 +40,12 @@ export function PaginationControls({
 		}
 	};
 
-  console.log("Total pages: ", totalPages);
-
 	const canGoPrev = currentPage > 1;
 	const canGoNext = currentPage < totalPages;
+
+  console.log(endItem);
+
+  console.log(endItem === 10 ? endItem : endItem + 10);
 
 	return (
 		<div className="flex flex-col items-center pb-24 dark:bg-gray-800">
@@ -57,13 +60,13 @@ export function PaginationControls({
 				<button
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={!canGoPrev} // Disable if on the first page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-white dark:text-black dark:hover:bg-gray-100 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-sky-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Anterior {/* Changed to Spanish "Anterior" */}
 				</button>
 				<button
 					onClick={() => handlePageChange(currentPage + 1)}
 					disabled={!canGoNext} // Disable if on the last page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-white dark:text-black dark:hover:bg-gray-100 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-sky-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Siguiente {/* Changed to Spanish "Siguiente" */}
 				</button>
 			</div>
