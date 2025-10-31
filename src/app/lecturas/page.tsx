@@ -5,7 +5,6 @@ import { PaginationControls } from "@/components/blog/PaginationControls";
 import { ArticleList } from "@/components/blog/item";
 import { sql } from "@vercel/postgres";
 import { ArticleType, CategoryType } from "@/models/articlesTypes";
-import Router from "next/router";
 
 // Server Components receive `searchParams` as a prop
 export default async function ReflexionesPage({
@@ -29,9 +28,7 @@ export default async function ReflexionesPage({
 
 	let [articlesResult, categoriesResult, countResult]: any[] = [];
 	// 4. Run two queries concurrently for better performance
-	[articlesResult, categoriesResult,
-    // countResult
-  ] = await Promise.all([
+	[articlesResult, categoriesResult, countResult] = await Promise.all([
 		// Query for the specific page of articles
 		sql`
           SELECT
@@ -56,12 +53,22 @@ export default async function ReflexionesPage({
 		sql`
         SELECT * FROM categories
       `,
+
+    sql`
+      SELECT COUNT(*) as total FROM lectures
+      WHERE lectures.draft = false
+      AND lectures.title ILIKE '%' || ${keyword} || '%'
+      OR lectures.summary ILIKE '%' || ${keyword} || '%'
+      OR lectures.content ILIKE '%' || ${keyword} || '%'
+    `
+
 	]);
 
 	const articles: ArticleType[] = articlesResult.rows;
 	const categories: CategoryType[] = categoriesResult.rows;
-	const totalItems: number = articlesResult.rows.length;
+	const totalItems: number = countResult.rows[0].total;
 	const totalPages: number = Math.ceil(totalItems / limit);
+  const searchResultItems = articles.length;
 
 	let JumbotronTitle: string = "Todas las lecturas";
 
@@ -88,6 +95,7 @@ export default async function ReflexionesPage({
 				currentPage={page}
 				totalPages={totalPages}
 				totalItems={totalItems}
+        searchResultItems={searchResultItems}
 				limit={limit}
 			/>
 		</main>

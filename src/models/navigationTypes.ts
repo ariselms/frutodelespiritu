@@ -17,6 +17,7 @@ export interface PaginationControlsProps {
 	totalPages: number;
 	currentPage: number;
 	totalItems: number | undefined;
+  searchResultItems: number | undefined;
 	limit: number | undefined;
 }
 

@@ -7,6 +7,7 @@ export function PaginationControls({
 	totalPages,
 	currentPage,
 	totalItems,
+  searchResultItems,
 	limit
 }: PaginationControlsProps) {
 
@@ -20,7 +21,7 @@ export function PaginationControls({
 	// Calculate the starting and ending item numbers for the "Showing X to Y" text
 	const startItem = (currentPage - 1) * itemsPerPage + 1;
 	// Ensure endItem does not exceed totalItems
-	const endItem = Math.min(currentPage * itemsPerPage, totalItems ?? 0);
+	const endItem = Math.min(currentPage * itemsPerPage, searchResultItems ?? 0);
 
 	const handlePageChange = (newPage: number) => {
 		// Ensure the new page is within valid bounds
@@ -37,6 +38,8 @@ export function PaginationControls({
 
 		}
 	};
+
+  console.log("Total pages: ", totalPages);
 
 	const canGoPrev = currentPage > 1;
 	const canGoNext = currentPage < totalPages;
