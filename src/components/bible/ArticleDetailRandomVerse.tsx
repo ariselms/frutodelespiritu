@@ -109,7 +109,7 @@ const bibleVersesWithReference = [
 	{
 		verse_or_passage: "Efesios 2:8-9",
 		text: "Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe.",
-		reference: "spa_r09/EFE/2#8"
+		reference: "spa_r09/EPH/2#8"
 	},
 	{
 		verse_or_passage: "Colosenses 3:23-24",
