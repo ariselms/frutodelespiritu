@@ -173,11 +173,11 @@ export default async function SingleLecturePage({
 										/>
 									</Link>
 									<div className="flex-1 flex flex-col justify-start md:w-4/6 pb-1">
-										<Link
+										{/* <Link
 											href={`/lecturas?page=1&limit=10&category=${article?.category_id}`}
 											className="inline-flex items-center font-medium underline underline-offset-4 text-sky-700 dark:text-gray-300 hover:no-underline my-2">
 											{article?.category_name}
-										</Link>
+										</Link> */}
 										<h2 className="mb-2 text-xl font-bold leading-tight text-sky-700 dark:text-white hover:underline">
 											<Link href={`/lecturas/${article?.slug}`}>
 												{article?.title}
