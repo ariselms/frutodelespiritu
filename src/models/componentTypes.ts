@@ -11,7 +11,6 @@ export interface ContentAndTwoImagesProps {
 
 export interface BtnLinkBtnTextProps {
     firstParagraph: string,
-    secondParagraph: string,
     btnLink: string,
     btnText: string
 }

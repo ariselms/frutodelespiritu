@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BibleSearchResultList } from "./BibleSearchResultsSearchResults";
+import { BibleSearchResultList } from "./BibleSearchResultList";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FetchEndpoints } from "@/static";
 
@@ -139,9 +139,9 @@ export function BibleSearch({ bibleId }: { bibleId: string }) {
 					</p>
 			)}
 
-			<BibleSearchResultList 
-				bibleId={bibleId} 
-				results={bibleKeywordResults?.verses} 
+			<BibleSearchResultList
+				bibleId={bibleId}
+				results={bibleKeywordResults?.verses}
 			/>
 
 		</>

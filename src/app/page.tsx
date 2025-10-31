@@ -17,13 +17,12 @@ export default async function Home() {
 
 			<div className="bg-white dark:bg-gray-800 pb-28">
 				<HomePageCard
-					title="Lee La Biblia"
+					title="Lee y Estudia La Biblia"
 					description={
 						<HomePageCardDescription
-							firstParagraph="Lee la Biblia en nuestra plataforma libre de costo."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
+							firstParagraph="La Biblia es la herramienta del creyente. Es importante vivirla, por lo tanto es importante estudiarla. Con 8 biblias disponibles en español, puedes elegir la que mejor te guste. Puedes tomar notas, crear listas de memorización dinámicas y mucho más."
 							btnLink="/biblia"
-							btnText="Lee la Biblia"
+							btnText="Elige tu Biblia"
 						/>
 					}
 					firstImgUrl="/images/bible.svg"
@@ -33,29 +32,12 @@ export default async function Home() {
 				/>
 
 				<HomePageCard
-					title="Estudios"
+					title="Lecturas Bíblicas"
 					description={
 						<HomePageCardDescription
-							firstParagraph="Encuentra estudios y reflexiones para aprender y crecer en la fe."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-							btnLink="/lecturas?category=1"
-							btnText="Estudios"
-						/>
-					}
-					firstImgUrl="/images/reading.svg"
-					firstImgUrlAlt="Biblia"
-					secondImgUrl="/images/studying.svg"
-					secondImgUrlAlt="Iglesia"
-				/>
-
-				<HomePageCard
-					title="Reflexiones"
-					description={
-						<HomePageCardDescription
-							firstParagraph="Encuentra reflexiones y estudios para aprender y crecer en la fe."
-							secondParagraph="Nuestra plataforma es una herramienta de estudio para aprender y reflexionar sobre la Biblia."
-							btnLink="/lecturas?category=2"
-							btnText="Reflexiones"
+							firstParagraph="Encuentra lecturas basadas en la bibla para aprender y crecer en la fe. Elige entre una variedad de temas edificantes con oraciones guías que te ayudan tanto a cultivar como a crecer en la fe. Puedes leerlas, compartirlas, o guardarlas para futuras referencias."
+							btnLink="/lecturas?page=1&limit=10"
+							btnText="Leer Lecturas"
 						/>
 					}
 					firstImgUrl="/images/cross-in-hand.svg"

@@ -116,7 +116,7 @@ export default function AddNoteOrMemorizationForm({
 			return;
 		}
 
-		console.log(responseUserMemorizationLists);
+		// console.log(responseUserMemorizationLists);
 
 		setUserMemorizationLists(responseUserMemorizationLists.data);
 
@@ -169,9 +169,6 @@ export default function AddNoteOrMemorizationForm({
 
 		try {
 			if (action === BibleCrudActions.note) {
-				console.log(bibleData);
-
-				console.log(userNoteLists);
 
 				return;
 				//

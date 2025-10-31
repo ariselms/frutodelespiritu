@@ -28,29 +28,27 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 					className="absolute inset-0 size-full rounded-t-2xl lg:rounded-tr-none lg:rounded-l-2xl bg-transparent object-cover lg:border-y-0 lg:border-l-0 lg:border-r border-sky-100 dark:border-gray-600"
 				/>
 			</div>
-			<div className="flex flex-col justify-between px-4 pt-2 pb-10 lg:py-4">
-				<div>
-					<div className="flex items-center gap-x-4 text-xs">
-						<span className="relative z-10 rounded-2xl bg-sky-100 border border-sky-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
+			<div className="flex flex-col px-4 pt-0 pb-10 lg:pt-6">
+				<div className="flex items-center gap-x-4 text-xs">
+					{/* <span className="relative z-10 rounded-2xl bg-sky-100 border border-sky-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
 							{article.category_name}
-						</span>
-						<time
-							dateTime={formatDate(creation_date)}
-							className="text-gray-800 dark:text-gray-200">
-							{formatDate(creation_date)}
-						</time>
-					</div>
-					<div className="group relative max-w-xl">
-						<h3 className="mt-4 text-xl font-semibold text-sky-700 dark:text-white group-hover:text-sky-800 dark:group-hover:text-gray-200 dark:underline">
-							<Link href={`/lecturas/${article.slug}`}>
-								<span className="absolute inset-0" />
-								{article.title}
-							</Link>
-						</h3>
-						<p className="mt-6 text-base text-gray-800 dark:text-gray-100">
-							{article.summary}
-						</p>
-					</div>
+						</span> */}
+					<time
+						dateTime={formatDate(creation_date)}
+						className="text-gray-800 dark:text-gray-200">
+						{formatDate(creation_date)}
+					</time>
+				</div>
+				<div className="group relative max-w-xl">
+					<h3 className="mt-4 text-xl font-semibold text-sky-700 dark:text-white group-hover:text-sky-800 dark:group-hover:text-gray-200 dark:underline">
+						<Link href={`/lecturas/${article.slug}`}>
+							<span className="absolute inset-0" />
+							{article.title}
+						</Link>
+					</h3>
+					<p className="mt-6 text-base text-gray-800 dark:text-gray-100">
+						{article.summary}
+					</p>
 				</div>
 			</div>
 		</article>

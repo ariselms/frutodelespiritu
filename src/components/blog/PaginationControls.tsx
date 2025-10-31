@@ -9,6 +9,7 @@ export function PaginationControls({
 	totalItems,
 	limit
 }: PaginationControlsProps) {
+
 	const router = useRouter();
 
 	const searchParams = useSearchParams();

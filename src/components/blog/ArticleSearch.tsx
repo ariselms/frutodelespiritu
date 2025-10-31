@@ -44,23 +44,23 @@ export function ArticleSearch({
 		router.push(`/lecturas?${newParams.toString()}`);
 	};
 
-	const hanldeCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		newParams.set("page", "1"); // Reset to page 1 on new search
-		newParams.set("limit", "10"); // Reset to default limit
-		newParams.delete("keyword");
-		setInputSearchTerm("");
+	// const hanldeCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	// 	newParams.set("page", "1"); // Reset to page 1 on new search
+	// 	newParams.set("limit", "10"); // Reset to default limit
+	// 	newParams.delete("keyword");
+	// 	setInputSearchTerm("");
 
-		const categoryValye = event.target.value;
-		setSelectedCategory(categoryValye);
+	// 	const categoryValye = event.target.value;
+	// 	setSelectedCategory(categoryValye);
 
-		if (categoryValye === "All") {
-			newParams.delete("category");
-		} else {
-			newParams.set("category", categoryValye);
-		}
+	// 	if (categoryValye === "All") {
+	// 		newParams.delete("category");
+	// 	} else {
+	// 		newParams.set("category", categoryValye);
+	// 	}
 
-		router.push(`/lecturas?${newParams.toString()}`);
-	};
+	// 	router.push(`/lecturas?${newParams.toString()}`);
+	// };
 
 	return (
 		<form onSubmit={handleKeywordSubmit} className="w-full flex flex-col">
@@ -98,7 +98,7 @@ export function ArticleSearch({
 					/>
 				</div>
 			</div>
-			<div className="w-full">
+			{/* <div className="w-full">
 				<p className="dark:text-gray-50 mb-2 inline-block text-sm">
 					Puedes elegir una categoría para filtrar las publicaciones
 				</p>
@@ -133,7 +133,7 @@ export function ArticleSearch({
 						))}
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</form>
 	);
 }

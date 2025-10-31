@@ -9,12 +9,15 @@ import {
 import LOTTIE_BIBLE_OPEN from "@/lotties/bible-open.json";
 
 export const SpanishBibleItem = ({ bible }: { bible: BibleDataType }) => {
-	// 1. Create a ref to hold the LordIconClickRedirect component's exposed methods
+
+  // 1. Create a ref to hold the LordIconClickRedirect component's exposed methods
 	const lordIconRef = useRef<LordIconClickHandle>(null);
-	// 2. Create a handler that calls the exposed function
+
+  // 2. Create a handler that calls the exposed function
 	const handleButtonClick = () => {
 		lordIconRef.current?.triggerAnimation();
 	};
+
 	return (
 		<div
 			className="bg-sky-50 dark:bg-gray-900/50 border border-sky-200 dark:border-gray-600 rounded-2xl p-4 flex flex-col h-full"

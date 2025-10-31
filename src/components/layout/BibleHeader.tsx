@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { isActive } from "@/helpers";
 import { useParams, usePathname } from "next/navigation";
-import Image from "next/image";
 import {LordIconHover} from "@/components/animations/lordicon";
-// Assuming 'lock.json' is in a folder accessible by your component
 import LOTTIE_BIBLE_OPEN from "@/lotties/bible-open.json";
 import LOTTIE_BOOKS_HIT from "@/lotties/books-hit.json";
 import LOTTIE_GRID_PINCH from "@/lotties/grid-pinch.json";

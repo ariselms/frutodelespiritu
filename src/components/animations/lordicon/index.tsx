@@ -65,22 +65,22 @@ export const LordIconClickRedirect = forwardRef<LordIconClickHandle,
   }));
 
   return (
-    // We no longer need the onClick handler here
-    <div className="flex flex-col items-center justify-center">
-      <Player
-        ref={playerRef}
-        icon={ICON_SRC}
-        size={size}
-        state={state}
-        onComplete={() => {
-          if (route) {
-            push(route);
-          }
-        }}
-      />
-      {text}
-    </div>
-  );
+		// We no longer need the onClick handler here
+		<div className="flex flex-col items-center justify-center">
+			<Player
+				ref={playerRef}
+				icon={ICON_SRC}
+				size={size}
+				state={state}
+				onComplete={() => {
+					if (route) {
+						push(route);
+					}
+				}}
+			/>
+			<span>{text}</span>
+		</div>
+	);
 });
 
 export function LordIconRevealOnLoad({
