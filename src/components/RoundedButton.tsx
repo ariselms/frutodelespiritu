@@ -20,7 +20,7 @@ export default function RoundedButtonWithLordIcon({
 	};
 
 	return (
-		<button className="text-sky-900 bg-blue-50 border border-sky-200 dark:bg-gray-900 pl-4 pr-7 py-2 flex items-center rounded-2xl relative mt-10">
+		<button className="text-sky-900 dark:text-gray-50 bg-blue-50 border border-sky-200 dark:bg-gray-900 dark:border-gray-600 pl-4 pr-7 py-2 flex items-center rounded-2xl relative mt-10">
 			<span className="font-semibold">{text} &rarr;</span>
 			<div
 				onClick={handleButtonClick}
