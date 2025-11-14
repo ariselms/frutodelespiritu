@@ -29,7 +29,7 @@ export async function GET(
 		let memoryListData: any = {};
 
 		const { rows: memoryList } =
-			await sql`SELECT * FROM memory_list WHERE id = ${listId}`;
+			await sql`SELECT * FROM learning_list WHERE id = ${listId}`;
 
 		const { rows: memoryListItems } = await sql`
       SELECT
@@ -37,9 +37,9 @@ export async function GET(
       FROM
         memory_item mi
       JOIN
-        memory_list_item_join mlij ON mi.id = mlij.memory_item_id
+        learning_list_memory_item_join mlij ON mi.id = mlij.memory_item_id
       JOIN
-        memory_list ml ON mlij.memory_list_id = ml.id
+        learning_list ml ON mlij.memory_list_id = ml.id
       WHERE
         ml.id = ${listId};
     `;

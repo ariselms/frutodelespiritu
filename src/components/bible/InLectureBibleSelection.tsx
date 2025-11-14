@@ -7,9 +7,9 @@ import { useParams, useRouter } from "next/navigation";
 import { DropdownBibleSelectionTheme } from "@/components/theme/";
 
 export default function InLectureBibleSelection({
-	chapterDetails
+	ChapterDetails
 }: {
-	chapterDetails: any;
+	ChapterDetails: any;
 }) {
 	const [spanishBibles, setSpanishBibles] = useState<BibleDataType[]>([]);
 
@@ -71,7 +71,7 @@ export default function InLectureBibleSelection({
 	}, [bibleId]); // <-- Important: Added bibleId dependency
 
 	const handleBibleSelection = ({ bId }: { bId: string }) => {
-		push(`/biblia/libros/capitulos/versiculos/${bId}/${chapterDetails?.book.id}/${chapterDetails?.chapter?.number}`);
+		push(`/biblia/libros/capitulos/versiculos/${bId}/${ChapterDetails?.book.id}/${ChapterDetails?.chapter?.number}`);
 	};
 
 	return (
@@ -88,7 +88,7 @@ export default function InLectureBibleSelection({
 						onMouseEnter={
 							// add change to background color and text color on hover
 							(e) => (
-								e.currentTarget.style.backgroundColor = "#f0f9ff", 
+								e.currentTarget.style.backgroundColor = "#f0f9ff",
 								e.currentTarget.style.color = "#111827"
 							)
 						}

@@ -103,9 +103,9 @@ export async function POST(request: Request) {
 		// check if the selected memorization list exists
 		if (selectedNoteList !== "") {
 
-			// get the memorization list id to use in new memory_list_item_join
+			// get the memorization list id to use in new learning_list_memory_item_join
 			const { rows: memorizationList } = await sql`
-        SELECT * FROM memory_list
+        SELECT * FROM learning_list
         WHERE
           name = ${selectedNoteList} AND
           by_user_id = ${by_user_id}
@@ -176,10 +176,10 @@ export async function POST(request: Request) {
 				);
 			}
 
-			// insert memory_list_item_join relation
+			// insert learning_list_memory_item_join relation
 			const { rowCount: joinRowCount } = await sql`
         INSERT INTO
-          memory_list_item_join (memory_list_id, memory_item_id)
+          learning_list_memory_item_join (memory_list_id, memory_item_id)
           VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id})
         RETURNING *
       `;
@@ -210,7 +210,7 @@ export async function POST(request: Request) {
 
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
-        INSERT INTO memory_list (by_user_id, name, description)
+        INSERT INTO learning_list (by_user_id, name, description)
         VALUES (
           ${Number(userId)},
           ${name},

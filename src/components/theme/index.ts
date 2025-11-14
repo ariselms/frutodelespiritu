@@ -42,7 +42,7 @@ export const BlueNavTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-2xl p-2 text-sm text-sky-700 hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-sky-700 md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600",
+		base: "inline-flex items-center rounded-2xl p-2 text-sm bg-sky-700 dark:bg-transparent hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-sky-950 md:hidden dark:text-gray-300 hover:bg-sky-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -271,4 +271,36 @@ export const NotesAndMemoryTabTheme = createTheme({
 		}
 	},
 	tabpanel: "py-0"
+});
+
+export const MemoryListAccordionTheme = createTheme({
+	root: {
+		base: "divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700",
+		flush: {
+			off: "rounded-lg border",
+			on: "border-b"
+		}
+	},
+	content: {
+		base: "p-5 first:rounded-t-lg last:rounded-b-lg dark:bg-gray-900"
+	},
+	title: {
+		arrow: {
+			base: "h-6 w-6 shrink-0",
+			open: {
+				off: "fill-sky-200",
+				on: "rotate-180 fill-sky-50"
+			}
+		},
+		base: "flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 first:rounded-t-lg last:rounded-b-lg dark:text-gray-400",
+		flush: {
+			off: "hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:hover:bg-gray-800 dark:focus:ring-gray-800",
+			on: "bg-transparent dark:bg-transparent"
+		},
+		heading: "",
+		open: {
+			off: "",
+			on: "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white"
+		}
+	}
 });

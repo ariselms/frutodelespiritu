@@ -39,7 +39,7 @@ export async function DELETE(
     // 1. Find all memory_item IDs related to this list
     //    We use the <ItemIdRow> generic here
     const { rows: itemsToDelete } = await client.sql<ItemIdRow>`
-      SELECT memory_item_id FROM memory_list_item_join WHERE memory_list_id = ${listId};
+      SELECT memory_item_id FROM learning_list_memory_item_join WHERE memory_list_id = ${listId};
     `;
 
     // Because of <ItemIdRow>, 'itemIds' is now correctly typed as 'string[]' (or 'number[]')
@@ -47,7 +47,7 @@ export async function DELETE(
 
     // 2. Delete the relationships from the join table
     await client.sql`
-      DELETE FROM memory_list_item_join WHERE memory_list_id = ${listId};
+      DELETE FROM learning_list_memory_item_join WHERE memory_list_id = ${listId};
     `;
 
     // 3. Delete the actual memory_item records
@@ -60,7 +60,7 @@ export async function DELETE(
 
     // 4. Delete the parent list itself
     const { rows: deletedList } = await client.sql`
-      DELETE FROM memory_list WHERE id = ${listId} RETURNING *;
+      DELETE FROM learning_list WHERE id = ${listId} RETURNING *;
     `;
 
     // If no list was found and deleted, roll back and return 404
@@ -141,7 +141,7 @@ export async function PUT(
   const { by_user_id, name, description } = body;
 
   const {rows: MemoryListExists} = await sql`
-    SELECT * FROM memory_list
+    SELECT * FROM learning_list
       WHERE id = ${listId} AND by_user_id = ${by_user_id}
   `;
 
@@ -157,7 +157,7 @@ export async function PUT(
   }
 
   const { rows: updatedList } = await sql`
-    UPDATE memory_list
+    UPDATE learning_list
       SET name = ${name}, description = ${description}
       WHERE id = ${listId} AND by_user_id = ${by_user_id}
       RETURNING *

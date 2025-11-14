@@ -48,3 +48,19 @@ span.swiper-pagination-bullet-active {
 /*
 SWIPER CUSTOM STYLES END
 */
+
+/*
+ACCORDION LEARNING LIST SVG START
+*/
+
+button svg.h-6.w-6.shrink-0{
+  fill: theme('colors.sky.50') !important;
+}
+
+button svg.h-6.w-6.shrink-0.rotate-180{
+  fill: theme('colors.sky.200') !important;
+}
+
+/*
+ACCORDION LEARNING LIST SVG END
+*/

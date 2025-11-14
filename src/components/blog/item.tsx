@@ -1,4 +1,5 @@
 "use client";
+
 import { ArticleType } from "@/models/articlesTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,9 +31,9 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 			</div>
 			<div className="flex flex-col px-4 pt-0 pb-10 lg:pt-6">
 				<div className="flex items-center gap-x-4 text-xs">
-					{/* <span className="relative z-10 rounded-2xl bg-sky-100 border border-sky-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
-							{article.category_name}
-						</span> */}
+					<span className="relative z-10 rounded-2xl bg-sky-100 border border-sky-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
+						{article.category_name}
+					</span>
 					<time
 						dateTime={formatDate(creation_date)}
 						className="text-gray-800 dark:text-gray-200">

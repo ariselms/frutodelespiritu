@@ -5,61 +5,8 @@ import "../../lectures.css";
 import Image from "next/image";
 import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
-import {ShareButtons} from "@/components/ShareButtons";
+import { ShareButtons } from "@/components/ShareButtons";
 import { SaveLecturebutton } from "@/components/SaveLectureButton";
-import ReferenceTagger from "@/components/bible/ReferenceTagger";
-
-export async function generateMetadata({
-	params
-}: {
-	params: Promise<{ slug: string }>;
-}) {
-	const { slug } = await params;
-
-  const {rows: article}: QueryResultRow =
-		await sql`SELECT * FROM lectures WHERE slug = ${slug}`;
-
-  let a = article[0];
-
-	return {
-		title: `${a?.title} | Fruto del Espíritu`,
-		description: a?.summary,
-		keywords: [
-			"devocionales",
-			"cristiano",
-			"reflexiones",
-			"estudios bíblicos",
-			"biblias en espanol",
-			"la biblia en espanol",
-			"biblia en espanol",
-			"entiende la biblia",
-			"espiritu santo",
-			"aprende la biblia",
-			"libros de la biblia reina valera 1960 en orden",
-			"lista de libros de la biblia reina valera 1960",
-			"tres significados de mundo en la biblia",
-			"significados de mundo en la biblia"
-		].concat(a?.title?.split(" ")),
-		robots: {
-			index: true,
-			follow: true
-		},
-		openGraph: {
-			title: `${a?.title} | Fruto del Espíritu`,
-			description: a?.summary,
-			url: `https://frutodelespiritu.com/lecturas/${slug}`,
-			siteName: "Fruto del Espíritu",
-			type: "website",
-			locale: "es_US",
-			images: [
-				{
-					url: `${a?.image_url}`,
-					alt: "Fruto del Espíritu"
-				}
-			]
-		}
-	};
-}
 
 export default async function SingleLecturePage({
 	params
@@ -110,11 +57,11 @@ export default async function SingleLecturePage({
 				}}>
 				<div className="absolute top-0 left-0 w-full h-full text-sky-700 bg-sky-100/70 dark:bg-black/60"></div>
 				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-screen-xl xl:px-0">
-					{/* <Link
+					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
 						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
 						{FetchedDetailedArticled.category_name}
-					</Link> */}
+					</Link>
 					<h1 className="max-w-[80ch] text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-black dark:text-gray-300 mb-8">
 						{FetchedDetailedArticled.title}
 					</h1>
@@ -124,14 +71,14 @@ export default async function SingleLecturePage({
 				</div>
 			</header>
 			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-sky-200 dark:border-gray-600 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
-					<div className="rich-text-content">
-						<div
-							className="pr-8 flex-2"
-							dangerouslySetInnerHTML={{
-								__html: FetchedDetailedArticled.content
-							}}
-						/>
-					</div>
+				<div className="rich-text-content">
+					<div
+						className="pr-8 flex-2"
+						dangerouslySetInnerHTML={{
+							__html: FetchedDetailedArticled.content
+						}}
+					/>
+				</div>
 				<aside
 					className="hidden lg:block flex-1"
 					aria-labelledby="sidebar-label">
@@ -193,7 +140,58 @@ export default async function SingleLecturePage({
 					</div>
 				</div>
 			</section>
-
 		</main>
 	);
+}
+
+export async function generateMetadata({
+	params
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+
+	const { rows: article }: QueryResultRow =
+		await sql`SELECT * FROM lectures WHERE slug = ${slug}`;
+
+	let a = article[0];
+
+	return {
+		title: `${a?.title} | Fruto del Espíritu`,
+		description: a?.summary,
+		keywords: [
+			"devocionales",
+			"cristiano",
+			"reflexiones",
+			"estudios bíblicos",
+			"biblias en espanol",
+			"la biblia en espanol",
+			"biblia en espanol",
+			"entiende la biblia",
+			"espiritu santo",
+			"aprende la biblia",
+			"libros de la biblia reina valera 1960 en orden",
+			"lista de libros de la biblia reina valera 1960",
+			"tres significados de mundo en la biblia",
+			"significados de mundo en la biblia"
+		].concat(a?.title?.split(" ")),
+		robots: {
+			index: true,
+			follow: true
+		},
+		openGraph: {
+			title: `${a?.title} | Fruto del Espíritu`,
+			description: a?.summary,
+			url: `https://frutodelespiritu.com/lecturas/${slug}`,
+			siteName: "Fruto del Espíritu",
+			type: "website",
+			locale: "es_US",
+			images: [
+				{
+					url: `${a?.image_url}`,
+					alt: "Fruto del Espíritu"
+				}
+			]
+		}
+	};
 }

@@ -2,9 +2,9 @@
 import { TabItem, Tabs } from "flowbite-react";
 import { FaBrain } from "react-icons/fa";
 import { FaStickyNote } from "react-icons/fa";
-import MemorizationListComponent from "@/components/notes-and-memorization/MemorizationListComponent";
+import LearningListComponent from "@/components/learning-lists/LearningListComponent";
 import { NotesAndMemoryTabTheme } from "@/components/theme";
-import NotesListComponent from "@/components/notes-and-memorization/NotesListComponent";
+import GeneralNotesListComponent from "@/components/learning-lists/GeneralNotesListComponent";
 
 export default function UserBiblePage() {
 	return (
@@ -17,14 +17,14 @@ export default function UserBiblePage() {
 					variant="default">
 					<TabItem
 						active
-						title="Listas de Memorización"
+						title="Listas de Aprendizaje"
 						icon={FaBrain}>
-						<MemorizationListComponent />
+						<LearningListComponent />
 					</TabItem>
 					<TabItem
-						title="Notas de la Biblia"
+						title="Notas Generales"
 						icon={FaStickyNote}>
-						<NotesListComponent />
+						<GeneralNotesListComponent />
 					</TabItem>
 				</Tabs>
 			</article>

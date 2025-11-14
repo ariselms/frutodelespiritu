@@ -18,7 +18,7 @@ import {
 	ModalFooter,
 	Spinner
 } from "flowbite-react";
-import MemorizationListPaginationComponent from "@/components/notes-and-memorization/TanStackPaginationComponent";
+import MemorizationListPaginationComponent from "@/components/learning-lists/TanStackPaginationComponent";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { DeleteUserListOrNoteType, NoteOrMemoryListType } from "@/models/memorizationAndNotesTypes";
@@ -93,8 +93,8 @@ export default function MemorizationListComponent() {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						memorizationData: memorizationData,
-						selectedMemorizationList: ""
+						selectedLearningList: "",
+						memorizationData: memorizationData
 					})
 				}
 			);
@@ -319,14 +319,18 @@ export default function MemorizationListComponent() {
 		return (
 			<div className="flex justify-center items-center py-8">
 				<Spinner size="xl" />
-				<span className="ml-2">Cargando listas de memorización...</span>
+				<span className="ml-2">Cargando listas de aprendizaje...</span>
 			</div>
 		);
 	}
 
 	return (
-		<div className="bg-sky-50 dark:bg-gray-900/50 px-2 py-8 w-full border-x border-b border-sky-200 dark:border-gray-600">
-			<h2 className="text-xl font-bold mb-4">Tus Listas de Memorización</h2>
+		<div className="px-2 py-8 w-full border-x border-b border-sky-200 dark:border-gray-600">
+			<h2 className="text-xl font-bold">Tus Listas de Aprendizaje</h2>
+			<p className="mb-6 max-w-[80ch]">
+				Selecciona una lista para ver tus versículos para memorizar o notas
+				creadas.
+			</p>
 
 			{/* Form for creating a new list */}
 			<form

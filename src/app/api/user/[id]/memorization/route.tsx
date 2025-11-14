@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { isAuthenticated } from "@/helpers/server";
+import { memo } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -46,9 +47,9 @@ export async function GET(request: Request) {
 	}
 
 	const { rows: userMemorizationLists } = await sql`
-    SELECT * FROM memory_list
+    SELECT * FROM learning_list
     WHERE
-      memory_list.by_user_id = ${Number(userId)}
+      learning_list.by_user_id = ${Number(userId)}
   `;
 
 	return NextResponse.json(
@@ -76,21 +77,20 @@ export async function POST(request: Request) {
 		);
 	}
 
-  const { searchParams } = new URL(request.url);
+	const { searchParams } = new URL(request.url);
 
-  const userId = Number(searchParams.get("userId"));
+	const userId = Number(searchParams.get("userId"));
 
 	try {
-
 		const body = await request.json();
 
-		const { selectedMemorizationList, memorizationData } = body;
+		const { selectedLearningList, memorizationData } = body;
 
 		const {
-      bible_name, // full bible version name
+			bible_name, // full bible version name
 			bible_id, // bible id (abbreviation)
 			by_user_id,
-      bible_book, // bible book name
+			bible_book, // bible book name
 			book_id, // book id (abbreviation)
 			chapter_id,
 			verse_from,
@@ -101,13 +101,12 @@ export async function POST(request: Request) {
 		} = memorizationData;
 
 		// check if the selected memorization list exists
-		if (selectedMemorizationList !== "") {
-
-			// get the memorization list id to use in new memory_list_item_join
+		if (selectedLearningList !== "") {
+			// get the memorization list id to use in new learning_list_memory_item_join
 			const { rows: memorizationList } = await sql`
-        SELECT * FROM memory_list
+        SELECT * FROM learning_list
         WHERE
-          name = ${selectedMemorizationList} AND
+          name = ${selectedLearningList} AND
           by_user_id = ${by_user_id}
       `;
 
@@ -123,8 +122,8 @@ export async function POST(request: Request) {
 				);
 			}
 
-      // check if the user have saved the same memory item before
-      const { rows: memoryItemExist } = await sql`
+			// check if the user have saved the same memory item before
+			const { rows: memoryItemExist } = await sql`
         SELECT * FROM memory_item
         WHERE
           by_user_id = ${by_user_id} AND
@@ -138,16 +137,16 @@ export async function POST(request: Request) {
           passage_text = ${passage_text}
       `;
 
-      if (memoryItemExist.length > 0) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Esta selección ya ha sido guardada.",
-            data: null
-          },
-          { status: 400 }
-        );
-      }
+			if (memoryItemExist.length > 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "Esta selección ya ha sido guardada.",
+						data: null
+					},
+					{ status: 400 }
+				);
+			}
 
 			// insert new memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
@@ -176,10 +175,10 @@ export async function POST(request: Request) {
 				);
 			}
 
-			// insert memory_list_item_join relation
+			// insert learning_list_memory_item_join relation
 			const { rowCount: joinRowCount } = await sql`
         INSERT INTO
-          memory_list_item_join (memory_list_id, memory_item_id)
+          learning_list_memory_item_join (memory_list_id, memory_item_id)
           VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id})
         RETURNING *
       `;
@@ -205,12 +204,12 @@ export async function POST(request: Request) {
 			);
 		}
 
-    // if there is no name or description, means that a new memorization list needs to be created
+		// if there is no name or description, means that a new memorization list needs to be created
 		if (name !== "" && description !== "") {
 
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
-        INSERT INTO memory_list (by_user_id, name, description)
+        INSERT INTO learning_list (by_user_id, name, description)
         VALUES (
           ${Number(userId)},
           ${name},
@@ -238,10 +237,8 @@ export async function POST(request: Request) {
 				},
 				{ status: 200 }
 			);
-
 		}
 	} catch (error) {
-
 		console.error("Error creating memorization:", error);
 
 		if (

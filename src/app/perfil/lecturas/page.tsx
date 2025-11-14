@@ -26,7 +26,7 @@ import {
 import type { SortingState } from "@tanstack/react-table";
 // Assuming you have a generic pagination component
 // If not, you can copy MemorizationListPaginationComponent and rename it
-import MemorizationListPaginationComponent from "@/components/notes-and-memorization/TanStackPaginationComponent";
+import MemorizationListPaginationComponent from "@/components/learning-lists/TanStackPaginationComponent";
 // --- End New Imports ---
 
 export default function UserLecturesPage() {

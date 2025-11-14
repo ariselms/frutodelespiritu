@@ -43,10 +43,6 @@ export function PaginationControls({
 	const canGoPrev = currentPage > 1;
 	const canGoNext = currentPage < totalPages;
 
-  console.log(endItem);
-
-  console.log(endItem === 10 ? endItem : endItem + 10);
-
 	return (
 		<div className="flex flex-col items-center pb-24 dark:bg-gray-800">
 			{/* Help text - dynamically updated for Spanish */}

@@ -6,8 +6,18 @@ import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { serverBaseUrl } from "@/static";
 import { useRouter, usePathname } from "next/navigation";
-import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemorySlide";
+import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemoryItemSlide";
 import { BibleBookType } from "@/models/bibleTypes";
+import Link from "next/link";
+import FINGERPRINT_SECURITY_LOTTIE from "@/lotties/fingerprint-security-hover-wrong.json";
+import { LordIconHover } from "@/components/animations/lordicon";
+import {
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader
+} from "flowbite-react";
+
 
 // Helper function to parse a "Book Chapter:Verse" string
 const parseSid = (sid: string) => {
@@ -29,25 +39,30 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
 	const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	// Effect for scrolling to a hash link
+	// EFFECT 1: Effect for scrolling to a hash link if present in the URL
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			const hash = window.location.hash;
+
 			if (hash && contentRef.current) {
 				const targetId = hash.substring(1);
+
 				const targetElement = contentRef.current.querySelector(
 					`[id="${targetId}"]`
 				);
+
 				if (targetElement) {
 					targetElement.scrollIntoView({ behavior: "smooth" });
 				}
 			}
 		}, 100);
+
 		return () => clearTimeout(timer);
 	}, [ChapterContent]);
 
-	// EFFECT 1: Set up the delegated event listener with corrected selection logic
+	// EFFECT 2: Set up the delegated event listener with corrected selection logic
 	useEffect(() => {
 		const content = contentRef.current;
 		if (!content || !ChapterContent || ChapterContent.length === 0) return;
@@ -63,15 +78,9 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 		const currentChapter = chapterId;
 
 		const handleContainerClick = (event: MouseEvent) => {
-      // Update the following to use a modal instead of redirecting the user right away
+			// Update the following to use a modal instead of redirecting the user right away
 			if (!user) {
-				const redirectUrl = serverBaseUrl + pathname;
-
-				toast.warning(
-					"Debes iniciar sesión para guardar notas y listas de memorización."
-				);
-
-				router.push(`/log?redirectUrl=${redirectUrl}`);
+				setIsModalOpen(true);
 
 				return;
 			}
@@ -87,7 +96,6 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 			const verseSid = `${currentBook} ${currentChapter}:${verseNumber}`;
 
 			setSelectedVerses((prevSelected) => {
-
 				const newSelection = new Set(prevSelected);
 
 				// --- SCENARIO 1: The verse is already selected (TRUNCATE LOGIC) ---
@@ -160,7 +168,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 		};
 	}, [ChapterContent, user]);
 
-	// EFFECT 2: Apply visual styles (this is correct)
+	// EFFECT 3: Apply visual styles upon selection changes
 	useEffect(() => {
 		const content = contentRef.current;
 
@@ -218,16 +226,15 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 		}
 	}, [selectedVerses, ChapterContent]);
 
-	// EFFECT 3: On Load, Create a function that fetches global notes and memorization items for the current chapter and pre-select verses accordingly, if any, to display a brain icon next to the last verse of the individual selection. For example, if the user has notes in the chapter for verses 2, 3, 4, 5, and 8, then verses 2-5 should be selected and verse 5 should have a brain icon next to it. Verse 8 should be selected and have a brain icon next to it as well.
+	// EFFECT 4: On Load, Create a function that fetches global notes and memorization items for the current chapter and pre-select verses accordingly, if any, to display a brain icon next to the last verse of the individual selection. For example, if the user has notes in the chapter for verses 2, 3, 4, 5, and 8, then verses 2-5 should be selected and verse 5 should have a brain icon next to it. Verse 8 should be selected and have a brain icon next to it as well.
 	// STEP 1: Fetch user notes and memorization items for the current chapter
 	// STEP 2: Parse the response to identify verses with notes or memorization items
 	// STEP 3: Update the selectedVerses state to include these verses
 	// STEP 4: Ensure that the last verse in each contiguous selection has a brain icon next to it
 	// NOTE: Each verse looks like that. The chapter number is in the span data-number attribute.
-  // <p><span class="v" id="7" data-number="7">7</span> <span>Cuando vio que muchos fariseos y saduceos acudían a su bautismo, les dijo: ¡Generación de víboras! ¿Quién les enseñó a huir de la ira que viene?</span></p>
-  // Consider to also on load, check for the chapter and if there are any popular verses, kind of give it a highlight or a different color to indicate that those verses are popular among users, this will encourage users to read those verses and engage more with the content as well as use the save note or memory list feature.
-  // Consider to work with the API and how to fetch the most popular verses by selecting the verses with the most notes or memorization items across all users for that specific chapter.
-
+	// <p><span class="v" id="7" data-number="7">7</span> <span>Cuando vio que muchos fariseos y saduceos acudían a su bautismo, les dijo: ¡Generación de víboras! ¿Quién les enseñó a huir de la ira que viene?</span></p>
+	// Consider to also on load, check for the chapter and if there are any popular verses, kind of give it a highlight or a different color to indicate that those verses are popular among users, this will encourage users to read those verses and engage more with the content as well as use the save note or memory list feature.
+	// Consider to work with the API and how to fetch the most popular verses by selecting the verses with the most notes or memorization items across all users for that specific chapter.
 
 	return (
 		<>
@@ -240,6 +247,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 							</h2>
 						);
 					}
+
 					if (content.type === "verse") {
 						return (
 							<p key={content.number}>
@@ -288,20 +296,61 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 				})}
 			</div>
 
+			{/* Prompt from the top to ask the user to use the selected versicles for notes or memorization */}
 			{selectedVerses.size > 0 && (
 				<>
 					<AddNoteOrMemoryItem
-            bibleBook={Book}
+						bibleBook={Book}
 						selectedVerses={selectedVerses}
 						setSelectedVerses={setSelectedVerses}
 						bibleId={String(bibleId)}
 						chapterContent={ChapterContent}
 						isDrawerOpen={isDrawerOpen}
-            chapterInfo={ChapterInfo}
-            bibleName={BibleName}
+						chapterInfo={ChapterInfo}
+						bibleName={BibleName}
 					/>
 				</>
 			)}
+
+			{/* Modal to inform the user to log in to use the feature */}
+			<Modal
+				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				dismissible
+				show={isModalOpen}
+				onClose={() => setIsModalOpen(false)}>
+				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+					¿Cómo guardar versículos en listas de memorias or tomar notas?
+				</ModalHeader>
+				<ModalBody>
+					<div className="space-y-6">
+						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+							Cuando oprimes en un versículo, notarás que puedes hacer una
+							selección de los versículos que desees. Una vez seleccionados,
+							podrás añadirlos a tus listas de aprendizaje para memorizarlos o
+							para tomar notas sobre ellos.
+						</p>
+						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+							Si eso es lo que quieres, debes iniciar sesión, todo lo que
+							necesitas es tu correo electrónico. Si no, puedes simplemente
+							cerrar esta ventana.
+						</p>
+					</div>
+				</ModalBody>
+				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+					<Link
+						className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600 flex items-center gap-2"
+						href={`/log?${new URLSearchParams({
+							redirectUrl: serverBaseUrl + pathname
+						}).toString()}`}>
+						<LordIconHover
+              size={32}
+              ICON_SRC={FINGERPRINT_SECURITY_LOTTIE}
+              state="hover-pinch"
+              text="Iniciar sesión"
+            />
+					</Link>
+				</ModalFooter>
+			</Modal>
 		</>
 	);
 }

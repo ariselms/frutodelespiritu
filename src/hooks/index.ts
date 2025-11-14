@@ -43,7 +43,7 @@ export const useDataProvider = () => {
 	return dataProvider;
 };
 
-export const useFetchUserMemorizationLists = async (userId: string) => {
+export const useFetchUserLearningLists = async (userId: string) => {
 	try {
 		const requestUserMemorizationLists = await fetch(
 			`/api/user/${userId}/memorization?userId=${userId}`

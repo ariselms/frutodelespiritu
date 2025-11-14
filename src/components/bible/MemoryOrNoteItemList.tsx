@@ -13,8 +13,8 @@ import {
 } from "flowbite-react";
 import {
 	MemoryItemType,
-  NoteItemType,
-  Verse
+	NoteItemType,
+	Verse
 } from "@/models/memorizationAndNotesTypes";
 import { useAuthContext } from "@/context/authContext";
 import { LordIconHover } from "@/components/animations/lordicon";
@@ -22,20 +22,21 @@ import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json
 import Link from "next/link";
 
 export function MemoryOrNoteItemList({
-	memoryOrNoteListItems,
+	memoryOrNoteListItems
 }: {
-	memoryOrNoteListItems:
-    MemoryItemType[] |
-    NoteItemType[] |
-    null;
+	memoryOrNoteListItems: MemoryItemType[] | NoteItemType[] | null;
 }) {
 	const { user } = useAuthContext();
 
 	// add state to track the item being deleted using the id and name
-	const [deletingMemoryOrNoteItem, setDeletingMemoryOrNoteItem] = useState<MemoryItemType | NoteItemType | null>(null);
+	const [deletingMemoryOrNoteItem, setDeletingMemoryOrNoteItem] = useState<
+		MemoryItemType | NoteItemType | null
+	>(null);
 
-  // add state to the memory or note list
-	const [memoryOrNoteList, setMemoryOrNoteList] = useState<MemoryItemType[] | NoteItemType[]>([]);
+	// add state to the memory or note list
+	const [memoryOrNoteList, setMemoryOrNoteList] = useState<
+		MemoryItemType[] | NoteItemType[]
+	>([]);
 
 	// simplified useEffect to sync prop to state
 	useEffect(() => {
@@ -63,7 +64,6 @@ export function MemoryOrNoteItemList({
 				setMemoryOrNoteList((currentList) =>
 					currentList.filter((item) => String(item.id) !== memoryItemId)
 				);
-
 			} else {
 				console.error(
 					"Failed to delete item:",
@@ -71,10 +71,7 @@ export function MemoryOrNoteItemList({
 				);
 			}
 		} catch (error) {
-			console.error(
-        "Error during delete request:",
-        error
-      );
+			console.error("Error during delete request:", error);
 		}
 	};
 
@@ -84,13 +81,11 @@ export function MemoryOrNoteItemList({
 				<p className="text-gray-500 dark:text-gray-300 mb-3">
 					No hay elementos en esta lista. Visita la sección de la biblia, elije
 					una traducción y comienza a leer para agregar versículos a tu lista de
-					memoria. Las listas de memoria ayudan a recordar y comprender el
-					contenido de la biblia.
+					aprendizaje. Las listas de aprendizaje ayudan a recordar y comprender
+					el contenido de la biblia.
 				</p>
 				<p>
-					<Link
-						className="text-sky-700 hover:text-sky-800"
-						href="/biblia">
+					<Link className="text-sky-700 hover:text-sky-800" href="/biblia">
 						Abrir biblias disponibles 📖
 					</Link>
 				</p>
@@ -101,16 +96,16 @@ export function MemoryOrNoteItemList({
 	return (
 		<>
 			<Accordion collapseAll>
-
 				{memoryOrNoteList?.map((listItem: MemoryItemType | NoteItemType) => {
-
 					// Safely parse the complex, malformed string
 					const getPassageContent = () => {
-
 						if (!listItem.passage_text) return <p>No text available.</p>;
 
 						try {
-							const correctedJsonString = `[${listItem.passage_text.slice(1, -1)}]`;
+							const correctedJsonString = `[${listItem.passage_text.slice(
+								1,
+								-1
+							)}]`;
 
 							const verseStrings: string[] = JSON.parse(correctedJsonString);
 
@@ -122,11 +117,9 @@ export function MemoryOrNoteItemList({
 								<p
 									key={verse.number}
 									className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-2 max-w-[80ch]">
-
 									<sup className="font-bold mr-1">{verse.number}</sup>
 
 									{verse.content.map((item, index) => {
-
 										if (typeof item === "string") {
 											return (
 												<React.Fragment key={index}>{item} </React.Fragment>
@@ -161,16 +154,18 @@ export function MemoryOrNoteItemList({
 
 					return (
 						<AccordionPanel key={listItem.id}>
-							<AccordionTitle className="bg-sky-50 hover:bg-sky-100 border-sky-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200 text-sm md:text-base">
-								<p className="text-sky-700 hover:text-sky-800 dark:text-gray-50 dark:hover:text-gray-100">
+							<AccordionTitle className="bg-sky-700 hover:bg-sky-800 border-sky-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200 text-sm md:text-base">
+								<p className="text-sky-50 hover:text-sky-100 dark:text-gray-50 dark:hover:text-gray-100">
 									{listItem.bible_book} {listItem.chapter_id}:
 									{listItem.verse_from}
 									{listItem.verse_to !== listItem.verse_from &&
 										`-${listItem.verse_to}`}{" "}
 								</p>
-								<p className="text-sm text-sky-600 dark:text-gray-400">Biblia {listItem.bible_name}</p>
+								<p className="text-sm text-sky-100 dark:text-gray-400">
+									Biblia {listItem.bible_name}
+								</p>
 							</AccordionTitle>
-							<AccordionContent className="text-gray-500 dark:text-gray-100 dark:bg-gray-800">
+							<AccordionContent className="text-gray-500 dark:text-gray-100 bg-sky-50 dark:bg-gray-800">
 								{getPassageContent()}
 								<div
 									className="items-center justify-start inline-block mt-5 px-2 py-1 rounded-2xl border-2 border-red-500 text-red-500 bg-red-50 font-bold cursor-pointer"
@@ -205,15 +200,17 @@ export function MemoryOrNoteItemList({
 
 					{/* FIX 3: Display human-readable verse reference */}
 					<p className="text-black dark:text-gray-50 mb-6 text-lg underline underline-offset-4">
-						{deletingMemoryOrNoteItem?.bible_book} {deletingMemoryOrNoteItem?.chapter_id}:
+						{deletingMemoryOrNoteItem?.bible_book}{" "}
+						{deletingMemoryOrNoteItem?.chapter_id}:
 						{deletingMemoryOrNoteItem?.verse_from}
-						{deletingMemoryOrNoteItem?.verse_to !== deletingMemoryOrNoteItem?.verse_from &&
+						{deletingMemoryOrNoteItem?.verse_to !==
+							deletingMemoryOrNoteItem?.verse_from &&
 							`-${deletingMemoryOrNoteItem?.verse_to}`}
 					</p>
 
 					<p className="text-gray-600 dark:text-gray-400">
-						Esta acción removerá este contenido de la lista. Luego de
-						oprimir confirmar no se puede deshacer.
+						Esta acción removerá este contenido de la lista. Luego de oprimir
+						confirmar no se puede deshacer.
 					</p>
 				</ModalBody>
 

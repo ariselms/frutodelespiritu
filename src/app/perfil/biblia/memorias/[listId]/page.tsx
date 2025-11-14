@@ -15,7 +15,7 @@ export default async function ({
 	const { listId } = await params;
 
 	const { rows: memoryList } =
-		await sql`SELECT * FROM memory_list WHERE id = ${listId}`;
+		await sql`SELECT * FROM learning_list WHERE id = ${listId}`;
 
 	const { rows: memoryListItems } = await sql`
     SELECT
@@ -23,9 +23,9 @@ export default async function ({
     FROM
       memory_item mi
     JOIN
-      memory_list_item_join mlij ON mi.id = mlij.memory_item_id
+      learning_list_memory_item_join mlij ON mi.id = mlij.memory_item_id
     JOIN
-      memory_list ml ON mlij.memory_list_id = ml.id
+      learning_list ml ON mlij.memory_list_id = ml.id
     WHERE
       ml.id = ${listId};
   `;
@@ -44,10 +44,10 @@ export default async function ({
 					<Link
 						href="/perfil/biblia"
 						className="text-sky-900 hover:text-sky-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 my-4 flex items-center">
-						&larr; Volver a Mis Listas de Memorización
+						&larr; Volver a Mis Listas de Aprendizaje
 					</Link>
 
-					{memoryOrNotelist?.listItems?.length > 0 && (						
+					{memoryOrNotelist?.listItems?.length > 0 && (
 						<BibleMemoryMode bibleData={memoryOrNotelist?.listItems} />
 					)}
 				</div>

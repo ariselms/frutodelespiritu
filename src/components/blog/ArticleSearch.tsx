@@ -13,54 +13,70 @@ export function ArticleSearch({
 	searchTerm: string;
 	categories: CategoryType[];
 }) {
-	const router = useRouter();
+
+  const router = useRouter();
 	const searchParams = useSearchParams();
 	const [inputSearchTerm, setInputSearchTerm] = useState(searchTerm || "");
 	const [selectedCategory, setSelectedCategory] = useState(
 		searchParams.get("category") || "All"
 	);
+
 	const newParams = new URLSearchParams(searchParams.toString());
 
 	const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
 		newParams.set("keyword", event.target.value);
-		newParams.set("page", "1"); // Reset to page 1 on new search
-		newParams.set("limit", "10"); // Reset to default limit
+    // reset to default page and limit on new search
+		newParams.set("page", "1");
+		newParams.set("limit", "10");
+
 		setInputSearchTerm(event.target.value);
+
 		if (event.target.value === "") {
-			newParams.delete("keyword"); // Remove keyword if input is empty
+      // Remove keyword if input is empty and reset category
+			newParams.delete("keyword");
 			newParams.delete("category");
+
 			setSelectedCategory("All");
 			router.push(`/lecturas?${newParams.toString()}`);
 		}
+
 	};
 
 	const handleKeywordSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		newParams.set("keyword", inputSearchTerm);
 		newParams.set("page", "1"); // Reset to page 1 on new search
 		newParams.set("limit", "10"); // Reset to default limit
-		newParams.delete("category");
-		setSelectedCategory("All");
+		newParams.set("keyword", inputSearchTerm);
+
+    console.log(newParams.get("category"));
+		// newParams.delete("category");
+    // setSelectedCategory("All");
 		router.push(`/lecturas?${newParams.toString()}`);
 	};
 
-	// const hanldeCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-	// 	newParams.set("page", "1"); // Reset to page 1 on new search
-	// 	newParams.set("limit", "10"); // Reset to default limit
-	// 	newParams.delete("keyword");
-	// 	setInputSearchTerm("");
+	const hanldeCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		newParams.set("page", "1"); // Reset to page 1 on new search
+		newParams.set("limit", "10"); // Reset to default limit
 
-	// 	const categoryValye = event.target.value;
-	// 	setSelectedCategory(categoryValye);
+    if(inputSearchTerm === "") {
+      newParams.delete("keyword");
+    }
 
-	// 	if (categoryValye === "All") {
-	// 		newParams.delete("category");
-	// 	} else {
-	// 		newParams.set("category", categoryValye);
-	// 	}
+    newParams.set("keyword", inputSearchTerm);
 
-	// 	router.push(`/lecturas?${newParams.toString()}`);
-	// };
+		const categoryValue = event.target.value;
+
+		setSelectedCategory(categoryValue);
+
+		if (categoryValue === "All") {
+			newParams.delete("category");
+		} else {
+			newParams.set("category", categoryValue);
+		}
+
+		router.push(`/lecturas?${newParams.toString()}`);
+	};
 
 	return (
 		<form onSubmit={handleKeywordSubmit} className="w-full flex flex-col">
@@ -98,7 +114,7 @@ export function ArticleSearch({
 					/>
 				</div>
 			</div>
-			{/* <div className="w-full">
+			<div className="w-full">
 				<p className="dark:text-gray-50 mb-2 inline-block text-sm">
 					Puedes elegir una categoría para filtrar las publicaciones
 				</p>
@@ -133,7 +149,7 @@ export function ArticleSearch({
 						))}
 					</div>
 				</div>
-			</div> */}
+			</div>
 		</form>
 	);
 }
