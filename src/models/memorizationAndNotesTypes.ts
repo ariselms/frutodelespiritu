@@ -17,13 +17,9 @@ export type MemoryItemType = {
 	passage_text: string[];
 	bible_book: string;
 	bible_name: string;
+  title?: string;
+  content?: string;
 };
-
-// the note structure is the same as the memory item structure but with the addition of note_title and note_content
-export type NoteItemType = MemoryItemType & {
-  note_title: string;
-  note_content: string;
-}
 
 export type DeleteUserListOrNoteType = {
   id: string;

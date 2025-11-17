@@ -1,9 +1,9 @@
 import { sql } from "@vercel/postgres";
-import { MemoryOrNoteItemList } from "@/components/bible/MemoryOrNoteItemList";
 import Link from "next/link";
 
 // TODO: import the Modal logic for the memory mode feature, create a standalone component that I can use by passing the list of memory items
 import BibleMemoryMode from "@/components/bible/BibleMemoryMode";
+import MemoryOrNoteItemList from "@/components/bible/MemoryOrNoteItemList";
 
 export default async function ({
 	params
@@ -14,7 +14,7 @@ export default async function ({
 
 	const { listId } = await params;
 
-	const { rows: memoryList } =
+	const { rows: learningList } =
 		await sql`SELECT * FROM learning_list WHERE id = ${listId}`;
 
 	const { rows: memoryListItems } = await sql`
@@ -30,10 +30,10 @@ export default async function ({
       ml.id = ${listId};
   `;
 
-	if (memoryList && memoryListItems) {
+	if (learningList && (memoryListItems)) {
 		memoryOrNotelist = {
-			listInfo: memoryList[0],
-			listItems: memoryListItems.length > 0 ? memoryListItems : []
+			listInfo: learningList[0],
+			memoryItemsList: memoryListItems.length > 0 ? memoryListItems : []
 		};
 	}
 
@@ -47,8 +47,8 @@ export default async function ({
 						&larr; Volver a Mis Listas de Aprendizaje
 					</Link>
 
-					{memoryOrNotelist?.listItems?.length > 0 && (
-						<BibleMemoryMode bibleData={memoryOrNotelist?.listItems} />
+					{memoryOrNotelist?.memoryItemsList?.length > 0 && (
+						<BibleMemoryMode bibleData={memoryOrNotelist?.memoryItemsList} />
 					)}
 				</div>
 
@@ -65,7 +65,7 @@ export default async function ({
 
 			<section className="container mx-auto p-4 text-lg">
 				<MemoryOrNoteItemList
-					memoryOrNoteListItems={memoryOrNotelist.listItems}
+					memoryOrNoteListItems={memoryOrNotelist.memoryItemsList}
 				/>
 			</section>
 		</div>

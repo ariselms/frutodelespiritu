@@ -85,6 +85,7 @@ export async function POST(request: Request) {
   try {
 
 		const body = await request.json();
+
 		const { book, chapter, verse, content } = body;
 
 		const { rows: newMemorization } = await sql`

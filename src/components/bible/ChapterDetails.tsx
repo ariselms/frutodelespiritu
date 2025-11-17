@@ -65,6 +65,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 	// EFFECT 2: Set up the delegated event listener with corrected selection logic
 	useEffect(() => {
 		const content = contentRef.current;
+
 		if (!content || !ChapterContent || ChapterContent.length === 0) return;
 
 		const firstVerse = ChapterContent.find(

@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { MemoryOrNoteItemList } from "@/components/bible/MemoryOrNoteItemList";
+import MemoryOrNoteItemList from "@/components/bible/MemoryOrNoteItemList";
 import Link from "next/link";
 
 export default async function ({

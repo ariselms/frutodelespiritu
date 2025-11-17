@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { isAuthenticated } from "@/helpers/server";
-import { memo } from "react";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
-	// Check if the user is authenticated
+
+  // Check if the user is authenticated
 	const userAuthenticated = await isAuthenticated();
 
 	if (!userAuthenticated) {
@@ -82,6 +82,7 @@ export async function POST(request: Request) {
 	const userId = Number(searchParams.get("userId"));
 
 	try {
+
 		const body = await request.json();
 
 		const { selectedLearningList, memorizationData } = body;
@@ -97,13 +98,16 @@ export async function POST(request: Request) {
 			verse_to,
 			passage_text,
 			name,
-			description
+			description,
+			note_title,
+			note_content
 		} = memorizationData;
 
 		// check if the selected memorization list exists
 		if (selectedLearningList !== "") {
+
 			// get the memorization list id to use in new learning_list_memory_item_join
-			const { rows: memorizationList } = await sql`
+			const { rows: learningList } = await sql`
         SELECT * FROM learning_list
         WHERE
           name = ${selectedLearningList} AND
@@ -111,11 +115,11 @@ export async function POST(request: Request) {
       `;
 
 			// if the memorization list does not exist, return an error
-			if (memorizationList.length === 0) {
+			if (learningList.length === 0) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "La lista de memorización no existe.",
+						message: "La lista de aprendizaje no existe.",
 						data: null
 					},
 					{ status: 400 }
@@ -151,7 +155,7 @@ export async function POST(request: Request) {
 			// insert new memory_item
 			const { rows: newMemoryItem, rowCount } = await sql`
         INSERT INTO
-          memory_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text)
+          memory_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text, title, content)
         VALUES (
           ${by_user_id},
           ${bible_name},
@@ -161,14 +165,16 @@ export async function POST(request: Request) {
           ${String(chapter_id)},
           ${verse_from},
           ${verse_to},
-          ${passage_text}) RETURNING *
+          ${passage_text},
+          ${note_title},
+          ${note_content}) RETURNING *
       `;
 
 			if (rowCount === 0) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al guardar el item de memorización.",
+						message: "Error al guardar el memorización.",
 						data: null
 					},
 					{ status: 500 }
@@ -179,7 +185,7 @@ export async function POST(request: Request) {
 			const { rowCount: joinRowCount } = await sql`
         INSERT INTO
           learning_list_memory_item_join (memory_list_id, memory_item_id)
-          VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id})
+          VALUES (${learningList[0].id}, ${newMemoryItem[0].id})
         RETURNING *
       `;
 
@@ -187,7 +193,7 @@ export async function POST(request: Request) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al guardar memorización.",
+						message: "Error al guardar.",
 						data: null
 					},
 					{ status: 500 }
@@ -197,7 +203,7 @@ export async function POST(request: Request) {
 			return NextResponse.json(
 				{
 					success: true,
-					message: "La lista de memorización creada correctamente.",
+					message: "La lista de aprendizaje creada correctamente.",
 					data: newMemoryItem
 				},
 				{ status: 200 }
@@ -222,7 +228,7 @@ export async function POST(request: Request) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al crear la lista de memorización.",
+						message: "Error al crear la lista de aprendizaje.",
 						data: null
 					},
 					{ status: 500 }
@@ -232,14 +238,15 @@ export async function POST(request: Request) {
 			return NextResponse.json(
 				{
 					success: true,
-					message: "Memorización creada correctamente.",
+					message: "Lista de aprendizaje creada correctamente.",
 					data: newMemorizationList[0]
 				},
 				{ status: 200 }
 			);
 		}
 	} catch (error) {
-		console.error("Error creating memorization:", error);
+
+		console.error("Error creando memorización: ", error);
 
 		if (
 			error instanceof Error &&

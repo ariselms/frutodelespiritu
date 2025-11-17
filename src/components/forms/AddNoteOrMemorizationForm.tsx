@@ -58,7 +58,7 @@ export default function AddNoteOrMemorizationForm({
 	});
 
 	// state to control the add memorization list form modal
-	const [isAddMemorizationListFormOpen, setIsAddMemorizationListFormOpen] =
+	const [isAddLearningListFormOpen, setIsAddMemorizationListFormOpen] =
 		useState<boolean>(false);
 
 	const [userNote, setUserNote] = useState<{
@@ -108,7 +108,7 @@ export default function AddNoteOrMemorizationForm({
 	}, [passageId]);
 
 	// fetch user memorization lists
-	const getUserMemorizationLists: () => Promise<string[] | null> = async () => {
+	const getUserLearningLists: () => Promise<string[] | null> = async () => {
 		if (!user) return null;
 
 		const responseUserMemorizationLists: any = await useFetchUserLearningLists(
@@ -129,7 +129,7 @@ export default function AddNoteOrMemorizationForm({
 		if (!user) return;
 
 		if (user) {
-			getUserMemorizationLists();
+			getUserLearningLists();
 		}
 
 		return () => {
@@ -142,26 +142,23 @@ export default function AddNoteOrMemorizationForm({
 
 		e.preventDefault();
 
+    if(!selectedLearningList){
+
+      toast.error("Debes seleccionar una lista de aprendizaje");
+
+      return;
+    }
+
 		try {
+
 			if (action === BibleCrudActions.note) {
 
-        console.log("userNote:", userNote);
-				return;
-				//
-				// bible_note //
-				// id int
-				// title string
-				// passage_id string
-				// bible_id string
-				// passage_text string
-				// passage_note text
-				// by_user_id reference int
-				// created_at timestamp now
-				// updated_at timestamp now
-			}
+        if(!userNote.title || !userNote.content){
+          toast.error("El título y el contenido de la nota son obligatorios.");
+          return;
+        }
 
-			if (action === BibleCrudActions.memorization) {
-				const learningListPostRequest = await fetch(
+        const notePostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
 						method: "POST",
@@ -173,13 +170,62 @@ export default function AddNoteOrMemorizationForm({
 							memorizationData: {
 								...bibleData,
 								name: newLearningList.name,
-								description: newLearningList.description
+								description: newLearningList.description,
+								note_title: userNote.title,
+								note_content: userNote.content
 							}
 						})
 					}
 				);
 
-				const memorizationPostResponse = await learningListPostRequest.json();
+        const notePostResponse = await notePostRequest.json();
+
+        if (notePostResponse.success) {
+
+          console.log("Note saved successfully");
+          // close the modal
+          setOpenModal(false);
+          // clear the selectedLearningList
+          setSelectedLearningList("");
+          // clear the bibleData
+          setBibleData(null);
+
+          toast.success("Nota guardada correctamente.");
+
+        } else {
+
+          toast.error(notePostResponse.message);
+
+          return;
+        }
+
+			}
+
+			if (action === BibleCrudActions.memorization) {
+
+				const memorizationPostRequest = await fetch(
+					`/api/user/${user?.id}/memorization`,
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							selectedLearningList,
+							memorizationData: {
+								...bibleData,
+								name: newLearningList.name,
+								description: newLearningList.description,
+								note_title: userNote.title,
+								note_content: userNote.content
+							}
+						})
+					}
+				);
+
+				const memorizationPostResponse = await memorizationPostRequest.json();
+
+        console.log(memorizationPostResponse)
 
 				if (memorizationPostResponse.success) {
 					// close the modal
@@ -189,8 +235,10 @@ export default function AddNoteOrMemorizationForm({
 					// clear the bibleData
 					setBibleData(null);
 
-					toast.success("Memorización guardada correctamente");
+					toast.success("Memorización guardada correctamente.");
+
 				} else {
+
 					toast.error(memorizationPostResponse.message);
 
 					return;
@@ -201,7 +249,7 @@ export default function AddNoteOrMemorizationForm({
 		}
 	};
 
-	// TODO: pass the getUserMemorizationLists to the AddNewLearningListForm component and call it after creating a new list to refresh the lists
+	// TODO: pass the getUserLearningLists to the AddNewLearningListForm component and call it after creating a new list to refresh the lists
 
 	// TODO: when a new memorization item is created show a success message and close all of the modals
 
@@ -411,11 +459,11 @@ export default function AddNoteOrMemorizationForm({
 				</DrawerItems>
 			</Drawer>
 			<AddNewLearningListForm
-				isAddMemorizationListFormOpen={isAddMemorizationListFormOpen}
+				isAddLearningListFormOpen={isAddLearningListFormOpen}
 				setIsAddMemorizationListFormOpen={setIsAddMemorizationListFormOpen}
 				newLearningList={newLearningList}
 				setNewLearningList={setNewLearningList}
-				getUserMemorizationLists={getUserMemorizationLists}
+				getUserLearningLists={getUserLearningLists}
 				userId={user?.id}
 			/>
 		</>
@@ -423,14 +471,14 @@ export default function AddNoteOrMemorizationForm({
 }
 
 const AddNewLearningListForm = ({
-	isAddMemorizationListFormOpen,
+	isAddLearningListFormOpen,
 	setIsAddMemorizationListFormOpen,
 	newLearningList,
 	setNewLearningList,
-	getUserMemorizationLists,
+	getUserLearningLists,
 	userId
 }: {
-	isAddMemorizationListFormOpen: boolean;
+	isAddLearningListFormOpen: boolean;
 	setIsAddMemorizationListFormOpen: React.Dispatch<
 		React.SetStateAction<boolean>
 	>;
@@ -438,7 +486,7 @@ const AddNewLearningListForm = ({
 	setNewLearningList: React.Dispatch<
 		React.SetStateAction<{ name: string; description: string }>
 	>;
-	getUserMemorizationLists: () => Promise<string[] | null>;
+	getUserLearningLists: () => Promise<string[] | null>;
 	userId: string | undefined;
 }) => {
 	const handleNewMemorizationListSubmit = async (
@@ -478,9 +526,15 @@ const AddNewLearningListForm = ({
 		const memorizationPostResponse = await learningListPostRequest.json();
 
 		if (memorizationPostResponse.success) {
+
 			setIsAddMemorizationListFormOpen(false);
+
 			setNewLearningList({ name: "", description: "" });
-			getUserMemorizationLists();
+
+			getUserLearningLists();
+
+      toast.success(memorizationPostResponse.message);
+
 		} else {
 			console.error(
 				"Error creating new memorization list:",
@@ -491,7 +545,7 @@ const AddNewLearningListForm = ({
 
 	return (
 		<Modal
-			show={isAddMemorizationListFormOpen}
+			show={isAddLearningListFormOpen}
 			size="xl"
 			onClose={() => {
 				setIsAddMemorizationListFormOpen(false);

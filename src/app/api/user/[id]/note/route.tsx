@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { isAuthenticated } from "@/helpers/server";
+import { memo } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -45,17 +46,17 @@ export async function GET(request: Request) {
 		});
 	}
 
-	const { rows: userNoteLists } = await sql`
-    SELECT * FROM note_list
+	const { rows: userMemorizationLists } = await sql`
+    SELECT * FROM learning_list
     WHERE
-      note_list.by_user_id = ${Number(userId)}
+      learning_list.by_user_id = ${Number(userId)}
   `;
 
 	return NextResponse.json(
 		{
 			success: true,
-			message: "Notas solicitadas correctamente.",
-			data: userNoteLists
+			message: "Listas de aprendizaje solicitadas correctamente.",
+			data: userMemorizationLists
 		},
 		{ status: 200 }
 	);
@@ -76,43 +77,44 @@ export async function POST(request: Request) {
 		);
 	}
 
-  const { searchParams } = new URL(request.url);
+	const { searchParams } = new URL(request.url);
 
-  const userId = Number(searchParams.get("userId"));
+	const userId = Number(searchParams.get("userId"));
 
 	try {
-
 		const body = await request.json();
 
-		const { selectedNoteList, bibleData } = body;
+		const { selectedLearningList, noteData } = body;
 
 		const {
-      bible_name, // full bible version name
+			bible_name, // full bible version name
 			bible_id, // bible id (abbreviation)
 			by_user_id,
-      bible_book, // bible book name
+			bible_book, // bible book name
 			book_id, // book id (abbreviation)
 			chapter_id,
 			verse_from,
 			verse_to,
 			passage_text,
 			name,
-			description
-		} = bibleData;
+			description,
+      note_title,
+      note_content
+		} = noteData;
 
-		// check if the selected memorization list exists
-		if (selectedNoteList !== "") {
+		// check if the selected memorization list existsm if it does, add the note item to it, but before, check if the note item exist already
+		if (selectedLearningList !== "") {
 
 			// get the memorization list id to use in new learning_list_memory_item_join
-			const { rows: memorizationList } = await sql`
+			const { rows: learningList } = await sql`
         SELECT * FROM learning_list
         WHERE
-          name = ${selectedNoteList} AND
+          name = ${selectedLearningList} AND
           by_user_id = ${by_user_id}
       `;
 
 			// if the memorization list does not exist, return an error
-			if (memorizationList.length === 0) {
+			if (learningList.length === 0) {
 				return NextResponse.json(
 					{
 						success: false,
@@ -123,9 +125,9 @@ export async function POST(request: Request) {
 				);
 			}
 
-      // check if the user have saved the same memory item before
-      const { rows: memoryItemExist } = await sql`
-        SELECT * FROM memory_item
+			// check if the user have saved the same note item before
+			const { rows: noteItemExist } = await sql`
+        SELECT * FROM note_item
         WHERE
           by_user_id = ${by_user_id} AND
           bible_name = ${bible_name} AND
@@ -138,21 +140,21 @@ export async function POST(request: Request) {
           passage_text = ${passage_text}
       `;
 
-      if (memoryItemExist.length > 0) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Esta selección ya ha sido guardada.",
-            data: null
-          },
-          { status: 400 }
-        );
-      }
+			if (noteItemExist.length > 0) {
+				return NextResponse.json(
+					{
+						success: false,
+						message: "Esta selección ya ha sido guardada.",
+						data: null
+					},
+					{ status: 400 }
+				);
+			}
 
-			// insert new memory_item
-			const { rows: newMemoryItem, rowCount } = await sql`
+			// insert new note_item
+			const { rows: newNoteItem, rowCount } = await sql`
         INSERT INTO
-          memory_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text)
+          note_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text, title, content)
         VALUES (
           ${by_user_id},
           ${bible_name},
@@ -162,14 +164,16 @@ export async function POST(request: Request) {
           ${String(chapter_id)},
           ${verse_from},
           ${verse_to},
-          ${passage_text}) RETURNING *
+          ${passage_text},
+          ${note_title},
+          ${note_content}) RETURNING *
       `;
 
 			if (rowCount === 0) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al guardar el item de memorización.",
+						message: "Error al guardar la nota.",
 						data: null
 					},
 					{ status: 500 }
@@ -179,8 +183,8 @@ export async function POST(request: Request) {
 			// insert learning_list_memory_item_join relation
 			const { rowCount: joinRowCount } = await sql`
         INSERT INTO
-          learning_list_memory_item_join (memory_list_id, memory_item_id)
-          VALUES (${memorizationList[0].id}, ${newMemoryItem[0].id})
+          learning_list_note_item_join (memory_list_id, note_item_id)
+          VALUES (${learningList[0].id}, ${newNoteItem[0].id})
         RETURNING *
       `;
 
@@ -188,7 +192,7 @@ export async function POST(request: Request) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al guardar memorización.",
+						message: "Error al guardar nota.",
 						data: null
 					},
 					{ status: 500 }
@@ -199,15 +203,14 @@ export async function POST(request: Request) {
 				{
 					success: true,
 					message: "La lista de memorización creada correctamente.",
-					data: newMemoryItem
+					data: newNoteItem
 				},
 				{ status: 200 }
 			);
 		}
 
-    // if there is no name or description, means that a new memorization list needs to be created
+		// if there is no name or description, means that a new memorization list needs to be created
 		if (name !== "" && description !== "") {
-
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO learning_list (by_user_id, name, description)
@@ -216,13 +219,14 @@ export async function POST(request: Request) {
           ${name},
           ${description}
         )
+        RETURNING *
       `;
 
 			if (rowCount === 0) {
 				return NextResponse.json(
 					{
 						success: false,
-						message: "Error al crear la lista de memorización.",
+						message: "Error al crear la lista de aprendizaje.",
 						data: null
 					},
 					{ status: 500 }
@@ -232,16 +236,15 @@ export async function POST(request: Request) {
 			return NextResponse.json(
 				{
 					success: true,
-					message: "Memorización creada correctamente.",
-					data: newMemorizationList
+					message: "Lista de aprendizaje creada correctamente.",
+					data: newMemorizationList[0]
 				},
 				{ status: 200 }
 			);
-
 		}
 	} catch (error) {
 
-		console.error("Error creating memorization:", error);
+		console.error("Error creando nota: ", error);
 
 		if (
 			error instanceof Error &&

@@ -1,7 +1,7 @@
 "use client";
+
 import { TabItem, Tabs } from "flowbite-react";
-import { FaBrain } from "react-icons/fa";
-import { FaStickyNote } from "react-icons/fa";
+import { FaBrain, FaStickyNote } from "react-icons/fa";
 import LearningListComponent from "@/components/learning-lists/LearningListComponent";
 import { NotesAndMemoryTabTheme } from "@/components/theme";
 import GeneralNotesListComponent from "@/components/learning-lists/GeneralNotesListComponent";

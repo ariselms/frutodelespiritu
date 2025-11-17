@@ -49,8 +49,6 @@ export default function BibleMemoryMode({
 						navigation
             pagination={{ clickable: true }}
 						scrollbar={{ draggable: false }}
-						// onSwiper={(swiper) => console.log("")}
-						// onSlideChange={() => console.log("")}
             >
 						{bibleData.map((item, index) => (
 							<SwiperSlide className="flex h-full items-center justify-center dark:text-white">

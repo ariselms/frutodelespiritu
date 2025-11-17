@@ -255,7 +255,7 @@ export default function MemorizationListComponent() {
 			cell: ({ row }) => (
 				<div className="flex-col items-center justify-center md:flex md:flex-row gap-2">
 					<Link
-						href={`/perfil/biblia/memorias/${row.original.id}`}
+						href={`/perfil/biblia/aprendizaje/${row.original.id}`}
 						className="cursor-pointer text-center w-full mb-3 md:mb-0 transition-colors inline-block flex-1">
 						<div
 							className="items-center justify-start px-2 py-1 rounded-2xl border border-sky-200 dark:border-gray-600 text-sky-700 dark:text-gray-100 bg-sky-100 dark:bg-gray-800 font-bold cursor-pointer"
