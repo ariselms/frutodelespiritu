@@ -320,7 +320,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 				show={isModalOpen}
 				onClose={() => setIsModalOpen(false)}>
 				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
-					¿Cómo guardar versículos en listas de memorias or tomar notas?
+					¿Cómo guardar versículos en listas de aprendizaje o tomar notas?
 				</ModalHeader>
 				<ModalBody>
 					<div className="space-y-6">

@@ -265,7 +265,7 @@ export async function POST(request: Request) {
 		return NextResponse.json(
 			{
 				success: false,
-				message: "Error creating memorization",
+				message: "Error creating memorization: " + (error instanceof Error ? `: ${error.message}` : ""),
 				data: null
 			},
 			{ status: 500 }
