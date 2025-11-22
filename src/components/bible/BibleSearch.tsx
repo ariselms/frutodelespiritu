@@ -66,8 +66,6 @@ export function BibleSearch({ bibleId }: { bibleId: string }) {
 
 			const { data } = responseData; // Destructure the data from the variable
 
-			console.log("Data to be set in state:", data);
-
 			setBibleKeywordResults(data);
 
 		} catch (error) {

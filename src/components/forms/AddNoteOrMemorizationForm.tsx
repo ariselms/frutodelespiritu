@@ -181,8 +181,6 @@ export default function AddNoteOrMemorizationForm({
         const notePostResponse = await notePostRequest.json();
 
         if (notePostResponse.success) {
-
-          console.log("Note saved successfully");
           // close the modal
           setOpenModal(false);
           // clear the selectedLearningList
@@ -224,8 +222,6 @@ export default function AddNoteOrMemorizationForm({
 				);
 
 				const memorizationPostResponse = await memorizationPostRequest.json();
-
-        console.log(memorizationPostResponse)
 
 				if (memorizationPostResponse.success) {
 					// close the modal

@@ -48,8 +48,6 @@ export function ArticleSearch({
 		newParams.set("page", "1"); // Reset to page 1 on new search
 		newParams.set("limit", "10"); // Reset to default limit
 		newParams.set("keyword", inputSearchTerm);
-
-    console.log(newParams.get("category"));
 		// newParams.delete("category");
     // setSelectedCategory("All");
 		router.push(`/lecturas?${newParams.toString()}`);

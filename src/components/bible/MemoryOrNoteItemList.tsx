@@ -17,13 +17,13 @@ import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
 import LOTTIE_EDIT_DOCUMENT_HOVER_PINCH from "@/lotties/edit-document-hover-pinch.json";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function MemoryOrNoteItemList({
 	memoryOrNoteListItems
 }: {
 	memoryOrNoteListItems: MemoryItemType[] | null;
 }) {
-	console.log(memoryOrNoteListItems);
 	const { user } = useAuthContext();
 
 	// add state to track the item being deleted using the id and name
@@ -76,6 +76,74 @@ export default function MemoryOrNoteItemList({
 		} catch (error) {
 			console.error("Error during delete request:", error);
 		}
+	};
+
+	const handleUpdateMemoryOrNoteItem = async (
+		memoryOrNoteItem: MemoryItemType
+	) => {
+		try {
+
+			if (
+        memoryOrNoteItem.title === "" ||
+        memoryOrNoteItem.content === ""
+      )
+      {
+				toast.warning("El título y contenido de la nota son requeridos.");
+				return;
+			}
+
+			const requestUpdateMemoryItem = await fetch(
+				`/api/user/${user?.id}/memorization/item/${memoryOrNoteItem.id}`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(memoryOrNoteItem)
+				}
+			);
+
+			const responseUpdateMemoryItem = await requestUpdateMemoryItem.json();
+
+			if (responseUpdateMemoryItem.success) {
+				// update the local state to trigger a re-render
+				setMemoryOrNoteList((currentList) =>
+					currentList.map((item) =>
+						String(item.id) === String(memoryOrNoteItem.id)
+							? { ...item, ...memoryOrNoteItem }
+							: item
+					)
+				);
+
+        toast.success("Elemento de aprendizaje actualizado correctamente.");
+
+			} else {
+				console.error(
+					"Failed to update item:",
+					responseUpdateMemoryItem.message
+				);
+			}
+		} catch (error) {
+			console.error("Error during update request:", error);
+		}
+	};
+
+	const handleInputChange = (
+		id: number | null,
+		field: keyof MemoryItemType,
+		value: string
+	) => {
+		setMemoryOrNoteList((currentList) =>
+			currentList.map((item) => {
+				// Find the item by ID
+				if (String(item.id) === String(id)) {
+					// Return a new object with the updated field
+					return { ...item, [field]: value };
+				}
+				// Return the unchanged item
+				return item;
+			})
+		);
 	};
 
 	if (memoryOrNoteList?.length === 0) {
@@ -185,7 +253,14 @@ export default function MemoryOrNoteItemList({
 													className="block w-full px-2 py-4 text-sm text-gray-900 border border-sky-100 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 													id="title"
 													type="text"
-													value={"title" in listItem ? listItem.title : ""}
+													value={listItem.title || ""}
+													onChange={(e) =>
+														handleInputChange(
+															listItem.id,
+															"title",
+															e.target.value
+														)
+													}
 													name="title"
 												/>
 											</div>
@@ -200,14 +275,21 @@ export default function MemoryOrNoteItemList({
 													className="block w-full px-2 py-4 text-sm text-gray-900 border border-sky-100 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
 													id="content"
 													rows={4}
-													value={"content" in listItem ? listItem.content : ""}
+													value={listItem.content || ""}
+													onChange={(e) =>
+														handleInputChange(
+															listItem.id,
+															"content",
+															e.target.value
+														)
+													}
 													name="content"
 												/>
 											</div>
 											<div
 												className="items-center justify-start inline-block mt-5 mr-6 px-2 py-1 rounded-2xl border-2 border-sky-500 dark:border-gray-600 text-gray-700 dark:text-gray-100 bg-sky-50 dark:bg-gray-800 font-bold cursor-pointer"
 												// FIX 3: Pass the entire listItem to state
-												onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
+												onClick={() => handleUpdateMemoryOrNoteItem(listItem)}>
 												<LordIconHover
 													size={24}
 													ICON_SRC={LOTTIE_EDIT_DOCUMENT_HOVER_PINCH}
@@ -241,15 +323,11 @@ export default function MemoryOrNoteItemList({
 				show={deletingMemoryOrNoteItem !== null}
 				onClose={() => setDeletingMemoryOrNoteItem(null)}
 				popup>
-
 				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
-
 					Confirma remover versículos
-
 				</ModalHeader>
 
 				<ModalBody className="p-6">
-
 					<p className="text-black dark:text-gray-50 text-xl mb-3">
 						¿Estas seguro de remover lo siguiente?
 					</p>
@@ -275,7 +353,6 @@ export default function MemoryOrNoteItemList({
 						Esta acción removerá este contenido de la lista. Luego de oprimir
 						confirmar no se puede deshacer.
 					</p>
-
 				</ModalBody>
 
 				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
