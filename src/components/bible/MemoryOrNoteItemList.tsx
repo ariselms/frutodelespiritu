@@ -267,6 +267,7 @@ export default function MemoryOrNoteItemList({
 				})}
 			</Accordion>
 
+      {/* TODO: Refactor this modal  */}
 			{/* Modal for deleting a lecture */}
 			<Modal
 				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
