@@ -14,24 +14,26 @@ export default function AddNoteOrMemorySlide({
 	bibleId,
 	chapterContent,
 	isDrawerOpen,
-  bibleBook,
-  chapterInfo,
-  bibleName
+	bibleBook,
+	chapterInfo,
+	bibleName,
+	fetchUserSavedVerses
 }: {
 	selectedVerses: Set<string>;
 	setSelectedVerses: React.Dispatch<React.SetStateAction<Set<string>>>;
 	bibleId: string;
 	chapterContent: any;
 	isDrawerOpen: boolean;
-  bibleBook: BibleBookType;
-  chapterInfo: any;
-  bibleName: string;
+	bibleBook: BibleBookType;
+	chapterInfo: any;
+	bibleName: string;
+	fetchUserSavedVerses: () => Promise<void>;
 }) {
 	const [apiSelectedVerses, setApiSelectedVerses] = useState<Set<string>>(
 		new Set()
 	);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [action, setAction] = useState<string | null>(null);
+	const [openModal, setOpenModal] = useState<boolean>(false);
+	const [action, setAction] = useState<string | null>(null);
 
 	// get the selectedVerses and sort it from low to high, then set get the lowest and the highest and set it to the apiSelectedVerses
 	useEffect(() => {
@@ -45,20 +47,24 @@ export default function AddNoteOrMemorySlide({
 
 		// 3. If there are any sorted verses, get the lowest and highest.
 		if (parsedVerses.length > 0) {
-			const lowestSelectedVerse = parsedVerses[0].chapter + ":" + parsedVerses[0].verse;
-			const highestSelectedVerse = parsedVerses[parsedVerses.length - 1].chapter + ":" + parsedVerses[parsedVerses.length - 1].verse;
+			const lowestSelectedVerse =
+				parsedVerses[0].chapter + ":" + parsedVerses[0].verse;
+			const highestSelectedVerse =
+				parsedVerses[parsedVerses.length - 1].chapter +
+				":" +
+				parsedVerses[parsedVerses.length - 1].verse;
 
 			// 4. Update the state with the correct lowest and highest verses.
 			// Use a new Set to avoid issues if the highest and lowest are the same.
 			setApiSelectedVerses(
 				new Set([lowestSelectedVerse, highestSelectedVerse])
 			);
-
 		} else {
 			// Handle the case where the selection is empty.
 			setApiSelectedVerses(new Set());
 		}
 	}, [selectedVerses]);
+
 	const handleCloseModal = () => {
 		// clear the selectedVerses
 		setSelectedVerses(new Set());
@@ -122,6 +128,7 @@ export default function AddNoteOrMemorySlide({
 				bibleBook={bibleBook}
 				chapterInfo={chapterInfo}
 				bibleName={bibleName}
+				fetchUserSavedVerses={fetchUserSavedVerses}
 			/>
 		</>
 	);

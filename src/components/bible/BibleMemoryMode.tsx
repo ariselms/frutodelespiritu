@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { LordIconRevealOnLoad } from "@/components/animations/lordicon";
 import LOTTIE_BRAIN_IN_REVEAL from "@/lotties/brain-in-reveal.json";
-import { Verse } from "@/models/memorizationAndNotesTypes";
 import {
 	Navigation,
 	Pagination,
@@ -21,6 +20,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import 'swiper/css/effect-fade';
+import BiblePassageText from "@/components/bible/BiblePassageText";
 
 export default function BibleMemoryMode({
 	bibleData
@@ -50,7 +50,7 @@ export default function BibleMemoryMode({
             pagination={{ clickable: true }}
 						scrollbar={{ draggable: false }}
             >
-						{bibleData.map((item, index) => (
+						{bibleData.map((item) => (
 							<SwiperSlide className="flex h-full items-center justify-center dark:text-white">
 								<BibleMemoryCard bibleDataItem={item} />
 							</SwiperSlide>
@@ -95,7 +95,7 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 					</p>
 				</div>
 			) : (
-				<BiblePassageText listItem={bibleDataItem} />
+				<BiblePassageText chapterContent={bibleDataItem} />
 			)}
 
 			<button
@@ -105,69 +105,4 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 			</button>
 		</div>
 	);
-}
-
-export function BiblePassageText({ listItem }: { listItem: any }) {
-	const getPassageContent = () => {
-		if (!listItem.passage_text) return <p>No text available.</p>;
-
-		try {
-			const correctedJsonString = `[${listItem.passage_text.slice(1, -1)}]`;
-
-			const verseStrings: string[] = JSON.parse(correctedJsonString);
-
-			const verses: Verse[] = verseStrings.map((str) => JSON.parse(str));
-
-			return (
-				<>
-					<span className="block mb-8">
-						{listItem.bible_name.toUpperCase()}
-					</span>
-
-					<span className="block mb-4 font-bold text-2xl">
-						{listItem.bible_book} {listItem.chapter_id}:{listItem.verse_from}{" "}
-						{listItem.verse_to !== listItem.verse_from &&
-							`-${listItem.verse_to}`}
-					</span>
-
-					<div className="max-w-[75%] xl:max-w-[80ch] overflow-auto">
-						{verses.map((verse) => (
-							<p
-								key={verse.number}
-								className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
-								<sup className="font-bold mr-1">{verse.number}</sup>
-
-								{verse.content.map((item, index) => {
-									if (typeof item === "string") {
-										return <React.Fragment key={index}>{item} </React.Fragment>;
-									}
-
-									return (
-										<span
-											key={index}
-											className={
-												item.wordsOfJesus
-													? "text-red-600 dark:text-red-400"
-													: ""
-											}>
-											{item.text}
-										</span>
-									);
-								})}
-							</p>
-						))}
-					</div>
-				</>
-			);
-		} catch (error) {
-			console.error(
-				"Failed to parse passage_text:",
-				listItem.passage_text,
-				error
-			);
-			return <p className="text-red-500">Error: Could not display verse.</p>;
-		}
-	};
-
-	return <>{getPassageContent()}</>;
 }

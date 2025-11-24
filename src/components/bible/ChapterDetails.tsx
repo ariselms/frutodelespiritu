@@ -3,21 +3,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
-import { toast } from "react-toastify";
 import { serverBaseUrl } from "@/static";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemoryItemSlide";
 import { BibleBookType } from "@/models/bibleTypes";
 import Link from "next/link";
 import FINGERPRINT_SECURITY_LOTTIE from "@/lotties/fingerprint-security-hover-wrong.json";
 import { LordIconHover } from "@/components/animations/lordicon";
-import {
-	Modal,
-	ModalBody,
-	ModalFooter,
-	ModalHeader
-} from "flowbite-react";
-
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
+import UserSavedVerses from "@/components/bible/UserSavedVerses";
+import { createRoot } from "react-dom/client"; // Import createRoot
+import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 
 // Helper function to parse a "Book Chapter:Verse" string
 const parseSid = (sid: string) => {
@@ -31,15 +27,26 @@ const parseSid = (sid: string) => {
 	};
 };
 
-export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } : { ChapterContent: any[]; Book: BibleBookType; ChapterInfo: any, BibleName: string}) {
+export function ChapterDetails({
+	ChapterContent,
+	Book,
+	ChapterInfo,
+	BibleName
+}: {
+	ChapterContent: any[];
+	Book: BibleBookType;
+	ChapterInfo: any;
+	BibleName: string;
+}) {
 	const { user } = useAuthContext();
-	const router = useRouter();
 	const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [selectedVerses, setSelectedVerses] = useState<Set<string>>(new Set());
 	const { bibleId, bookId, chapterId } = useParams();
 	const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [isModalToPromptUserToLoginOpen, setIsModalToPromptUserToLoginOpen] =
+		useState<boolean>(false);
+	const [userSavedVerses, setUserSavedVerses] = useState<any>(null);
 
 	// EFFECT 1: Effect for scrolling to a hash link if present in the URL
 	useEffect(() => {
@@ -81,7 +88,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 		const handleContainerClick = (event: MouseEvent) => {
 			// Update the following to use a modal instead of redirecting the user right away
 			if (!user) {
-				setIsModalOpen(true);
+				setIsModalToPromptUserToLoginOpen(true);
 
 				return;
 			}
@@ -227,73 +234,93 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 		}
 	}, [selectedVerses, ChapterContent]);
 
-	// EFFECT 4: On Load, Create a function that fetches global notes and memorization items for the current chapter and pre-select verses accordingly, if any, to display a brain icon next to the last verse of the individual selection. For example, if the user has notes in the chapter for verses 2, 3, 4, 5, and 8, then verses 2-5 should be selected and verse 5 should have a brain icon next to it. Verse 8 should be selected and have a brain icon next to it as well.
-	// STEP 1: Fetch user notes and memorization items for the current chapter
-	// STEP 2: Parse the response to identify verses with notes or memorization items
-	// STEP 3: Update the selectedVerses state to include these verses
-	// STEP 4: Ensure that the last verse in each contiguous selection has a brain icon next to it
-	// NOTE: Each verse looks like that. The chapter number is in the span data-number attribute.
-	// <p><span class="v" id="7" data-number="7">7</span> <span>Cuando vio que muchos fariseos y saduceos acudían a su bautismo, les dijo: ¡Generación de víboras! ¿Quién les enseñó a huir de la ira que viene?</span></p>
-	// Consider to also on load, check for the chapter and if there are any popular verses, kind of give it a highlight or a different color to indicate that those verses are popular among users, this will encourage users to read those verses and engage more with the content as well as use the save note or memory list feature.
-	// Consider to work with the API and how to fetch the most popular verses by selecting the verses with the most notes or memorization items across all users for that specific chapter.
+	// Effect 4: On load, fetch the user saved verses if they exists
+	useEffect(() => {
+		if (!user) return;
+
+		fetchUserSavedVerses();
+	}, [user]);
+
+	// Effect 5: set the icons after the bible verse to indicate that the user has saved something that includes the bible verse
+	useEffect(() => {
+		const content = contentRef.current;
+		if (!content || !userSavedVerses) return;
+
+		// Keep track of roots to unmount them cleanly later if needed
+		const roots: any[] = [];
+
+		userSavedVerses.forEach((memoryItem: any) => {
+			const verseSpan = content.querySelector(
+				`span[data-number="${memoryItem.verse_from}"]`
+			);
+
+			const parentP = verseSpan?.parentElement;
+
+			if (!parentP) return;
+
+			parentP.classList.add("flex");
+			parentP.classList.add("items-center");
+
+			// Prevent adding the icon if it's already there (optional check)
+			if (
+				!verseSpan ||
+				verseSpan.nextElementSibling?.getAttribute("data-icon-type") ===
+					"saved-verse"
+			) {
+				return;
+			}
+
+			// 1. Create a container DOM element for the React component
+			const iconContainer = document.createElement("span");
+
+			// Optional: Add styles or classes to position it nicely
+			iconContainer.style.display = "inline-flex";
+			iconContainer.setAttribute("data-icon-type", "saved-verse"); // Mark it to avoid duplicates
+
+			// 2. Insert the container into the real DOM
+			verseSpan.insertAdjacentElement("afterend", iconContainer);
+
+			// 3. Use createRoot to render the interactive React component into the container
+			const root = createRoot(iconContainer);
+			root.render(<UserSavedVerses verses={memoryItem} />);
+
+			roots.push(root);
+		});
+	}, [userSavedVerses, ChapterContent]);
+
+	const fetchUserSavedVerses = async () => {
+		if (!user) return;
+
+		try {
+			// request the memory_item where the by_user_id is the current user and the bible_id, book_id and chapter_id are matches
+			const requestUserSavedVerses = await fetch(
+				`${serverBaseUrl}/api/user/${user?.id}/memorization/item/details/${bibleId}/${bookId}/${chapterId}`
+			);
+
+			if (!requestUserSavedVerses.ok) {
+				throw new Error("Failed to fetch user saved verses");
+			}
+
+			const responseUserSavedVerses = await requestUserSavedVerses.json();
+
+			if (responseUserSavedVerses?.data?.length === 0) {
+				return;
+			}
+
+			setUserSavedVerses(responseUserSavedVerses?.data);
+		} catch (error) {
+			console.error("Error fetching user saved verses:", error);
+		}
+	};
 
 	return (
 		<>
 			<div className="bible-chapter max-w-[80ch] mx-auto my-4" ref={contentRef}>
-				{ChapterContent.map((content: any) => {
-					if (content.type === "heading") {
-						return (
-							<h2 key={content.content[0]} id={content.content[0]}>
-								{content.content[0]}
-							</h2>
-						);
-					}
 
-					if (content.type === "verse") {
-						return (
-							<p key={content.number}>
-								<span
-									className="v"
-									id={content.number}
-									data-number={content.number}>
-									{content.number}
-								</span>{" "}
-								{content.content.map((verse: any, index: number) => {
-									// Specifically handle line break objects
-									// If the verse object is a line break, render a <br /> tag.
-									if (verse && verse.lineBreak) {
-										return <br key={index} />;
-									}
+				{ChapterContent.map((chapterData: any, index: number) => {
 
-									// Handle objects that contain a 'text' property
-									if (verse && verse?.text) {
-										return (
-											<span
-												className={`${
-													verse?.wordsOfJesus
-														? "mx-1 text-red-600 dark:text-red-400"
-														: ""
-												}`}
-												key={index}>
-												{verse.text}
-											</span>
-										);
-									}
+					return <BibleContentBuilder chapterData={chapterData} key={index} />;
 
-									// Handle simple strings
-									// Check if 'verse' is a string before trying to render it.
-									if (typeof verse === "string") {
-										return <span key={index}>{verse}</span>;
-									}
-
-									// Ignore any other types of objects (like those with noteId)
-									return null;
-								})}
-							</p>
-						);
-					}
-
-					return null;
 				})}
 			</div>
 
@@ -309,6 +336,7 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 						isDrawerOpen={isDrawerOpen}
 						chapterInfo={ChapterInfo}
 						bibleName={BibleName}
+						fetchUserSavedVerses={fetchUserSavedVerses}
 					/>
 				</>
 			)}
@@ -317,8 +345,8 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 			<Modal
 				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
 				dismissible
-				show={isModalOpen}
-				onClose={() => setIsModalOpen(false)}>
+				show={isModalToPromptUserToLoginOpen}
+				onClose={() => setIsModalToPromptUserToLoginOpen(false)}>
 				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
 					¿Cómo guardar versículos en listas de aprendizaje o tomar notas?
 				</ModalHeader>
@@ -344,11 +372,11 @@ export function ChapterDetails({ ChapterContent, Book, ChapterInfo, BibleName } 
 							redirectUrl: serverBaseUrl + pathname
 						}).toString()}`}>
 						<LordIconHover
-              size={32}
-              ICON_SRC={FINGERPRINT_SECURITY_LOTTIE}
-              state="hover-pinch"
-              text="Iniciar sesión"
-            />
+							size={32}
+							ICON_SRC={FINGERPRINT_SECURITY_LOTTIE}
+							state="hover-pinch"
+							text="Iniciar sesión"
+						/>
 					</Link>
 				</ModalFooter>
 			</Modal>

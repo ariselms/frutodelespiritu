@@ -18,6 +18,7 @@ import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json
 import LOTTIE_EDIT_DOCUMENT_HOVER_PINCH from "@/lotties/edit-document-hover-pinch.json";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import BiblePassageText from "@/components/bible/BiblePassageText";
 
 export default function MemoryOrNoteItemList({
 	memoryOrNoteListItems
@@ -42,6 +43,8 @@ export default function MemoryOrNoteItemList({
 		}
 	}, [memoryOrNoteListItems]); // Only depends on the prop
 
+
+  // TODO: make this function reusable to also delete memory item in bible reading modal when the user click the selected saved verses
 	const handleDeletingMemoryOrNoteItem = async (
 		memoryOrNoteItem: MemoryItemType,
 		bibleId: string
@@ -167,61 +170,9 @@ export default function MemoryOrNoteItemList({
 	return (
 		<>
 			<Accordion collapseAll>
+
 				{memoryOrNoteList?.map((listItem: MemoryItemType) => {
-					// Safely parse the complex, malformed string
-					const getPassageContent = () => {
-						if (!listItem.passage_text) return <p>No text available.</p>;
 
-						try {
-							const correctedJsonString = `[${listItem.passage_text.slice(
-								1,
-								-1
-							)}]`;
-
-							const verseStrings: string[] = JSON.parse(correctedJsonString);
-
-							const verses: Verse[] = verseStrings.map((str) =>
-								JSON.parse(str)
-							);
-
-							return verses.map((verse) => (
-								<p
-									key={verse.number}
-									className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-2 max-w-[80ch]">
-									<sup className="font-bold mr-1">{verse.number}</sup>
-
-									{verse.content.map((item, index) => {
-										if (typeof item === "string") {
-											return (
-												<React.Fragment key={index}>{item} </React.Fragment>
-											);
-										}
-
-										return (
-											<span
-												key={index}
-												className={
-													item.wordsOfJesus
-														? "text-red-600 dark:text-red-400"
-														: ""
-												}>
-												{item.text}{" "}
-											</span>
-										);
-									})}
-								</p>
-							));
-						} catch (error) {
-							console.error(
-								"Failed to parse passage_text:",
-								listItem.passage_text,
-								error
-							);
-							return (
-								<p className="text-red-500">Error: Could not display verse.</p>
-							);
-						}
-					};
 
 					return (
 						<AccordionPanel key={listItem.id}>
@@ -237,7 +188,7 @@ export default function MemoryOrNoteItemList({
 								</p>
 							</AccordionTitle>
 							<AccordionContent className="text-gray-500 dark:text-gray-100 dark:bg-gray-800">
-								{getPassageContent()}
+								<BiblePassageText chapterContent={listItem} />
 								{/* For notes only */}
 								{listItem.hasOwnProperty("title") &&
 									listItem.hasOwnProperty("content") && (
@@ -299,7 +250,6 @@ export default function MemoryOrNoteItemList({
 											</div>
 										</form>
 									)}
-
 								<div
 									className="items-center justify-start inline-block mt-5 px-2 py-1 rounded-2xl border-2 border-red-500 text-red-500 bg-red-50/90 font-bold cursor-pointer"
 									// FIX 3: Pass the entire listItem to state
@@ -360,7 +310,7 @@ export default function MemoryOrNoteItemList({
 						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 						onClick={() => {
 							if (deletingMemoryOrNoteItem) {
-								// FIX 3: Get ID and bibleId from the state object
+								// Get ID and bibleId from the state object
 								handleDeletingMemoryOrNoteItem(
 									deletingMemoryOrNoteItem,
 									String(deletingMemoryOrNoteItem.bible_id)

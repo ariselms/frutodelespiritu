@@ -1,3 +1,5 @@
+// TODO: Create a feature to PIN functionalities in the home page, for example, if the user uses more often the notes feature, then show that in the home page as a quick access button, or the saved lectures feature and notes and memory lists in the bible section. It will have a config section in the admin panel
+
 "use client";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
@@ -12,6 +14,7 @@ import { toast } from "react-toastify";
 import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
 import { BottomModalTheme } from "@/components/theme/index";
 import { BibleBookType } from "@/models/bibleTypes";
+import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 
 export default function AddNoteOrMemorizationForm({
 	bibleId,
@@ -22,7 +25,8 @@ export default function AddNoteOrMemorizationForm({
 	chapterContent,
 	bibleBook,
 	chapterInfo,
-	bibleName
+	bibleName,
+	fetchUserSavedVerses
 }: {
 	bibleId: string;
 	passageId: string[];
@@ -33,6 +37,7 @@ export default function AddNoteOrMemorizationForm({
 	bibleBook: BibleBookType;
 	chapterInfo: any;
 	bibleName: string;
+	fetchUserSavedVerses: () => Promise<void>;
 }) {
 	// user object
 	const { user } = useAuthContext();
@@ -62,9 +67,9 @@ export default function AddNoteOrMemorizationForm({
 		useState<boolean>(false);
 
 	const [userNote, setUserNote] = useState<{
-    title: string;
-    content: string;
-  }>({
+		title: string;
+		content: string;
+	}>({
 		title: "",
 		content: ""
 	});
@@ -142,23 +147,20 @@ export default function AddNoteOrMemorizationForm({
 
 		e.preventDefault();
 
-    if(!selectedLearningList){
+		if (!selectedLearningList) {
+			toast.error("Debes seleccionar una lista de aprendizaje");
 
-      toast.error("Debes seleccionar una lista de aprendizaje");
-
-      return;
-    }
+			return;
+		}
 
 		try {
-
 			if (action === BibleCrudActions.note) {
+				if (!userNote.title || !userNote.content) {
+					toast.error("El título y el contenido de la nota son obligatorios.");
+					return;
+				}
 
-        if(!userNote.title || !userNote.content){
-          toast.error("El título y el contenido de la nota son obligatorios.");
-          return;
-        }
-
-        const notePostRequest = await fetch(
+				const notePostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
 						method: "POST",
@@ -178,29 +180,25 @@ export default function AddNoteOrMemorizationForm({
 					}
 				);
 
-        const notePostResponse = await notePostRequest.json();
+				const notePostResponse = await notePostRequest.json();
 
-        if (notePostResponse.success) {
-          // close the modal
-          setOpenModal(false);
-          // clear the selectedLearningList
-          setSelectedLearningList("");
-          // clear the bibleData
-          setBibleData(null);
+				if (notePostResponse.success) {
+					// close the modal
+					setOpenModal(false);
+					// clear the selectedLearningList
+					setSelectedLearningList("");
+					// clear the bibleData
+					setBibleData(null);
 
-          toast.success("Nota guardada correctamente.");
+					toast.success("Nota guardada correctamente.");
+				} else {
+					toast.error(notePostResponse.message);
 
-        } else {
-
-          toast.error(notePostResponse.message);
-
-          return;
-        }
-
+					return;
+				}
 			}
 
 			if (action === BibleCrudActions.memorization) {
-
 				const memorizationPostRequest = await fetch(
 					`/api/user/${user?.id}/memorization`,
 					{
@@ -232,26 +230,18 @@ export default function AddNoteOrMemorizationForm({
 					setBibleData(null);
 
 					toast.success("Memorización guardada correctamente.");
-
 				} else {
-
 					toast.error(memorizationPostResponse.message);
 
 					return;
 				}
 			}
+
+			fetchUserSavedVerses();
 		} catch (error) {
 			console.error(error);
 		}
 	};
-
-	// TODO: pass the getUserLearningLists to the AddNewLearningListForm component and call it after creating a new list to refresh the lists
-
-	// TODO: when a new memorization item is created show a success message and close all of the modals
-
-	// TODO: upon page load, lookup for any user memorization items to highlight or note the verses that the user has already saved in a memory list
-
-	// TODO: Create a feature to PIN functionalities in the home page, for example, if the user uses more often the notes feature, then show that in the home page as a quick access button, or the saved lectures feature and notes and memory lists in the bible section. It will have a config section in the admin panel
 
 	return (
 		<>
@@ -294,44 +284,9 @@ export default function AddNoteOrMemorizationForm({
 							</p>
 							{
 								<div>
-									{bibleData?.passage_text.map((verse: any, index: number) => {
-										if (verse?.number) {
-											return (
-												<p key={index}>
-													<span className="w mr-1.5 font-bold">
-														{verse?.number}
-													</span>
+									{bibleData?.passage_text.map((chapterData: any, index: number) => {
 
-													{verse?.content.map((text: any, index: number) => {
-														if (verse && verse.lineBreak) {
-															return <br key={index} />;
-														}
-
-														if (typeof text === "string") {
-															return (
-																<span key={index} className="w mx-1">
-																	{text}
-																</span>
-															);
-														}
-
-														if (text?.text) {
-															return (
-																<span
-																	className={`${
-																		text?.wordsOfJesus
-																			? "mx-1 text-red-600 dark:text-red-400"
-																			: ""
-																	}`}
-																	key={index}>
-																	{text?.text}{" "}
-																</span>
-															);
-														}
-													})}
-												</p>
-											);
-										}
+										return <BibleContentBuilder chapterData={chapterData} key={index} />;
 									})}
 								</div>
 							}
@@ -488,8 +443,7 @@ const AddNewLearningListForm = ({
 	const handleNewMemorizationListSubmit = async (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
-
-    e.preventDefault();
+		e.preventDefault();
 
 		const memorizationDataToSubmit = {
 			bible_name: "", // full bible version name
@@ -522,15 +476,13 @@ const AddNewLearningListForm = ({
 		const memorizationPostResponse = await learningListPostRequest.json();
 
 		if (memorizationPostResponse.success) {
-
 			setIsAddMemorizationListFormOpen(false);
 
 			setNewLearningList({ name: "", description: "" });
 
 			getUserLearningLists();
 
-      toast.success(memorizationPostResponse.message);
-
+			toast.success(memorizationPostResponse.message);
 		} else {
 			console.error(
 				"Error creating new memorization list:",

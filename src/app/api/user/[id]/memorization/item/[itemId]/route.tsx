@@ -3,6 +3,7 @@ import { isAuthenticated } from "@/helpers/server";
 import { sql } from "@vercel/postgres";
 
 export const dynamic = "force-dynamic";
+
 export async function PUT(
 	request: Request,
 	{ params }: { params: Promise<{ itemId: string }> }
@@ -43,7 +44,6 @@ export async function PUT(
 		by_user_id,
 		chapter_id,
 		content,
-		id,
 		passage_text,
 		title,
 		verse_from,
