@@ -1,20 +1,19 @@
 "use client";
+
 import { useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import BiblePassageText from "@/components/bible/BiblePassageText";
+import Link from "next/link";
 
 export default function UserSavedVerses({ verses }: { verses: any }) {
-
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
-
-  console.log(verses)
 
 	return (
 		<>
 			<svg
 				onClick={() => setIsUserSelectedModalOpen(true)}
-				className="w-6 h-6 text-sky-700 dark:text-gray-300"
+				className="w-6 h-6 text-sky-700 hover:text-sky-800 dark:text-gray-300 dark:hover:text-gray-400 cursor-pointer transition-all"
 				data-icon-type="saved-verse"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
@@ -34,31 +33,39 @@ export default function UserSavedVerses({ verses }: { verses: any }) {
 				dismissible
 				show={isUserSavedVerseModalOpen}
 				onClose={() => setIsUserSelectedModalOpen(false)}>
-				<ModalHeader
-					className="bg-sky-100 dark:bg-gray-
-        text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
 					Versículos Guardados
 				</ModalHeader>
 				<ModalBody>
 					<BiblePassageText chapterContent={verses} />
 					{verses.title && verses.content && (
-						<div className="mt-8">
-							<small>
+						<div className="mt-8 mb-3">
+							<small className="text-black dark:text-gray-300">
 								<strong>Mi Nota</strong>
 							</small>
-              <hr />
-							{verses.title && (
-								<h2 className="font-bold text-2xl my-2">{verses.title}</h2>
-							)}
-							{verses.content && <p>{verses.content}</p>}
+							<hr className="text-black dark:text-gray-300" />
+
+							<h2 className="font-bold text-2xl text-black dark:text-gray-100 my-2">
+								{verses.title}
+							</h2>
+
+							<p className="text-black dark:text-gray-200">{verses.content}</p>
 						</div>
 					)}
 				</ModalBody>
-				{/* <ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
-					<button>Editar Nota</button>
-					<button>Eliminar Versículo(s)</button>
-				</ModalFooter> */}
+				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-between">
+					<Link
+						href={`/perfil/biblia/aprendizaje/${verses.learning_list_id}`}
+						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100 transition-all">
+						Editar Nota
+					</Link>
+					{/* <button className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100 transition-all">
+						Eliminar
+					</button> */}
+				</ModalFooter>
 			</Modal>
+
+			{/* TODO: MODAL PROMPT TO DELETE ITEM */}
 		</>
 	);
 }

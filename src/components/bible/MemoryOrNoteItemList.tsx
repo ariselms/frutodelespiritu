@@ -11,7 +11,7 @@ import {
 	ModalBody,
 	ModalFooter
 } from "flowbite-react";
-import { MemoryItemType, Verse } from "@/models/memorizationAndNotesTypes";
+import { MemoryItemType } from "@/models/memorizationAndNotesTypes";
 import { useAuthContext } from "@/context/authContext";
 import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";

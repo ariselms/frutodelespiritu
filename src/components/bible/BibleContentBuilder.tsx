@@ -19,7 +19,7 @@ export default function buildBibleChapterContent({
 			{/* SECTION B: Handle Verses */}
 			{/* If the type is 'verse', we need to parse the mixed content array */}
 			{chapterData.type === "verse" && (
-				<p key={chapterData.number}>
+				<p key={chapterData.number} className="text-black dark:text-gray-200">
 					{/* Render the Verse Number first */}
 					<span
 						className="v"

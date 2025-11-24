@@ -29,20 +29,25 @@ export async function GET(
 		);
 	}
 
- const { id, bibleId, bookId, chapterId } = await params;
+	const { id, bibleId, bookId, chapterId } = await params;
 
- const {rows: userSavedVerses} = await sql`
-  SELECT * FROM memory_item
-  WHERE by_user_id = ${id}
-    AND bible_id = ${bibleId}
-    AND book_id = ${bookId}
-    AND chapter_id = ${chapterId}
- `
+	// Updated Query with LEFT JOIN
+	const { rows: userSavedVerses } = await sql`
+    SELECT
+      mi.*,
+      join_table.memory_list_id as learning_list_id
+    FROM memory_item mi
+    LEFT JOIN learning_list_memory_item_join join_table
+      ON mi.id = join_table.memory_item_id
+    WHERE mi.by_user_id = ${id}
+      AND mi.bible_id = ${bibleId}
+      AND mi.book_id = ${bookId}
+      AND mi.chapter_id = ${chapterId}
+  `;
 
- return NextResponse.json({
+	return NextResponse.json({
 		success: true,
 		message: "Success",
 		data: userSavedVerses
- });
-
+	});
 }

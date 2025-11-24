@@ -28,11 +28,11 @@ export default function BiblePassageText({
 
 			return (
 				<>
-					<span className="block mb-8">
+					<span className="block mb-4 text-black dark:text-gray-300">
 						{chapterContent.bible_name.toUpperCase()}
 					</span>
 
-					<span className="block mb-4 font-bold text-2xl">
+					<span className="block mb-4 font-bold text-2xl text-black dark:text-gray-200">
 						{chapterContent.bible_book} {chapterContent.chapter_id}:
 						{chapterContent.verse_from}{" "}
 						{chapterContent.verse_to !== chapterContent.verse_from &&
