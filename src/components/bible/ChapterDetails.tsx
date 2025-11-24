@@ -320,11 +320,8 @@ export function ChapterDetails({
 	return (
 		<>
 			<div className="bible-chapter max-w-[80ch] mx-auto my-4" ref={contentRef}>
-
 				{ChapterContent.map((chapterData: any, index: number) => {
-
 					return <BibleContentBuilder chapterData={chapterData} key={index} />;
-
 				})}
 			</div>
 
@@ -356,13 +353,13 @@ export function ChapterDetails({
 				</ModalHeader>
 				<ModalBody>
 					<div className="space-y-6">
-						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+						<p className="text-base leading-relaxed text-gray-900 dark:text-gray-200">
 							Cuando oprimes en un versículo, notarás que puedes hacer una
 							selección de los versículos que desees. Una vez seleccionados,
 							podrás añadirlos a tus listas de aprendizaje para memorizarlos o
 							para tomar notas sobre ellos.
 						</p>
-						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+						<p className="text-base leading-relaxed text-gray-900 dark:text-gray-200">
 							Si eso es lo que quieres, debes iniciar sesión, todo lo que
 							necesitas es tu correo electrónico. Si no, puedes simplemente
 							cerrar esta ventana.
