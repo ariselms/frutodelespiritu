@@ -12,20 +12,9 @@ import FINGERPRINT_SECURITY_LOTTIE from "@/lotties/fingerprint-security-hover-wr
 import { LordIconHover } from "@/components/animations/lordicon";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import UserSavedVerses from "@/components/bible/UserSavedVerses";
-import { createRoot } from "react-dom/client"; // Import createRoot
 import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
-
-// Helper function to parse a "Book Chapter:Verse" string
-const parseSid = (sid: string) => {
-	const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
-	if (!match) return null;
-
-	return {
-		book: match[1],
-		chapter: parseInt(match[2], 10),
-		verse: parseInt(match[3], 10)
-	};
-};
+import { createRoot } from "react-dom/client";
+import { parseSid } from "@/helpers";
 
 export function ChapterDetails({
 	ChapterContent,
