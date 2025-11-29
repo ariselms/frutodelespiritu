@@ -72,7 +72,7 @@ export default function buildBibleChapterContent({
 							return (
 								<span
 									key={index}
-									className="text-[10px] text-sky-600 dark:text-sky-400 cursor-pointer hover:underline bg-sky-50 dark:bg-gray-800 px-0.5 rounded"
+									className="text-[10px] text-blue-600 dark:text-blue-400 cursor-pointer hover:underline bg-blue-50 dark:bg-gray-800 px-0.5 rounded"
 								/>
 							);
 						}

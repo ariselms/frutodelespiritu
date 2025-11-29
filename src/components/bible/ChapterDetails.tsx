@@ -333,11 +333,11 @@ export function ChapterDetails({
 
 			{/* Modal to inform the user to log in to use the feature */}
 			<Modal
-				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 				dismissible
 				show={isModalToPromptUserToLoginOpen}
 				onClose={() => setIsModalToPromptUserToLoginOpen(false)}>
-				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
 					¿Cómo guardar versículos en listas de aprendizaje o tomar notas?
 				</ModalHeader>
 				<ModalBody>
@@ -355,9 +355,9 @@ export function ChapterDetails({
 						</p>
 					</div>
 				</ModalBody>
-				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<Link
-						className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600 flex items-center gap-2"
+						className="p-2 text-sm font-medium text-center text-blue-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 flex items-center gap-2"
 						href={`/log?${new URLSearchParams({
 							redirectUrl: serverBaseUrl + pathname
 						}).toString()}`}>

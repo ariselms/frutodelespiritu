@@ -108,7 +108,7 @@ export default function UserLecturesPage() {
 			accessorKey: "title",
 			cell: ({ row, getValue }) => (
 				<Link
-					className="text-sky-600 dark:text-white underline hover:text-sky-800 dark:hover:text-gray-300"
+					className="text-blue-600 dark:text-white underline hover:text-blue-800 dark:hover:text-gray-300"
 					href={`/lecturas/${row.original.slug}`}>
 					{getValue<string>()}
 				</Link>
@@ -168,7 +168,7 @@ export default function UserLecturesPage() {
 				<div className="overflow-x-auto">
 					{userLectures.length > 0 ? (
 						<>
-							<table className="min-w-full border border-sky-200 dark:border-gray-600 border-collapse">
+							<table className="min-w-full border border-blue-200 dark:border-gray-600 border-collapse">
 								<thead>
 									{table.getHeaderGroups().map((headerGroup) => (
 										<tr key={headerGroup.id}>
@@ -176,7 +176,7 @@ export default function UserLecturesPage() {
 												<th
 													key={header.id}
 													onClick={header.column.getToggleSortingHandler()}
-													className="border border-sky-200 dark:border-gray-600 px-4 py-2 text-left bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 cursor-pointer transition-colors">
+													className="border border-blue-200 dark:border-gray-600 px-4 py-2 text-left bg-blue-100 dark:bg-gray-900 dark:hover:bg-gray-800 cursor-pointer transition-colors">
 													{flexRender(
 														header.column.columnDef.header,
 														header.getContext()
@@ -197,11 +197,11 @@ export default function UserLecturesPage() {
 									{table.getRowModel().rows.map((row) => (
 										<tr
 											key={row.id}
-											className="hover:bg-sky-50 dark:hover:bg-gray-800 transition-colors">
+											className="hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors">
 											{row.getVisibleCells().map((cell) => (
 												<td
 													key={cell.id}
-													className="border border-sky-200 dark:border-gray-600 px-4 py-2">
+													className="border border-blue-200 dark:border-gray-600 px-4 py-2">
 													{flexRender(
 														cell.column.columnDef.cell,
 														cell.getContext()
@@ -225,11 +225,11 @@ export default function UserLecturesPage() {
 
 			{/* Modal for deleting a lecture */}
 			<Modal
-				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 				show={deletingItem !== null}
 				onClose={() => setDeletingItem(null)}
 				popup>
-				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
 					Confirma remover lectura
 				</ModalHeader>
 				<ModalBody className="p-6">
@@ -248,9 +248,9 @@ export default function UserLecturesPage() {
 					</p>
 				</ModalBody>
 
-				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<button
-						className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
+						className="p-2 text-sm font-medium text-center text-blue-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600"
 						onClick={() => {
 							if (deletingItem) {
 								handleSavedLectureRemoved(deletingItem.id);

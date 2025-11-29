@@ -2,10 +2,13 @@ import {
 	NavigationItemType,
 	NavigationItemTypeWithAuth
 } from "@/models/navigationTypes";
+
 export const MainNavigation: NavigationItemType[] = [
 	{ name: "Lecturas", href: "/lecturas" },
-	{ name: "Biblia", href: "/biblia" }
+	{ name: "Biblia", href: "/biblia" },
+  { name: "Media", href: "/media" },
 ];
+
 export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 	{
 		name: "Biblia",

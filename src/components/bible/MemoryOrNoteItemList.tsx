@@ -159,7 +159,7 @@ export default function MemoryOrNoteItemList({
 					el contenido de la biblia.
 				</p>
 				<p>
-					<Link className="text-sky-700 hover:text-sky-800" href="/biblia">
+					<Link className="text-blue-700 hover:text-blue-800" href="/biblia">
 						Abrir biblias disponibles 📖
 					</Link>
 				</p>
@@ -176,14 +176,14 @@ export default function MemoryOrNoteItemList({
 
 					return (
 						<AccordionPanel key={listItem.id}>
-							<AccordionTitle className="bg-sky-700 hover:bg-sky-800 border-sky-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-sky-200 text-sm md:text-base">
-								<p className="text-sky-50 hover:text-sky-100 dark:text-gray-50 dark:hover:text-gray-100">
+							<AccordionTitle className="bg-blue-700 hover:bg-blue-800 border-blue-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-blue-200 text-sm md:text-base">
+								<p className="text-blue-50 hover:text-blue-100 dark:text-gray-50 dark:hover:text-gray-100">
 									{listItem.bible_book} {listItem.chapter_id}:
 									{listItem.verse_from}
 									{listItem.verse_to !== listItem.verse_from &&
 										`-${listItem.verse_to}`}{" "}
 								</p>
-								<p className="text-sm text-sky-100 dark:text-gray-400">
+								<p className="text-sm text-blue-100 dark:text-gray-400">
 									Biblia {listItem.bible_name}
 								</p>
 							</AccordionTitle>
@@ -201,7 +201,7 @@ export default function MemoryOrNoteItemList({
 													Título de la nota
 												</label>
 												<input
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-sky-100 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 													id="title"
 													type="text"
 													value={listItem.title || ""}
@@ -223,7 +223,7 @@ export default function MemoryOrNoteItemList({
 													Contenido
 												</label>
 												<textarea
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-sky-100 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 													id="content"
 													rows={4}
 													value={listItem.content || ""}
@@ -238,7 +238,7 @@ export default function MemoryOrNoteItemList({
 												/>
 											</div>
 											<div
-												className="items-center justify-start inline-block mt-5 mr-6 px-2 py-1 rounded-2xl border-2 border-sky-500 dark:border-gray-600 text-gray-700 dark:text-gray-100 bg-sky-50 dark:bg-gray-800 font-bold cursor-pointer"
+												className="items-center justify-start inline-block mt-5 mr-6 px-2 py-1 rounded-2xl border-2 border-blue-500 dark:border-gray-600 text-gray-700 dark:text-gray-100 bg-blue-50 dark:bg-gray-800 font-bold cursor-pointer"
 												// FIX 3: Pass the entire listItem to state
 												onClick={() => handleUpdateMemoryOrNoteItem(listItem)}>
 												<LordIconHover
@@ -270,11 +270,11 @@ export default function MemoryOrNoteItemList({
       {/* TODO: Refactor this modal  */}
 			{/* Modal for deleting a lecture */}
 			<Modal
-				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 				show={deletingMemoryOrNoteItem !== null}
 				onClose={() => setDeletingMemoryOrNoteItem(null)}
 				popup>
-				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
 					Confirma remover versículos
 				</ModalHeader>
 
@@ -306,9 +306,9 @@ export default function MemoryOrNoteItemList({
 					</p>
 				</ModalBody>
 
-				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<button
-						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 						onClick={() => {
 							if (deletingMemoryOrNoteItem) {
 								// Get ID and bibleId from the state object

@@ -35,11 +35,11 @@ export default function BibleMemoryMode({
 				{bibleData.length > 0 && (
 					<button
 						onClick={() => setOpenBibleMode(false)}
-						className="absolute right-8 top-8 text-red-500 dark:text-red-400 z-60 text-xl cursor-pointer hover:bg-sky-100 dark:hover:bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center">
+						className="absolute right-8 top-8 text-red-500 dark:text-red-400 z-60 text-xl cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center">
 						X
 					</button>
 				)}
-				<section className="fixed inset-0 z-50 h-screen w-screen backdrop-blur-md bg-sky-50/50 dark:bg-gray-950/50">
+				<section className="fixed inset-0 z-50 h-[100vh] w-screen backdrop-blur-md bg-blue-50/50 dark:bg-gray-950/50 m-auto">
 					<Swiper
 						className="h-full w-full bg-transparent --swiper-navigation-size:32px"
 						// install Swiper modules
@@ -65,7 +65,7 @@ export default function BibleMemoryMode({
 		<button
 			onClick={() => setOpenBibleMode(true)}
 			className="relative flex items-center">
-			<span className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-tl-2xl rounded-bl-2xl cursor-pointer">
+			<span className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-tl-2xl rounded-bl-2xl cursor-pointer">
 				MODO DE MEMORIZACIÓN
 			</span>
 			<LordIconRevealOnLoad
@@ -99,7 +99,7 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 			)}
 
 			<button
-				className="bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-2xl cursor-pointer mt-16"
+				className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-2xl cursor-pointer mt-16"
 				onClick={() => setShowText(!showText)}>
 				{showText ? "Ocultar" : "Mostrar"}
 			</button>
