@@ -5,7 +5,7 @@ export default function JumbotronMain() {
 	return (
 		<section className="h-full w-full">
 			<div className="w-full h-full bg-white dark:bg-gray-800 pt-66 pb-24 md:pt-44 md:pb-20 xl:pt-42">
-				<div className="grid max-w-screen-xl px-4 mx-auto lg:gap-12 xl:gap-0 lg:grid-cols-12">
+				<div className="grid max-w-screen-xl px-4 2xl:px-0 mx-auto lg:gap-12 xl:gap-0 lg:grid-cols-12">
 					<div className="mr-auto place-self-center col-span-10 xl:col-span-8 px-1">
 						<h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-wide leading-none md:text-5xl xl:text-6xl text-black dark:text-gray-100">
 							<span>Biblia,</span> <span>Estudios,</span>{" "}
