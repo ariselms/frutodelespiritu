@@ -10,7 +10,7 @@ export default async function Home() {
 		<main className="relative">
 			<AlertBanner
 				type="info"
-				message="Contamos con 8 biblias disponibles en español para tu beneficio. Muy pronto tendrás la habilidad de tomar notas y guradar listas para memorizar la palabra de Dios. Gracias por tu paciencia."
+				message="Contamos con 8 biblias disponibles en español para tu beneficio. Ya tienes la habilidad de tomar notas y guardar listas de aprendizaje para estudiar y memorizar la palabra de Dios. Gracias por tu paciencia."
 			/>
 
 			<MainJumbotron />
