@@ -232,7 +232,7 @@ export function ChapterDetails({
 
 	// Effect 5: Set the icons after the bible verse to indicate that the user has saved something that includes the bible verse
 	useEffect(() => {
-    console.log("Rendering saved verses icons:", userSavedVerses);
+
 		const content = contentRef.current;
 		if (!content || !userSavedVerses) return;
 
@@ -293,8 +293,6 @@ export function ChapterDetails({
 			}
 
 			const responseUserSavedVerses = await requestUserSavedVerses.json();
-
-      console.log("Fetched user saved verses:", responseUserSavedVerses);
 
 			if (responseUserSavedVerses?.data?.length === 0) {
 				return;

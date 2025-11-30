@@ -61,9 +61,6 @@ export function BibleSearch({ bibleId }: { bibleId: string }) {
 				return;
 			}
 
-			// 2. Now you can use the 'responseData' variable as much as you want
-			console.log("Full response:", responseData);
-
 			const { data } = responseData; // Destructure the data from the variable
 
 			setBibleKeywordResults(data);

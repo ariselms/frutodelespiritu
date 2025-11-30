@@ -2,318 +2,339 @@
 
 import React, { useState, useMemo } from "react";
 import {
-  Search,
-  ChevronLeft,
-  Book,
-  Globe,
-  Hash,
-  List,
-  Loader2,
-  X,
-  Pencil // Imported Pencil icon for the edit buttons
+	Search,
+	ChevronLeft,
+	Book,
+	Globe,
+	Hash,
+	List,
+	Loader2,
+	X,
+	Pencil // Imported Pencil icon for the edit buttons
 } from "lucide-react";
 import { BibleDataType, BibleBookType } from "@/models/bibleTypes";
-import RoundedButtonWithLordIcon from "@/components/RoundedButtonWithLordIcon";
+import { LordIconHover } from "@/components/animations/lordicon";
+import LOTTIE_BIBLE_HOVER_PINCH from "@/lotties/bible-open.json";
+import LOTTIE_WORLD_GLOBE_HOVER_ROLL from "@/lotties/world-globe-hover-roll.json";
+import Link from "next/link";
+import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 
 interface ChapterContent {
-  type: string;
-  number?: string | number;
-  content?: string[] | string;
+	type: string;
+	number?: string | number;
+	content?: string[] | string;
 }
 
 interface ChapterResponse {
-  chapter: {
-    content: ChapterContent[];
-    number: number;
-  };
+	chapter: {
+		content: ChapterContent[];
+		number: number;
+	};
 }
 
 interface Selection {
-  translation?: BibleDataType;
-  book?: BibleBookType;
-  chapter?: number;
-  verses?: number[];
+	translation?: BibleDataType;
+	book?: BibleBookType;
+	chapter?: number;
+	verses?: number[];
+	content?: ChapterContent[];
 }
 
 type Step =
-  | "initial"
-  | "translation"
-  | "book"
-  | "chapter"
-  | "verse"
-  | "complete";
+	| "initial"
+	| "translation"
+	| "book"
+	| "chapter"
+	| "verse"
+	| "complete";
 
 // --- Main Component ---
 
 export default function BibleEverywhere() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState<Step>("initial");
-  const [loading, setLoading] = useState(false);
-  const [selection, setSelection] = useState<Selection>({});
+	const [isOpen, setIsOpen] = useState(false);
+	const [step, setStep] = useState<Step>("initial");
+	const [loading, setLoading] = useState(false);
+	const [selection, setSelection] = useState<Selection>({});
 
-  // Data State
-  const [translations, setTranslations] = useState<BibleDataType[]>([]);
-  const [books, setBooks] = useState<BibleBookType[]>([]);
-  const [availableVerses, setAvailableVerses] = useState<number[]>([]);
-  const [chapterText, setChapterText] = useState<Record<number, string>>({});
+	// Data State
+	const [translations, setTranslations] = useState<BibleDataType[]>([]);
+	const [books, setBooks] = useState<BibleBookType[]>([]);
+	const [availableVerses, setAvailableVerses] = useState<number[]>([]);
+	const [chapterText, setChapterText] = useState<Record<number, string>>({});
 
-  // Search/Filter State
-  const [searchQuery, setSearchQuery] = useState("");
+	// Search/Filter State
+	const [searchQuery, setSearchQuery] = useState("");
 
-  // --- API Fetching Functions ---
+	// --- API Fetching Functions ---
 
-  const fetchTranslations = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        "https://bible.helloao.org/api/available_translations.json"
-      );
-      const data = await res.json();
+	const fetchTranslations = async () => {
+		setLoading(true);
+		try {
+			const res = await fetch(
+				"https://bible.helloao.org/api/available_translations.json"
+			);
+			const data = await res.json();
 
-      // Filter for Spanish translations only
-      const spanish = data.translations.filter((sb: any) =>
-        sb.language.toLowerCase().includes("spa")
-      );
+			// Filter for Spanish translations only
+			const spanish = data.translations.filter((sb: any) =>
+				sb.language.toLowerCase().includes("spa")
+			);
 
-      setTranslations(spanish || []);
-    } catch (error) {
-      console.error("Failed to fetch translations", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+			setTranslations(spanish || []);
+		} catch (error) {
+			console.error("Failed to fetch translations", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  const fetchBooks = async (translationId: string) => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `https://bible.helloao.org/api/${translationId}/books.json`
-      );
-      const data = await res.json();
-      setBooks(data.books || []);
-    } catch (error) {
-      console.error("Failed to fetch books", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+	const fetchBooks = async (translationId: string) => {
+		setLoading(true);
+		try {
+			const res = await fetch(
+				`https://bible.helloao.org/api/${translationId}/books.json`
+			);
+			const data = await res.json();
+			setBooks(data.books || []);
+		} catch (error) {
+			console.error("Failed to fetch books", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  const fetchChapterAndParseVerses = async (
-    translationId: string,
-    bookId: string,
-    chapter: number
-  ) => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `https://bible.helloao.org/api/${translationId}/${bookId}/${chapter}.json`
-      );
-      const data: ChapterResponse = await res.json();
+	const fetchChapterAndParseVerses = async (
+		translationId: string,
+		bookId: string,
+		chapter: number
+	) => {
+		setLoading(true);
+		try {
+			const res = await fetch(
+				`https://bible.helloao.org/api/${translationId}/${bookId}/${chapter}.json`
+			);
+			const data: ChapterResponse = await res.json();
 
-      // Extract unique verse numbers and text content
-      const foundVerses = new Set<number>();
-      const textMap: Record<number, string> = {};
+			// Extract unique verse numbers and text content
+			const foundVerses = new Set<number>();
+			const textMap: Record<number, string> = {};
 
-      if (data.chapter && Array.isArray(data.chapter.content)) {
-        data.chapter.content.forEach((item) => {
-          if (item.type === "verse" && item.number) {
-            const verseNum = parseInt(item.number.toString(), 10);
-            foundVerses.add(verseNum);
+			if (data.chapter && Array.isArray(data.chapter.content)) {
+				data.chapter.content.forEach((item: any) => {
+					if (item.type === "verse" && item.number) {
+						const verseNum = parseInt(item.number.toString(), 10);
+						foundVerses.add(verseNum);
 
-            // Extract text content
-            if (Array.isArray(item.content)) {
-              textMap[verseNum] = item.content.join(" ");
-            } else if (typeof item.content === "string") {
-              textMap[verseNum] = item.content;
-            }
-          }
-        });
-      }
+						if (Array.isArray(item.content)) {
+							textMap[verseNum] = item.content
+								.map((c: any) => (typeof c === "string" ? c : c.text))
+								.join(" ");
+						} else if (typeof item.content === "string") {
+							textMap[verseNum] = item.content;
+						}
+					}
+				});
+			}
 
-      // Sort verses numerically
-      setAvailableVerses(Array.from(foundVerses).sort((a, b) => a - b));
-      setChapterText(textMap);
-    } catch (error) {
-      console.error("Failed to fetch chapter", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+			// --- THE FIX IS HERE ---
+			// Instead of spreading 'selection', use 'prev' to get the latest state
+			setSelection((prev) => ({
+				...prev,
+				content: data.chapter.content
+			}));
+			// -----------------------
 
-  // --- Event Handlers ---
+			// Sort verses numerically
+			setAvailableVerses(Array.from(foundVerses).sort((a, b) => a - b));
+			setChapterText(textMap);
+		} catch (error) {
+			console.error("Failed to fetch chapter", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  const handleOpen = () => {
-    setIsOpen(true);
-    setStep("translation");
-    setSelection({});
-    fetchTranslations();
-  };
+	// --- Event Handlers ---
 
-  // Helper to jump to a specific edit step
-  const handleEditStep = (targetStep: Step) => {
-    setIsOpen(true);
-    setStep(targetStep);
+	const handleOpen = () => {
+		setIsOpen(true);
+		setStep("translation");
+		setSelection({});
+		fetchTranslations();
+	};
 
-    // If jumping to 'book' or 'verse' steps, ensure we have the data
-    // (Data usually persists in state, but this logic ensures specific fetch if needed could go here)
-    if (targetStep === "translation") {
-        fetchTranslations();
-    }
-    // 'book' uses 'books' state which persists
-    // 'chapter' uses 'selection.book' which persists
-    // 'verse' uses 'availableVerses' which persists
-  };
+	// Helper to jump to a specific edit step
+	const handleEditStep = (targetStep: Step) => {
+		setIsOpen(true);
+		setStep(targetStep);
 
-  const handleClose = () => {
-    setIsOpen(false);
-    setStep("initial");
-    setSearchQuery("");
-  };
+		// If jumping to 'book' or 'verse' steps, ensure we have the data
+		// (Data usually persists in state, but this logic ensures specific fetch if needed could go here)
+		if (targetStep === "translation") {
+			fetchTranslations();
+		}
+		// 'book' uses 'books' state which persists
+		// 'chapter' uses 'selection.book' which persists
+		// 'verse' uses 'availableVerses' which persists
+	};
 
-  const handleSelectTranslation = (t: BibleDataType) => {
-    setSelection({ translation: t });
-    setSearchQuery("");
-    setStep("book");
-    fetchBooks(t.id);
-  };
+	const handleClose = () => {
+		setIsOpen(false);
+		setStep("initial");
+		setSearchQuery("");
+	};
 
-  const handleSelectBook = (b: BibleBookType) => {
-    setSelection((prev) => ({
-      translation: prev.translation,
-      book: b,
-    }));
-    setSearchQuery("");
-    setStep("chapter");
-  };
+	const handleSelectTranslation = (t: BibleDataType) => {
+		setSelection({ translation: t });
+		setSearchQuery("");
+		setStep("book");
+		fetchBooks(t.id);
+	};
 
-  const handleSelectChapter = (c: number) => {
-    setSelection((prev) => ({
-      ...prev,
-      chapter: c,
-      verses: [],
-    }));
-    setStep("verse");
-    if (selection.translation && selection.book) {
-      fetchChapterAndParseVerses(
-        selection.translation.id,
-        selection.book.id,
-        c
-      );
-    }
-  };
+	const handleSelectBook = (b: BibleBookType) => {
 
-  const handleSelectVerse = (v: number) => {
-    setSelection((prev) => {
-      const currentVerses = prev.verses || [];
+		setSelection((prev) => ({
+			...prev,
+			translation: prev.translation,
+			book: b
+		}));
+		setSearchQuery("");
+		setStep("chapter");
+	};
 
-      // Logic for range selection
-      if (currentVerses.length === 0) {
-        // Select first verse
-        return { ...prev, verses: [v] };
-      } else if (currentVerses.length === 1) {
-        const start = currentVerses[0];
+	const handleSelectChapter = (c: number) => {
 
-        // Toggle off if clicking the same verse again
-        if (start === v) {
-          return { ...prev, verses: [] };
-        }
+		setSelection((prev) => ({
+			...prev,
+			chapter: c,
+			verses: []
+		}));
 
-        // Select second verse (creates range)
-        const end = v;
-        return { ...prev, verses: start < end ? [start, end] : [end, start] };
-      } else {
-        // Reset and select new start verse if a range already exists
-        return { ...prev, verses: [v] };
-      }
-    });
-  };
+		setStep("verse");
+		if (selection.translation && selection.book) {
+			fetchChapterAndParseVerses(
+				selection.translation.id,
+				selection.book.id,
+				c
+			);
+		}
+	};
 
-  const handleConfirmSelection = () => {
-    setStep("complete");
-    setIsOpen(false);
-  };
+	const handleSelectVerse = (v: number) => {
+		setSelection((prev) => {
+			const currentVerses = prev.verses || [];
 
-  const handleBack = () => {
-    setSearchQuery("");
-    if (step === "book") setStep("translation");
-    if (step === "chapter") setStep("book");
-    if (step === "verse") setStep("chapter");
-  };
+			// Logic for range selection
+			if (currentVerses.length === 0) {
+				// Select first verse
+				return { ...prev, verses: [v] };
+			} else if (currentVerses.length === 1) {
+				const start = currentVerses[0];
 
-  // --- Filtering Logic ---
+				// Toggle off if clicking the same verse again
+				if (start === v) {
+					return { ...prev, verses: [] };
+				}
 
-  const filteredTranslations = useMemo(() => {
-    if (!searchQuery) return translations;
-    const lower = searchQuery.toLowerCase();
-    return translations.filter(
-      (t) =>
-        t.name.toLowerCase().includes(lower) ||
-        t.englishName.toLowerCase().includes(lower) ||
-        t.id.toLowerCase().includes(lower)
-    );
-  }, [translations, searchQuery]);
+				// Select second verse (creates range)
+				const end = v;
+				return { ...prev, verses: start < end ? [start, end] : [end, start] };
+			} else {
+				// Reset and select new start verse if a range already exists
+				return { ...prev, verses: [v] };
+			}
+		});
+	};
 
-  const filteredBooks = useMemo(() => {
-    if (!searchQuery) return books;
-    const lower = searchQuery.toLowerCase();
-    return books.filter(
-      (b) =>
-        b.name.toLowerCase().includes(lower) ||
-        b.commonName.toLowerCase().includes(lower) ||
-        b.id.toLowerCase().includes(lower)
-    );
-  }, [books, searchQuery]);
+	const handleConfirmSelection = () => {
+		setStep("complete");
+		setIsOpen(false);
+	};
 
-  // --- Render Helpers ---
+	const handleBack = () => {
+		setSearchQuery("");
+		if (step === "book") setStep("translation");
+		if (step === "chapter") setStep("book");
+		if (step === "verse") setStep("chapter");
+	};
 
-  const renderHeader = (title: string, icon: React.ReactNode) => (
-    <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
-      <div className="flex items-center gap-2">
-        {step !== "translation" && (
-          <button
-            onClick={handleBack}
-            className="p-1 hover:bg-gray-200 rounded-full transition"
-          >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
-          </button>
-        )}
-        <div className="flex items-center gap-2 text-lg font-semibold text-gray-800">
-          {icon}
-          <span>{title}</span>
-        </div>
-      </div>
-      <button
-        onClick={handleClose}
-        className="p-1 hover:bg-gray-200 rounded-full transition"
-      >
-        <X className="w-5 h-5 text-gray-500" />
-      </button>
-    </div>
-  );
+	// --- Filtering Logic ---
 
-  const renderSearch = (placeholder: string) => (
-    <div className="p-4 border-b border-gray-100">
-      <div className="relative">
-        <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
-        <input
-          type="text"
-          placeholder={placeholder}
-          className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          autoFocus
-        />
-      </div>
-    </div>
-  );
+	const filteredTranslations = useMemo(() => {
+		if (!searchQuery) return translations;
+		const lower = searchQuery.toLowerCase();
+		return translations.filter(
+			(t) =>
+				t.name.toLowerCase().includes(lower) ||
+				t.englishName.toLowerCase().includes(lower) ||
+				t.id.toLowerCase().includes(lower)
+		);
+	}, [translations, searchQuery]);
 
-  // --- Views ---
+	const filteredBooks = useMemo(() => {
+		if (!searchQuery) return books;
+		const lower = searchQuery.toLowerCase();
+		return books.filter(
+			(b) =>
+				b.name.toLowerCase().includes(lower) ||
+				b.commonName.toLowerCase().includes(lower) ||
+				b.id.toLowerCase().includes(lower)
+		);
+	}, [books, searchQuery]);
 
-  const renderTranslations = () => (
+	// --- Render Helpers ---
+
+	const renderHeader = (title: string, icon: React.ReactNode) => (
+		<div className="flex items-center justify-between p-4 border-b border-blue-200 dark:border-gray-600 rounded-t-lg">
+			<div className="flex items-center gap-2">
+				{step !== "translation" && (
+					<button
+						onClick={handleBack}
+						className="p-1 hover:bg-gray-200 rounded-full transition">
+						<ChevronLeft className="w-5 h-5 text-gray-600" />
+					</button>
+				)}
+				<div className="flex items-center gap-2 text-lg font-semibold">
+					{icon}
+					<span className="text-gray-900 dark:text-gray-50">{title}</span>
+				</div>
+			</div>
+			<button
+				onClick={handleClose}
+				className="p-1 hover:bg-gray-200 rounded-full transition">
+				<X className="w-5 h-5 text-gray-500" />
+			</button>
+		</div>
+	);
+
+	const renderSearch = (placeholder: string) => (
+		<div className="px-2 py-4  border-b border-blue-200 dark:border-gray-600">
+			<div className="relative flex items-center w-full">
+				<Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 dark:text-gray-50" />
+				<input
+					type="text"
+					placeholder={placeholder}
+					className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-2xl  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					autoFocus
+				/>
+			</div>
+		</div>
+	);
+
+	// --- Views ---
+
+	const renderTranslations = () => (
 		<div className="flex flex-col h-full">
 			{renderHeader(
 				"Selecciona una traducción",
-				<Globe className="w-5 h-5 text-blue-600" />
+				<LordIconHover
+					size={32}
+					ICON_SRC={LOTTIE_WORLD_GLOBE_HOVER_ROLL}
+					state="hover-roll"
+					text=""
+				/>
 			)}
 			{renderSearch("Selecciona una traducción (e.g. RV60, Spanish)...")}
 			<div className="flex-1 overflow-y-auto p-2">
@@ -322,16 +343,16 @@ export default function BibleEverywhere() {
 						<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
 					</div>
 				) : (
-					<div className="grid gap-2">
+					<div className="grid gap-2 py-2">
 						{filteredTranslations.map((t) => (
 							<button
 								key={t.id}
 								onClick={() => handleSelectTranslation(t)}
-								className="text-left px-4 py-3 hover:bg-blue-50 rounded-lg transition border border-transparent hover:border-blue-100 group">
-								<div className="font-medium text-gray-900 group-hover:text-blue-700">
+								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-start justify-center">
+								<div className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200 mb-2">
 									{t.name}
 								</div>
-								<div className="text-xs text-gray-500 flex items-center gap-2">
+								<div className="text-xs text-gray-400 flex items-center gap-2">
 									<span className="uppercase bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 font-mono text-[10px]">
 										{t.id}
 									</span>
@@ -350,208 +371,262 @@ export default function BibleEverywhere() {
 		</div>
 	);
 
-  const renderBooks = () => (
-    <div className="flex flex-col h-full">
-      {renderHeader(
-        selection.translation?.englishName || "Select Book",
-        <Book className="w-5 h-5 text-blue-600" />
-      )}
-      {renderSearch("Search books (e.g. Genesis)...")}
-      <div className="flex-1 overflow-y-auto p-2">
-        {loading ? (
-          <div className="flex justify-center p-8">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-2">
-            {filteredBooks.map((b) => (
-              <button
-                key={b.id}
-                onClick={() => handleSelectBook(b)}
-                className="text-left px-4 py-3 hover:bg-blue-50 rounded-lg transition border border-transparent hover:border-blue-100 group flex justify-between items-center"
-              >
-                <span className="font-medium text-gray-900 group-hover:text-blue-700">
-                  {b.name}
-                </span>
-                <span className="text-xs text-gray-400 hidden group-hover:inline-block">
-                  Seleccionar
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+	const renderBooks = () => (
+		<div className="flex flex-col h-full ">
+			{renderHeader(
+				selection.translation?.englishName || "Select Book",
+				<LordIconHover
+					size={32}
+					ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
+					state="hover-pinch"
+					text=""
+				/>
+			)}
+			{renderSearch("Search books (e.g. Genesis)...")}
+			<div className="flex-1 overflow-y-auto p-2">
+				{loading ? (
+					<div className="flex justify-center p-8">
+						<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+					</div>
+				) : (
+					<div className="grid grid-cols-2 gap-2">
+						{filteredBooks.map((b) => (
+							<button
+								key={b.id}
+								onClick={() => handleSelectBook(b)}
+								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold py-2.5 px-0.5 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word text-center cursor-pointer">
+								<span className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200">
+									{b.name}
+								</span>
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+		</div>
+	);
 
-  const renderChapters = () => (
-    <div className="flex flex-col h-full">
-      {renderHeader(
-        `${selection.book?.name}`,
-        <Hash className="w-5 h-5 text-blue-600" />
-      )}
-      <div className="flex-1 overflow-y-auto p-4">
-        <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">
-          Select Chapter
-        </h3>
-        <div className="grid grid-cols-5 sm:grid-cols-8 gap-2">
-          {Array.from(
-            { length: selection.book?.numberOfChapters || 0 },
-            (_, i) => i + 1
-          ).map((num) => (
-            <button
-              key={num}
-              onClick={() => handleSelectChapter(num)}
-              className="aspect-square flex items-center justify-center rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 transition font-medium text-gray-700"
-            >
-              {num}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+	const renderChapters = () => (
+		<div className="flex flex-col h-full">
+			{renderHeader(
+				`${selection.book?.name}`,
+				<LordIconHover
+					size={32}
+					ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
+					state="hover-pinch"
+					text=""
+				/>
+			)}
+			<div className="flex-1 overflow-y-auto p-4">
+				<h3 className="text-sm font-medium text-black dark:text-gray-200 mb-3 uppercase tracking-wider">
+					Select Chapter
+				</h3>
+				<div className="grid grid-cols-5 sm:grid-cols-8 gap-2">
+					{Array.from(
+						{ length: selection.book?.numberOfChapters || 0 },
+						(_, i) => i + 1
+					).map((num) => (
+						<button
+							key={num}
+							onClick={() => handleSelectChapter(num)}
+							className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-center justify-center">
+							{num}
+						</button>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 
-  const renderVerses = () => {
-    const isSelected = (v: number) => {
-      if (!selection.verses) return false;
-      if (selection.verses.length === 1) return selection.verses[0] === v;
-      // Range check
-      return v >= selection.verses[0] && v <= selection.verses[1];
-    };
+	const renderVerses = () => {
+		// Helper to render mixed content safely
+		const getVerseContent = (verseNumber: number) => {
+			// 1. Find the actual verse object within the content array
+			// We cannot use [index] because verse 1 might be at index 2 (after headers)
+			const verseObj = selection.content?.find(
+				(item: any) =>
+					item.type === "verse" && parseInt(item.number) === verseNumber
+			);
 
-    return (
-      <div className="flex flex-col h-full">
-        {renderHeader(
-          `${selection.book?.name} ${selection.chapter}`,
-          <List className="w-5 h-5 text-blue-600" />
-        )}
-        <div className="flex-1 overflow-y-auto p-0">
-          {loading ? (
-            <div className="flex justify-center p-8">
-              <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-            </div>
-          ) : (
-            <>
-              <div className="p-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center sticky top-0 z-10 backdrop-blur-sm">
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                  Select Verses
-                </h3>
-                <div className="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded">
-                  {selection.verses?.length
-                    ? selection.verses.length === 1
-                      ? `Verse ${selection.verses[0]}`
-                      : `Verses ${selection.verses[0]} - ${selection.verses[1]}`
-                    : "Oprime versículo inicial y final"}
-                </div>
-              </div>
+			if (!verseObj || !verseObj.content) return "Loading...";
 
-              <div className="flex flex-col">
-                {availableVerses.map((num) => {
-                  const active = isSelected(num);
-                  return (
-                    <button
-                      key={num}
-                      onClick={() => handleSelectVerse(num)}
-                      className={`text-left px-4 py-3 border-b border-gray-100 transition flex gap-3 hover:bg-gray-50
-                        ${active ? "bg-blue-50 hover:bg-blue-50" : ""}
-                      `}
-                    >
-                      <div
-                        className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-medium text-sm transition
-                          ${
-                            active
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-100 text-gray-500"
-                          }
-                        `}
-                      >
-                        {num}
-                      </div>
-                      <div className={`text-sm leading-relaxed ${active ? "text-gray-900" : "text-gray-600"}`}>
-                        {chapterText[num] || "..."}
-                      </div>
-                    </button>
-                  );
-                })}
-                {availableVerses.length === 0 && !loading && (
-                  <div className="text-center text-gray-400 py-8">
-                    No verses found for this chapter.
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-        <div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-lg sticky bottom-0 z-20">
-          <button
-            disabled={!selection.verses || selection.verses.length === 0}
-            onClick={handleConfirmSelection}
-            className="w-full bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition shadow-sm"
-          >
-            Confirm Selection
-          </button>
-        </div>
-      </div>
-    );
-  };
+			// 2. If content is just a string, return it
+			if (typeof verseObj.content === "string") {
+				return verseObj.content;
+			}
 
-  // --- Display Result ---
+			// 3. If content is an array, map through it handling both Strings and Objects
+			if (Array.isArray(verseObj.content)) {
+				return verseObj.content.map((part: any, index: number) => {
+					// Case A: It's a plain string
+					if (typeof part === "string") {
+						return <span key={index}>{part} </span>;
+					}
+					// Case B: It's an object (e.g., Words of Jesus)
+					if (typeof part === "object" && part.text) {
+						return (
+							<span
+								key={index}
+								className={
+									part.wordsOfJesus ? "text-red-700 dark:text-red-400" : ""
+								}>
+								{part.text}{" "}
+							</span>
+						);
+					}
+					return null;
+				});
+			}
 
-  const formatSelection = () => {
-    if (!selection.translation || !selection.book || !selection.chapter)
-      return null;
-    const verseFrom = selection?.verses && selection?.verses[0];
-    const verseTo = selection?.verses && selection?.verses[selection?.verses.length - 1];
-    const versiclesValue =
-      verseFrom !== verseTo ?
-      verseFrom + " - " + verseTo :
-      verseFrom;
+			return null;
+		};
 
-    // Generate preview text
-    let selectedText = "";
+		const isSelected = (v: number) => {
+			if (!selection.verses) return false;
 
-    // if (v && v.length > 0) {
-    //     const start = v[0];
-    //     const end = v.length === 2 ? v[1] : start;
-    //     const textParts = [];
-    //     for (let i = start; i <= end; i++) {
-    //         if (chapterText[i]) {
-    //             textParts.push(`${i} ${chapterText[i]}`);
-    //         }
-    //     }
-    //     selectedText = textParts.join("\n");
-    // }
+			if (selection.verses.length === 1) return selection.verses[0] === v;
+			// Range check
+			return v >= selection.verses[0] && v <= selection.verses[1];
+		};
 
-    // Helper component for edit rows
-    const EditRow = ({ label, value, stepName }: { label: string, value: string | undefined, stepName: Step }) => (
-      <div className="flex items-center justify-between border-b border-gray-200 pb-2 last:border-0 last:pb-0">
-        <div className="flex flex-col">
-            <span className="text-xs text-gray-400 font-semibold uppercase">{label}</span>
-            <span className="font-medium text-gray-800">{value}</span>
-        </div>
-        <button
-            onClick={() => handleEditStep(stepName)}
-            className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition"
-            title={`Edit ${label}`}
-        >
-            <Pencil className="w-4 h-4" />
-        </button>
-      </div>
-    );
 
-    return (
-			<div className="mt-6 p-6 bg-white border border-gray-200 rounded-xl shadow-sm max-w-md mx-auto w-full">
+
+		return (
+			<div className="flex flex-col h-full">
+				{renderHeader(
+					`${selection.book?.name} ${selection.chapter}`,
+					<LordIconHover
+						size={32}
+						ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
+						state="hover-pinch"
+						text=""
+					/>
+				)}
+				<div className="flex-1 overflow-y-auto p-0">
+					{loading ? (
+						<div className="flex justify-center p-8">
+							<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+						</div>
+					) : (
+						<>
+							<div className="p-4 border-b border-blue-200 dark:border-gray-600 flex flex-col items-center flex-wrap sticky top-0 z-10 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-t-lg">
+								<h3 className="text-sm font-medium text-black dark:text-gray-200 uppercase tracking-wider mb-1">
+									Selección de versículo(s)
+								</h3>
+								<div className="text-xs text-gray-700 font-medium bg-blue-50 px-2 py-1 rounded mt-1 sm:mt-0">
+									{selection.verses?.length
+										? selection.verses.length === 1
+											? `Versículo ${selection.verses[0]}`
+											: `Versículos ${selection.verses[0]} al ${selection.verses[1]}`
+										: "Oprime versículo inicial y final"}
+								</div>
+							</div>
+							// Inside renderVerses...
+							<div className="flex flex-col">
+								{availableVerses.map((num) => {
+									const active = isSelected(num);
+									return (
+										<button
+											key={num}
+											onClick={() => handleSelectVerse(num)}
+											className={`text-left px-4 py-3 border-b border-blue-200 dark:border-gray-600 transition flex gap-3 cursor-pointer
+                      ${active ? "bg-blue-50 dark:bg-gray-700" : ""}
+                    `}>
+											<div
+												className={`shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-medium text-sm transition
+                        ${
+													active
+														? "bg-blue-700 dark:bg-gray-900 text-blue-50 dark:text-gray-200"
+														: "bg-blue-700 dark:bg-gray-900 text-blue-50 dark:text-gray-200"
+												}
+                      `}>
+												{num}
+											</div>
+
+											{/* THIS IS THE FIXED PART */}
+											<div className="text-sm leading-relaxed text-black dark:text-gray-200">
+												{getVerseContent(num)}
+											</div>
+										</button>
+									);
+								})}
+								{availableVerses.length === 0 && !loading && (
+									<div className="text-center text-gray-400 py-8">
+										No verses found for this chapter.
+									</div>
+								)}
+							</div>
+						</>
+					)}
+				</div>
+				<div className="p-4 border-t border-blue-200 dark:border-gray-600 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-b-lg sticky bottom-0 z-20 text-center">
+					<button
+						disabled={!selection.verses || selection.verses.length === 0}
+						onClick={handleConfirmSelection}
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						Confirmar Selección
+					</button>
+				</div>
+			</div>
+		);
+	};
+
+	// --- Display Result ---
+
+	const formatSelection = () => {
+		const verseFrom = selection?.verses && selection?.verses[0];
+		const verseTo =
+			selection?.verses && selection?.verses[selection?.verses.length - 1];
+		const versiclesValue =
+			verseFrom !== verseTo ? verseFrom + " - " + verseTo : verseFrom;
+
+		// Generate preview text
+		let selectedText = "";
+
+
+
+		// Helper component for edit rows
+		const EditRow = ({
+			label,
+			value,
+			stepName
+		}: {
+			label: string;
+			value: string | undefined;
+			stepName: Step;
+		}) => (
+			<div className="flex items-center justify-between border-b border-blue-200 pb-2 last:border-0 last:pb-0">
+				<div className="flex flex-col">
+					<span className="text-xs text-gray-800 dark:text-gray-200 font-semibold uppercase">
+						{label}
+					</span>
+					<span className="font-medium text-gray-800 dark:text-gray-200">
+						{value}
+					</span>
+				</div>
+				<button
+					onClick={() => handleEditStep(stepName)}
+					className="p-2 text-blue-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-gray-200 rounded-full transition cursor-pointer"
+					title={`Edit ${label}`}>
+					<Pencil className="w-4 h-4" />
+				</button>
+			</div>
+		);
+
+		return (
+			<div className="p-6 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-2xl max-w-md mx-auto w-full">
 				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-lg font-bold text-gray-900">Tu selección:</h2>
+					<h2 className="text-lg font-bold text-gray-950 dark:text-gray-200 ">
+						Tu selección:
+					</h2>
 					<button
 						onClick={handleOpen}
-						className="text-sm text-blue-600 hover:underline">
+						className="text-sm text-blue-700 hover:underline dark:text-white dark:underline dark:underline-offset-4 cursor-pointer">
 						Reiniciar
 					</button>
 				</div>
 
-				<div className="flex flex-col gap-3 text-sm font-mono text-gray-600 bg-gray-50 p-4 rounded-lg">
+				<div className="flex flex-col gap-3 text-sm font-mono text-gray-600 bg-blue-100 dark:bg-gray-800 py-4">
 					<EditRow
 						label="Traducción"
 						value={selection.translation?.id}
@@ -578,47 +653,51 @@ export default function BibleEverywhere() {
 					</div>
 				)}
 
-				<div>
-					<RoundedButtonWithLordIcon
-						text="Ir al capítulo"
-						route={`/biblia/libros/capitulos/versiculos/${selection.translation?.id}/${selection.book?.id}/${selection.chapter}#${verseFrom}`}
-					/>
+				<div className="pt-10 pb-4 text-center">
+					<Link
+						href={`/biblia/libros/capitulos/versiculos/${selection.translation?.id}/${selection.book?.id}/${selection.chapter}#${verseFrom}`}
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						Ir al capítulo
+					</Link>
 				</div>
 			</div>
 		);
-  };
+	};
 
-  return (
-    <div className="font-sans text-gray-900 flex flex-col items-start justify-start w-full">
-      {/* Trigger Button (Only shown if initial or complete) */}
-      {!isOpen && (
-        <>
-          {step === "complete" ? (
-            formatSelection()
-          ) : (
-            <button
-              onClick={handleOpen}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium shadow-md transition flex items-center gap-2"
-            >
-              <Book className="w-5 h-5" />
-              Selecciona el pasaje bíblico
-            </button>
-          )}
-        </>
-      )}
+	return (
+		<div className="font-sans text-gray-900 flex flex-col items-start justify-start w-full">
+			{/* Trigger Button (Only shown if initial or complete) */}
+			{!isOpen && (
+				<>
+					{step === "complete" ? (
+						formatSelection()
+					) : (
+						<button
+							onClick={handleOpen}
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
+							<LordIconHover
+								size={32}
+								ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
+								state="hover-pinch"
+								text={`Selecciona el pasaje bíblico`}
+							/>
+						</button>
+					)}
+				</>
+			)}
 
-      {/* Modal Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
-          {/* Modal Content */}
-          <div className="bg-white w-full max-w-lg h-[600px] rounded-xl shadow-2xl flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden">
-            {step === "translation" && renderTranslations()}
-            {step === "book" && renderBooks()}
-            {step === "chapter" && renderChapters()}
-            {step === "verse" && renderVerses()}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+			{/* Modal Overlay */}
+			{isOpen && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200 backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
+					{/* Modal Content */}
+					<div className="w-full max-w-lg h-[600px] flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden border border-blue-200 dark:border-gray-600 rounded-2xl backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
+						{step === "translation" && renderTranslations()}
+						{step === "book" && renderBooks()}
+						{step === "chapter" && renderChapters()}
+						{step === "verse" && renderVerses()}
+					</div>
+				</div>
+			)}
+		</div>
+	);
 }

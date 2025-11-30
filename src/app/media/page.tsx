@@ -13,20 +13,19 @@ export default function MediaPage(){
     }
 
     return (
-			<main>
-        <JumbotronSection
-          section="Media"
-          description="Elige versículos bíblicos y descárgalos para tus proyectos de video, audio y multimedia o comparte en las redes."
-        />
-				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0 flex flex-col lg:flex-row gap-8 lg:gap-16">
-          <aside className="w-full lg:w-1/3">
-            <h2 className="text-xl mb-2">Elige un versículo bíblico:</h2>
-            <BibleEverywhere />
-          </aside>
-          <div>
-
-          </div>
-        </div>
+			<main className="bg-white dark:bg-gray-800">
+				<JumbotronSection
+					section="Media"
+					description="Elige versículos bíblicos y descárgalos para tus proyectos de video, audio y multimedia o comparte en las redes."
+				/>
+				<div className="max-w-7xl mx-auto py-8 px-2 xl:px-0 ">
+					<div className="px-4 xl:px-0 w-full flex flex-col lg:flex-row gap-8 lg:gap-12">
+						<aside className="flex-1 lg:flex-1">
+							<BibleEverywhere />
+						</aside>
+						<aside className="flex-1 lg:flex-2">Content</aside>
+					</div>
+				</div>
 			</main>
 		);
 }

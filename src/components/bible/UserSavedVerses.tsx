@@ -6,8 +6,10 @@ import BiblePassageText from "@/components/bible/BiblePassageText";
 import Link from "next/link";
 
 export default function UserSavedVerses({ verses }: { verses: any }) {
+
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
+
 	return (
 		<>
 			<svg
