@@ -219,7 +219,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "name",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -235,7 +235,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "description",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -255,7 +255,7 @@ export default function MemorizationListComponent() {
 						href={`/perfil/biblia/aprendizaje/${row.original.id}`}
 						className="cursor-pointer text-center w-full mb-3 md:mb-0 transition-colors inline-block flex-1">
 						<div
-							className="items-center justify-start px-2 py-1 rounded-2xl border border-blue-200 dark:border-gray-600 text-blue-700 dark:text-gray-100 bg-blue-100 dark:bg-gray-800 font-bold cursor-pointer"
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-4 py-1.75 text-center dark:bg-gray-900 dark:hover:bg-gray-950 dark:focus:ring-gray-800 cursor-pointer border-none transition-all"
 							// FIX 3: Pass the entire listItem to state
 						>
 							Abrir
@@ -270,10 +270,10 @@ export default function MemorizationListComponent() {
 							});
 						}}>
 						<div
-							className="items-center justify-start px-2 py-1 rounded-2xl text-red-500 bg-red-50 border border-red-200 dark:border-gray-600 dark:bg-gray-800 font-bold cursor-pointer"
+							className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-1.75 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer border-none transition-all"
 							// FIX 3: Pass the entire listItem to state
 						>
-              Eliminar
+							Eliminar
 						</div>
 					</button>
 				</div>
@@ -329,7 +329,7 @@ export default function MemorizationListComponent() {
 					value={newUserList.name}
 					onChange={onChangeNewListItem}
 					placeholder="Nombre de la nueva lista"
-					className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
+					className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 					required
 				/>
 				{newUserList.name.length > 3 && (
@@ -339,13 +339,13 @@ export default function MemorizationListComponent() {
 						value={newUserList.description}
 						onChange={onChangeNewListItem}
 						placeholder="Breve descripcion de la nueva lista"
-						className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
+						className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
 						required
 					/>
 				)}
 				<button
 					onClick={handleCreate}
-					className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600">
+					className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600">
 					Crear Nueva Lista
 				</button>
 			</form>
@@ -404,7 +404,7 @@ export default function MemorizationListComponent() {
 										{row.getVisibleCells().map((cell) => (
 											<td
 												key={cell.id}
-												className="border border-blue-200 dark:border-gray-600 px-4 py-2">
+												className="border border-blue-200 dark:border-gray-600 p-4">
 												{flexRender(
 													cell.column.columnDef.cell,
 													cell.getContext()
@@ -452,7 +452,7 @@ export default function MemorizationListComponent() {
 
 					<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 						<button
-							className="p-2 text-sm font-medium text-center text-blue-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600"
+							className="p-2 text-sm font-medium text-center text-blue-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600"
 							onClick={() => {
 								if (deletingListIdAndName) {
 									handleDelete(deletingListIdAndName.id);

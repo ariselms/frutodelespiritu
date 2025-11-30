@@ -642,7 +642,7 @@
 			items: [],
 			activeClasses: "bg-white dark:bg-gray-800",
 			inactiveClasses:
-				"bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800"
+				"bg-white/60 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800"
 		},
 		interval: 3000,
 		onNext: function onNext() {},

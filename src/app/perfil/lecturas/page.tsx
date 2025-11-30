@@ -123,9 +123,8 @@ export default function UserLecturesPage() {
 						onClick={() => {
 							setDeletingItem(row.original); // Set the item to delete
 						}}
-						color="red"
 						size="xs" // Smaller button for table
-						className="cursor-pointer rounded-2xl">
+						className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-1.75 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer border-none transition-all">
 						Remover
 					</Button>
 				</div>

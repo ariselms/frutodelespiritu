@@ -54,11 +54,11 @@ export default function SubscriberForm() {
 						funcionalidades.
 					</div>
 				</div>
-				<div className="w-full flex justify-end md:justify-start md:mt-2">
+				<div className="w-full flex justify-start md:mt-2">
 					<input
 						type="submit"
 						value="Suscribirme"
-						className="p-4 text-sm font-medium text-center text-white dark:text-gray-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 mt-4 md:mt-0"
+						className="p-4 text-sm font-medium text-center text-white dark:text-gray-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 mt-4 md:mt-0"
 						name="member_submit"
 						id="member_submit"
 					/>

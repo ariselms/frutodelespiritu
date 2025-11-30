@@ -6,15 +6,20 @@ import { useAuthContext } from "@/context/authContext";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 import { useFetchUserLearningLists } from "@/hooks";
+import { toast } from "react-toastify";
+import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import { BottomDrawerTheme } from "@/components/theme/index";
+import { BibleBookType } from "@/models/bibleTypes";
+import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
+import { LordIconHover } from "@/components/animations/lordicon/index";
+import LOTTIE_BRAIN_HOVER_PINCH from "@/lotties/brain-hover-pinch.json";
+import LOTTIE_NOTEBOOK_1_HOVER_PINCH from "@/lotties/notebook-1-hover-pinch.json";
+import LOTTIE_PLUS_HOVER_PINCH from "@/lotties/plus-math-hover-pinch.json";
+import LOTTIE_FLOPPY_HOVER_PINCH from "@/lotties/floppy-hover.json";
 import {
 	MemoryItemType,
 	NoteOrMemoryListType
 } from "@/models/memorizationAndNotesTypes";
-import { toast } from "react-toastify";
-import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
-import { BottomModalTheme } from "@/components/theme/index";
-import { BibleBookType } from "@/models/bibleTypes";
-import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 
 export default function AddNoteOrMemorizationForm({
 	bibleId,
@@ -246,8 +251,8 @@ export default function AddNoteOrMemorizationForm({
 	return (
 		<>
 			<Drawer
-				className="bg-white/50 dark:bg-black/50 backdrop-blur-lg border border-t-blue-200 dark:border-t-gray-600"
-				theme={BottomModalTheme}
+				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-t-blue-200 dark:border-t-gray-600"
+				theme={BottomDrawerTheme}
 				open={openModal}
 				onClose={() => setOpenModal(false)}
 				backdrop={false}
@@ -256,10 +261,21 @@ export default function AddNoteOrMemorizationForm({
 					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-blue-100 dark:border-gray-600 mb-6"
 					title={
 						action === BibleCrudActions.note
-							? "Escribe un Nota"
+							? "Escribe Nota Sobre Pasaje"
 							: "Añade a Lista de Aprendizaje"
 					}
-					titleIcon={() => <></>}
+					titleIcon={() => (
+						<LordIconHover
+							size={32}
+							ICON_SRC={
+								action === BibleCrudActions.note
+									? LOTTIE_BRAIN_HOVER_PINCH
+									: LOTTIE_NOTEBOOK_1_HOVER_PINCH
+							}
+							state="hover-pinch"
+							text=""
+						/>
+					)}
 				/>
 
 				<DrawerItems className="overflow-y-auto max-h-[65vh]">
@@ -284,10 +300,16 @@ export default function AddNoteOrMemorizationForm({
 							</p>
 							{
 								<div>
-									{bibleData?.passage_text.map((chapterData: any, index: number) => {
-
-										return <BibleContentBuilder chapterData={chapterData} key={index} />;
-									})}
+									{bibleData?.passage_text.map(
+										(chapterData: any, index: number) => {
+											return (
+												<BibleContentBuilder
+													chapterData={chapterData}
+													key={index}
+												/>
+											);
+										}
+									)}
 								</div>
 							}
 							<form
@@ -329,28 +351,20 @@ export default function AddNoteOrMemorizationForm({
 
 								<div className="w-full">
 									<Button
-										className="p-4 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full"
+										className="p-4 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full gap-0.5"
 										onClick={() => setIsAddMemorizationListFormOpen(true)}
 										type="button">
-										<svg
-											className="w-6 h-6 text-blue-50 dark:text-white"
-											aria-hidden="true"
-											xmlns="http://www.w3.org/2000/svg"
-											width="24"
-											height="24"
-											fill="none"
-											viewBox="0 0 24 24">
-											<path
-												stroke="currentColor"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M5 12h14m-7 7V5"
-											/>
-										</svg>
-										Crear nueva lista de aprendizaje
+										<LordIconHover
+											size={24}
+											ICON_SRC={
+												action === BibleCrudActions.note
+													? LOTTIE_BRAIN_HOVER_PINCH
+													: LOTTIE_PLUS_HOVER_PINCH
+											}
+											state="hover-pinch"
+											text="Crear nueva lista de aprendizaje">
+                    </LordIconHover>
 									</Button>
-
 									{action === BibleCrudActions.note && (
 										<div className="mt-6 mb-2">
 											<div className="mb-3">
@@ -396,12 +410,18 @@ export default function AddNoteOrMemorizationForm({
 										</div>
 									)}
 									<Button
-										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full gap-0.5"
 										type="submit">
-										Guardar{" "}
-										{action === BibleCrudActions.memorization
-											? "memorización"
-											: "nota"}
+										<LordIconHover
+											size={24}
+											ICON_SRC={LOTTIE_FLOPPY_HOVER_PINCH}
+											state="hover-put-in-out"
+											text={`Guardar `}></LordIconHover>
+										<span className="text-sm md:text-base">
+											{action === BibleCrudActions.memorization
+												? "memorización"
+												: "nota"}
+										</span>
 									</Button>
 								</div>
 							</form>

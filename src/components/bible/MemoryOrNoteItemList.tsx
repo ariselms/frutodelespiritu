@@ -237,30 +237,22 @@ export default function MemoryOrNoteItemList({
 													name="content"
 												/>
 											</div>
-											<div
-												className="items-center justify-start inline-block mt-5 mr-6 px-2 py-1 rounded-2xl border-2 border-blue-500 dark:border-gray-600 text-gray-700 dark:text-gray-100 bg-blue-50 dark:bg-gray-800 font-bold cursor-pointer"
+											<button
+												type="button"
+												className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all mt-6 mb-4"
 												// FIX 3: Pass the entire listItem to state
 												onClick={() => handleUpdateMemoryOrNoteItem(listItem)}>
-												<LordIconHover
-													size={24}
-													ICON_SRC={LOTTIE_EDIT_DOCUMENT_HOVER_PINCH}
-													state="hover-pinch"
-													text="Actualizar"
-												/>
-											</div>
+												Actualizar
+											</button>
 										</form>
 									)}
-								<div
-									className="items-center justify-start inline-block mt-5 px-2 py-1 rounded-2xl border-2 border-red-500 text-red-500 bg-red-50/90 font-bold cursor-pointer"
+								<button
+									type="button"
+									className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer dark:border-red-600 border border-red-100 transition-all"
 									// FIX 3: Pass the entire listItem to state
 									onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
-									<LordIconHover
-										size={24}
-										ICON_SRC={LOTTIE_TRASH_MORPH_TRASH_IN}
-										state="morph-trash-out"
-										text="Eliminar"
-									/>
-								</div>
+									Eliminar
+								</button>
 							</AccordionContent>
 						</AccordionPanel>
 					);

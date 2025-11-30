@@ -248,8 +248,8 @@ export function ChapterDetails({
 
 			if (!parentP) return;
 
-			parentP.classList.add("flex");
-			parentP.classList.add("items-center");
+			parentP.classList.add("inline-flex");
+			parentP.classList.add("items-start");
 
 			// Prevent adding the icon if it's already there (optional check)
 			if (

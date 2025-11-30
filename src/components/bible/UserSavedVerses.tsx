@@ -8,12 +8,11 @@ import Link from "next/link";
 export default function UserSavedVerses({ verses }: { verses: any }) {
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
-
 	return (
 		<>
 			<svg
 				onClick={() => setIsUserSelectedModalOpen(true)}
-				className="w-6 h-6 text-blue-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-gray-400 cursor-pointer transition-all"
+				className="w-[26px] h-[30px] text-blue-50 dark:text-gray-300 me-[.3rem] dark:hover:text-gray-200 cursor-pointer transition-all border border-blue-200 dark:border-gray-600 rounded-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800"
 				data-icon-type="saved-verse"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
