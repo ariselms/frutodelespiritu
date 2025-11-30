@@ -28,7 +28,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 			onUploadCompleted: async ({ blob, tokenPayload }) => {
 				// You can perform any logic here after the upload is complete.
 				// For example, you could log the upload or update a database.
-				console.log("Blob upload completed", blob, tokenPayload);
+				// console.log("Blob upload completed", blob, tokenPayload);
 			}
 		});
 

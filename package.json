@@ -23,6 +23,7 @@
     "flowbite-react": "^0.11.8",
     "gsap": "^3.13.0",
     "lightbox.js-react": "^1.6.2",
+    "lucide-react": "^0.555.0",
     "nanoid": "^5.1.5",
     "next": "^15.3.4",
     "nodemailer": "^7.0.5",

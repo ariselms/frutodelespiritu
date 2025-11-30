@@ -22,9 +22,6 @@ import MemorizationListPaginationComponent from "@/components/learning-lists/Tan
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { DeleteUserListOrNoteType, NoteOrMemoryListType } from "@/models/memorizationAndNotesTypes";
-import { LordIconHover } from "@/components/animations/lordicon";
-import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
-import LOTTIE_EYE_WATCHING_HOVER_BLINK from "@/lotties/glasses-eye-blink-hover-searching.json";
 
 export default function MemorizationListComponent() {
 	const { user } = useAuthContext();
@@ -222,7 +219,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "name",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[175px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -238,7 +235,7 @@ export default function MemorizationListComponent() {
 			accessorKey: "description",
 			cell: ({ row, getValue }) => (
 				<input
-					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500"
+					className="block w-full min-w-[300px] px-2 py-1.5 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 					defaultValue={getValue<string>()}
 					onBlur={(e) =>
 						handleUpdate(
@@ -258,15 +255,10 @@ export default function MemorizationListComponent() {
 						href={`/perfil/biblia/aprendizaje/${row.original.id}`}
 						className="cursor-pointer text-center w-full mb-3 md:mb-0 transition-colors inline-block flex-1">
 						<div
-							className="items-center justify-start px-2 py-1 rounded-2xl border border-sky-200 dark:border-gray-600 text-sky-700 dark:text-gray-100 bg-sky-100 dark:bg-gray-800 font-bold cursor-pointer"
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-4 py-1.75 text-center dark:bg-gray-900 dark:hover:bg-gray-950 dark:focus:ring-gray-800 cursor-pointer border-none transition-all"
 							// FIX 3: Pass the entire listItem to state
 						>
-							<LordIconHover
-								size={24}
-								ICON_SRC={LOTTIE_EYE_WATCHING_HOVER_BLINK}
-								state="hover-searching"
-								text="Abrir"
-							/>
+							Abrir
 						</div>
 					</Link>
 					<button
@@ -278,15 +270,10 @@ export default function MemorizationListComponent() {
 							});
 						}}>
 						<div
-							className="items-center justify-start px-2 py-1 rounded-2xl text-red-500 bg-red-50 border border-red-200 dark:border-gray-600 dark:bg-gray-800 font-bold cursor-pointer"
+							className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-1.75 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer border-none transition-all"
 							// FIX 3: Pass the entire listItem to state
 						>
-							<LordIconHover
-								size={24}
-								ICON_SRC={LOTTIE_TRASH_MORPH_TRASH_IN}
-								state="morph-trash-out"
-								text="Eliminar"
-							/>
+							Eliminar
 						</div>
 					</button>
 				</div>
@@ -325,7 +312,7 @@ export default function MemorizationListComponent() {
 	}
 
 	return (
-		<div className="px-2 py-8 w-full border-x border-b border-sky-200 dark:border-gray-600">
+		<div className="px-2 py-8 w-full border-x border-b border-blue-200 dark:border-gray-600">
 			<h2 className="text-xl font-bold">Tus Listas de Aprendizaje</h2>
 			<p className="mb-6 max-w-[80ch]">
 				Selecciona una lista para ver tus versículos para memorizar o notas
@@ -342,7 +329,7 @@ export default function MemorizationListComponent() {
 					value={newUserList.name}
 					onChange={onChangeNewListItem}
 					placeholder="Nombre de la nueva lista"
-					className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
+					className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 mb-1 md:w-3/6 xl:w-2/6 md:mb-0"
 					required
 				/>
 				{newUserList.name.length > 3 && (
@@ -352,13 +339,13 @@ export default function MemorizationListComponent() {
 						value={newUserList.description}
 						onChange={onChangeNewListItem}
 						placeholder="Breve descripcion de la nueva lista"
-						className="block w-full px-2 py-2 text-sm text-gray-900 border border-sky-200 rounded-2xl bg-sky-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-sky-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
+						className="block w-full px-2 py-2 text-sm text-gray-900 border border-blue-200 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500 mr-2 my-1 md:w-3/6 xl:w-2/6 md:mb-0 xl:my-0"
 						required
 					/>
 				)}
 				<button
 					onClick={handleCreate}
-					className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600">
+					className="p-2 ms:0 md:ms-2 mt-1 md:mt-0 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600">
 					Crear Nueva Lista
 				</button>
 			</form>
@@ -384,7 +371,7 @@ export default function MemorizationListComponent() {
 							Para actualizar la información, solo cambia el valor de la celda y
 							luego salga del campo.
 						</p>
-						<table className="min-w-full border border-sky-200 dark:border-gray-600">
+						<table className="min-w-full border border-blue-200 dark:border-gray-600">
 							<thead>
 								{memorizationListTable.getHeaderGroups().map((headerGroup) => (
 									<tr key={headerGroup.id}>
@@ -392,7 +379,7 @@ export default function MemorizationListComponent() {
 											<th
 												key={header.id}
 												onClick={header.column.getToggleSortingHandler()}
-												className="border border-sky-200 dark:border-gray-600 px-4 py-2 text-left bg-sky-100 dark:bg-gray-900 dark:hover:bg-gray-800 cursor-pointer transition-colors">
+												className="border border-blue-200 dark:border-gray-600 px-4 py-2 text-left bg-blue-100 dark:bg-gray-900 dark:hover:bg-gray-800 cursor-pointer transition-colors">
 												{flexRender(
 													header.column.columnDef.header,
 													header.getContext()
@@ -413,11 +400,11 @@ export default function MemorizationListComponent() {
 								{memorizationListTable.getRowModel().rows.map((row) => (
 									<tr
 										key={row.id}
-										className="hover:bg-sky-50 dark:hover:bg-gray-800 transition-colors">
+										className="hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors">
 										{row.getVisibleCells().map((cell) => (
 											<td
 												key={cell.id}
-												className="border border-sky-200 dark:border-gray-600 px-4 py-2">
+												className="border border-blue-200 dark:border-gray-600 p-4">
 												{flexRender(
 													cell.column.columnDef.cell,
 													cell.getContext()
@@ -443,10 +430,10 @@ export default function MemorizationListComponent() {
 				)}
 				{/* Modal for deleting a list */}
 				<Modal
-					className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+					className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 					show={deletingListIdAndName !== null}
 					onClose={() => setDeletingListAndNameId(null)}>
-					<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600">
+					<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600">
 						Confirma eliminar lista de memorización
 					</ModalHeader>
 
@@ -463,9 +450,9 @@ export default function MemorizationListComponent() {
 						</p>
 					</ModalBody>
 
-					<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+					<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 						<button
-							className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600"
+							className="p-2 text-sm font-medium text-center text-blue-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600"
 							onClick={() => {
 								if (deletingListIdAndName) {
 									handleDelete(deletingListIdAndName.id);

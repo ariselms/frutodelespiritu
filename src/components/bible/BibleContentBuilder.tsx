@@ -19,13 +19,16 @@ export default function buildBibleChapterContent({
 			{/* SECTION B: Handle Verses */}
 			{/* If the type is 'verse', we need to parse the mixed content array */}
 			{chapterData.type === "verse" && (
+
 				<p key={chapterData.number} className="text-black dark:text-gray-200">
 					{/* Render the Verse Number first */}
 					<span
 						className="v"
 						id={chapterData.number}
 						data-number={chapterData.number}>
+
 						{chapterData.number}
+
 					</span>{" "}
 					{/* Map through the content array which contains strings and objects */}
 					{chapterData.content.map((verse: any, index: number) => {
@@ -72,7 +75,7 @@ export default function buildBibleChapterContent({
 							return (
 								<span
 									key={index}
-									className="text-[10px] text-sky-600 dark:text-sky-400 cursor-pointer hover:underline bg-sky-50 dark:bg-gray-800 px-0.5 rounded"
+									className="text-[10px] text-blue-600 dark:text-blue-400 cursor-pointer hover:underline bg-blue-50 dark:bg-gray-800 px-0.5 rounded"
 								/>
 							);
 						}

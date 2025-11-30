@@ -31,7 +31,7 @@ export default function MainHeader() {
 		<Navbar
 			theme={BlueNavTheme}
 			fluid
-			className="relative bg-sky-50 dark:bg-gray-950 py-4 z-20 border-b border-sky-200">
+			className="relative bg-blue-50 dark:bg-gray-950 py-4 z-20 border-b border-blue-200">
 			<NavbarBrand as={Link} href="/">
 				<Image
 					width={100}
@@ -43,10 +43,10 @@ export default function MainHeader() {
 				<span
 					className={`${
 						isActive(pathname, "/") &&
-						"text-sky-700 hover:text-sky-800 dark:text-white dark:underline dark:underline-offset-4 dark:hover:text-gray-200"
-					} text-gray-700 hover:text-sky-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline dark:hover:underline-offset-4  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
+						"text-blue-700 hover:text-blue-800 dark:text-white dark:underline dark:underline-offset-4 dark:hover:text-gray-200"
+					} text-gray-700 hover:text-blue-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline dark:hover:underline-offset-4  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
 					<span>Fruto del Espíritu </span>
-					<span className="text-xs inline-block bg-sky-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
+					<span className="text-xs inline-block bg-blue-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
 						Beta
 					</span>
 				</span>
@@ -82,7 +82,7 @@ export default function MainHeader() {
 						</NavbarLink>
 					)}
 					<div className="text-center">
-						<DarkThemeToggle className="text-sky-700 cursor-pointer hover:bg-transparent focus:ring-1 focus:ring-sky-700" />
+						<DarkThemeToggle className="text-blue-700 cursor-pointer hover:bg-transparent focus:ring-1 focus:ring-blue-700" />
 					</div>
 				</div>
 			</NavbarCollapse>

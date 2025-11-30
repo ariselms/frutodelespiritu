@@ -1,5 +1,5 @@
 import { BtnLinkBtnTextProps } from "@/models/componentTypes";
-import RoundedButtonWithLordIcon from "@/components/RoundedButton";
+import RoundedButtonWithLordIcon from "@/components/RoundedButtonWithLordIcon";
 
 export const HomePageCardDescription = ({
 	firstParagraph,
@@ -7,10 +7,9 @@ export const HomePageCardDescription = ({
 	btnText
 }: BtnLinkBtnTextProps) => (
 	<>
-		<p>{firstParagraph}</p>
-    <RoundedButtonWithLordIcon
-      text={btnText}
-      route={btnLink}
-    />
+		<p className="">{firstParagraph}</p>
+		<div className="px-4 mt-8">
+			<RoundedButtonWithLordIcon text={btnText} route={btnLink} />
+		</div>
 	</>
 );

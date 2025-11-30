@@ -12,7 +12,7 @@
   --rich-text-color-primary: #333;
   --rich-text-color-heading: #222;
   --rich-text-color-secondary: #555;
-  --rich-text-color-link: #0069a8;
+  --rich-text-color-link: #1a56db;
   --rich-text-color-link-visited: #551a8b;
   --rich-text-color-border: #ccc;
   --rich-text-color-background-light: #eee; /* For code, mark */
@@ -139,7 +139,7 @@ html.dark .bible-chapter {
 
 span[data-number]{
   display: inline-block;
-  background-color: #0069a8;
+  background-color: #1a56db;
   color: #dff2fe ;
   border: 1px solid #dff2fe;
   border-radius: 4px;
@@ -150,7 +150,7 @@ span[data-number]{
 }
 
 span[data-number]:hover{
-  background-color: #00598a;
+  background-color: #1E429F;
   transition: all .3s ease-in-out;
 }
 

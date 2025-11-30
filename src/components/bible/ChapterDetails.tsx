@@ -12,20 +12,9 @@ import FINGERPRINT_SECURITY_LOTTIE from "@/lotties/fingerprint-security-hover-wr
 import { LordIconHover } from "@/components/animations/lordicon";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import UserSavedVerses from "@/components/bible/UserSavedVerses";
-import { createRoot } from "react-dom/client"; // Import createRoot
 import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
-
-// Helper function to parse a "Book Chapter:Verse" string
-const parseSid = (sid: string) => {
-	const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
-	if (!match) return null;
-
-	return {
-		book: match[1],
-		chapter: parseInt(match[2], 10),
-		verse: parseInt(match[3], 10)
-	};
-};
+import { createRoot } from "react-dom/client";
+import { parseSid } from "@/helpers";
 
 export function ChapterDetails({
 	ChapterContent,
@@ -243,7 +232,7 @@ export function ChapterDetails({
 
 	// Effect 5: Set the icons after the bible verse to indicate that the user has saved something that includes the bible verse
 	useEffect(() => {
-    console.log("Rendering saved verses icons:", userSavedVerses);
+
 		const content = contentRef.current;
 		if (!content || !userSavedVerses) return;
 
@@ -259,8 +248,8 @@ export function ChapterDetails({
 
 			if (!parentP) return;
 
-			parentP.classList.add("flex");
-			parentP.classList.add("items-center");
+			parentP.classList.add("inline-flex");
+			parentP.classList.add("items-start");
 
 			// Prevent adding the icon if it's already there (optional check)
 			if (
@@ -305,8 +294,6 @@ export function ChapterDetails({
 
 			const responseUserSavedVerses = await requestUserSavedVerses.json();
 
-      console.log("Fetched user saved verses:", responseUserSavedVerses);
-
 			if (responseUserSavedVerses?.data?.length === 0) {
 				return;
 			}
@@ -344,11 +331,11 @@ export function ChapterDetails({
 
 			{/* Modal to inform the user to log in to use the feature */}
 			<Modal
-				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 				dismissible
 				show={isModalToPromptUserToLoginOpen}
 				onClose={() => setIsModalToPromptUserToLoginOpen(false)}>
-				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
 					¿Cómo guardar versículos en listas de aprendizaje o tomar notas?
 				</ModalHeader>
 				<ModalBody>
@@ -366,9 +353,9 @@ export function ChapterDetails({
 						</p>
 					</div>
 				</ModalBody>
-				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-end">
+				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<Link
-						className="p-2 text-sm font-medium text-center text-sky-50 rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-sky-100 dark:border-gray-600 flex items-center gap-2"
+						className="p-2 text-sm font-medium text-center text-blue-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 flex items-center gap-2"
 						href={`/log?${new URLSearchParams({
 							redirectUrl: serverBaseUrl + pathname
 						}).toString()}`}>

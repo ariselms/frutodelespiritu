@@ -6,6 +6,7 @@ import BiblePassageText from "@/components/bible/BiblePassageText";
 import Link from "next/link";
 
 export default function UserSavedVerses({ verses }: { verses: any }) {
+
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
 
@@ -13,7 +14,7 @@ export default function UserSavedVerses({ verses }: { verses: any }) {
 		<>
 			<svg
 				onClick={() => setIsUserSelectedModalOpen(true)}
-				className="w-6 h-6 text-sky-700 hover:text-sky-800 dark:text-gray-300 dark:hover:text-gray-400 cursor-pointer transition-all"
+				className="w-[26px] h-[30px] text-blue-50 dark:text-gray-300 me-[.3rem] dark:hover:text-gray-200 cursor-pointer transition-all border border-blue-200 dark:border-gray-600 rounded-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800"
 				data-icon-type="saved-verse"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
@@ -29,11 +30,11 @@ export default function UserSavedVerses({ verses }: { verses: any }) {
 			</svg>
 
 			<Modal
-				className="backdrop-blur-md bg-sky-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 				dismissible
 				show={isUserSavedVerseModalOpen}
 				onClose={() => setIsUserSelectedModalOpen(false)}>
-				<ModalHeader className="bg-sky-100 dark:bg-gray-800 text-sky-950 dark:text-gray-50 border-b border-sky-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
 					Versículos Guardados
 				</ModalHeader>
 				<ModalBody>
@@ -53,13 +54,13 @@ export default function UserSavedVerses({ verses }: { verses: any }) {
 						</div>
 					)}
 				</ModalBody>
-				<ModalFooter className="border-t-sky-200 dark:border-gray-600 flex items-center justify-between">
+				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-between">
 					<Link
 						href={`/perfil/biblia/aprendizaje/${verses.learning_list_id}`}
-						className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100 transition-all">
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
 						Editar Nota
 					</Link>
-					{/* <button className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-sky-100 transition-all">
+					{/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
 						Eliminar
 					</button> */}
 				</ModalFooter>

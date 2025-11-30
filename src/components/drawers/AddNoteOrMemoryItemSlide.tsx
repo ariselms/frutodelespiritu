@@ -2,11 +2,11 @@ import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { parseSid } from "@/helpers";
 import { BibleCrudActions } from "@/static";
-import AddNoteOrMemorizationForm from "../forms/AddNoteOrMemorizationForm";
 import { BibleBookType } from "@/models/bibleTypes";
 import { LordIconHover } from "@/components/animations/lordicon";
-import LOTTIE_INTUITIVE_HOVER_PINCH from "@/lotties/intuitive-hover-pinch.json";
-import LOTTIE_NOTEBOOK_2_HOVER_PINCH from "@/lotties/notebook-2-hover-pinch.json";
+import AddNoteOrMemorizationForm from "@/components/forms/AddNoteOrMemorizationForm";
+import LOTTIE_BRAIN_HOVER_PINCH from "@/lotties/brain-hover-pinch.json";
+import LOTTIE_NOTEBOOK_1_HOVER_PINCH from "@/lotties/notebook-1-hover-pinch.json";
 
 export default function AddNoteOrMemorySlide({
 	selectedVerses,
@@ -75,7 +75,7 @@ export default function AddNoteOrMemorySlide({
 	return (
 		<>
 			<Drawer
-				className="bg-white/50 dark:bg-black/50 backdrop-blur-lg border border-b-sky-200 dark:border-b-gray-600"
+				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-b-blue-200 dark:border-b-gray-600"
 				open={isDrawerOpen}
 				onClose={() => handleCloseModal()}
 				position="top"
@@ -94,12 +94,12 @@ export default function AddNoteOrMemorySlide({
 								setOpenModal(true);
 								setAction(BibleCrudActions.memorization);
 							}}
-							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 							<LordIconHover
-								size={22}
-								ICON_SRC={LOTTIE_INTUITIVE_HOVER_PINCH}
-								state="hover-pinch"
-								text="Añadir memorización"
+								size={32}
+								ICON_SRC={LOTTIE_BRAIN_HOVER_PINCH}
+								state="/brain-hover-pinch.json="
+								text="Guardar pasaje"
 							/>
 						</button>
 						<button
@@ -107,12 +107,12 @@ export default function AddNoteOrMemorySlide({
 								setOpenModal(true);
 								setAction(BibleCrudActions.note);
 							}}
-							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-2xl cursor-pointer bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-sky-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 							<LordIconHover
-								size={22}
-								ICON_SRC={LOTTIE_NOTEBOOK_2_HOVER_PINCH}
-								state="in-reveal"
-								text="Añadir nota"
+								size={32}
+								ICON_SRC={LOTTIE_NOTEBOOK_1_HOVER_PINCH}
+								state="hover-pinch"
+								text="Guardar con nota"
 							/>
 						</button>
 					</div>
