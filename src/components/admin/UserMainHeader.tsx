@@ -40,7 +40,7 @@ export function UserMainHeader() {
 							(e.target as HTMLImageElement).src =
 								"/images/animated/static-user.png";
 						}}
-						className="mr-3 h-10 w-10 sm:h-9 rounded-2xl"
+						className="mr-3 h-10 w-10 sm:h-9 rounded-lg"
 						alt="Flowbite React Logo"
 					/>
 					<span

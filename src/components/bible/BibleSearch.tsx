@@ -106,7 +106,7 @@ export function BibleSearch({ bibleId }: { bibleId: string }) {
 							</svg>
 						</div>
 						<input
-							className="block w-full lg:w-4/6 py-4 px-10  text-sm text-gray-900 border border-blue-100 rounded-2xl bg-blue-50 focus:ring-blue-300 focus:border-blue-100 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-300 dark:focus-visible:outline-gray-500"
+							className="block w-full lg:w-4/6 py-4 px-10  text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-300 focus:border-blue-100 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-300 dark:focus-visible:outline-gray-500"
 							id="blog_search_term"
 							type="search"
 							placeholder="e.j. Amor del padre"

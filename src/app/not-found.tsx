@@ -17,7 +17,7 @@ export default function NotFound() {
 						</p>
 						<Link
 							href="/"
-							className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in mt-4 inline-block">
+							className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in mt-4 inline-block">
 							Regresar al inicio
 						</Link>
 					</div>

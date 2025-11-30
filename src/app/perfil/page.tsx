@@ -34,7 +34,7 @@ export default function AdminPage() {
 									(item: NavigationItemTypeWithAuth) => (
 										<div
 											key={item.name}
-											className="flex flex-col justify-start rounded-2xl p-4 bg-blue-50 dark:bg-gray-900/50 border border-blue-100 dark:border-gray-600">
+											className="flex flex-col justify-start rounded-lg p-4 bg-blue-50 dark:bg-gray-900/50 border border-blue-100 dark:border-gray-600">
 											<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 												{item.name}
 											</h5>
@@ -43,7 +43,7 @@ export default function AdminPage() {
 											</p>
 											<Link
 												href={item.href}
-												className="flex items-center justify-center p-4 text-sm text-white font-bold uppercase dark:text-gray-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 border dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-blue-300  dark:focus:ring-gray-800 transition-all mt-auto">
+												className="flex items-center justify-center p-4 text-sm text-white font-bold uppercase dark:text-gray-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 border dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-blue-300  dark:focus:ring-gray-800 transition-all mt-auto">
 												Administra
 											</Link>
 										</div>
@@ -52,7 +52,7 @@ export default function AdminPage() {
 							{UserNavigationNoAuth.map((item: NavigationItemTypeWithAuth) => (
 								<div
 									key={item.name}
-									className="flex flex-col justify-start rounded-2xl p-4 bg-blue-50 dark:bg-gray-900/50 border border-blue-100 dark:border-gray-600">
+									className="flex flex-col justify-start rounded-lg p-4 bg-blue-50 dark:bg-gray-900/50 border border-blue-100 dark:border-gray-600">
 									<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
 										{item.name}
 									</h5>
@@ -61,7 +61,7 @@ export default function AdminPage() {
 									</p>
 									<Link
 										href={item.href}
-										className="flex items-center justify-center p-4 text-sm text-white font-bold uppercase dark:text-gray-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 border dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-blue-300  dark:focus:ring-gray-800 transition-all mt-auto">
+										className="flex items-center justify-center p-4 text-sm text-white font-bold uppercase dark:text-gray-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 border dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-blue-300  dark:focus:ring-gray-800 transition-all mt-auto">
 										Administra
 									</Link>
 								</div>

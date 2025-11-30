@@ -22,7 +22,7 @@ export default function RoundedButtonWithLordIcon({
 	return (
 		<button
 			onClick={handleButtonClick}
-			className="text-black dark:text-gray-50 bg-blue-100 hover:bg-blue-200 border border-blue-200 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 pl-22 pr-8 py-2 flex items-center rounded-2xl relative my-4 lg:my-6 w-full max-w-md shadow-sm cursor-pointer transition-all">
+			className="text-black dark:text-gray-50 bg-blue-100 hover:bg-blue-200 border border-blue-200 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 pl-22 pr-8 py-2 flex items-center rounded-lg relative my-4 lg:my-6 w-full max-w-md shadow-sm cursor-pointer transition-all">
 			<span title={text} className="font-semibold w-full text-left lg:truncate">
 				{text}
 			</span>

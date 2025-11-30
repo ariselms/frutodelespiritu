@@ -42,7 +42,7 @@ export const BlueNavTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-2xl p-2 text-sm bg-blue-700 dark:bg-transparent hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-blue-950 md:hidden dark:text-gray-300 hover:bg-blue-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all",
+		base: "inline-flex items-center rounded-lg p-2 text-sm bg-blue-700 dark:bg-transparent hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-blue-950 md:hidden dark:text-gray-300 hover:bg-blue-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -82,7 +82,7 @@ export const ModalUserProfileTheme = createTheme({
 	content: {
 		base: "relative h-full w-full p-4 md:h-auto",
 		inner:
-			"relative flex max-h-[90dvh] flex-col rounded-2xl bg-white/10 dark:bg-gray-950/20 backdrop-blur-lg"
+			"relative flex max-h-[90dvh] flex-col rounded-lg bg-white/10 dark:bg-gray-950/20 backdrop-blur-lg"
 	},
 	body: {
 		base: "flex-1 overflow-auto p-6",
@@ -93,7 +93,7 @@ export const ModalUserProfileTheme = createTheme({
 		popup: "border-b-0 p-2",
 		title: "text-xl font-medium text-gray-900 dark:text-white",
 		close: {
-			base: "ml-auto inline-flex items-center rounded-2xl bg-transparent p-1.5 text-sm hover:bg-transparent dark:hover:bg-transparent cursor-pointer",
+			base: "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:bg-transparent dark:hover:bg-transparent cursor-pointer",
 			icon: "h-5 w-5"
 		}
 	},
@@ -124,7 +124,7 @@ export const DropdownBibleSelectionTheme = createTheme({
 		hidden: "invisible opacity-0",
 		item: {
 			container: "",
-			base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-blue-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-2xl",
+			base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-blue-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-lg",
 			icon: "mr-2 h-4 w-4"
 		},
 		style: {

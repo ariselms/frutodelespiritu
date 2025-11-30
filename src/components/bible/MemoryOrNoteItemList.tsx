@@ -201,7 +201,7 @@ export default function MemoryOrNoteItemList({
 													Título de la nota
 												</label>
 												<input
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 													id="title"
 													type="text"
 													value={listItem.title || ""}
@@ -223,7 +223,7 @@ export default function MemoryOrNoteItemList({
 													Contenido
 												</label>
 												<textarea
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-2xl bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
 													id="content"
 													rows={4}
 													value={listItem.content || ""}
@@ -239,7 +239,7 @@ export default function MemoryOrNoteItemList({
 											</div>
 											<button
 												type="button"
-												className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all mt-6 mb-4"
+												className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all mt-6 mb-4"
 												// FIX 3: Pass the entire listItem to state
 												onClick={() => handleUpdateMemoryOrNoteItem(listItem)}>
 												Actualizar
@@ -248,7 +248,7 @@ export default function MemoryOrNoteItemList({
 									)}
 								<button
 									type="button"
-									className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer dark:border-red-600 border border-red-100 transition-all"
+									className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer dark:border-red-600 border border-red-100 transition-all"
 									// FIX 3: Pass the entire listItem to state
 									onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
 									Eliminar
@@ -300,7 +300,7 @@ export default function MemoryOrNoteItemList({
 
 				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<button
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 						onClick={() => {
 							if (deletingMemoryOrNoteItem) {
 								// Get ID and bibleId from the state object

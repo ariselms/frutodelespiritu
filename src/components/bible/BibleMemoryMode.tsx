@@ -99,7 +99,7 @@ export function BibleMemoryCard({ bibleDataItem }: { bibleDataItem: any }) {
 			)}
 
 			<button
-				className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-2xl cursor-pointer mt-16"
+				className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-950 border dark:border-gray-600 px-3 py-2 text-white rounded-lg cursor-pointer mt-16"
 				onClick={() => setShowText(!showText)}>
 				{showText ? "Ocultar" : "Mostrar"}
 			</button>

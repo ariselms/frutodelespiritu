@@ -59,7 +59,7 @@ export default async function SingleLecturePage({
 				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-screen-xl xl:px-0">
 					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
-						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
+						className="inline-block mb-4 rounded-lg px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
 						{FetchedDetailedArticled.category_name}
 					</Link>
 					<h1 className="max-w-[80ch] text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-black dark:text-gray-300 mb-8">
@@ -70,7 +70,7 @@ export default async function SingleLecturePage({
 					</p>
 				</div>
 			</header>
-			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-blue-200 dark:border-gray-600 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
+			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-blue-200 dark:border-gray-600 rounded-lg xl:-m-32 xl:p-9 xl:mx-auto">
 				<div className="rich-text-content">
 					<div
 						className="pr-8 flex-2"
@@ -115,14 +115,14 @@ export default async function SingleLecturePage({
 												width={300}
 												height={300}
 												src={article?.image_url}
-												className="h-full mr-5 w-full object-cover rounded-2xl"
+												className="h-full mr-5 w-full object-cover rounded-lg"
 												alt="Image 1"
 											/>
 										</Link>
 										<div className="flex-1 flex flex-col justify-start md:w-4/6 p-1">
 											<Link
 												href={`/lecturas?page=1&limit=10&category=${article?.category_id}`}
-												className="text-sm inline-block w-fit rounded-2xl px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all mt-3 mb-2 md:mt-0">
+												className="text-sm inline-block w-fit rounded-lg px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all mt-3 mb-2 md:mt-0">
 												{article?.category_name}
 											</Link>
 											<h2 className="mb-2 text-xl font-bold leading-tight text-blue-700 dark:text-white hover:underline">

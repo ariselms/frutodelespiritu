@@ -46,7 +46,7 @@ export default function MainHeader() {
 						"text-blue-700 hover:text-blue-800 dark:text-white dark:underline dark:underline-offset-4 dark:hover:text-gray-200"
 					} text-gray-700 hover:text-blue-700 dark:text-gray-300 hover:dark:text-white dark:hover:underline dark:hover:underline-offset-4  self-center whitespace-nowrap text-xl font-semibold flex items-center transition-all`}>
 					<span>Fruto del Espíritu </span>
-					<span className="text-xs inline-block bg-blue-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-2xl">
+					<span className="text-xs inline-block bg-blue-700 dark:bg-gray-50 px-3 py-1 ms-2 text-white dark:text-gray-800 rounded-lg">
 						Beta
 					</span>
 				</span>
@@ -60,7 +60,7 @@ export default function MainHeader() {
 							as={Link}
 							href={nav.href}
 							active={isActive(pathname, nav.href)}
-							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
+							className="rounded-lg px-3 py-2 text-sm font-medium text-center">
 							{nav.name}
 						</NavbarLink>
 					))}
@@ -69,7 +69,7 @@ export default function MainHeader() {
 							as={Link}
 							href="/perfil"
 							active={isActive(pathname, "/perfil")}
-							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
+							className="rounded-lg px-3 py-2 text-sm font-medium text-center">
 							Admin
 						</NavbarLink>
 					) : (
@@ -77,7 +77,7 @@ export default function MainHeader() {
 							as={Link}
 							href="/log"
 							active={isActive(pathname, "/log")}
-							className="rounded-2xl px-3 py-2 text-sm font-medium text-center">
+							className="rounded-lg px-3 py-2 text-sm font-medium text-center">
 							Iniciar Sesión
 						</NavbarLink>
 					)}

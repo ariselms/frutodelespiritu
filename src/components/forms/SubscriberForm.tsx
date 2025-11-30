@@ -40,7 +40,7 @@ export default function SubscriberForm() {
 						Correo Electrónico
 					</label>
 					<input
-						className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-2xl  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+						className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
 						placeholder="correo@dominio.com"
 						type="email"
 						name="email"
@@ -58,7 +58,7 @@ export default function SubscriberForm() {
 					<input
 						type="submit"
 						value="Suscribirme"
-						className="p-4 text-sm font-medium text-center text-white dark:text-gray-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 mt-4 md:mt-0"
+						className="p-4 text-sm font-medium text-center text-white dark:text-gray-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 mt-4 md:mt-0"
 						name="member_submit"
 						id="member_submit"
 					/>

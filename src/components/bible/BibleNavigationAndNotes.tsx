@@ -21,7 +21,7 @@ export function BibleNavigationAndNotes({
 			{previousChapterParams && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${prevParams[0]}/${prevParams[1]}/${prevParams[2]}`}
-					className="rounded-2xl border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-blue-50 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
+					className="rounded-lg border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-blue-50 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
 					<svg
 						className="w-6 h-6 text-blue-50 bolder dark:text-white"
 						aria-hidden="true"
@@ -46,7 +46,7 @@ export function BibleNavigationAndNotes({
 			{nextChapterParams && (
 				<Link
 					href={`/biblia/libros/capitulos/versiculos/${nextParams[0]}/${nextParams[1]}/${nextParams[2]}`}
-					className="rounded-2xl border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-blue-50 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
+					className="rounded-lg border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-5 py-1 font-bold text-blue-50 dark:text-gray-50 flex items-center transition-all text-xs sm:text-sm md:text-base">
 					{nextParams[1] !== BibleChapterData?.book?.id && nextParams[1]}{" "}
 					{nextParams[2]}
 					<svg

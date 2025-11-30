@@ -19,7 +19,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-0 bg-blue-50 dark:bg-gray-900/50 border-blue-100 dark:border-gray-600 rounded-2xl border">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-0 bg-blue-50 dark:bg-gray-900/50 border-blue-100 dark:border-gray-600 rounded-lg border">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
@@ -31,7 +31,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 			</div>
 			<div className="flex flex-col px-4 pt-0 pb-10 lg:pt-6">
 				<div className="flex items-center gap-x-4 text-xs">
-					<span className="relative z-10 rounded-2xl bg-blue-100 border border-blue-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
+					<span className="relative z-10 rounded-lg bg-blue-100 border border-blue-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
 						{article.category_name}
 					</span>
 					<time

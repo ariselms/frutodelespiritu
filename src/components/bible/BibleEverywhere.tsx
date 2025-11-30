@@ -314,7 +314,7 @@ export default function BibleEverywhere() {
 				<input
 					type="text"
 					placeholder={placeholder}
-					className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-2xl  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+					className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					autoFocus
@@ -348,7 +348,7 @@ export default function BibleEverywhere() {
 							<button
 								key={t.id}
 								onClick={() => handleSelectTranslation(t)}
-								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-start justify-center">
+								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-start justify-center">
 								<div className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200 mb-2">
 									{t.name}
 								</div>
@@ -394,7 +394,7 @@ export default function BibleEverywhere() {
 							<button
 								key={b.id}
 								onClick={() => handleSelectBook(b)}
-								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold py-2.5 px-0.5 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word text-center cursor-pointer">
+								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold py-2.5 px-0.5 rounded-lg transition-all border dark:border-gray-600 wrap-break-word text-center cursor-pointer">
 								<span className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200">
 									{b.name}
 								</span>
@@ -429,7 +429,7 @@ export default function BibleEverywhere() {
 						<button
 							key={num}
 							onClick={() => handleSelectChapter(num)}
-							className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-2xl transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-center justify-center">
+							className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-center justify-center">
 							{num}
 						</button>
 					))}
@@ -563,7 +563,7 @@ export default function BibleEverywhere() {
 					<button
 						disabled={!selection.verses || selection.verses.length === 0}
 						onClick={handleConfirmSelection}
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
 						Confirmar Selección
 					</button>
 				</div>
@@ -614,7 +614,7 @@ export default function BibleEverywhere() {
 		);
 
 		return (
-			<div className="p-6 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-2xl max-w-md mx-auto w-full">
+			<div className="p-6 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-lg max-w-md mx-auto w-full">
 				<div className="flex justify-between items-center mb-4">
 					<h2 className="text-lg font-bold text-gray-950 dark:text-gray-200 ">
 						Tu selección:
@@ -656,7 +656,7 @@ export default function BibleEverywhere() {
 				<div className="pt-10 pb-4 text-center">
 					<Link
 						href={`/biblia/libros/capitulos/versiculos/${selection.translation?.id}/${selection.book?.id}/${selection.chapter}#${verseFrom}`}
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
 						Ir al capítulo
 					</Link>
 				</div>
@@ -674,7 +674,7 @@ export default function BibleEverywhere() {
 					) : (
 						<button
 							onClick={handleOpen}
-							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
+							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
 							<LordIconHover
 								size={32}
 								ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
@@ -690,7 +690,7 @@ export default function BibleEverywhere() {
 			{isOpen && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200 backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
 					{/* Modal Content */}
-					<div className="w-full max-w-lg h-[600px] flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden border border-blue-200 dark:border-gray-600 rounded-2xl backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
+					<div className="w-full max-w-lg h-[600px] flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden border border-blue-200 dark:border-gray-600 rounded-lg backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
 						{step === "translation" && renderTranslations()}
 						{step === "book" && renderBooks()}
 						{step === "chapter" && renderChapters()}

@@ -355,7 +355,7 @@ export function ChapterDetails({
 				</ModalBody>
 				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
 					<Link
-						className="p-2 text-sm font-medium text-center text-blue-50 rounded-2xl cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 flex items-center gap-2"
+						className="p-2 text-sm font-medium text-center text-blue-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 flex items-center gap-2"
 						href={`/log?${new URLSearchParams({
 							redirectUrl: serverBaseUrl + pathname
 						}).toString()}`}>
