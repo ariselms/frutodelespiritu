@@ -15,7 +15,7 @@ export default async function Home() {
 
 			<MainJumbotron />
 
-			<div className="bg-white dark:bg-gray-800 pb-28">
+			<div className="bg-white dark:bg-gray-800 pb-28 px-4">
 				<HomePageCard
 					title="Lee y Estudia La Biblia"
 					description={

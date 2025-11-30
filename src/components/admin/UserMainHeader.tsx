@@ -46,8 +46,8 @@ export function UserMainHeader() {
 					<span
 						className={`${
 							isActive(pathname, "/perfil") &&
-							"text-sky-700 hover:text-sky-800 dark:text-white dark:hover:text-white dark:underline underline-offset-4"
-						} hover:text-sky-800 text-gray-700 dark:text-gray-300 dark:hover:text-white  self-center whitespace-nowrap text-xl font-semibold `}>
+							"text-blue-700 hover:text-blue-800 dark:text-white dark:hover:text-white dark:underline underline-offset-4"
+						} hover:text-blue-800 text-gray-700 dark:text-gray-300 dark:hover:text-white  self-center whitespace-nowrap text-xl font-semibold `}>
 						{user?.name || "Perfil"}
 					</span>
 				</NavbarBrand>

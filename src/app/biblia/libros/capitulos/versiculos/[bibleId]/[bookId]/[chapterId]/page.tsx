@@ -32,7 +32,7 @@ export default async function SingleChapterPage({
 				<div className="max-w-[80ch] mx-auto py-8 px-2 xl:px-0">
 					<div className="flex flex-row items-center justify-between mb-8">
 						<Link
-							className="rounded-2xl border border-sky-100 dark:border-gray-600 bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-sky-50 dark:text-gray-50 inline-flex items-center transition-all text-xs sm:text-sm md:text-base"
+							className="rounded-2xl border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-blue-50 dark:text-gray-50 inline-flex items-center transition-all text-xs sm:text-sm md:text-base"
 							href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
               <LordIconHover
                 size={22}

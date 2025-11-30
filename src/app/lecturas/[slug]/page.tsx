@@ -49,17 +49,17 @@ export default async function SingleLecturePage({
 	FetchedRecentArticles = DbRecentArticles;
 
 	return (
-		<main className="pb-16 lg:pb-24 bg-sky-50 dark:bg-gray-800 antialiased">
+		<main className="pb-16 lg:pb-24 bg-blue-50 dark:bg-gray-800 antialiased">
 			<header
 				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16 flex justify-center items-center"
 				style={{
 					backgroundImage: `url(${FetchedDetailedArticled?.image_url})`
 				}}>
-				<div className="absolute top-0 left-0 w-full h-full text-sky-700 bg-sky-100/70 dark:bg-black/60"></div>
+				<div className="absolute top-0 left-0 w-full h-full text-blue-700 bg-blue-100/70 dark:bg-black/60"></div>
 				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-screen-xl xl:px-0">
 					<Link
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
-						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-sky-700 hover:bg-sky-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
+						className="inline-block mb-4 rounded-2xl px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
 						{FetchedDetailedArticled.category_name}
 					</Link>
 					<h1 className="max-w-[80ch] text-2xl font-extrabold leading-none sm:text-3xl lg:text-4xl text-black dark:text-gray-300 mb-8">
@@ -70,7 +70,7 @@ export default async function SingleLecturePage({
 					</p>
 				</div>
 			</header>
-			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-sky-200 dark:border-gray-600 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
+			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-blue-200 dark:border-gray-600 rounded-2xl xl:-m-32 xl:p-9 xl:mx-auto">
 				<div className="rich-text-content">
 					<div
 						className="pr-8 flex-2"
@@ -105,36 +105,38 @@ export default async function SingleLecturePage({
 					<div className="grid xl:grid-cols-2 gap-6 lg:gap-8">
 						{FetchedRecentArticles.map(
 							(article: ArticleType | QueryResultRow) => (
-								<article
-									key={article.id}
-									className="flex flex-col md:flex md:flex-row">
-									<Link
-										href={`/lecturas/${article.slug}`}
-										className="xl:mb-0 w-full md:w-2/6 mr-3">
-										<Image
-											width={300}
-											height={300}
-											src={article?.image_url}
-											className="h-full mr-5 w-full object-cover rounded-2xl"
-											alt="Image 1"
-										/>
-									</Link>
-									<div className="flex-1 flex flex-col justify-start md:w-4/6 pb-1">
-										{/* <Link
-											href={`/lecturas?page=1&limit=10&category=${article?.category_id}`}
-											className="inline-flex items-center font-medium underline underline-offset-4 text-sky-700 dark:text-gray-300 hover:no-underline my-2">
-											{article?.category_name}
-										</Link> */}
-										<h2 className="mb-2 text-xl font-bold leading-tight text-sky-700 dark:text-white hover:underline">
-											<Link href={`/lecturas/${article?.slug}`}>
-												{article?.title}
+								<div key={article.id}>
+									<article
+										className="flex flex-col md:flex md:flex-row">
+										<Link
+											href={`/lecturas/${article.slug}`}
+											className="xl:mb-0 w-full md:w-2/6 mr-3">
+											<Image
+												width={300}
+												height={300}
+												src={article?.image_url}
+												className="h-full mr-5 w-full object-cover rounded-2xl"
+												alt="Image 1"
+											/>
+										</Link>
+										<div className="flex-1 flex flex-col justify-start md:w-4/6 p-1">
+											<Link
+												href={`/lecturas?page=1&limit=10&category=${article?.category_id}`}
+												className="text-sm inline-block w-fit rounded-2xl px-2 py-1 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all mt-3 mb-2 md:mt-0">
+												{article?.category_name}
 											</Link>
-										</h2>
-										<p className="mb-4 text-gray-800 dark:text-gray-300 max-w-sm">
-											{article?.summary}
-										</p>
-									</div>
-								</article>
+											<h2 className="mb-2 text-xl font-bold leading-tight text-blue-700 dark:text-white hover:underline">
+												<Link href={`/lecturas/${article?.slug}`}>
+													{article?.title}
+												</Link>
+											</h2>
+											<p className="mb-4 text-gray-800 dark:text-gray-300 max-w-sm">
+												{article?.summary}
+											</p>
+										</div>
+									</article>
+                  <hr className="text-blue-200 dark:text-gray-600 mt-8 mb-2"/>
+								</div>
 							)
 						)}
 					</div>

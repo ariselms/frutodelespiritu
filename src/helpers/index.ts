@@ -21,6 +21,7 @@ export const checkIfParamsExistOrSetDefault = (checkType: string, paramId: strin
 
 }
 
+// this function parses a string in the format "Book Chapter:Verse" and returns an object with book, chapter, and verse, this is because the api returns the verse ids in a weird format
 export const parseSid = (sid: string) => {
 	const match = sid.match(/^(.+?)\s(\d+):(\d+)$/);
 	if (!match) return null;

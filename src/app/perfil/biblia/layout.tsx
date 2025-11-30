@@ -8,7 +8,7 @@ export default async function UserBibleNotesLayout({
 
   return (
     <>
-    <div className="bg-white dark:bg-gray-950 text-black dark:text-white border-b border-sky-100 dark:border-gray-600">
+    <div className="bg-white dark:bg-gray-950 text-black dark:text-white border-b border-blue-100 dark:border-gray-600">
       <ProfileSection
         sectionName="Biblia"
         sectionDescription="Administra tus listas de memorias y notas."

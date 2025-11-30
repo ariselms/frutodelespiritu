@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function MainLoader() {
   return (
-		<div className="flex flex-col items-center justify-center h-96 bg-sky-50 dark:bg-gray-800">
+		<div className="flex flex-col items-center justify-center h-96 bg-blue-50 dark:bg-gray-800">
 			<Image
 				unoptimized
 				src="/images/gifs/flame.gif"
