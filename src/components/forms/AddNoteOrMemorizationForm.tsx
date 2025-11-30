@@ -419,8 +419,8 @@ export default function AddNoteOrMemorizationForm({
 											text={`Guardar `}></LordIconHover>
 										<span className="text-sm md:text-base">
 											{action === BibleCrudActions.memorization
-												? "memorización"
-												: "nota"}
+												? "pasaje"
+												: "pasaje con nota"}
 										</span>
 									</Button>
 								</div>
