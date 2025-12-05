@@ -1,72 +1,50 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import {
-	Search,
-	ChevronLeft,
-	Book,
-	Globe,
-	Hash,
-	List,
-	Loader2,
-	X,
-	Pencil // Imported Pencil icon for the edit buttons
-} from "lucide-react";
-import { BibleDataType, BibleBookType } from "@/models/bibleTypes";
+	BibleDataType,
+	BibleBookType,
+	ChapterResponse,
+	PassageSelection,
+	BibleSelectionStep
+} from "@/models/bibleTypes";
 import { LordIconHover } from "@/components/animations/lordicon";
+import { MainLoader } from "@/components/Loaders";
+import { useAuthContext } from "@/context/authContext";
+import ModalToPromptUserToLogin from "@/components/modals/ModalPromptUserToLogin";
 import LOTTIE_BIBLE_HOVER_PINCH from "@/lotties/bible-open.json";
 import LOTTIE_WORLD_GLOBE_HOVER_ROLL from "@/lotties/world-globe-hover-roll.json";
-import Link from "next/link";
-import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
+import LOTTIE_CHEVRON_LEFT_HOVER_SLIDE from "@/lotties/chevron-left-hover-scale.json";
+import LOTTIE_CLOSE_HOVER_WOBBLE from "@/lotties/error-cross-simple-hover-wobble.json";
+import LOTTIE_EDIT_HOVER_CIRCLE from "@/lotties/edit-hover-circle.json";
+import { usePathname } from "next/navigation";
 
-interface ChapterContent {
-	type: string;
-	number?: string | number;
-	content?: string[] | string;
-}
-
-interface ChapterResponse {
-	chapter: {
-		content: ChapterContent[];
-		number: number;
-	};
-}
-
-interface Selection {
-	translation?: BibleDataType;
-	book?: BibleBookType;
-	chapter?: number;
-	verses?: number[];
-	content?: ChapterContent[];
-}
-
-type Step =
-	| "initial"
-	| "translation"
-	| "book"
-	| "chapter"
-	| "verse"
-	| "complete";
 
 // --- Main Component ---
 
-export default function BibleEverywhere() {
+export default function BibleEverywhere({
+  setPassageSelection
+} : {
+  setPassageSelection: React.Dispatch<React.SetStateAction<PassageSelection>>
+}) {
+  // --- STATES ---
+  const {user} = useAuthContext();
+  const pathname = usePathname();
 	const [isOpen, setIsOpen] = useState(false);
-	const [step, setStep] = useState<Step>("initial");
+	const [step, setStep] = useState<BibleSelectionStep>("initial");
 	const [loading, setLoading] = useState(false);
-	const [selection, setSelection] = useState<Selection>({});
+	const [selection, setSelection] = useState<PassageSelection>({});
 
-	// Data State
+	// STATES //
 	const [translations, setTranslations] = useState<BibleDataType[]>([]);
 	const [books, setBooks] = useState<BibleBookType[]>([]);
 	const [availableVerses, setAvailableVerses] = useState<number[]>([]);
-	const [chapterText, setChapterText] = useState<Record<number, string>>({});
-
-	// Search/Filter State
 	const [searchQuery, setSearchQuery] = useState("");
+  const [isModalToPromptUserToLoginOpen, setIsModalToPromptUserToLoginOpen] = useState<boolean>(false);
 
-	// --- API Fetching Functions ---
 
+	// --- API FETCHING FUNCTIONS --- //
 	const fetchTranslations = async () => {
 		setLoading(true);
 		try {
@@ -117,21 +95,12 @@ export default function BibleEverywhere() {
 
 			// Extract unique verse numbers and text content
 			const foundVerses = new Set<number>();
-			const textMap: Record<number, string> = {};
 
 			if (data.chapter && Array.isArray(data.chapter.content)) {
 				data.chapter.content.forEach((item: any) => {
 					if (item.type === "verse" && item.number) {
 						const verseNum = parseInt(item.number.toString(), 10);
 						foundVerses.add(verseNum);
-
-						if (Array.isArray(item.content)) {
-							textMap[verseNum] = item.content
-								.map((c: any) => (typeof c === "string" ? c : c.text))
-								.join(" ");
-						} else if (typeof item.content === "string") {
-							textMap[verseNum] = item.content;
-						}
 					}
 				});
 			}
@@ -146,7 +115,6 @@ export default function BibleEverywhere() {
 
 			// Sort verses numerically
 			setAvailableVerses(Array.from(foundVerses).sort((a, b) => a - b));
-			setChapterText(textMap);
 		} catch (error) {
 			console.error("Failed to fetch chapter", error);
 		} finally {
@@ -154,9 +122,17 @@ export default function BibleEverywhere() {
 		}
 	};
 
-	// --- Event Handlers ---
+	// --- EVENT HANDLERS --- //
 
 	const handleOpen = () => {
+
+    if (!user) {
+
+      setIsModalToPromptUserToLoginOpen(true);
+
+      return;
+    }
+
 		setIsOpen(true);
 		setStep("translation");
 		setSelection({});
@@ -164,7 +140,7 @@ export default function BibleEverywhere() {
 	};
 
 	// Helper to jump to a specific edit step
-	const handleEditStep = (targetStep: Step) => {
+	const handleEditStep = (targetStep: BibleSelectionStep) => {
 		setIsOpen(true);
 		setStep(targetStep);
 
@@ -192,7 +168,6 @@ export default function BibleEverywhere() {
 	};
 
 	const handleSelectBook = (b: BibleBookType) => {
-
 		setSelection((prev) => ({
 			...prev,
 			translation: prev.translation,
@@ -203,13 +178,11 @@ export default function BibleEverywhere() {
 	};
 
 	const handleSelectChapter = (c: number) => {
-
 		setSelection((prev) => ({
 			...prev,
 			chapter: c,
 			verses: []
 		}));
-
 		setStep("verse");
 		if (selection.translation && selection.book) {
 			fetchChapterAndParseVerses(
@@ -247,6 +220,22 @@ export default function BibleEverywhere() {
 	};
 
 	const handleConfirmSelection = () => {
+		// 1. Calculate the text string ONCE when the user clicks confirm
+		const passageText = generateVerseText(selection);
+
+		// 2. Update the state
+		setSelection((prev) => ({
+			...prev,
+			// Assuming you want to store the string in 'content' or a new field like 'passageText'
+			// based on your previous code snippet:
+			passageText: passageText,
+		}));
+
+    setPassageSelection({
+      ...selection,
+      passageText: passageText
+    });
+
 		setStep("complete");
 		setIsOpen(false);
 	};
@@ -258,8 +247,7 @@ export default function BibleEverywhere() {
 		if (step === "verse") setStep("chapter");
 	};
 
-	// --- Filtering Logic ---
-
+	// --- FILTERING LOGIC --- //
 	const filteredTranslations = useMemo(() => {
 		if (!searchQuery) return translations;
 		const lower = searchQuery.toLowerCase();
@@ -282,7 +270,51 @@ export default function BibleEverywhere() {
 		);
 	}, [books, searchQuery]);
 
-	// --- Render Helpers ---
+
+	// --- RENDER HELPERS --- //
+	// Helper to extract text safely without causing side effects
+	const generateVerseText = (currentSelection: PassageSelection) => {
+		if (
+			!currentSelection.content ||
+			!currentSelection.verses ||
+			currentSelection.verses.length === 0
+		) {
+			return "";
+		}
+
+		const start = currentSelection.verses[0];
+		const end = currentSelection.verses[currentSelection.verses.length - 1];
+
+		// Check if content is array before filtering
+		if (!Array.isArray(currentSelection.content)) {
+			return typeof currentSelection.content === "string"
+				? currentSelection.content
+				: "";
+		}
+
+		return currentSelection.content
+			.filter((item: any) => {
+				if (item.type !== "verse") return false;
+				const vNum = parseInt(item.number);
+				return vNum >= start && vNum <= end;
+			})
+			.map((item: any) => {
+				let text = "";
+				if (typeof item.content === "string") {
+					text = item.content;
+				} else if (Array.isArray(item.content)) {
+					text = item.content
+						.map((part: any) => {
+							if (typeof part === "string") return part;
+							if (typeof part === "object" && part.text) return part.text;
+							return "";
+						})
+						.join("");
+				}
+				return `${item.number} ${text}`;
+			})
+			.join("\n");
+	};
 
 	const renderHeader = (title: string, icon: React.ReactNode) => (
 		<div className="flex items-center justify-between p-4 border-b border-blue-200 dark:border-gray-600 rounded-t-lg">
@@ -291,7 +323,12 @@ export default function BibleEverywhere() {
 					<button
 						onClick={handleBack}
 						className="p-1 hover:bg-gray-200 rounded-full transition">
-						<ChevronLeft className="w-5 h-5 text-gray-600" />
+						<LordIconHover
+							size={32}
+							ICON_SRC={LOTTIE_CHEVRON_LEFT_HOVER_SLIDE}
+							state="hover-slide"
+							text=""
+						/>
 					</button>
 				)}
 				<div className="flex items-center gap-2 text-lg font-semibold">
@@ -301,8 +338,13 @@ export default function BibleEverywhere() {
 			</div>
 			<button
 				onClick={handleClose}
-				className="p-1 hover:bg-gray-200 rounded-full transition">
-				<X className="w-5 h-5 text-gray-500" />
+				className="p-1 hover:bg-gray-200 rounded-full transition cursor-pointer">
+				<LordIconHover
+					size={32}
+					ICON_SRC={LOTTIE_CLOSE_HOVER_WOBBLE}
+					state="hover-wobble"
+					text=""
+				/>
 			</button>
 		</div>
 	);
@@ -310,7 +352,6 @@ export default function BibleEverywhere() {
 	const renderSearch = (placeholder: string) => (
 		<div className="px-2 py-4  border-b border-blue-200 dark:border-gray-600">
 			<div className="relative flex items-center w-full">
-				<Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 dark:text-gray-50" />
 				<input
 					type="text"
 					placeholder={placeholder}
@@ -323,8 +364,7 @@ export default function BibleEverywhere() {
 		</div>
 	);
 
-	// --- Views ---
-
+	// --- VIEWS --- //
 	const renderTranslations = () => (
 		<div className="flex flex-col h-full">
 			{renderHeader(
@@ -340,7 +380,7 @@ export default function BibleEverywhere() {
 			<div className="flex-1 overflow-y-auto p-2">
 				{loading ? (
 					<div className="flex justify-center p-8">
-						<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+						<MainLoader />
 					</div>
 				) : (
 					<div className="grid gap-2 py-2">
@@ -374,7 +414,7 @@ export default function BibleEverywhere() {
 	const renderBooks = () => (
 		<div className="flex flex-col h-full ">
 			{renderHeader(
-				selection.translation?.englishName || "Select Book",
+				selection.translation?.name || "Selecciona un libro",
 				<LordIconHover
 					size={32}
 					ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
@@ -382,11 +422,11 @@ export default function BibleEverywhere() {
 					text=""
 				/>
 			)}
-			{renderSearch("Search books (e.g. Genesis)...")}
+			{renderSearch("Buscar libros (e.g. Génesis)...")}
 			<div className="flex-1 overflow-y-auto p-2">
 				{loading ? (
 					<div className="flex justify-center p-8">
-						<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+						<MainLoader />
 					</div>
 				) : (
 					<div className="grid grid-cols-2 gap-2">
@@ -419,7 +459,7 @@ export default function BibleEverywhere() {
 			)}
 			<div className="flex-1 overflow-y-auto p-4">
 				<h3 className="text-sm font-medium text-black dark:text-gray-200 mb-3 uppercase tracking-wider">
-					Select Chapter
+					Selecciona Capíulo
 				</h3>
 				<div className="grid grid-cols-5 sm:grid-cols-8 gap-2">
 					{Array.from(
@@ -489,8 +529,6 @@ export default function BibleEverywhere() {
 			return v >= selection.verses[0] && v <= selection.verses[1];
 		};
 
-
-
 		return (
 			<div className="flex flex-col h-full">
 				{renderHeader(
@@ -505,7 +543,7 @@ export default function BibleEverywhere() {
 				<div className="flex-1 overflow-y-auto p-0">
 					{loading ? (
 						<div className="flex justify-center p-8">
-							<Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+							<MainLoader />
 						</div>
 					) : (
 						<>
@@ -521,7 +559,6 @@ export default function BibleEverywhere() {
 										: "Oprime versículo inicial y final"}
 								</div>
 							</div>
-							// Inside renderVerses...
 							<div className="flex flex-col">
 								{availableVerses.map((num) => {
 									const active = isSelected(num);
@@ -571,8 +608,7 @@ export default function BibleEverywhere() {
 		);
 	};
 
-	// --- Display Result ---
-
+	// --- DISPLAY RESULTS --- //
 	const formatSelection = () => {
 		const verseFrom = selection?.verses && selection?.verses[0];
 		const verseTo =
@@ -580,10 +616,11 @@ export default function BibleEverywhere() {
 		const versiclesValue =
 			verseFrom !== verseTo ? verseFrom + " - " + verseTo : verseFrom;
 
-		// Generate preview text
-		let selectedText = "";
+		// --- RENDER SELECTION START ---
 
+		let selectedText = generateVerseText(selection);
 
+		// --- RENDER SELECTION END ---
 
 		// Helper component for edit rows
 		const EditRow = ({
@@ -593,10 +630,10 @@ export default function BibleEverywhere() {
 		}: {
 			label: string;
 			value: string | undefined;
-			stepName: Step;
+			stepName: BibleSelectionStep;
 		}) => (
 			<div className="flex items-center justify-between border-b border-blue-200 pb-2 last:border-0 last:pb-0">
-				<div className="flex flex-col">
+				<div className="flex flex-col justify-between px-4">
 					<span className="text-xs text-gray-800 dark:text-gray-200 font-semibold uppercase">
 						{label}
 					</span>
@@ -608,7 +645,12 @@ export default function BibleEverywhere() {
 					onClick={() => handleEditStep(stepName)}
 					className="p-2 text-blue-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-gray-200 rounded-full transition cursor-pointer"
 					title={`Edit ${label}`}>
-					<Pencil className="w-4 h-4" />
+					<LordIconHover
+						size={32}
+						ICON_SRC={LOTTIE_EDIT_HOVER_CIRCLE}
+						state="hover-circle"
+						text=""
+					/>
 				</button>
 			</div>
 		);
@@ -646,8 +688,8 @@ export default function BibleEverywhere() {
 				</div>
 
 				{selectedText && (
-					<div className="mt-4 p-4 bg-gray-50 rounded-lg text-sm text-gray-700 italic border-l-4 border-blue-200 max-h-60 overflow-y-auto shadow-inner">
-						<pre className="whitespace-pre-wrap font-sans font-normal leading-relaxed text-gray-600">
+					<div className="mt-4 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg text-sm italic border-l-8 border border-blue-200 dark:border-l-8 dark:border dark:border-gray-600 max-h-60 overflow-y-auto">
+						<pre className="whitespace-pre-wrap font-sans font-normal leading-relaxed text-blue-950 dark:text-gray-50">
 							{selectedText}
 						</pre>
 					</div>
@@ -697,6 +739,14 @@ export default function BibleEverywhere() {
 						{step === "verse" && renderVerses()}
 					</div>
 				</div>
+			)}
+
+			{isModalToPromptUserToLoginOpen && (
+				<ModalToPromptUserToLogin
+					isModalToPromptUserToLoginOpen={isModalToPromptUserToLoginOpen}
+					setIsModalToPromptUserToLoginOpen={setIsModalToPromptUserToLoginOpen}
+					pathname={pathname}
+				/>
 			)}
 		</div>
 	);

@@ -138,15 +138,20 @@ html.dark .bible-chapter {
 }
 
 span[data-number]{
-  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   background-color: #1a56db;
   color: #dff2fe ;
   border: 1px solid #dff2fe;
-  border-radius: 4px;
   margin-right: .3rem;
   padding: 0 .5rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all .3s ease-in-out;
 }
 
 span[data-number]:hover{

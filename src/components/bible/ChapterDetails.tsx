@@ -7,14 +7,11 @@ import { serverBaseUrl } from "@/static";
 import { usePathname } from "next/navigation";
 import AddNoteOrMemoryItem from "@/components/drawers/AddNoteOrMemoryItemSlide";
 import { BibleBookType } from "@/models/bibleTypes";
-import Link from "next/link";
-import FINGERPRINT_SECURITY_LOTTIE from "@/lotties/fingerprint-security-hover-wrong.json";
-import { LordIconHover } from "@/components/animations/lordicon";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import UserSavedVerses from "@/components/bible/UserSavedVerses";
 import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 import { createRoot } from "react-dom/client";
 import { parseSid } from "@/helpers";
+import ModalToPromptUserToLogin from "../modals/ModalPromptUserToLogin";
 
 export function ChapterDetails({
 	ChapterContent,
@@ -27,6 +24,7 @@ export function ChapterDetails({
 	ChapterInfo: any;
 	BibleName: string;
 }) {
+  // STATES //
 	const { user } = useAuthContext();
 	const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
@@ -37,6 +35,7 @@ export function ChapterDetails({
 		useState<boolean>(false);
 	const [userSavedVerses, setUserSavedVerses] = useState<any>(null);
 
+  // EFFECTS //
 	// EFFECT 1: Effect for scrolling to a hash link if present in the URL
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -279,6 +278,9 @@ export function ChapterDetails({
 		});
 	}, [userSavedVerses, ChapterContent]);
 
+
+  // HANDLRES //
+  // HANDLER 1 fetch user saved verses
 	const fetchUserSavedVerses = async () => {
 		if (!user) return;
 
@@ -330,44 +332,10 @@ export function ChapterDetails({
 			)}
 
 			{/* Modal to inform the user to log in to use the feature */}
-			<Modal
-				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
-				dismissible
-				show={isModalToPromptUserToLoginOpen}
-				onClose={() => setIsModalToPromptUserToLoginOpen(false)}>
-				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
-					¿Cómo guardar versículos en listas de aprendizaje o tomar notas?
-				</ModalHeader>
-				<ModalBody>
-					<div className="space-y-6">
-						<p className="text-base leading-relaxed text-gray-900 dark:text-gray-200">
-							Cuando oprimes en un versículo, notarás que puedes hacer una
-							selección de los versículos que desees. Una vez seleccionados,
-							podrás añadirlos a tus listas de aprendizaje para memorizarlos o
-							para tomar notas sobre ellos.
-						</p>
-						<p className="text-base leading-relaxed text-gray-900 dark:text-gray-200">
-							Si eso es lo que quieres, debes iniciar sesión, todo lo que
-							necesitas es tu correo electrónico. Si no, puedes simplemente
-							cerrar esta ventana.
-						</p>
-					</div>
-				</ModalBody>
-				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
-					<Link
-						className="p-2 text-sm font-medium text-center text-blue-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 ease-in border border-blue-100 dark:border-gray-600 flex items-center gap-2"
-						href={`/log?${new URLSearchParams({
-							redirectUrl: serverBaseUrl + pathname
-						}).toString()}`}>
-						<LordIconHover
-							size={32}
-							ICON_SRC={FINGERPRINT_SECURITY_LOTTIE}
-							state="hover-pinch"
-							text="Iniciar sesión"
-						/>
-					</Link>
-				</ModalFooter>
-			</Modal>
+      <ModalToPromptUserToLogin
+        isModalToPromptUserToLoginOpen={isModalToPromptUserToLoginOpen}
+        setIsModalToPromptUserToLoginOpen={setIsModalToPromptUserToLoginOpen}
+        pathname={pathname} />
 		</>
 	);
 }

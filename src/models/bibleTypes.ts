@@ -17,6 +17,28 @@ export interface ChapterType {
 	previous?: ChapterNavigationType; // Optional, as it might be the first chapter
 }
 
+export interface ChapterContent {
+	type: string;
+	number?: string | number;
+	content?: string[] | string;
+}
+
+export interface ChapterResponse {
+	chapter: {
+		content: ChapterContent[];
+		number: number;
+	};
+}
+
+export interface PassageSelection {
+	translation?: BibleDataType | null;
+	book?: BibleBookType | null;
+	chapter?: number | null;
+	verses?: number[] | null;
+	content?: ChapterContent[] | null;
+  passageText?: string | null;
+}
+
 export interface BookPillBlockProps {
   seccion: string;
   seccionDescription: string;
@@ -92,3 +114,11 @@ export interface BibleResponseType {
 	id: string;
 	data: BibleDataType;
 }
+
+export type BibleSelectionStep =
+	| "initial"
+	| "translation"
+	| "book"
+	| "chapter"
+	| "verse"
+	| "complete";
