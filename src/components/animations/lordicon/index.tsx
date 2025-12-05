@@ -34,12 +34,11 @@ export function LordIconHover({
 		// 3. Attach the event handlers to a wrapper div.
 		<div
 			className="cursor-pointer flex items-center justify-center"
-			onMouseEnter={handleMouseEnter}
-		>
+			onMouseEnter={handleMouseEnter}>
 			<div className="mr-0.3">
 				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
 			</div>
-			<span className="text-sm md:text-base">{text}</span>
+			<span className="text-sm md:text-base whitespace-nowrap">{text}</span>
 		</div>
 	);
 }

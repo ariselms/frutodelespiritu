@@ -43,8 +43,7 @@ export default function MemoryOrNoteItemList({
 		}
 	}, [memoryOrNoteListItems]); // Only depends on the prop
 
-
-  // TODO: make this function reusable to also delete memory item in bible reading modal when the user click the selected saved verses
+	// TODO: make this function reusable to also delete memory item in bible reading modal when the user click the selected saved verses
 	const handleDeletingMemoryOrNoteItem = async (
 		memoryOrNoteItem: MemoryItemType,
 		bibleId: string
@@ -85,12 +84,7 @@ export default function MemoryOrNoteItemList({
 		memoryOrNoteItem: MemoryItemType
 	) => {
 		try {
-
-			if (
-        memoryOrNoteItem.title === "" ||
-        memoryOrNoteItem.content === ""
-      )
-      {
+			if (memoryOrNoteItem.title === "" || memoryOrNoteItem.content === "") {
 				toast.warning("El título y contenido de la nota son requeridos.");
 				return;
 			}
@@ -118,8 +112,7 @@ export default function MemoryOrNoteItemList({
 					)
 				);
 
-        toast.success("Elemento de aprendizaje actualizado correctamente.");
-
+				toast.success("Elemento de aprendizaje actualizado correctamente.");
 			} else {
 				console.error(
 					"Failed to update item:",
@@ -170,10 +163,7 @@ export default function MemoryOrNoteItemList({
 	return (
 		<>
 			<Accordion collapseAll>
-
 				{memoryOrNoteList?.map((listItem: MemoryItemType) => {
-
-
 					return (
 						<AccordionPanel key={listItem.id}>
 							<AccordionTitle className="bg-blue-700 hover:bg-blue-800 border-blue-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-blue-200 text-sm md:text-base">
@@ -192,7 +182,7 @@ export default function MemoryOrNoteItemList({
 								{/* For notes only */}
 								{listItem.hasOwnProperty("title") &&
 									listItem.hasOwnProperty("content") && (
-										<form className="max-w-2xl">
+										<form className="max-w-2xl mt-6">
 											<div className="mb-2">
 												<label
 													className="text-sm font-medium text-gray-900 dark:text-white"
@@ -237,29 +227,38 @@ export default function MemoryOrNoteItemList({
 													name="content"
 												/>
 											</div>
-											<button
-												type="button"
-												className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all mt-6 mb-4"
-												// FIX 3: Pass the entire listItem to state
-												onClick={() => handleUpdateMemoryOrNoteItem(listItem)}>
-												Actualizar
-											</button>
+											<div className="flex items-center gap-4 mt-6 mb-4">
+												<button
+													type="button"
+													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all"
+													// FIX 3: Pass the entire listItem to state
+													onClick={() =>
+														handleUpdateMemoryOrNoteItem(listItem)
+													}>
+													Actualizar
+												</button>
+												<Link
+													href={`/biblia/libros/capitulos/versiculos/${listItem.bible_id}/${listItem.book_id}/${listItem.chapter_id}/#${listItem.verse_from}`}
+													type="button"
+													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800 cursor-pointer dark:border-blue-600 border border-blue-100 transition-all">
+													Ir al capítulo
+												</Link>
+												<button
+													type="button"
+													className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer dark:border-red-600 border border-red-100 transition-all"
+													onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
+													Eliminar
+												</button>
+											</div>
 										</form>
 									)}
-								<button
-									type="button"
-									className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-red-900 dark:hover:bg-red-800 dark:focus:ring-red-800 cursor-pointer dark:border-red-600 border border-red-100 transition-all"
-									// FIX 3: Pass the entire listItem to state
-									onClick={() => setDeletingMemoryOrNoteItem(listItem)}>
-									Eliminar
-								</button>
 							</AccordionContent>
 						</AccordionPanel>
 					);
 				})}
 			</Accordion>
 
-      {/* TODO: Refactor this modal  */}
+			{/* TODO: Refactor this modal  */}
 			{/* Modal for deleting a lecture */}
 			<Modal
 				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
