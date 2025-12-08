@@ -10,7 +10,9 @@ export function OrangeGradientRightToBottomLeft({
 	usage: string | null;
 }) {
 
-  usage !== "api" && usage === null;
+	usage !== "api" && usage === null;
+
+	const IMAGE_WIDTH = 800;
 
 	return (
 		<div
@@ -57,7 +59,7 @@ export function OrangeGradientRightToBottomLeft({
 								display: "flex",
 								fontSize: 24,
 								fontStyle: "normal",
-								color: "gray",
+								color: "darkgray",
 								marginTop: "auto",
 								whiteSpace: "pre-wrap"
 							}}>
@@ -85,13 +87,13 @@ export function OrangeGradientRightToBottomLeft({
 								style={{
 									fontSize: 16,
 									whiteSpace: "pre-wrap",
-									color: "gray"
+									color: "darkgray"
 								}}>
 								Reina Valera 1909
 							</b>
 							<b
 								style={{
-									fontSize: mediaControllers.verseInfoSize,
+									fontSize: mediaControllers.verseInfoSize * (IMAGE_WIDTH / 800),
 									whiteSpace: "pre-wrap",
 									marginBottom: "8px"
 								}}>
@@ -100,18 +102,17 @@ export function OrangeGradientRightToBottomLeft({
 								{":"}
 								{passageSelection.verses && passageSelection.verses.length > 0
 									? passageSelection.verses.length > 1
-										? `${passageSelection.verses[0]}-${
-												passageSelection.verses[
-													passageSelection.verses.length - 1
-												]
-										  }`
+										? `${passageSelection.verses[0]}-${passageSelection.verses[
+										passageSelection.verses.length - 1
+										]
+										}`
 										: passageSelection.verses[0]
 									: "16"}
 							</b>
 						</div>
 						<span
 							style={{
-								fontSize: mediaControllers.passageTextSize,
+								fontSize: mediaControllers.passageTextSize * (IMAGE_WIDTH / 800),
 								whiteSpace: "pre-wrap",
 								textAlign: "start",
 								lineHeight: "1.5"
@@ -137,7 +138,9 @@ export function BlueGradientRightToBottomLeft({
 	usage: string | null;
 }) {
 
-  usage !== "api" && usage === null;
+	usage !== "api" && usage === null;
+
+	const IMAGE_WIDTH = 800;
 
 	return (
 		<div
@@ -185,7 +188,7 @@ export function BlueGradientRightToBottomLeft({
 								display: "flex",
 								fontSize: 24,
 								fontStyle: "normal",
-								color: "gray",
+								color: "darkgray",
 								marginTop: "auto",
 								whiteSpace: "pre-wrap"
 							}}>
@@ -213,13 +216,13 @@ export function BlueGradientRightToBottomLeft({
 								style={{
 									fontSize: 16,
 									whiteSpace: "pre-wrap",
-									color: "gray"
+									color: "darkgray"
 								}}>
 								Reina Valera 1909
 							</b>
 							<b
 								style={{
-									fontSize: mediaControllers.verseInfoSize,
+									fontSize: mediaControllers.verseInfoSize * (IMAGE_WIDTH / 800),
 									whiteSpace: "pre-wrap",
 									marginBottom: "8px"
 								}}>
@@ -228,18 +231,17 @@ export function BlueGradientRightToBottomLeft({
 								{":"}
 								{passageSelection.verses && passageSelection.verses.length > 0
 									? passageSelection.verses.length > 1
-										? `${passageSelection.verses[0]}-${
-												passageSelection.verses[
-													passageSelection.verses.length - 1
-												]
-										  }`
+										? `${passageSelection.verses[0]}-${passageSelection.verses[
+										passageSelection.verses.length - 1
+										]
+										}`
 										: passageSelection.verses[0]
 									: "16"}
 							</b>
 						</div>
 						<span
 							style={{
-								fontSize: mediaControllers.passageTextSize,
+								fontSize: mediaControllers.passageTextSize * (IMAGE_WIDTH / 800),
 								whiteSpace: "pre-wrap",
 								textAlign: "start",
 								lineHeight: "1.5"
@@ -265,7 +267,9 @@ export function RedGradientRightToBottomLeft({
 	usage: string | null;
 }) {
 
-  usage !== "api" && usage === null;
+	usage !== "api" && usage === null;
+
+	const IMAGE_WIDTH = 800;
 
 	return (
 		<div
@@ -313,7 +317,7 @@ export function RedGradientRightToBottomLeft({
 								display: "flex",
 								fontSize: 24,
 								fontStyle: "normal",
-								color: "gray",
+								color: "darkgray",
 								marginTop: "auto",
 								whiteSpace: "pre-wrap"
 							}}>
@@ -341,13 +345,13 @@ export function RedGradientRightToBottomLeft({
 								style={{
 									fontSize: 16,
 									whiteSpace: "pre-wrap",
-									color: "gray"
+									color: "darkgray"
 								}}>
 								Reina Valera 1909
 							</b>
 							<b
 								style={{
-									fontSize: mediaControllers.verseInfoSize,
+									fontSize: mediaControllers.verseInfoSize * (IMAGE_WIDTH/ 800),
 									whiteSpace: "pre-wrap",
 									marginBottom: "8px"
 								}}>
@@ -356,11 +360,10 @@ export function RedGradientRightToBottomLeft({
 								{":"}
 								{passageSelection.verses && passageSelection.verses.length > 0
 									? passageSelection.verses.length > 1
-										? `${passageSelection.verses[0]}-${
-												passageSelection.verses[
-													passageSelection.verses.length - 1
-												]
-										  }`
+										? `${passageSelection.verses[0]}-${passageSelection.verses[
+										passageSelection.verses.length - 1
+										]
+										}`
 										: passageSelection.verses[0]
 									: "16"}
 							</b>
@@ -393,7 +396,9 @@ export function PurpleGradientRightToBottomLeft({
 	usage: string | null;
 }) {
 
-  usage !== "api" && usage === null;
+	usage !== "api" && usage === null;
+
+	const IMAGE_WIDTH = 800;
 
 	return (
 		<div
@@ -439,7 +444,7 @@ export function PurpleGradientRightToBottomLeft({
 								display: "flex",
 								fontSize: 24,
 								fontStyle: "normal",
-								color: "gray",
+								color: "darkgray",
 								marginTop: "auto",
 								whiteSpace: "pre-wrap"
 							}}>
@@ -467,13 +472,13 @@ export function PurpleGradientRightToBottomLeft({
 								style={{
 									fontSize: 16,
 									whiteSpace: "pre-wrap",
-									color: "gray"
+									color: "darkgray"
 								}}>
 								Reina Valera 1909
 							</b>
 							<b
 								style={{
-									fontSize: mediaControllers.verseInfoSize,
+									fontSize: mediaControllers.verseInfoSize * (IMAGE_WIDTH/ 800),
 									whiteSpace: "pre-wrap",
 									marginBottom: "8px"
 								}}>
@@ -482,18 +487,17 @@ export function PurpleGradientRightToBottomLeft({
 								{":"}
 								{passageSelection.verses && passageSelection.verses.length > 0
 									? passageSelection.verses.length > 1
-										? `${passageSelection.verses[0]}-${
-												passageSelection.verses[
-													passageSelection.verses.length - 1
-												]
-										  }`
+										? `${passageSelection.verses[0]}-${passageSelection.verses[
+										passageSelection.verses.length - 1
+										]
+										}`
 										: passageSelection.verses[0]
 									: "16"}
 							</b>
 						</div>
 						<span
 							style={{
-								fontSize: mediaControllers.passageTextSize,
+								fontSize: mediaControllers.passageTextSize * (IMAGE_WIDTH/ 800),
 								whiteSpace: "pre-wrap",
 								textAlign: "start",
 								lineHeight: "1.5"
@@ -514,10 +518,16 @@ export function ApiExportBaseImage({
 	mediaControllers,
 	usage
 }: {
-	passageSelection: PassageSelection;
+	passageSelection: any;
 	mediaControllers: any;
 	usage: string | null;
 }) {
+
+	// Define a fixed canvas size for Vercel OG to ensure consistency
+	const IMAGE_WIDTH = 800;
+
+	// Use the passed-in gradient value directly
+	const backgroundImageValue = mediaControllers.selectedBackgroundImageValue;
 
 	return (
 		<div
@@ -536,12 +546,12 @@ export function ApiExportBaseImage({
 				padding: "16px 32px",
 				backgroundImage:
 					usage === "main"
-						? `linear-gradient(${mediaControllers.selectedBackgroundImageValue})` // <--- Add this wrapper
+						? `linear-gradient(${backgroundImageValue})` // <--- Add this wrapper
 						: "linear-gradient(to bottom left, #FED7AA, #FFEDD5, #FFF7ED)",
 				backgroundRepeat: "no-repeat"
 			}}>
 			{usage === "main" && (
-				<div style={{display: "flex", position: "relative", height: "100%", width: "100%"}}>
+				<div style={{ display: "flex", position: "relative", height: "100%", width: "100%" }}>
 					<div
 						style={{
 							position: "absolute",
@@ -564,7 +574,7 @@ export function ApiExportBaseImage({
 								display: "flex",
 								fontSize: 24,
 								fontStyle: "normal",
-								color: "gray",
+								color: "darkgray",
 								marginTop: "auto",
 								whiteSpace: "pre-wrap"
 							}}>
@@ -592,33 +602,28 @@ export function ApiExportBaseImage({
 								style={{
 									fontSize: 16,
 									whiteSpace: "pre-wrap",
-									color: "gray"
+									color: "darkgray"
 								}}>
 								Reina Valera 1909
 							</b>
 							<b
 								style={{
-									fontSize: mediaControllers.verseInfoSize,
+									fontSize: mediaControllers.verseInfoSize * (IMAGE_WIDTH / 800),
 									whiteSpace: "pre-wrap",
 									marginBottom: "8px"
 								}}>
 								{passageSelection.book ? passageSelection.book.name : "Juan"}{" "}
 								{passageSelection.chapter ? passageSelection.chapter : 3}
 								{":"}
-								{passageSelection.verses && passageSelection.verses.length > 0
-									? passageSelection.verses.length > 1
-										? `${passageSelection.verses[0]}-${
-												passageSelection.verses[
-													passageSelection.verses.length - 1
-												]
-										  }`
-										: passageSelection.verses[0]
-									: "16"}
+								{`${passageSelection.verseFrom && passageSelection.verseFrom === passageSelection.verseTo 
+								? passageSelection.verseFrom 
+								: passageSelection.verseFrom + "-" +  passageSelection.verseTo}`
+								}
 							</b>
 						</div>
 						<span
 							style={{
-								fontSize: mediaControllers.passageTextSize,
+								fontSize: mediaControllers.passageTextSize * (IMAGE_WIDTH / 800),
 								whiteSpace: "pre-wrap",
 								textAlign: "start",
 								lineHeight: "1.5"

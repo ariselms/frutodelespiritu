@@ -10,12 +10,10 @@ import {
 	PurpleGradientRightToBottomLeft
 } from "@/components/media";
 import { PassageSelection } from "@/models/bibleTypes";
-import { useRouter } from "next/navigation";
 import ModalGeneratedImageToShare from "@/components/modals/ModalGeneratedImageToShare";
 
 export default function MediaPage() {
 	// -- STATE -- //
-	const router = useRouter();
 
 	const [showControllers, setShowControllers] = useState<Boolean>(false);
 
@@ -33,9 +31,13 @@ export default function MediaPage() {
 			"to left bottom, rgb(254, 215, 170), rgb(255, 237, 213), rgb(255, 247, 237)"
 		);
 
+	const [verseInfoSize, setVerseInfoSize] = useState(16);
+	const [passageTextSize, setPassageTextSize] = useState(14);
+
+
 	const [mediaControllers, setMediaControllers] = useState({
-		verseInfoSize: 36,
-		passageTextSize: 24,
+		verseInfoSize: verseInfoSize,
+		passageTextSize: passageTextSize,
 		currentBackgroundLayout: 0,
 		selectedBackgroundImageValue: selectedBackgroundImageValue
 	});
@@ -68,6 +70,26 @@ export default function MediaPage() {
 
 		setShowControllers(true);
 	}, [passageSelection]);
+
+	  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVerseInfoSize(14);
+		setPassageTextSize(12);
+      } else if (window.innerWidth < 1200) {
+        setVerseInfoSize(24);
+		setPassageTextSize(18);
+      } else {
+        setVerseInfoSize(28);
+		setPassageTextSize(22);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Set initial font size
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 	// -- HANDLERS -- //
 	const handleIncreaseText = (type: string) => {
@@ -141,6 +163,7 @@ export default function MediaPage() {
 
 		setSelectedBackgroundImageValue(backgroundImageValue);
 	};
+
 
 	// -- FETCHING HANDLERS -- //
 	const generateImage = async () => {
@@ -233,15 +256,13 @@ export default function MediaPage() {
 								)}
 							</>
 						</div>
-						{showControllers && (
-							<div className="w-full flex items-center justify-center mt-2">
-								<button
-									onClick={generateImage}
-									className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
-									Ver Prevista
-								</button>
-							</div>
-						)}
+						<div className="w-full flex items-center justify-center mt-2">
+							<button
+								onClick={generateImage}
+								className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+								Ver Prevista
+							</button>
+						</div>
 						<div>
 							<div className="text-lg font-bold uppercase text-blue-950 dark:text-gray-50 text-center py-4">
 								Selecciona una plantilla
