@@ -35,7 +35,7 @@ export async function GET(
       SELECT
         mi.*
       FROM
-        memory_item mi
+        learning_item mi
       JOIN
         learning_list_memory_item_join mlij ON mi.id = mlij.memory_item_id
       JOIN

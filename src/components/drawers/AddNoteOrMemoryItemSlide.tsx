@@ -35,7 +35,7 @@ export default function AddNoteOrMemorySlide({
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [action, setAction] = useState<string | null>(null);
 
-	// get the selectedVerses and sort it from low to high, then set get the lowest and the highest and set it to the apiSelectedVerses
+	// Effect 1: get the selectedVerses and sort it from low to high, then set get the lowest and the highest and set it to the apiSelectedVerses
 	useEffect(() => {
 		// 1. Convert the Set to an array and parse each verse string.
 		const parsedVerses = Array.from(selectedVerses)

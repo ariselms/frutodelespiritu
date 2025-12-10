@@ -85,25 +85,28 @@ export async function POST(request: Request) {
 
 		const { selectedLearningList, memorizationData } = body;
 
+    console.log(body);
+
 		const {
-			bible_name, // full bible version name
-			bible_id, // bible id (abbreviation)
 			by_user_id,
-			bible_book, // bible book name
+			bible_id, // bible id (abbreviation)
 			book_id, // book id (abbreviation)
 			chapter_id,
 			verse_from,
 			verse_to,
 			passage_text,
-			name,
-			description,
-			note_title,
-			note_content
+			bible_book, // book name
+			bible_name, // bible version name
+			note_title, // note title
+			note_content, // note content
+			name, // new learning list name if to be created
+			description, // new learning list description if to be created
 		} = memorizationData;
 
-		// check if the selected memorization list exists
+		// -- Check if the user selected a learning list to save the memorization item -- //
 		if (selectedLearningList !== "") {
-			// get the memorization list id to use in new learning_list_memory_item_join
+
+			// get the learning list to use it's id
 			const { rows: learningList } = await sql`
         SELECT * FROM learning_list
         WHERE
@@ -123,74 +126,45 @@ export async function POST(request: Request) {
 				);
 			}
 
+      const listId = learningList[0].id;
+
 			// check if the user have saved the same memory item before
 			const { rows: memoryItemExist } = await sql`
-        SELECT * FROM memory_item
+        SELECT * FROM learning_item
         WHERE
+          learning_list_id = ${listId} AND
           by_user_id = ${by_user_id} AND
-          bible_name = ${bible_name} AND
           bible_id = ${bible_id} AND
-          bible_book = ${bible_book} AND
           book_id = ${book_id} AND
           chapter_id = ${chapter_id} AND
           verse_from = ${verse_from} AND
           verse_to = ${verse_to} AND
-          passage_text = ${passage_text}
+          passage_text = ${passage_text} AND
+          bible_book = ${bible_book} AND
+          bible_name = ${bible_name} AND
+          title = ${note_title} AND
+          content = ${note_content}
       `;
 
+      console.log("memoryItemExist:", memoryItemExist);
+
+      // if the memory item exists
 			if (memoryItemExist.length > 0) {
-				// check if the memory item is already in the selected learning list
-				const { rows: memoryItemInLearningList } = await sql`
-          SELECT * FROM learning_list_memory_item_join
-          WHERE
-            memory_item_id = ${memoryItemExist[0].id} AND
-            memory_list_id = ${learningList[0].id}
-        `;
 
-				if (memoryItemInLearningList.length > 0) {
-					return NextResponse.json(
-						{
-							success: false,
-							message: "Esta selección ya ha sido guardada.",
-							data: null
-						},
-						{ status: 400 }
-					);
-				}
-
-				// if it doesnt exist, proceed to insert the join relation
-				const { rowCount: joinRowCount } = await sql`
-          INSERT INTO
-            learning_list_memory_item_join (memory_list_id, memory_item_id)
-            VALUES (${learningList[0].id}, ${memoryItemExist[0].id})
-          RETURNING *
-        `;
-
-				if (joinRowCount === 0) {
-					return NextResponse.json(
-						{
-							success: false,
-							message: "Error al guardar.",
-							data: null
-						},
-						{ status: 500 }
-					);
-				}
-
-				return NextResponse.json(
-					{
-						success: true,
-						message: "La selección ha sido guardada correctamente.",
-						data: null
-					},
-					{ status: 200 }
-				);
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Esta selección ya ha sido guardada. Visita tu lista de aprendizaje para actualizarla.",
+            data: null
+          },
+          { status: 400 }
+        );
 			}
 
-			// insert new memory_item
+			// insert new learning_item
 			const { rows: newMemoryItem, rowCount } = await sql`
         INSERT INTO
-          memory_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text, title, content)
+          learning_item (by_user_id, bible_name, bible_id, bible_book, book_id, chapter_id, verse_from, verse_to, passage_text, title, content, learning_list_id)
         VALUES (
           ${by_user_id},
           ${bible_name},
@@ -202,7 +176,9 @@ export async function POST(request: Request) {
           ${verse_to},
           ${passage_text},
           ${note_title},
-          ${note_content}) RETURNING *
+          ${note_content},
+          ${listId}
+        ) RETURNING *
       `;
 
 			if (rowCount === 0) {
@@ -210,25 +186,6 @@ export async function POST(request: Request) {
 					{
 						success: false,
 						message: "Error al guardar el memorización.",
-						data: null
-					},
-					{ status: 500 }
-				);
-			}
-
-			// insert learning_list_memory_item_join relation
-			const { rowCount: joinRowCount } = await sql`
-        INSERT INTO
-          learning_list_memory_item_join (memory_list_id, memory_item_id)
-          VALUES (${learningList[0].id}, ${newMemoryItem[0].id})
-        RETURNING *
-      `;
-
-			if (joinRowCount === 0) {
-				return NextResponse.json(
-					{
-						success: false,
-						message: "Error al guardar.",
 						data: null
 					},
 					{ status: 500 }
@@ -247,6 +204,24 @@ export async function POST(request: Request) {
 
 		// if there is no name or description, means that a new memorization list needs to be created
 		if (name !== "" && description !== "") {
+
+      const { rows: newLearningListNameExists} = await sql`
+        SELECT * FROM learning_list
+        WHERE
+          name = ${name} AND
+          by_user_id = ${by_user_id}
+      `;
+
+      if(newLearningListNameExists.length > 0) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Ya tienes una lista de aprendizaje con ese nombre. Por favor elige otro nombre.",
+            data: null
+          },
+          { status: 200 }
+        );
+      }
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO learning_list (by_user_id, name, description)

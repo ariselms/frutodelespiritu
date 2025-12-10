@@ -235,8 +235,6 @@ export default function UserLecturesPage() {
 					<p className="text-black dark:text-gray-50 text-xl font-bold leading mb-3">
 						¿Estas seguro de remover la siguientelectura?
 					</p>
-					{/* === THIS IS THE MISSING PIECE === */}
-					{/* It uses .title, which is correct for ArticleType */}
 					<p className="text-black dark:text-gray-50 mb-6 text-lg underline underline-offset-4">
 						{deletingItem?.title}
 					</p>

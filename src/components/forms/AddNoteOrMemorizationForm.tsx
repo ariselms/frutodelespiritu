@@ -3,7 +3,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
-import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalHeader,
+	ModalFooter
+} from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 import { useFetchUserLearningLists } from "@/hooks";
 import { toast } from "react-toastify";
@@ -44,18 +50,19 @@ export default function AddNoteOrMemorizationForm({
 	bibleName: string;
 	fetchUserSavedVerses: () => Promise<void>;
 }) {
+	// STATE //
 	// user object
 	const { user } = useAuthContext();
 
-	// memorization data contains the memory_item information
+	// memorization data contains the learning_item information
 	const [bibleData, setBibleData] = useState<MemoryItemType | null>(null);
 
-	// user memorization lists to relate to the memory_item
+	// user memorization lists to relate to the learning_item
 	const [userLearningLists, setUserLearningLists] = useState<
 		NoteOrMemoryListType[]
 	>([]);
 
-	// memorizartion list the user will select to save the memory_item
+	// memorizartion list the user will select to save the learning_item
 	const [selectedLearningList, setSelectedLearningList] = useState<string>("");
 
 	// new memorization list name
@@ -79,7 +86,11 @@ export default function AddNoteOrMemorizationForm({
 		content: ""
 	});
 
-	// set the bible data
+	const [titleFieldHasValue, setTitleFieldHasValue] = useState<boolean>(false);
+	const [contentFieldHasValue, setContentFieldHasValue] =
+		useState<boolean>(false);
+
+	// Effect 1: Set the bible data
 	useEffect(() => {
 		if (bibleId && passageId && chapterContent && user) {
 			// get the initial verse number from the passageId
@@ -117,6 +128,20 @@ export default function AddNoteOrMemorizationForm({
 		}
 	}, [passageId]);
 
+	// Effect 2: fetch user memorization lists when user is available
+	useEffect(() => {
+		if (!user) return;
+
+		if (user) {
+			getUserLearningLists();
+		}
+
+		return () => {
+			setUserLearningLists([]);
+		};
+	}, [user]);
+
+	// -- HANDLERS -- //
 	// fetch user memorization lists
 	const getUserLearningLists: () => Promise<string[] | null> = async () => {
 		if (!user) return null;
@@ -135,25 +160,14 @@ export default function AddNoteOrMemorizationForm({
 		return responseUserMemorizationLists;
 	};
 
-	useEffect(() => {
-		if (!user) return;
-
-		if (user) {
-			getUserLearningLists();
-		}
-
-		return () => {
-			setUserLearningLists([]);
-		};
-	}, [user]);
-
+	// handle form submission
 	const onFormSubmission = async (e: React.FormEvent) => {
 		if (!user) return;
 
 		e.preventDefault();
 
 		if (!selectedLearningList) {
-			toast.error("Debes seleccionar una lista de aprendizaje");
+			toast.warn("Debes seleccionar una lista de aprendizaje");
 
 			return;
 		}
@@ -161,7 +175,7 @@ export default function AddNoteOrMemorizationForm({
 		try {
 			if (action === BibleCrudActions.note) {
 				if (!userNote.title || !userNote.content) {
-					toast.error("El título y el contenido de la nota son obligatorios.");
+					toast.warn("El título y el contenido de la nota son obligatorios.");
 					return;
 				}
 
@@ -248,6 +262,74 @@ export default function AddNoteOrMemorizationForm({
 		}
 	};
 
+	const handleChangeLearningList = async (
+		e: React.ChangeEvent<HTMLSelectElement>
+	) => {
+		setSelectedLearningList(e.target.value);
+
+		// make a request to the learning list to check if the memorization data exists in that list
+
+		// 1. get the list data to use the id
+		const listName = e.target.value;
+
+		// filter the userLearningLists to get the list data
+		const listData = userLearningLists.filter((list) => list.name === listName);
+
+
+		const listId = listData[0]?.id;
+
+		const listDataRequest = await fetch(
+			`/api/user/${user?.id}/lists/validation/${listId}`,
+			{
+				method: "POST",
+				body: JSON.stringify({
+					memorizationData: bibleData
+				}),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		);
+
+		const listDataResponse = await listDataRequest.json();
+
+		// 2. check if the memorization data exists in that list
+		if (listDataResponse.success) {
+      console.log(listDataResponse);
+			// if it exists, set the note data to the userNote state
+			setUserNote({
+				title: listDataResponse.data?.title,
+				content: listDataResponse.data?.content
+			});
+
+			if (listDataResponse.data?.title !== undefined) {
+				setTitleFieldHasValue(true);
+			} else {
+				setTitleFieldHasValue(false);
+			}
+
+			if (listDataResponse.data?.content !== undefined) {
+				setContentFieldHasValue(true);
+			} else {
+				setContentFieldHasValue(false);
+			}
+
+    } else {
+      // if it doesn't exist, clear the userNote state
+      setUserNote({
+        title: "",
+        content: ""
+      });
+
+      setTitleFieldHasValue(false);
+      setContentFieldHasValue(false);
+    }
+		// 3. if it exists, set the note data to the userNote state
+		// 4. if it exists, update the button from Guardar to Actualizar
+		// 5. if it doesn't exist, it is a new note to be added
+		// NOTE: There is a fundamental issue on what I need to do to be able to fetch the user notes and memorization items properly, I need to remove the many to many relationshop and make it a one to many relationship, so each memorization item or note belongs to one learning list only. This will make it easier to fetch the data and avoid complex queries.
+	};
+
 	return (
 		<>
 			<Drawer
@@ -326,7 +408,7 @@ export default function AddNoteOrMemorizationForm({
 										className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 										id="memorizationList"
 										value={selectedLearningList || ""}
-										onChange={(e) => setSelectedLearningList(e.target.value)}>
+										onChange={(e) => handleChangeLearningList(e)}>
 										<option value="" disabled>
 											Selecciona una lista
 										</option>
@@ -362,8 +444,7 @@ export default function AddNoteOrMemorizationForm({
 													: LOTTIE_PLUS_HOVER_PINCH
 											}
 											state="hover-pinch"
-											text="Crear nueva lista de aprendizaje">
-                    </LordIconHover>
+											text="Crear nueva lista de aprendizaje"></LordIconHover>
 									</Button>
 									{action === BibleCrudActions.note && (
 										<div className="mt-6 mb-2">
@@ -374,11 +455,13 @@ export default function AddNoteOrMemorizationForm({
 													Título de la nota
 												</label>
 
+												{titleFieldHasValue}
 												<input
+													disabled={titleFieldHasValue}
 													type="text"
 													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 													id="note_title"
-													value={userNote.title}
+													value={userNote.title || ""}
 													onChange={(e) =>
 														setUserNote({
 															...userNote,
@@ -394,11 +477,13 @@ export default function AddNoteOrMemorizationForm({
 													Contenido
 												</label>
 
+												{contentFieldHasValue}
 												<textarea
+													disabled={contentFieldHasValue}
 													rows={5}
 													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 													id="note_content"
-													value={userNote.content}
+													value={userNote.content || ""}
 													onChange={(e) =>
 														setUserNote({
 															...userNote,
@@ -463,65 +548,73 @@ const AddNewLearningListForm = ({
 	const handleNewMemorizationListSubmit = async (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
-		e.preventDefault();
+		try {
+			e.preventDefault();
 
-		const memorizationDataToSubmit = {
-			bible_name: "", // full bible version name
-			bible_id: "", // bible id (abbreviation)
-			by_user_id: String(userId),
-			bible_book: "", // bible book name
-			book_id: "", // book id (abbreviation)
-			chapter_id: "",
-			verse_from: "",
-			verse_to: "",
-			passage_text: "",
-			name: newLearningList.name,
-			description: newLearningList.description
-		};
+			const memorizationDataToSubmit = {
+				bible_name: "", // full bible version name
+				bible_id: "", // bible id (abbreviation)
+				by_user_id: String(userId),
+				bible_book: "", // bible book name
+				book_id: "", // book id (abbreviation)
+				chapter_id: "",
+				verse_from: "",
+				verse_to: "",
+				passage_text: "",
+				name: newLearningList.name,
+				description: newLearningList.description
+			};
 
-		const learningListPostRequest = await fetch(
-			`/api/user/${userId}/memorization?userId=${userId}`,
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					selectedLearningList: "",
-					memorizationData: memorizationDataToSubmit
-				})
-			}
-		);
-
-		const memorizationPostResponse = await learningListPostRequest.json();
-
-		if (memorizationPostResponse.success) {
-			setIsAddMemorizationListFormOpen(false);
-
-			setNewLearningList({ name: "", description: "" });
-
-			getUserLearningLists();
-
-			toast.success(memorizationPostResponse.message);
-		} else {
-			console.error(
-				"Error creating new memorization list:",
-				memorizationPostResponse.message
+			const learningListPostRequest = await fetch(
+				`/api/user/${userId}/memorization?userId=${userId}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						selectedLearningList: "",
+						memorizationData: memorizationDataToSubmit
+					})
+				}
 			);
+
+			const memorizationPostResponse = await learningListPostRequest.json();
+
+			if (memorizationPostResponse.success) {
+				setIsAddMemorizationListFormOpen(false);
+
+				setNewLearningList({ name: "", description: "" });
+
+				getUserLearningLists();
+
+				toast.success(memorizationPostResponse.message);
+
+			} else {
+
+				toast.error(memorizationPostResponse.message);
+
+			}
+		} catch (error) {
+			console.error("Error creating new memorization list:", error);
 		}
 	};
 
 	return (
 		<Modal
+			className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
 			show={isAddLearningListFormOpen}
 			size="xl"
 			onClose={() => {
 				setIsAddMemorizationListFormOpen(false);
 			}}
+			dismissible
 			popup>
 			<div className="bg-white dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-600">
-				<ModalHeader />
-				<ModalBody>
+				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
+					Crea lista de memorización
+				</ModalHeader>
+				<ModalBody className="p-6">
 					<form onSubmit={handleNewMemorizationListSubmit}>
 						<div className="text-black dark:text-white space-y-2">
 							<h3 className="text-lg font-medium ">
@@ -554,21 +647,20 @@ const AddNewLearningListForm = ({
 									})
 								}
 							/>
-
-							<div className="w-full flex justify-end gap-2 mt-4">
-								<Button
-									onClick={() => setIsAddMemorizationListFormOpen(false)}
-									color="gray"
-									className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
-									type="button">
-									Cancelar
-								</Button>
-								<Button
-									className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
-									type="submit">
-									Guardar lista
-								</Button>
-							</div>
+						</div>
+						<div className="w-full flex justify-end gap-2 mt-4 border-t-blue-200 dark:border-gray-600">
+							<Button
+								onClick={() => setIsAddMemorizationListFormOpen(false)}
+								color="gray"
+								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
+								type="button">
+								Cancelar
+							</Button>
+							<Button
+								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
+								type="submit">
+								Guardar lista
+							</Button>
 						</div>
 					</form>
 				</ModalBody>

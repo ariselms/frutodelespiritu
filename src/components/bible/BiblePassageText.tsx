@@ -4,10 +4,8 @@ import { Verse } from "@/models/memorizationAndNotesTypes";
 // TODO: add a prop to indicate if it's being used in memory mode or a regular passage view
 export default function BiblePassageText({
 	chapterContent,
-	mode,
 } : {
 	chapterContent: any;
-	mode?: "memory" | "regular";
 }) {
 
 	const getPassageContent = () => {

@@ -30,7 +30,7 @@ export async function DELETE(
 	const bibleId = searchParams.get("bibleId");
 
 	const { rows: deletedMemoryItem } = await sql`DELETE FROM
-    memory_item
+    learning_item
     WHERE id = ${memoryItemId}
     AND by_user_id = ${userId}
     AND bible_id = ${bibleId} RETURNING *;`;

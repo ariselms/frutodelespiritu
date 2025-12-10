@@ -34,9 +34,6 @@ export function ChapterDetails({
 	const [isModalToPromptUserToLoginOpen, setIsModalToPromptUserToLoginOpen] =
 		useState<boolean>(false);
 	const [userSavedVerses, setUserSavedVerses] = useState<any>(null);
-	const [listsData, setListsData] = useState<
-		Array<{ listId: number | null; listName: string }>
-	>([{ listId: null, listName: "" }]);
 
 	// EFFECTS //
 	// EFFECT 1: Effect for scrolling to a hash link if present in the URL
@@ -240,19 +237,17 @@ export function ChapterDetails({
 		// Keep track of roots to unmount them cleanly later if needed
 		const roots: any[] = [];
 
-		console.log("userSavedVerses:", userSavedVerses);
+		userSavedVerses.forEach((learningItem: any) => {
 
-		userSavedVerses.forEach((memoryItem: any) => {
+      console.log(learningItem)
 
 			const learningListsData: { listId: number | null; listName: string } = {listId: null, listName: ""};
 
-      console.log(memoryItem)
-
-      learningListsData.listName = memoryItem.learning_list_name
-      learningListsData.listId = memoryItem.learning_list_id;
+      learningListsData.listName = learningItem.learning_list_name
+      learningListsData.listId = learningItem.learning_list_id;
 
 			const verseSpan = content.querySelector(
-				`span[data-number="${memoryItem.verse_from}"]`
+				`span[data-number="${learningItem.verse_from}"]`
 			);
 
 			const parentP = verseSpan?.parentElement;
@@ -278,7 +273,7 @@ export function ChapterDetails({
 
 			root.render(
 				<UserSavedVerses
-					verses={memoryItem}
+					verses={learningItem}
 					listsData={learningListsData}
 				/>
 			);
@@ -294,7 +289,7 @@ export function ChapterDetails({
 
 		try {
       document.querySelectorAll('span[data-icon-type="saved-verse"]').forEach((el) => el.remove());
-			// request the memory_item where the by_user_id is the current user and the bible_id, book_id and chapter_id are matches
+			// request the learning_item where the by_user_id is the current user and the bible_id, book_id and chapter_id are matches
 			const requestUserSavedVerses = await fetch(
 				`${serverBaseUrl}/api/user/${user?.id}/memorization/item/details/${bibleId}/${bookId}/${chapterId}`
 			);
@@ -310,6 +305,7 @@ export function ChapterDetails({
 			}
 
 			setUserSavedVerses(responseUserSavedVerses?.data);
+
 		} catch (error) {
 			console.error("Error fetching user saved verses:", error);
 		}

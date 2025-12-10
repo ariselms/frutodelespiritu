@@ -16,6 +16,8 @@ export default function UserSavedVerses({
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
 
+  console.log(listsData.listName);
+
 	return (
 		<>
 			<span className="relative">
@@ -47,9 +49,8 @@ export default function UserSavedVerses({
 				</ModalHeader>
 				<ModalBody>
 					<BiblePassageText chapterContent={verses} />
-					{verses.title && verses.content && (
+					{verses.title && verses.content ? (
 						<div className="mt-8 mb-3">
-
 							<small className="text-sm text-black dark:text-gray-300">
 								<strong>Nota en lista de aprendizaje: </strong>
 								{listsData?.listName}
@@ -63,6 +64,20 @@ export default function UserSavedVerses({
 
 							<p className="text-black dark:text-gray-200">{verses.content}</p>
 						</div>
+					) : (
+						<>
+							<hr className="text-gray-300 dark:text-gray-600 my-4" />
+
+							<p className="mt-4 text-black dark:text-gray-300 text-sm">
+                Este versículo está guardado en la lista de aprendizaje:{" "}
+                <strong>{listsData?.listName}</strong>
+              </p>
+              <p className="mt-2 text-black dark:text-gray-300 text-sm">
+								No hay notas asociadas a este versículo. Oprime el botón{" "}
+								<strong>Editar</strong> para administrar tu versículo, añadir
+								notas y mucho más.
+							</p>
+						</>
 					)}
 				</ModalBody>
 				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-between">

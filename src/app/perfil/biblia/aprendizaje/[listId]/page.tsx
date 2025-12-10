@@ -18,16 +18,8 @@ export default async function ({
 		await sql`SELECT * FROM learning_list WHERE id = ${listId}`;
 
 	const { rows: memoryListItems } = await sql`
-    SELECT
-      mi.*
-    FROM
-      memory_item mi
-    JOIN
-      learning_list_memory_item_join mlij ON mi.id = mlij.memory_item_id
-    JOIN
-      learning_list ml ON mlij.memory_list_id = ml.id
-    WHERE
-      ml.id = ${listId};
+    SELECT * FROM learning_item WHERE
+    learning_list_id = ${listId};
   `;
 
 	if (learningList && (memoryListItems)) {

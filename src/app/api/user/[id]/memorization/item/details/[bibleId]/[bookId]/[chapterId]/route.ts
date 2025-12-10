@@ -34,23 +34,30 @@ export async function GET(
 	// Updated Query with LEFT JOIN
 	const { rows: userSavedVerses } = await sql`
     SELECT
-      mi.*,
-      join_table.memory_list_id as learning_list_id,
-      ll.name as learning_list_name
-    FROM memory_item mi
-    LEFT JOIN learning_list_memory_item_join join_table
-      ON mi.id = join_table.memory_item_id
+      li.*,
+      ll.name as learning_list_name,
+      ll.id as learning_list_id
+    FROM learning_item li
     LEFT JOIN learning_list ll
-      ON join_table.memory_list_id = ll.id
-    WHERE mi.by_user_id = ${id}
-      AND mi.bible_id = ${bibleId}
-      AND mi.book_id = ${bookId}
-      AND mi.chapter_id = ${chapterId}
+      ON li.learning_list_id = ll.id
+    WHERE
+      li.by_user_id = ${id} AND
+      li.bible_id = ${bibleId} AND
+      li.book_id = ${bookId} AND
+      li.chapter_id = ${chapterId}
   `;
+
+	if (userSavedVerses.length === 0) {
+		return NextResponse.json({
+			success: true,
+			message: "No hay versículos guardados.",
+			data: null
+		});
+	}
 
 	return NextResponse.json({
 		success: true,
-		message: "Success",
+		message: "Versículos solicitados correctamente.",
 		data: userSavedVerses
 	});
 }

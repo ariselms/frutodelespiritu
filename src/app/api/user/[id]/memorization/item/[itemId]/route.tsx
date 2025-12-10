@@ -51,7 +51,7 @@ export async function PUT(
 	} = body;
 
 	const { rows: MemoryItemExists } = await sql`
-    SELECT * FROM memory_item
+    SELECT * FROM learning_item
       WHERE id = ${itemId} AND by_user_id = ${by_user_id}
   `;
 
@@ -67,7 +67,7 @@ export async function PUT(
 	}
 
 	const { rows: updatedMemoryItem } = await sql`
-    UPDATE memory_item
+    UPDATE learning_item
       SET bible_book = ${bible_book},
           bible_id = ${bible_id},
           bible_name = ${bible_name},
