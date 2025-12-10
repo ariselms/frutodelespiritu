@@ -35,10 +35,13 @@ export async function GET(
 	const { rows: userSavedVerses } = await sql`
     SELECT
       mi.*,
-      join_table.memory_list_id as learning_list_id
+      join_table.memory_list_id as learning_list_id,
+      ll.name as learning_list_name
     FROM memory_item mi
     LEFT JOIN learning_list_memory_item_join join_table
       ON mi.id = join_table.memory_item_id
+    LEFT JOIN learning_list ll
+      ON join_table.memory_list_id = ll.id
     WHERE mi.by_user_id = ${id}
       AND mi.bible_id = ${bibleId}
       AND mi.book_id = ${bookId}

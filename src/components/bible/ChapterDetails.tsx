@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
 import { serverBaseUrl } from "@/static";
@@ -24,7 +24,7 @@ export function ChapterDetails({
 	ChapterInfo: any;
 	BibleName: string;
 }) {
-  // STATES //
+	// STATES //
 	const { user } = useAuthContext();
 	const pathname = usePathname();
 	const contentRef = useRef<HTMLDivElement>(null);
@@ -34,8 +34,11 @@ export function ChapterDetails({
 	const [isModalToPromptUserToLoginOpen, setIsModalToPromptUserToLoginOpen] =
 		useState<boolean>(false);
 	const [userSavedVerses, setUserSavedVerses] = useState<any>(null);
+	const [listsData, setListsData] = useState<
+		Array<{ listId: number | null; listName: string }>
+	>([{ listId: null, listName: "" }]);
 
-  // EFFECTS //
+	// EFFECTS //
 	// EFFECT 1: Effect for scrolling to a hash link if present in the URL
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -231,14 +234,23 @@ export function ChapterDetails({
 
 	// Effect 5: Set the icons after the bible verse to indicate that the user has saved something that includes the bible verse
 	useEffect(() => {
-
 		const content = contentRef.current;
 		if (!content || !userSavedVerses) return;
 
 		// Keep track of roots to unmount them cleanly later if needed
 		const roots: any[] = [];
 
+		console.log("userSavedVerses:", userSavedVerses);
+
 		userSavedVerses.forEach((memoryItem: any) => {
+
+			const learningListsData: { listId: number | null; listName: string } = {listId: null, listName: ""};
+
+      console.log(memoryItem)
+
+      learningListsData.listName = memoryItem.learning_list_name
+      learningListsData.listId = memoryItem.learning_list_id;
+
 			const verseSpan = content.querySelector(
 				`span[data-number="${memoryItem.verse_from}"]`
 			);
@@ -249,15 +261,7 @@ export function ChapterDetails({
 
 			parentP.classList.add("inline-flex");
 			parentP.classList.add("items-start");
-
-			// Prevent adding the icon if it's already there (optional check)
-			if (
-				!verseSpan ||
-				verseSpan.nextElementSibling?.getAttribute("data-icon-type") ===
-					"saved-verse"
-			) {
-				return;
-			}
+			parentP.classList.add("flex-wrap");
 
 			// 1. Create a container DOM element for the React component
 			const iconContainer = document.createElement("span");
@@ -272,19 +276,24 @@ export function ChapterDetails({
 			// 3. Use createRoot to render the interactive React component into the container
 			const root = createRoot(iconContainer);
 
-			root.render(<UserSavedVerses verses={memoryItem} />);
+			root.render(
+				<UserSavedVerses
+					verses={memoryItem}
+					listsData={learningListsData}
+				/>
+			);
 
 			roots.push(root);
 		});
 	}, [userSavedVerses, ChapterContent]);
 
-
-  // HANDLRES //
-  // HANDLER 1 fetch user saved verses
+	// HANDLRES //
+	// HANDLER 1 fetch user saved verses
 	const fetchUserSavedVerses = async () => {
 		if (!user) return;
 
 		try {
+      document.querySelectorAll('span[data-icon-type="saved-verse"]').forEach((el) => el.remove());
 			// request the memory_item where the by_user_id is the current user and the bible_id, book_id and chapter_id are matches
 			const requestUserSavedVerses = await fetch(
 				`${serverBaseUrl}/api/user/${user?.id}/memorization/item/details/${bibleId}/${bookId}/${chapterId}`
@@ -332,10 +341,11 @@ export function ChapterDetails({
 			)}
 
 			{/* Modal to inform the user to log in to use the feature */}
-      <ModalToPromptUserToLogin
-        isModalToPromptUserToLoginOpen={isModalToPromptUserToLoginOpen}
-        setIsModalToPromptUserToLoginOpen={setIsModalToPromptUserToLoginOpen}
-        pathname={pathname} />
+			<ModalToPromptUserToLogin
+				isModalToPromptUserToLoginOpen={isModalToPromptUserToLoginOpen}
+				setIsModalToPromptUserToLoginOpen={setIsModalToPromptUserToLoginOpen}
+				pathname={pathname}
+			/>
 		</>
 	);
 }

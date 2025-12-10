@@ -13,21 +13,21 @@ export const UserProfileNavigation: NavigationItemTypeWithAuth[] = [
 	{
 		name: "Biblia",
 		description:
-			"Administra tus notas y documentos relacionados con la Biblia. Esta función estará disponible pronto.",
+			"Administra tus listas de aprendizaje, versículos bíblicos y notas relacionadas a la Biblia.",
 		href: "/perfil/biblia",
 		requiresAdmin: false
 	},
 	{
 		name: "Lecturas",
 		description:
-			"Administra tus lecturas guardadas, así como tus recortes y notas relacionadas a las lecturas. Esta función estará muy pronto.",
+			"Administra tus lecturas guardadas, puedes volver a visitarlas en cualquier momento.",
 		href: "/perfil/lecturas",
 		requiresAdmin: false
 	},
 	{
 		name: "Órdenes",
 		description:
-			"Administra tus órdenes y revisa tu historial de compras. Esta función estará disponible en el 2026.",
+			"Administra tus órdenes y revisa tu historial de compras. Disponible en el 2026.",
 		href: "/perfil/ordenes",
 		requiresAdmin: false
 	},

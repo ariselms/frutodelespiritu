@@ -13,9 +13,6 @@ import {
 } from "flowbite-react";
 import { MemoryItemType } from "@/models/memorizationAndNotesTypes";
 import { useAuthContext } from "@/context/authContext";
-import { LordIconHover } from "@/components/animations/lordicon";
-import LOTTIE_TRASH_MORPH_TRASH_IN from "@/lotties/trash-bin-morph-trash-in.json";
-import LOTTIE_EDIT_DOCUMENT_HOVER_PINCH from "@/lotties/edit-document-hover-pinch.json";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import BiblePassageText from "@/components/bible/BiblePassageText";
@@ -49,9 +46,7 @@ export default function MemoryOrNoteItemList({
 		bibleId: string
 	) => {
 		try {
-			if (memoryOrNoteItem.title !== "" && memoryOrNoteItem.content !== "") {
-				return;
-			}
+      console.log(memoryOrNoteItem);
 
 			const requestDeleteMemoryItem = await fetch(
 				`/api/bible/memorization/${memoryOrNoteItem.id}?userId=${user?.id}&bibleId=${bibleId}`,
@@ -69,6 +64,9 @@ export default function MemoryOrNoteItemList({
 						(item) => String(item.id) !== String(memoryOrNoteItem.id)
 					)
 				);
+
+        toast.success("Elemento de aprendizaje eliminado correctamente.");
+
 			} else {
 				console.error(
 					"Failed to delete item:",
@@ -227,10 +225,10 @@ export default function MemoryOrNoteItemList({
 													name="content"
 												/>
 											</div>
-											<div className="flex items-center gap-4 mt-6 mb-4">
+											<div className="flex items-center flex-wrap gap-4 mt-6 mb-4">
 												<button
 													type="button"
-													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all"
+													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all w-full"
 													// FIX 3: Pass the entire listItem to state
 													onClick={() =>
 														handleUpdateMemoryOrNoteItem(listItem)

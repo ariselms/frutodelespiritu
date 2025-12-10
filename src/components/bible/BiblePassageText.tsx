@@ -4,7 +4,7 @@ import { Verse } from "@/models/memorizationAndNotesTypes";
 // TODO: add a prop to indicate if it's being used in memory mode or a regular passage view
 export default function BiblePassageText({
 	chapterContent,
-	mode
+	mode,
 } : {
 	chapterContent: any;
 	mode?: "memory" | "regular";
@@ -39,7 +39,7 @@ export default function BiblePassageText({
 							`-${chapterContent.verse_to}`}
 					</span>
 
-					<div className="max-w-[75%] xl:max-w-[80ch] overflow-auto">
+					<div className="w-full max-w-[80ch] overflow-auto">
 						{chapterVersicles.map((chapterData, index) => (
 							<BibleContentBuilder chapterData={chapterData} key={index} />
 						))}

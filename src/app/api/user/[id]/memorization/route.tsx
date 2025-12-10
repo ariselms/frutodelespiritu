@@ -5,8 +5,7 @@ import { isAuthenticated } from "@/helpers/server";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
-
-  // Check if the user is authenticated
+	// Check if the user is authenticated
 	const userAuthenticated = await isAuthenticated();
 
 	if (!userAuthenticated) {
@@ -82,7 +81,6 @@ export async function POST(request: Request) {
 	const userId = Number(searchParams.get("userId"));
 
 	try {
-
 		const body = await request.json();
 
 		const { selectedLearningList, memorizationData } = body;
@@ -105,7 +103,6 @@ export async function POST(request: Request) {
 
 		// check if the selected memorization list exists
 		if (selectedLearningList !== "") {
-
 			// get the memorization list id to use in new learning_list_memory_item_join
 			const { rows: learningList } = await sql`
         SELECT * FROM learning_list
@@ -142,13 +139,51 @@ export async function POST(request: Request) {
       `;
 
 			if (memoryItemExist.length > 0) {
+				// check if the memory item is already in the selected learning list
+				const { rows: memoryItemInLearningList } = await sql`
+          SELECT * FROM learning_list_memory_item_join
+          WHERE
+            memory_item_id = ${memoryItemExist[0].id} AND
+            memory_list_id = ${learningList[0].id}
+        `;
+
+				if (memoryItemInLearningList.length > 0) {
+					return NextResponse.json(
+						{
+							success: false,
+							message: "Esta selección ya ha sido guardada.",
+							data: null
+						},
+						{ status: 400 }
+					);
+				}
+
+				// if it doesnt exist, proceed to insert the join relation
+				const { rowCount: joinRowCount } = await sql`
+          INSERT INTO
+            learning_list_memory_item_join (memory_list_id, memory_item_id)
+            VALUES (${learningList[0].id}, ${memoryItemExist[0].id})
+          RETURNING *
+        `;
+
+				if (joinRowCount === 0) {
+					return NextResponse.json(
+						{
+							success: false,
+							message: "Error al guardar.",
+							data: null
+						},
+						{ status: 500 }
+					);
+				}
+
 				return NextResponse.json(
 					{
-						success: false,
-						message: "Esta selección ya ha sido guardada.",
+						success: true,
+						message: "La selección ha sido guardada correctamente.",
 						data: null
 					},
-					{ status: 400 }
+					{ status: 200 }
 				);
 			}
 
@@ -212,7 +247,6 @@ export async function POST(request: Request) {
 
 		// if there is no name or description, means that a new memorization list needs to be created
 		if (name !== "" && description !== "") {
-
 			// create a new list
 			const { rows: newMemorizationList, rowCount } = await sql`
         INSERT INTO learning_list (by_user_id, name, description)
@@ -245,7 +279,6 @@ export async function POST(request: Request) {
 			);
 		}
 	} catch (error) {
-
 		console.error("Error creando memorización: ", error);
 
 		if (
@@ -265,7 +298,9 @@ export async function POST(request: Request) {
 		return NextResponse.json(
 			{
 				success: false,
-				message: "Error creating memorization: " + (error instanceof Error ? `: ${error.message}` : ""),
+				message:
+					"Error creating memorization: " +
+					(error instanceof Error ? `: ${error.message}` : ""),
 				data: null
 			},
 			{ status: 500 }
