@@ -238,7 +238,7 @@ export default function MemoryOrNoteItemList({
 												<Link
 													href={`/biblia/libros/capitulos/versiculos/${listItem.bible_id}/${listItem.book_id}/${listItem.chapter_id}/#${listItem.verse_from}`}
 													type="button"
-													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800 cursor-pointer dark:border-blue-600 border border-blue-100 transition-all">
+													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all w-full">
 													Ir al capítulo
 												</Link>
 												<button
