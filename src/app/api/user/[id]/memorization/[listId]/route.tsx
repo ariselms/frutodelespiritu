@@ -30,19 +30,23 @@ export async function DELETE(
 
   const { listId } = await params;
 
+  console.log("Deleting list and related items for listId:", listId);
+
   try {
 
-    console.log("List id: ", listId)
 
-    // delete item from learning_item table
+    await sql`
+      DELETE FROM learning_item
+      WHERE learning_list_id = ${listId}
+    `;
+
+    // delete item from learning_item table in cascade
     const { rows: itemToDelete } = await sql`
       DELETE FROM
         learning_list WHERE
         id = ${listId}
       RETURNING *
     `;
-
-    console.log("Deleted Item:", itemToDelete);
 
     if(itemToDelete.length === 0) {
       return NextResponse.json(
