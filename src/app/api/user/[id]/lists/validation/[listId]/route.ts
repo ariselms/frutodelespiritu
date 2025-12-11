@@ -4,7 +4,7 @@ import { isAuthenticated } from "@/helpers/server";
 
 export async function POST(
 	request: Request,
-	{ params }: { params: Promise<{ id: number; listId: string }> }
+	{ params }: { params: Promise<{ id: string; listId: string }> }
 ) {
 	// Check if the user is authenticated
 	const userAuthenticated = await isAuthenticated();
@@ -35,8 +35,6 @@ export async function POST(
 		passage_text,
 		bible_book,
 		bible_name,
-    note_title,
-    note_content
 	} = memorizationData;
 
 	if (!id) {
@@ -92,7 +90,7 @@ export async function POST(
 	return NextResponse.json(
 		{
 			success: true,
-			message: "El versículo no está en la lista de aprendizaje.",
+			message: "Versículo encontrado en la lista de aprendizaje.",
 			data: memoryItemExist[0]
 		},
 		{ status: 200 }
