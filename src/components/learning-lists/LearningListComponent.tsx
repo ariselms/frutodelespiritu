@@ -19,11 +19,12 @@ import {
 	Spinner
 } from "flowbite-react";
 import MemorizationListPaginationComponent from "@/components/learning-lists/TanStackPaginationComponent";
-import { toast } from "react-toastify";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 import { DeleteUserListOrNoteType, NoteOrMemoryListType } from "@/models/memorizationAndNotesTypes";
 
 export default function MemorizationListComponent() {
+
 	const { user } = useAuthContext();
 
 	// loading state
@@ -64,7 +65,9 @@ export default function MemorizationListComponent() {
         newUserList.description === ""
       ) {
 
-				toast.warning("Todos los campos son requeridos");
+				toast.error("Todos los campos son requeridos", {
+					duration: 5000
+				});
 
 				return;
 			}
@@ -113,7 +116,10 @@ export default function MemorizationListComponent() {
 					responseNewMemorizationListItem.data
 				]);
 
-				toast.success("Lista creada!");
+				toast.success("Lista creada!", {
+					duration: 5000
+				});
+
 			}
 		} catch (error) {
 			console.error("Error creating new item:", error);
@@ -134,7 +140,9 @@ export default function MemorizationListComponent() {
 					prevLists.filter((list) => list.id !== listId)
 				);
 
-				toast.success("Lista eliminada!");
+				toast.success("Lista eliminada!", {
+					duration: 5000
+				});
 			}
 		} catch (error) {
 			console.error("Error deleting item:", error);
@@ -164,15 +172,22 @@ export default function MemorizationListComponent() {
 			const responseMemoryListItem = await requestUpdateMemoryListItem.json();
 
 			if (responseMemoryListItem.success) {
-				toast.success("Lista actualizada!");
+
+				toast.success("Lista actualizada!", {
+					duration: 5000
+				});
+
 				setUserMemorizationLists((prevLists) =>
 					prevLists.map((list) =>
 						list.id === updatedItem.id ? updatedItem : list
 					)
 				);
+
 			} else {
 				// Handle API errors
-				toast.error("Error al actualizar la lista.");
+				toast.error("Error al actualizar la lista.", {
+					duration: 5000
+				});
 				console.error(responseMemoryListItem.message);
 			}
 		} catch (error) {

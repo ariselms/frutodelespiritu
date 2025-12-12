@@ -1,7 +1,7 @@
 "use client";
 import { FetchEndpoints } from "@/static";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function SubscriberForm() {
 	const [email, setEmail] = useState<string>("");
@@ -23,7 +23,9 @@ export default function SubscriberForm() {
 			if (response.success) {
 				setEmail("");
 
-				toast.success(response.message);
+				toast.success(response.message, {
+          duration: 5000,
+        });
 			}
 		} catch (error) {
 			console.error("Error submitting email:", error);

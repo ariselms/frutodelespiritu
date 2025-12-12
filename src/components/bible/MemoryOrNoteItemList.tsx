@@ -13,8 +13,8 @@ import {
 } from "flowbite-react";
 import { MemoryItemType } from "@/models/memorizationAndNotesTypes";
 import { useAuthContext } from "@/context/authContext";
+import { toast } from "react-hot-toast";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import BiblePassageText from "@/components/bible/BiblePassageText";
 
 export default function MemoryOrNoteItemList({
@@ -22,6 +22,7 @@ export default function MemoryOrNoteItemList({
 }: {
 	memoryOrNoteListItems: MemoryItemType[] | null;
 }) {
+
 	const { user } = useAuthContext();
 
 	// add state to track the item being deleted using the id and name
@@ -35,9 +36,13 @@ export default function MemoryOrNoteItemList({
 
 	// simplified useEffect to sync prop to state
 	useEffect(() => {
+
 		if (memoryOrNoteListItems !== null) {
+
 			setMemoryOrNoteList(memoryOrNoteListItems);
+
 		}
+
 	}, [memoryOrNoteListItems]); // Only depends on the prop
 
 	// TODO: make this function reusable to also delete memory item in bible reading modal when the user click the selected saved verses
@@ -46,7 +51,6 @@ export default function MemoryOrNoteItemList({
 		bibleId: string
 	) => {
 		try {
-      console.log(memoryOrNoteItem);
 
 			const requestDeleteMemoryItem = await fetch(
 				`/api/bible/memorization/${memoryOrNoteItem.id}?userId=${user?.id}&bibleId=${bibleId}`,
@@ -65,16 +69,22 @@ export default function MemoryOrNoteItemList({
 					)
 				);
 
-        toast.success("Elemento de aprendizaje eliminado correctamente.");
+        toast.success("Elemento de aprendizaje eliminado correctamente.", {
+					duration: 5000
+				});
 
 			} else {
+
 				console.error(
 					"Failed to delete item:",
 					responseDeleteMemoryItem.message
 				);
+
 			}
 		} catch (error) {
+
 			console.error("Error during delete request:", error);
+
 		}
 	};
 
@@ -82,8 +92,13 @@ export default function MemoryOrNoteItemList({
 		memoryOrNoteItem: MemoryItemType
 	) => {
 		try {
+
 			if (memoryOrNoteItem.title === "" || memoryOrNoteItem.content === "") {
-				toast.warning("El título y contenido de la nota son requeridos.");
+
+				toast.error("El título y contenido de la nota son requeridos.", {
+					duration: 5000
+				});
+
 				return;
 			}
 
@@ -110,7 +125,10 @@ export default function MemoryOrNoteItemList({
 					)
 				);
 
-				toast.success("Elemento de aprendizaje actualizado correctamente.");
+				toast.success("Elemento de aprendizaje actualizado correctamente.", {
+					duration: 5000
+				});
+
 			} else {
 				console.error(
 					"Failed to update item:",

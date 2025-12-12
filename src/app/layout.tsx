@@ -1,11 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import MainHeader from "@/components/layout/MainHeader";
-import MainFooter from "@/components/layout/MainFooter";
+import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeModeScript } from "flowbite-react";
 import { AuthContextProvider } from "@/context/authContext";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next";
+import MainHeader from "@/components/layout/MainHeader";
+import MainFooter from "@/components/layout/MainFooter";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -36,7 +36,9 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AuthContextProvider>
-				<ToastContainer theme="dark"/>
+				<Toaster
+          position="top-center"
+        />
 					<MainHeader />
 					{children}
 					<MainFooter />

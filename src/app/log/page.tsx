@@ -3,13 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/authContext";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { Spinner } from "flowbite-react";
 import { useSearchParams } from "next/navigation";
 import { FetchEndpoints } from "@/static";
 
 export default function LogPage() {
-
 	const router = useRouter();
 	const { user } = useAuthContext();
 	const [email, setEmail] = useState<string>("");
@@ -17,7 +16,7 @@ export default function LogPage() {
 	const [codeSent, setCodeSent] = useState<boolean>(false);
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
-  const searchParams = useSearchParams();
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
 		if (user) {
@@ -26,11 +25,9 @@ export default function LogPage() {
 	}, [user, router]);
 
 	const handleEmailSubmit = async (e: React.FormEvent) => {
-
 		e.preventDefault();
 
 		try {
-
 			setProcessing(true);
 
 			const request = await fetch("/api/log", {
@@ -44,28 +41,40 @@ export default function LogPage() {
 			const response = await request.json();
 
 			if (response.success) {
+
 				setCodeSent(true);
 
-				toast.success(response.message || "Código enviado exitosamente.");
+        toast.success(response.message, {
+          duration: 5000,
+        });
+
 			} else {
+
 				setError(
 					response.message || "An error occurred while submitting the code."
 				);
+
 			}
 		} catch (error) {
+
 			console.error("Error submitting email:", error);
 			setError(
 				"An error occurred while submitting your email. Please try again."
 			);
+
 		} finally {
+
 			setProcessing(false);
+
 		}
 	};
 
 	const handleCodeSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
+
+    e.preventDefault();
 
 		try {
+
 			setProcessing(true);
 
 			if (!code || !email) {
@@ -73,8 +82,11 @@ export default function LogPage() {
 			}
 
 			if (code.length !== 6) {
+
 				const errorMessage = "El código debe tener 6 digitos";
+
 				throw new Error(errorMessage);
+
 			}
 
 			const request = await fetch(FetchEndpoints.Auth.Post, {
@@ -89,23 +101,29 @@ export default function LogPage() {
 
 			if (response.success && searchParams.get("redirectUrl") !== null) {
 
-        const redirectUrl: string = String(searchParams.get("redirectUrl"));
+				const redirectUrl: string = String(searchParams.get("redirectUrl"));
 
 				router.push(redirectUrl);
 
-				toast.success(response.message);
+        toast.success(response.message, {
+					duration: 5000,
+				});
 
 			} else if (response.success && searchParams.get("redirectUrl") === null) {
 
         router.push("/perfil");
 
-				toast.success(response.message);
+				toast.success(response.message, {
+					duration: 5000,
+				});
 
-      } else {
+			} else {
 
         console.error(response.message);
 
-        toast.error(response.message);
+        toast.error(response.message, {
+					duration: 5000,
+				});
 
 			}
 		} catch (error) {
@@ -113,11 +131,9 @@ export default function LogPage() {
 			console.error(error);
 
 			const errorMessage =
-				error instanceof Error
-          ? error.message
-          : "An error occurred";
+				error instanceof Error ? error.message : "An error occurred";
 
-      setError(errorMessage);
+			setError(errorMessage);
 
 		} finally {
 

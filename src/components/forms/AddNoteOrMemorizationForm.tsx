@@ -3,20 +3,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
-import {
-	Button,
-	Modal,
-	ModalBody,
-	ModalHeader,
-	ModalFooter
-} from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { BibleCrudActions } from "@/static";
 import { useFetchUserLearningLists } from "@/hooks";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
 import { BottomDrawerTheme } from "@/components/theme/index";
 import { BibleBookType } from "@/models/bibleTypes";
-import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 import { LordIconHover } from "@/components/animations/lordicon/index";
 import LOTTIE_BRAIN_HOVER_PINCH from "@/lotties/brain-hover-pinch.json";
 import LOTTIE_NOTEBOOK_1_HOVER_PINCH from "@/lotties/notebook-1-hover-pinch.json";
@@ -26,6 +19,7 @@ import {
 	MemoryItemType,
 	NoteOrMemoryListType
 } from "@/models/memorizationAndNotesTypes";
+import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
 
 export default function AddNoteOrMemorizationForm({
 	bibleId,
@@ -167,7 +161,9 @@ export default function AddNoteOrMemorizationForm({
 		e.preventDefault();
 
 		if (!selectedLearningList) {
-			toast.warn("Debes seleccionar una lista de aprendizaje");
+			toast.error("Debes seleccionar una lista de aprendizaje", {
+				duration: 5000
+			});
 
 			return;
 		}
@@ -175,7 +171,9 @@ export default function AddNoteOrMemorizationForm({
 		try {
 			if (action === BibleCrudActions.note) {
 				if (!userNote.title || !userNote.content) {
-					toast.warn("El título y el contenido de la nota son obligatorios.");
+					toast.error("El título y el contenido de la nota son obligatorios.", {
+						duration: 5000
+					});
 					return;
 				}
 
@@ -209,9 +207,13 @@ export default function AddNoteOrMemorizationForm({
 					// clear the bibleData
 					setBibleData(null);
 
-					toast.success("Nota guardada correctamente.");
+					toast.success("Nota guardada correctamente.", {
+						duration: 5000
+					});
 				} else {
-					toast.error(notePostResponse.message);
+					toast.error(notePostResponse.message, {
+						duration: 5000
+					});
 
 					return;
 				}
@@ -248,9 +250,13 @@ export default function AddNoteOrMemorizationForm({
 					// clear the bibleData
 					setBibleData(null);
 
-					toast.success("Memorización guardada correctamente.");
+					toast.success("Memorización guardada correctamente.", {
+						duration: 5000
+					});
 				} else {
-					toast.error(memorizationPostResponse.message);
+					toast.error(memorizationPostResponse.message, {
+						duration: 5000
+					});
 
 					return;
 				}
@@ -275,7 +281,6 @@ export default function AddNoteOrMemorizationForm({
 		// filter the userLearningLists to get the list data
 		const listData = userLearningLists.filter((list) => list.name === listName);
 
-
 		const listId = listData[0]?.id;
 
 		const listDataRequest = await fetch(
@@ -295,7 +300,7 @@ export default function AddNoteOrMemorizationForm({
 
 		// 2. check if the memorization data exists in that list
 		if (listDataResponse.success) {
-      console.log(listDataResponse);
+			console.log(listDataResponse);
 			// if it exists, set the note data to the userNote state
 			setUserNote({
 				title: listDataResponse.data?.title,
@@ -313,21 +318,16 @@ export default function AddNoteOrMemorizationForm({
 			} else {
 				setContentFieldHasValue(false);
 			}
+		} else {
+			// if it doesn't exist, clear the userNote state
+			setUserNote({
+				title: "",
+				content: ""
+			});
 
-    } else {
-      // if it doesn't exist, clear the userNote state
-      setUserNote({
-        title: "",
-        content: ""
-      });
-
-      setTitleFieldHasValue(false);
-      setContentFieldHasValue(false);
-    }
-		// 3. if it exists, set the note data to the userNote state
-		// 4. if it exists, update the button from Guardar to Actualizar
-		// 5. if it doesn't exist, it is a new note to be added
-		// NOTE: There is a fundamental issue on what I need to do to be able to fetch the user notes and memorization items properly, I need to remove the many to many relationshop and make it a one to many relationship, so each memorization item or note belongs to one learning list only. This will make it easier to fetch the data and avoid complex queries.
+			setTitleFieldHasValue(false);
+			setContentFieldHasValue(false);
+		}
 	};
 
 	return (
@@ -339,6 +339,7 @@ export default function AddNoteOrMemorizationForm({
 				onClose={() => setOpenModal(false)}
 				backdrop={false}
 				position="bottom">
+
 				<DrawerHeader
 					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-blue-100 dark:border-gray-600 mb-6"
 					title={
@@ -432,10 +433,12 @@ export default function AddNoteOrMemorizationForm({
 								) : null}
 
 								<div className="w-full">
+
 									<Button
 										className="p-4 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full gap-0.5"
 										onClick={() => setIsAddMemorizationListFormOpen(true)}
 										type="button">
+
 										<LordIconHover
 											size={24}
 											ICON_SRC={
@@ -445,7 +448,9 @@ export default function AddNoteOrMemorizationForm({
 											}
 											state="hover-pinch"
 											text="Crear nueva lista de aprendizaje"></LordIconHover>
+
 									</Button>
+
 									{action === BibleCrudActions.note && (
 										<div className="mt-6 mb-2">
 											<div className="mb-3">
@@ -494,6 +499,7 @@ export default function AddNoteOrMemorizationForm({
 											</div>
 										</div>
 									)}
+
 									<Button
 										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full gap-0.5"
 										type="submit">
@@ -508,12 +514,15 @@ export default function AddNoteOrMemorizationForm({
 												: "pasaje con nota"}
 										</span>
 									</Button>
+
 								</div>
 							</form>
 						</div>
 					</div>
 				</DrawerItems>
+
 			</Drawer>
+
 			<AddNewLearningListForm
 				isAddLearningListFormOpen={isAddLearningListFormOpen}
 				setIsAddMemorizationListFormOpen={setIsAddMemorizationListFormOpen}
@@ -588,16 +597,22 @@ const AddNewLearningListForm = ({
 
 				getUserLearningLists();
 
-				toast.success(memorizationPostResponse.message);
+				toast.success(memorizationPostResponse.message, {
+					duration: 5000
+				});
 
 			} else {
 
-				toast.error(memorizationPostResponse.message);
+				toast.error(memorizationPostResponse.message, {
+					duration: 5000
+				});
 
 			}
 		} catch (error) {
+
 			console.error("Error creating new memorization list:", error);
-		}
+
+    }
 	};
 
 	return (

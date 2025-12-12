@@ -11,8 +11,8 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { UserType } from "@/models/userTypes";
 import { useAuthContext } from "@/context/authContext";
-import { toast } from "react-toastify";
-import { ModalUserProfileTheme, BottomDrawerTheme } from "@/components/theme";
+import { toast } from "react-hot-toast";
+import { ModalUserProfileTheme } from "@/components/theme";
 import { FetchEndpoints } from "@/static";
 
 export function UserProfileForm() {
@@ -84,14 +84,24 @@ export function UserProfileForm() {
 
         // check file size must be less or equal to 4.5MB
         if (file && file?.size > 4500000) {
-          toast.error("La imagen de perfil debe ser menor o igual a 4.5MB");
+
+          toast.error("La imagen de perfil debe ser menor o igual a 4.5MB", {
+            duration: 5000
+          });
+
           return;
+
         }
 
         // check if file is an image
         if (file && !file?.type.startsWith("image/")) {
-          toast.error("El archivo debe ser una imagen");
+
+          toast.error("El archivo debe ser una imagen", {
+            duration: 5000
+          });
+
           return;
+
         }
 
         const fileRequest = await fetch(
@@ -105,7 +115,9 @@ export function UserProfileForm() {
         const fileResponse = await fileRequest.json();
 
         if(fileResponse.success){
+
           new_image_url = fileResponse.data.url;
+
         }
       }
 
@@ -123,13 +135,17 @@ export function UserProfileForm() {
 
 			if (!response.success) {
 
-				toast.error(response.message);
+				toast.error(response.message, {
+          duration: 5000
+        });
 
 				throw new Error(response.message);
 
 			}
 
-			toast.success(response.message);
+			toast.success(response.message, {
+				duration: 5000
+			});
 
 			setOpenModal(false);
 

@@ -12,7 +12,7 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { ArticleType } from "@/models/articlesTypes";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 // --- New TanStack Imports ---
 import {
@@ -46,32 +46,47 @@ export default function UserLecturesPage() {
 	const fetchUserLectures = async () => {
 		setLoading(true);
 		try {
+
 			if (!user) return; // Guard clause
-			const requestUserLectures = await fetch(
+
+      const requestUserLectures = await fetch(
 				`/api/user/lectures/saved?userId=${user.id}`
 			);
-			const responseUserLectures = await requestUserLectures.json();
+
+      const responseUserLectures = await requestUserLectures.json();
 
 			if (!responseUserLectures.success) {
 				throw new Error("Failed to fetch user lectures");
 			}
-			setUserLectures(responseUserLectures.data);
+
+      setUserLectures(responseUserLectures.data);
 		} catch (error) {
-			console.error("Error fetching user lectures:", error);
-			toast.error("No se pudieron cargar las lecturas.");
-		} finally {
-			setLoading(false);
-		}
+
+      console.error("Error fetching user lectures:", error);
+
+      toast.error("No se pudieron cargar las lecturas.", {
+        duration: 5000,
+      });
+
+    } finally {
+
+      setLoading(false);
+
+    }
 	};
 
 	useEffect(() => {
-		if (user) {
-			fetchUserLectures();
-		}
+
+    if (user) {
+
+      fetchUserLectures();
+
+    }
 	}, [user]);
 
 	// --- Updated Delete Handler (with Optimistic Update) ---
 	const handleSavedLectureRemoved = async (lectureId: number) => {
+
 		try {
 			const request = await fetch(
 				`/api/user/lectures/saved?userId=${user.id}&lectureId=${lectureId}`,
@@ -86,18 +101,31 @@ export default function UserLecturesPage() {
 			const response = await request.json();
 
 			if (response.success) {
-				toast.success(response.message);
+
+        toast.success(response.message, {
+          duration: 5000,
+        });
 
 				// Optimistic update: remove item from state directly
 				setUserLectures((prevLectures) =>
 					prevLectures.filter((lecture) => lecture.id !== lectureId)
 				);
+
 			} else {
-				toast.error(response.message);
+
+				toast.error(response.message, {
+					duration: 5000
+				});
+
 			}
 		} catch (error) {
+
 			console.error("Error removing saved lecture:", error);
-			toast.error("Error al remover la lectura.");
+
+			toast.error("Error al remover la lectura.", {
+				duration: 5000
+			});
+
 		}
 	};
 
