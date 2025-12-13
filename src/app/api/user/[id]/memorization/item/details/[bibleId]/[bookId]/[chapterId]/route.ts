@@ -42,7 +42,6 @@ export async function GET(
       ON li.learning_list_id = ll.id
     WHERE
       li.by_user_id = ${id} AND
-      li.bible_id = ${bibleId} AND
       li.book_id = ${bookId} AND
       li.chapter_id = ${chapterId}
   `;

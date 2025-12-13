@@ -13,7 +13,6 @@ export default function UserSavedVerses({
 	verses: any;
 	listsData: { listId: number | null; listName: string };
 }) {
-
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
 
@@ -49,30 +48,32 @@ export default function UserSavedVerses({
 				<ModalBody>
 					<BiblePassageText chapterContent={verses} />
 					{verses.title && verses.content ? (
-						<div className="mt-8 mb-3">
-							<small className="text-sm text-black dark:text-gray-300">
-								<strong>Nota en lista de aprendizaje: </strong>
-								{listsData?.listName}
-							</small>
+						<>
+							<hr className="text-blue-300 dark:text-gray-300 my-6" />
+							<div>
+								<small className="text-base text-black dark:text-gray-300">
+									<strong>Nota en lista de aprendizaje: </strong>
+									{listsData?.listName}
+								</small>
 
-							<hr className="text-black dark:text-gray-300" />
-
-							<h2 className="font-bold text-2xl text-black dark:text-gray-100 my-2">
-								{verses.title}
-							</h2>
-              <div className={styles.ReactAdminContainer}>
-                <div  dangerouslySetInnerHTML={{ __html: verses.content }}></div>
-              </div>
-						</div>
+								<h2 className="font-bold text-2xl text-black dark:text-gray-100 mt-2 mb-4">
+									{verses.title}
+								</h2>
+								<div className={styles.ReactAdminContainer}>
+									<div
+										dangerouslySetInnerHTML={{ __html: verses.content }}></div>
+								</div>
+							</div>
+						</>
 					) : (
 						<>
 							<hr className="text-gray-300 dark:text-gray-600 my-4" />
 
 							<p className="mt-4 text-black dark:text-gray-300 text-sm">
-                Este versículo está guardado en la lista de aprendizaje:{" "}
-                <strong>{listsData?.listName}</strong>
-              </p>
-              <p className="mt-2 text-black dark:text-gray-300 text-sm">
+								Este versículo está guardado en la lista de aprendizaje:{" "}
+								<strong>{listsData?.listName}</strong>
+							</p>
+							<p className="mt-2 text-black dark:text-gray-300 text-sm">
 								No hay notas asociadas a este versículo. Oprime el botón{" "}
 								<strong>Editar</strong> para administrar tu versículo, añadir
 								notas y mucho más.

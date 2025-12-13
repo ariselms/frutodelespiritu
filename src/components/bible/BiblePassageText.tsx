@@ -27,7 +27,8 @@ export default function BiblePassageText({
 			return (
 				<>
 					<span className="block mb-4 text-black dark:text-gray-300">
-						{chapterContent.bible_name.toUpperCase()}
+						<strong>Pasaje(s) en la biblia:</strong>{" "}
+            <span className="underline underline-offset-4">{chapterContent.bible_name}</span>
 					</span>
 
 					<span className="block mb-4 font-bold text-2xl text-black dark:text-gray-200">
