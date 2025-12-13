@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import {
 	Editor,
 	EditorProvider,
@@ -11,11 +11,8 @@ import {
 	BtnUnderline,
 	BtnLink,
 	BtnStrikeThrough,
-	BtnStyles,
 	BtnUndo,
 	BtnRedo,
-	BtnClearFormatting,
-	HtmlButton
 } from "react-simple-wysiwyg";
 
 export default function TextEditor({
@@ -28,6 +25,7 @@ export default function TextEditor({
   disabled: boolean
 }) {
 	const handleEditorChange = (event: any) => {
+
 		// support different event shapes the editor might emit:
 		// - event.html
 		// - event.target.value
@@ -41,13 +39,14 @@ export default function TextEditor({
 			(typeof event === "string" ? event : String(event));
 
 		onChange(html);
+
 	};
 
 	return (
 		<EditorProvider>
 			<Editor
         disabled={disabled}
-				className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+				className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer transition-all duration-300 ease-in w-full"
 				style={{ width: "100%", minHeight: "150px" }}
 				value={value}
 				onChange={handleEditorChange}>
