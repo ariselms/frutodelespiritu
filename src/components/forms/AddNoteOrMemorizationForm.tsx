@@ -302,7 +302,6 @@ export default function AddNoteOrMemorizationForm({
 
 		// 2. check if the memorization data exists in that list
 		if (listDataResponse.success) {
-			console.log(listDataResponse);
 			// if it exists, set the note data to the userNote state
 			setUserNote({
 				title: listDataResponse.data?.title,

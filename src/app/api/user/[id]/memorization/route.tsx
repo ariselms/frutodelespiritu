@@ -85,8 +85,6 @@ export async function POST(request: Request) {
 
 		const { selectedLearningList, memorizationData } = body;
 
-    console.log(body);
-
 		const {
 			by_user_id,
 			bible_id, // bible id (abbreviation)
@@ -145,8 +143,6 @@ export async function POST(request: Request) {
           title = ${note_title} AND
           content = ${note_content}
       `;
-
-      console.log("memoryItemExist:", memoryItemExist);
 
       // if the memory item exists
 			if (memoryItemExist.length > 0) {

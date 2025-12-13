@@ -30,8 +30,6 @@ export async function DELETE(
 
   const { listId } = await params;
 
-  console.log("Deleting list and related items for listId:", listId);
-
   try {
 
 

@@ -17,8 +17,6 @@ export default function UserSavedVerses({
 	const [isUserSavedVerseModalOpen, setIsUserSelectedModalOpen] =
 		useState(false);
 
-  console.log(listsData.listName);
-
 	return (
 		<>
 			<span className="relative">

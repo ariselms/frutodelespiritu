@@ -239,8 +239,6 @@ export function ChapterDetails({
 
 		userSavedVerses.forEach((learningItem: any) => {
 
-      console.log(learningItem)
-
 			const learningListsData: { listId: number | null; listName: string } = {listId: null, listName: ""};
 
       learningListsData.listName = learningItem.learning_list_name
