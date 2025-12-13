@@ -16,13 +16,14 @@ import { useAuthContext } from "@/context/authContext";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import BiblePassageText from "@/components/bible/BiblePassageText";
+import TextEditor from "@/components/bible/TextEditor";
+import styles from "@/components/admin/react-admin-styles.module.css";
 
 export default function MemoryOrNoteItemList({
 	memoryOrNoteListItems
 }: {
 	memoryOrNoteListItems: MemoryItemType[] | null;
 }) {
-
 	const { user } = useAuthContext();
 
 	// add state to track the item being deleted using the id and name
@@ -36,13 +37,9 @@ export default function MemoryOrNoteItemList({
 
 	// simplified useEffect to sync prop to state
 	useEffect(() => {
-
 		if (memoryOrNoteListItems !== null) {
-
 			setMemoryOrNoteList(memoryOrNoteListItems);
-
 		}
-
 	}, [memoryOrNoteListItems]); // Only depends on the prop
 
 	// TODO: make this function reusable to also delete memory item in bible reading modal when the user click the selected saved verses
@@ -51,7 +48,6 @@ export default function MemoryOrNoteItemList({
 		bibleId: string
 	) => {
 		try {
-
 			const requestDeleteMemoryItem = await fetch(
 				`/api/bible/memorization/${memoryOrNoteItem.id}?userId=${user?.id}&bibleId=${bibleId}`,
 				{
@@ -69,22 +65,17 @@ export default function MemoryOrNoteItemList({
 					)
 				);
 
-        toast.success("Elemento de aprendizaje eliminado correctamente.", {
+				toast.success("Elemento de aprendizaje eliminado correctamente.", {
 					duration: 5000
 				});
-
 			} else {
-
 				console.error(
 					"Failed to delete item:",
 					responseDeleteMemoryItem.message
 				);
-
 			}
 		} catch (error) {
-
 			console.error("Error during delete request:", error);
-
 		}
 	};
 
@@ -92,9 +83,7 @@ export default function MemoryOrNoteItemList({
 		memoryOrNoteItem: MemoryItemType
 	) => {
 		try {
-
 			if (memoryOrNoteItem.title === "" || memoryOrNoteItem.content === "") {
-
 				toast.error("El título y contenido de la nota son requeridos.", {
 					duration: 5000
 				});
@@ -128,7 +117,6 @@ export default function MemoryOrNoteItemList({
 				toast.success("Elemento de aprendizaje actualizado correctamente.", {
 					duration: 5000
 				});
-
 			} else {
 				console.error(
 					"Failed to update item:",
@@ -228,20 +216,19 @@ export default function MemoryOrNoteItemList({
 													htmlFor="content">
 													Contenido
 												</label>
-												<textarea
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
-													id="content"
-													rows={4}
-													value={listItem.content || ""}
-													onChange={(e) =>
-														handleInputChange(
-															listItem.id,
-															"content",
-															e.target.value
-														)
-													}
-													name="content"
-												/>
+												<div className={styles.ReactAdminContainer}>
+													<TextEditor
+														disabled={false}
+														value={listItem.content || ""}
+                            onChange={(value: string) =>
+                              handleInputChange(
+                              listItem.id,
+                              "content",
+                              value
+                              )
+                            }
+													/>
+												</div>
 											</div>
 											<div className="flex items-center flex-wrap gap-4 mt-6 mb-4">
 												<button

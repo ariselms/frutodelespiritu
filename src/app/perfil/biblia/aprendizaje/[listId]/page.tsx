@@ -31,8 +31,11 @@ export default async function ({
 
 	return (
 		<div className="w-full bg-white dark:bg-gray-800 text-blue-950 dark:text-gray-50">
+
 			<section className="container mx-auto p-4 text-lg">
+
 				<div className="flex items-center flex-wrap justify-between gap-x-1">
+
 					<Link
 						href="/perfil/biblia"
 						className="text-blue-900 hover:text-blue-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 my-4 flex items-center">

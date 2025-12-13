@@ -20,6 +20,8 @@ import {
 	NoteOrMemoryListType
 } from "@/models/memorizationAndNotesTypes";
 import BibleContentBuilder from "@/components/bible/BibleContentBuilder";
+import TextEditor from "@/components/bible/TextEditor";
+import styles from "@/components/admin/react-admin-styles.module.css";
 
 export default function AddNoteOrMemorizationForm({
 	bibleId,
@@ -339,7 +341,6 @@ export default function AddNoteOrMemorizationForm({
 				onClose={() => setOpenModal(false)}
 				backdrop={false}
 				position="bottom">
-
 				<DrawerHeader
 					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-blue-100 dark:border-gray-600 mb-6"
 					title={
@@ -433,12 +434,10 @@ export default function AddNoteOrMemorizationForm({
 								) : null}
 
 								<div className="w-full">
-
 									<Button
 										className="p-4 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full gap-0.5"
 										onClick={() => setIsAddMemorizationListFormOpen(true)}
 										type="button">
-
 										<LordIconHover
 											size={24}
 											ICON_SRC={
@@ -448,7 +447,6 @@ export default function AddNoteOrMemorizationForm({
 											}
 											state="hover-pinch"
 											text="Crear nueva lista de aprendizaje"></LordIconHover>
-
 									</Button>
 
 									{action === BibleCrudActions.note && (
@@ -482,8 +480,19 @@ export default function AddNoteOrMemorizationForm({
 													Contenido
 												</label>
 
-												{contentFieldHasValue}
-												<textarea
+												<div className={styles.ReactAdminContainer}>
+													<TextEditor
+														disabled={contentFieldHasValue}
+														value={userNote.content || ""}
+														onChange={(value) =>
+															setUserNote({
+																...userNote,
+																content: value
+															})
+														}
+													/>
+												</div>
+												{/* <textarea
 													disabled={contentFieldHasValue}
 													rows={5}
 													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
@@ -495,7 +504,7 @@ export default function AddNoteOrMemorizationForm({
 															content: e.target.value
 														})
 													}
-												/>
+												/> */}
 											</div>
 										</div>
 									)}
@@ -514,13 +523,11 @@ export default function AddNoteOrMemorizationForm({
 												: "pasaje con nota"}
 										</span>
 									</Button>
-
 								</div>
 							</form>
 						</div>
 					</div>
 				</DrawerItems>
-
 			</Drawer>
 
 			<AddNewLearningListForm

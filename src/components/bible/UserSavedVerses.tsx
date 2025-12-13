@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import BiblePassageText from "@/components/bible/BiblePassageText";
 import Link from "next/link";
+import styles from "@/components/admin/react-admin-styles.module.css";
 
 export default function UserSavedVerses({
 	verses,
@@ -61,8 +62,9 @@ export default function UserSavedVerses({
 							<h2 className="font-bold text-2xl text-black dark:text-gray-100 my-2">
 								{verses.title}
 							</h2>
-
-							<p className="text-black dark:text-gray-200">{verses.content}</p>
+              <div className={styles.ReactAdminContainer}>
+                <div  dangerouslySetInnerHTML={{ __html: verses.content }}></div>
+              </div>
 						</div>
 					) : (
 						<>
