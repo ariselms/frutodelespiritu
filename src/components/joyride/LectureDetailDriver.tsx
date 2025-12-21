@@ -38,7 +38,7 @@ export function LectureDetailDriver() {
 					popover: {
 						title: "Categoría",
 						description:
-							"Oprime el enlace para ver más artículos de esta categoría"
+							"Oprime el enlace para ver más artículos de esta categoría."
 					}
 				},
 				{
@@ -46,7 +46,7 @@ export function LectureDetailDriver() {
 					popover: {
 						title: "Guarda tu lectura",
 						description:
-							"Oprime el botón para guardar esta lectura en tu lista de lecturas"
+							"Oprime el botón para guardar esta lectura. Aparecerá en tu panel de administración."
 					}
 				},
 				{
@@ -54,7 +54,7 @@ export function LectureDetailDriver() {
 					popover: {
 						title: "Lecturas adicionales",
 						description:
-							"Lista de artículos adicionales para continuar aprendiendo la Palabra"
+							"Lista de artículos adicionales para continuar aprendiendo la Palabra del Todopoderoso."
 					}
 				}
 			],
