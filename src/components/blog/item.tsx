@@ -5,22 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function ArticleItem({ article }: { article: ArticleType }) {
-	// Ensure it's a Date object if it's coming as a string
+
+  // Ensure it's a Date object if it's coming as a string
 	const creation_date = new Date(article.updated_at);
 
 	// Format the date to a more readable format
-	const formatDate = (date: Date) => {
+	const format_date = (date: Date) => {
+
 		const options: Intl.DateTimeFormatOptions = {
 			year: "numeric",
 			month: "long",
 			day: "numeric"
 		};
+
 		return date.toLocaleDateString("es-US", options);
+
 	};
 
 	return (
 		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-0 bg-slate-50 dark:bg-gray-900/50 border-slate-100 dark:border-gray-600 rounded-lg border">
-			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+			<div className="relative aspect-video sm:aspect-2/1 lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
 					src={article?.image_url}
@@ -35,9 +39,9 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 						{article.category_name}
 					</span>
 					<time
-						dateTime={formatDate(creation_date)}
+						dateTime={format_date(creation_date)}
 						className="text-gray-800 dark:text-gray-200">
-						{formatDate(creation_date)}
+						{format_date(creation_date)}
 					</time>
 				</div>
 				<div className="group relative max-w-xl">
@@ -64,10 +68,10 @@ export function ArticleList({
 	articles: ArticleType[];
 }) {
 	return (
-		<section className="bg-white dark:bg-gray-800 border border-t-slate-100 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
+		<section className="bg-white dark:bg-gray-800 border border-t-slate-100 dark:border-t-gray-700 border-b-transparent py-8">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{children}
-				<div className="space-y-4 mt-8 lg:mt-16">
+				<div className="space-y-4 mt-8">
 					{articles?.map((article: ArticleType) => (
 						<ArticleItem key={article.id} article={article} />
 					))}

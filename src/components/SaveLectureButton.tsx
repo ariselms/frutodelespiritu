@@ -103,25 +103,22 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 
 	return (
 		<div className="mx-4 lg:mx-0">
-
 			<button
+				id="driver-lecture-2"
 				type="button"
 				onClick={handleSaveLecture}
 				className="rounde-2xl px-5 py-3 text-sm font-medium text-slate-50 dark:text-gray-100 rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-slate-100 dark:border-gray-600 focus:ring-4 focus:ring-slate-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
-
 				<LordIconHover
 					size={32}
 					ICON_SRC={LOTTIE_FLOPPY_HOVER}
 					state="hover-put-in-out"
 					text={lectureIsSaved ? "Lectura Guardada" : "Guardar Lectura"}
 				/>
-
 			</button>
 
-      <small className="block text-gray-600 dark:text-gray-400 text-center">
+			<small className="block text-gray-600 dark:text-gray-400 text-center">
 				Guarda tus lecturas para re-leerlas luego
 			</small>
-
 		</div>
 	);
 }

@@ -7,6 +7,7 @@ import { ArticleType } from "@/models/articlesTypes";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
 import { ShareButtons } from "@/components/ShareButtons";
 import { SaveLecturebutton } from "@/components/SaveLectureButton";
+import { LectureDetailDriver } from "@/components/joyride/LectureDetailDriver";
 
 export default async function SingleLecturePage({
 	params
@@ -50,14 +51,16 @@ export default async function SingleLecturePage({
 
 	return (
 		<main className="pb-16 lg:pb-24 bg-slate-50 dark:bg-gray-800 antialiased">
+			<LectureDetailDriver />
 			<header
 				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16 flex justify-center items-center"
 				style={{
 					backgroundImage: `url(${FetchedDetailedArticled?.image_url})`
 				}}>
 				<div className="absolute top-0 left-0 w-full h-full text-slate-700 bg-slate-100/70 dark:bg-black/60"></div>
-				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-screen-xl xl:px-0">
+				<div className="z-10 px-4 xl:mb-16 mx-auto w-full max-w-7xl xl:px-0">
 					<Link
+						id="driver-lecture-1"
 						href={`/lecturas?category=${FetchedDetailedArticled.category_id}`}
 						className="inline-block mb-4 rounded-lg px-2 py-1 bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 text-white transition-all">
 						{FetchedDetailedArticled.category_name}
@@ -70,7 +73,7 @@ export default async function SingleLecturePage({
 					</p>
 				</div>
 			</header>
-			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-screen-xl bg-gray-50 dark:bg-gray-950 border border-slate-200 dark:border-gray-600 rounded-lg xl:-m-32 xl:p-9 xl:mx-auto">
+			<div className="flex relative z-20 justify-between p-6 mx-4 max-w-7xl bg-gray-50 dark:bg-gray-950 border border-slate-200 dark:border-gray-600 rounded-lg xl:-m-32 xl:p-9 xl:mx-auto">
 				<div className="rich-text-content">
 					<div
 						className="pr-8 flex-2"
@@ -97,8 +100,11 @@ export default async function SingleLecturePage({
 				<ShareButtons />
 				<ArticleDetailRandomVerse />
 			</div>
-			<section aria-label="Related articles" className="mt-4 lg:mt-16 xl:mt-44">
-				<div className="px-8 mx-auto max-w-screen-xl">
+			<section
+				id="driver-lecture-3"
+				aria-label="Artículos relacionados"
+				className="mt-4 lg:mt-16 xl:mt-44">
+				<div className="px-8 mx-auto max-w-7xl">
 					<h2 className="mb-6 lg:mb-8 text-2xl font-bold text-gray-900 dark:text-white">
 						Artículos recientes
 					</h2>
@@ -106,8 +112,7 @@ export default async function SingleLecturePage({
 						{FetchedRecentArticles.map(
 							(article: ArticleType | QueryResultRow) => (
 								<div key={article.id}>
-									<article
-										className="flex flex-col md:flex md:flex-row">
+									<article className="flex flex-col md:flex md:flex-row">
 										<Link
 											href={`/lecturas/${article.slug}`}
 											className="xl:mb-0 w-full md:w-2/6 mr-3">
@@ -135,7 +140,7 @@ export default async function SingleLecturePage({
 											</p>
 										</div>
 									</article>
-                  <hr className="text-slate-200 dark:text-gray-600 mt-8 mb-2"/>
+									<hr className="text-slate-200 dark:text-gray-600 mt-8 mb-2" />
 								</div>
 							)
 						)}

@@ -143,11 +143,17 @@ export const SpanishBibleApiIds = {
 	VersionBibliaLibre: "spa_vbl"
 };
 export const SpanishBibleApiIdsArray = Object.values(SpanishBibleApiIds);
+
 export const BibleCheckTypes = Object.freeze({
 	BibleTranslation: "bible-translation",
 	BibleBook: "bible-book"
 });
+
 export const BibleTranslationsView = Object.freeze({
 	compact: "Compacta",
 	detailed: "Detallada"
 });
+
+export const localStorageVariables = Object.freeze({
+  joyRideLectures: "joyRideLectures"
+})

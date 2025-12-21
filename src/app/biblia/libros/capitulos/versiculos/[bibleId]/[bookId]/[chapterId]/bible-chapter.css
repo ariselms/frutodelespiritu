@@ -12,7 +12,7 @@
   --rich-text-color-primary: #333;
   --rich-text-color-heading: #222;
   --rich-text-color-secondary: #555;
-  --rich-text-color-link: #1a56db;
+  --rich-text-color-link: #314158;
   --rich-text-color-link-visited: #551a8b;
   --rich-text-color-border: #ccc;
   --rich-text-color-background-light: #eee; /* For code, mark */
@@ -144,7 +144,7 @@ span[data-number]{
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #1a56db;
+  background-color: #314158;
   color: #dff2fe ;
   border: 1px solid #dff2fe;
   margin-right: .3rem;
@@ -155,7 +155,7 @@ span[data-number]{
 }
 
 span[data-number]:hover{
-  background-color: #1E429F;
+  background-color: #1d293d;
   transition: all .3s ease-in-out;
 }
 
