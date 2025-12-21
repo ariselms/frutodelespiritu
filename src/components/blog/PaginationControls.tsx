@@ -56,13 +56,13 @@ export function PaginationControls({
 				<button
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={!canGoPrev} // Disable if on the first page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-blue-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-slate-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Anterior {/* Changed to Spanish "Anterior" */}
 				</button>
 				<button
 					onClick={() => handlePageChange(currentPage + 1)}
 					disabled={!canGoNext} // Disable if on the last page
-					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-blue-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-100  border border-slate-100 dark:border-gray-600 cursor-pointer rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
 					Siguiente {/* Changed to Spanish "Siguiente" */}
 				</button>
 			</div>

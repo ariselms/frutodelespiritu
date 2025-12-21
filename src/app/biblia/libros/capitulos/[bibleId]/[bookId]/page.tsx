@@ -51,13 +51,13 @@ export default async function BibleChaptersPage({
 	return (
 		<main>
 			<section className="w-full text-gray-700 dark:text-gray-300 dark:bg-gray-800 ">
-				<div className="max-w-3xl mx-auto py-8 px-2 xl:px-0">
+				<div className="max-w-3xl mx-auto py-4 px-2 xl:px-0">
 					<BibleHeaderSection section={`Capítulos de ${CurrentBook.name}`} />
 					<div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-10 justify-center gap-1.5">
 						{BookChapters?.map((book: any) => (
 							<Link
 								key={book.id}
-								className="bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold py-2 rounded-lg text-center border-0 dark:border dark:border-gray-700"
+								className="bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-900/50 text-white font-bold py-2 rounded-lg text-center border-0 dark:border dark:border-gray-700"
 								href={`/biblia/libros/capitulos/versiculos/${bibleId}/${book.bookId}/${book.number}`}>
 								{book.number}
 							</Link>

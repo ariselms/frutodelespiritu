@@ -334,14 +334,14 @@ export default function AddNoteOrMemorizationForm({
 	return (
 		<>
 			<Drawer
-				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-t-blue-200 dark:border-t-gray-600"
+				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-t-slate-200 dark:border-t-gray-600"
 				theme={BottomDrawerTheme}
 				open={openModal}
 				onClose={() => setOpenModal(false)}
 				backdrop={false}
 				position="bottom">
 				<DrawerHeader
-					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-blue-100 dark:border-gray-600 mb-6"
+					className="text-black dark:text-white max-w-[80ch] mx-auto py-0 px-2 xl:px-0 border-b border-slate-100 dark:border-gray-600 mb-6"
 					title={
 						action === BibleCrudActions.note
 							? "Escribe Nota Sobre Pasaje"
@@ -406,7 +406,7 @@ export default function AddNoteOrMemorizationForm({
 									</label>
 
 									<select
-										className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+										className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-slate-700 focus:ring-4 focus:ring-slate-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 										id="memorizationList"
 										value={selectedLearningList || ""}
 										onChange={(e) => handleChangeLearningList(e)}>
@@ -434,7 +434,7 @@ export default function AddNoteOrMemorizationForm({
 
 								<div className="w-full">
 									<Button
-										className="p-4 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full gap-0.5"
+										className="p-4 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 dark:bg-gray-900 dark:hover:bg-gray-800 border border-slate-100 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in mb-2 w-full gap-0.5"
 										onClick={() => setIsAddMemorizationListFormOpen(true)}
 										type="button">
 										<LordIconHover
@@ -461,7 +461,7 @@ export default function AddNoteOrMemorizationForm({
 												<input
 													disabled={titleFieldHasValue}
 													type="text"
-													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-slate-700 focus:ring-4 focus:ring-slate-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 													id="note_title"
 													value={userNote.title || ""}
 													onChange={(e) =>
@@ -494,7 +494,7 @@ export default function AddNoteOrMemorizationForm({
 												{/* <textarea
 													disabled={contentFieldHasValue}
 													rows={5}
-													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
+													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-slate-700 focus:ring-4 focus:ring-slate-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 													id="note_content"
 													value={userNote.content || ""}
 													onChange={(e) =>
@@ -509,7 +509,7 @@ export default function AddNoteOrMemorizationForm({
 									)}
 
 									<Button
-										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full gap-0.5"
+										className="p-4 text-sm font-medium text-center text-white dark:text-gray-950 rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:ring-slate-300 dark:bg-gray-50 dark:hover:bg-gray-300 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full gap-0.5"
 										type="submit">
 										<LordIconHover
 											size={24}
@@ -623,7 +623,7 @@ const AddNewLearningListForm = ({
 
 	return (
 		<Modal
-			className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
+			className="backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50"
 			show={isAddLearningListFormOpen}
 			size="xl"
 			onClose={() => {
@@ -631,8 +631,8 @@ const AddNewLearningListForm = ({
 			}}
 			dismissible
 			popup>
-			<div className="bg-white dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-600">
-				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
+			<div className="bg-white dark:bg-gray-800 rounded-lg border border-slate-200 dark:border-gray-600">
+				<ModalHeader className="bg-slate-100 dark:bg-gray-800 text-slate-950 dark:text-gray-50 border-b border-slate-200 dark:border-gray-600 p-5">
 					Crea lista de memorización
 				</ModalHeader>
 				<ModalBody className="p-6">
@@ -643,7 +643,7 @@ const AddNewLearningListForm = ({
 							</h3>
 							<input
 								type="text"
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-slate-100 rounded-lg bg-slate-50 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-slate-500 dark:focus-visible:outline-gray-500"
 								placeholder="Nombre"
 								required
 								value={newLearningList.name}
@@ -657,7 +657,7 @@ const AddNewLearningListForm = ({
 
 							<input
 								type="text"
-								className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+								className="block w-full px-2 py-4 text-sm text-gray-900 border border-slate-100 rounded-lg bg-slate-50 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-slate-500 dark:focus-visible:outline-gray-500"
 								placeholder="Descripción"
 								required
 								value={newLearningList.description}
@@ -669,16 +669,16 @@ const AddNewLearningListForm = ({
 								}
 							/>
 						</div>
-						<div className="w-full flex justify-end gap-2 mt-4 border-t-blue-200 dark:border-gray-600">
+						<div className="w-full flex justify-end gap-2 mt-4 border-t-slate-200 dark:border-gray-600">
 							<Button
 								onClick={() => setIsAddMemorizationListFormOpen(false)}
 								color="gray"
-								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
+								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-slate-100 dark:border-gray-600 ease-in"
 								type="button">
 								Cancelar
 							</Button>
 							<Button
-								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-blue-100 dark:border-gray-600 ease-in"
+								className="p-4 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 transition-all duration-300 border border-slate-100 dark:border-gray-600 ease-in"
 								type="submit">
 								Guardar lista
 							</Button>

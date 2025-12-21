@@ -191,33 +191,33 @@ export default function MediaPage() {
 						{showControllers && (
 							<>
 								<div className="flex flex-col items-center justify-between">
-									<div className="text-blue-950 dark:text-gray-50">
+									<div className="text-slate-950 dark:text-gray-50">
 										Ajusta el tamaño de los textos
 									</div>
 									<div className="flex items-center justify-between">
-										<div className="flex items-center justify-between text-blue-950 dark:text-gray-50 bg-blue-50 dark:bg-gray-800 rounded-lg px-4 py-0 mb-2 w-fit border border-blue-200 dark:border-gray-600">
+										<div className="flex items-center justify-between text-slate-950 dark:text-gray-50 bg-slate-50 dark:bg-gray-800 rounded-lg px-4 py-0 mb-2 w-fit border border-slate-200 dark:border-gray-600">
 											<span
 												onClick={() => handleIncreaseText("verseInfoSize")}
-												className="w-8 h-8 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-blue-700 dark:text-gray-50 transition-all">
+												className="w-8 h-8 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-slate-700 dark:text-gray-50 transition-all">
 												+
 											</span>
 											<span className="font-bold text-sm">Referencia</span>
 											<span
 												onClick={() => handleDecreaseText("verseInfoSize")}
-												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-blue-700 dark:text-gray-50 transition-all">
+												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-slate-700 dark:text-gray-50 transition-all">
 												-
 											</span>
 										</div>
-										<div className="flex items-center justify-between text-blue-950 dark:text-gray-50 bg-blue-50 dark:bg-gray-800 rounded-lg px-4 py-0 mb-2 w-fit border border-blue-200 dark:border-gray-600">
+										<div className="flex items-center justify-between text-slate-950 dark:text-gray-50 bg-slate-50 dark:bg-gray-800 rounded-lg px-4 py-0 mb-2 w-fit border border-slate-200 dark:border-gray-600">
 											<span
 												onClick={() => handleIncreaseText("passageTextSize")}
-												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-blue-700 dark:text-gray-50 transition-all">
+												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-slate-700 dark:text-gray-50 transition-all">
 												+
 											</span>
 											<span className="font-bold text-sm">Pasaje</span>
 											<span
 												onClick={() => handleDecreaseText("passageTextSize")}
-												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-blue-700 dark:text-gray-50 transition-all">
+												className="w-8 h-8 p-5 flex items-center justify-center leading-none text-2xl font-bold cursor-pointer rounded-full text-slate-700 dark:text-gray-50 transition-all">
 												-
 											</span>
 										</div>
@@ -237,13 +237,13 @@ export default function MediaPage() {
 							<div className="w-full flex items-center justify-center mt-2">
 								<button
 									onClick={generateImage}
-									className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+									className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all ">
 									Ver Prevista
 								</button>
 							</div>
 						)}
 						<div>
-							<div className="text-lg font-bold uppercase text-blue-950 dark:text-gray-50 text-center py-4">
+							<div className="text-lg font-bold uppercase text-slate-950 dark:text-gray-50 text-center py-4">
 								Selecciona una plantilla
 							</div>
 							<div>
@@ -261,7 +261,7 @@ export default function MediaPage() {
 												}}
 												className={`${
 													mediaControllers.currentBackgroundLayout === index &&
-													"border-4 border-blue-200 dark:border-gray-600"
+													"border-4 border-slate-200 dark:border-gray-600"
 												} aspect-video w-full h-auto mx-auto bg-gray-300 cursor-pointer`}>
 												{React.createElement(background, {
 													passageSelection,

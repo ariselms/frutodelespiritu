@@ -38,7 +38,9 @@ export function LordIconHover({
 			<div className="mr-0.3">
 				<Player ref={playerRef} icon={ICON_SRC} size={size} state={state} />
 			</div>
-			<span className="text-sm md:text-base whitespace-nowrap">{text}</span>
+			<span className="text-xs sm:text-sm md:text-base  whitespace-nowrap">
+				{text}
+			</span>
 		</div>
 	);
 }

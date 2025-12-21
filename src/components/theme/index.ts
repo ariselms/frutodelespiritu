@@ -2,7 +2,7 @@ import { createTheme } from "flowbite-react";
 
 export const BlueNavTheme = createTheme({
 	root: {
-		base: "bg-blue-50 dark:bg-gray-950 border-b border-blue-100 dark:border-gray-900 px-2 py-4 sm:px-4",
+		base: "bg-slate-50 dark:bg-gray-950 border-b border-slate-100 dark:border-gray-900 px-2 py-4 sm:px-4",
 		rounded: {
 			on: "rounded",
 			off: ""
@@ -33,8 +33,8 @@ export const BlueNavTheme = createTheme({
 	link: {
 		base: "block py-2 pl-3 pr-4 md:p-0",
 		active: {
-			on: "bg-transparent text-blue-700 hover:text-blue-800 dark:hover:text-white dark:hover:underline  md:text-blue-700 md:hover:text-blue-800 md:dark:text-white mb-3 last:mb-0 md:mb-0 dark:underline dark:underline-offset-4 transition-all",
-			off: "text-gray-700 border-0 hover:text-blue-700 dark:text-gray-200  dark:hover:text-white dark:hover:underline dark:hover:underline-offset-4 mb-3 last:mb-0 md:mb-0 hover:bg-blue-50 dark:hover:bg-transparent md:hover:text-blue-700 transition-all"
+			on: "bg-transparent text-slate-700 hover:text-slate-800 dark:hover:text-white dark:hover:underline  md:text-slate-700 md:hover:text-slate-800 md:dark:text-white mb-3 last:mb-0 md:mb-0 dark:underline dark:underline-offset-4 transition-all",
+			off: "text-gray-700 border-0 hover:text-slate-700 dark:text-gray-200  dark:hover:text-white dark:hover:underline dark:hover:underline-offset-4 mb-3 last:mb-0 md:mb-0 hover:bg-slate-50 dark:hover:bg-transparent md:hover:text-slate-700 transition-all"
 		},
 		disabled: {
 			on: "text-gray-300 hover:cursor-not-allowed dark:text-gray-600",
@@ -42,7 +42,7 @@ export const BlueNavTheme = createTheme({
 		}
 	},
 	toggle: {
-		base: "inline-flex items-center rounded-lg p-2 text-sm bg-blue-700 dark:bg-transparent hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-blue-950 md:hidden dark:text-gray-300 hover:bg-blue-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all",
+		base: "inline-flex items-center rounded-lg p-2 text-sm bg-slate-700 dark:bg-transparent hover:cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-950 md:hidden dark:text-gray-300 hover:bg-slate-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all",
 		icon: "h-6 w-6 shrink-0",
 		title: "sr-only"
 	}
@@ -52,7 +52,7 @@ export const ModalUserProfileTheme = createTheme({
 	root: {
 		base: "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
 		show: {
-			on: "bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-t-blue-200 dark:border-t-gray-600",
+			on: "bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-t-slate-200 dark:border-t-gray-600",
 			off: "hidden"
 		},
 		sizes: {
@@ -124,7 +124,7 @@ export const DropdownBibleSelectionTheme = createTheme({
 		hidden: "invisible opacity-0",
 		item: {
 			container: "",
-			base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-blue-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-lg",
+			base: "flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-slate-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white rounded-lg",
 			icon: "mr-2 h-4 w-4"
 		},
 		style: {
@@ -169,7 +169,7 @@ export const BottomDrawerTheme = createTheme({
 			titleCloseIcon: "sr-only",
 			titleIcon: "me-2.5 h-4 w-4",
 			titleText:
-				"mb-4 inline-flex items-center text-base font-semibold text-blue-950 dark:text-gray-300"
+				"mb-4 inline-flex items-center text-base font-semibold text-slate-950 dark:text-gray-300"
 		},
 		collapsed: {
 			on: "hidden",
@@ -183,7 +183,7 @@ export const BottomDrawerTheme = createTheme({
 
 export const AccordionTheme = createTheme({
 	root: {
-		base: "divide-y divide-blue-100 border-blue-100 dark:divide-gray-700 dark:border-gray-700",
+		base: "divide-y divide-slate-100 border-slate-100 dark:divide-gray-700 dark:border-gray-700",
 		flush: {
 			off: "rounded-lg border",
 			on: "border-b"
@@ -202,13 +202,13 @@ export const AccordionTheme = createTheme({
 		},
 		base: "flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 first:rounded-t-lg last:rounded-b-lg dark:text-gray-400",
 		flush: {
-			off: "hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 dark:hover:bg-red-800 dark:focus:ring-red-800",
+			off: "hover:bg-slate-100 focus:ring-4 focus:ring-slate-200 dark:hover:bg-red-800 dark:focus:ring-red-800",
 			on: "bg-transparent dark:bg-transparent"
 		},
 		heading: "",
 		open: {
 			off: "",
-			on: "bg-blue-100 text-blue-900 dark:bg-gray-800 dark:text-white"
+			on: "bg-slate-100 text-slate-900 dark:bg-gray-800 dark:text-white"
 		}
 	}
 });
@@ -218,7 +218,7 @@ export const NotesAndMemoryTabTheme = createTheme({
 	tablist: {
 		base: "flex text-center",
 		variant: {
-			default: "flex-wrap border-b border-blue-200 dark:border-gray-600",
+			default: "flex-wrap border-b border-slate-200 dark:border-gray-600",
 			underline:
 				"-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
 			pills:
@@ -227,13 +227,13 @@ export const NotesAndMemoryTabTheme = createTheme({
 				"grid w-full grid-flow-col divide-x divide-gray-200 rounded-none text-sm font-medium shadow dark:divide-gray-700 dark:text-gray-400"
 		},
 		tabitem: {
-			base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 border-x border-t border-blue-200 dark:border-gray-600",
+			base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 border-x border-t border-slate-200 dark:border-gray-600",
 			variant: {
 				default: {
 					base: "rounded-t-lg",
 					active: {
-						on: "bg-white text-blue-700 hover:text-blue-800 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-100 cursor-pointer transition-all",
-						off: "bg-blue-700 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-800 text-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:text-gray-300 cursor-pointer transition-all"
+						on: "bg-white text-slate-700 hover:text-slate-800 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-100 cursor-pointer transition-all",
+						off: "bg-slate-700 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-800 text-slate-50 hover:text-slate-700 dark:text-gray-300 dark:hover:text-gray-300 cursor-pointer transition-all"
 					}
 				},
 				underline: {
@@ -288,8 +288,8 @@ export const MemoryListAccordionTheme = createTheme({
 		arrow: {
 			base: "h-6 w-6 shrink-0",
 			open: {
-				off: "fill-blue-200",
-				on: "rotate-180 fill-blue-50"
+				off: "fill-slate-200",
+				on: "rotate-180 fill-slate-50"
 			}
 		},
 		base: "flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 first:rounded-t-lg last:rounded-b-lg dark:text-gray-400",

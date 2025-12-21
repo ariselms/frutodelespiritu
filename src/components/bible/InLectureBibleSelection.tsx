@@ -13,7 +13,7 @@ export default function InLectureBibleSelection({
 }) {
 	const [spanishBibles, setSpanishBibles] = useState<BibleDataType[]>([]);
 
-	const [currentBible, setCurrentBible] = useState<string | null>(null);
+	const [currentBible, setCurrentBible] = useState<string>("");
 
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -68,7 +68,7 @@ export default function InLectureBibleSelection({
 			console.error(error);
 
 		}
-	}, [bibleId]); // <-- Important: Added bibleId dependency
+	}, [bibleId]); // <-- Important: Added bibleId dependency to run on each change
 
 	const handleBibleSelection = ({ bId }: { bId: string }) => {
 		push(`/biblia/libros/capitulos/versiculos/${bId}/${ChapterDetails?.book.id}/${ChapterDetails?.chapter?.number}`);
@@ -77,7 +77,7 @@ export default function InLectureBibleSelection({
 	return (
 		<Dropdown
 			theme={DropdownBibleSelectionTheme}
-			className="rounded-lg border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 font-bold text-blue-50 dark:text-gray-50 flex items-center transition-all px-4 py-2 sm:mt-0 text-xs sm:text-base md:text-lg cursor-pointer"
+			className="rounded-lg border border-slate-100 dark:border-gray-600 bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 font-bold text-slate-50 dark:text-gray-50 flex items-center transition-all px-4 py-2 sm:mt-0 text-xs sm:text-sm md:text-base cursor-pointer flex-1"
 			label={`${currentBible}`}
 			dismissOnClick={true}>
 			{isLoading && <DropdownItem>Loading...</DropdownItem>}
@@ -88,16 +88,14 @@ export default function InLectureBibleSelection({
 						onMouseEnter={
 							// add change to background color and text color on hover
 							(e) => (
-								e.currentTarget.style.backgroundColor = "#f0f9ff",
-								e.currentTarget.style.color = "#111827"
+								(e.currentTarget.style.backgroundColor = "#f0f9ff"),
+								(e.currentTarget.style.color = "#111827")
 							)
 						}
-						onMouseLeave={
-							(e) => (
-								e.currentTarget.style.backgroundColor = "transparent",
-								e.currentTarget.style.color = "inherit"
-							)
-						}
+						onMouseLeave={(e) => (
+							(e.currentTarget.style.backgroundColor = "transparent"),
+							(e.currentTarget.style.color = "inherit")
+						)}
 						onClick={() => handleBibleSelection({ bId: bible.id })}
 						key={bible.id}>
 						{bible.name}

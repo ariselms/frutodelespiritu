@@ -88,7 +88,7 @@ export function ArticleSearch({
 				<div className="relative">
 					<div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 						<svg
-							className="w-4 h-4 text-blue-700 dark:text-gray-200"
+							className="w-4 h-4 text-slate-700 dark:text-gray-200"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -103,7 +103,7 @@ export function ArticleSearch({
 						</svg>
 					</div>
 					<input
-						className="block w-full lg:w-4/6 px-8 p-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+						className="block w-full lg:w-4/6 px-8 p-4 text-sm text-gray-900 border border-slate-100 rounded-lg bg-slate-50 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-slate-500 dark:focus-visible:outline-gray-500"
 						id="blog_search_term"
 						type="search"
 						placeholder="e.j. Preservar tu alma"
@@ -118,21 +118,21 @@ export function ArticleSearch({
 				</p>
 				<div className="flex">
 					<div className="flex items-center flex-wrap gap-2">
-						<div className="flex items-center border rounded-lg p-4 border-blue-100 dark:border-gray-600 bg-blue-50 dark:bg-gray-700">
+						<div className="flex items-center border rounded-lg p-4 border-slate-100 dark:border-gray-600 bg-slate-50 dark:bg-gray-700">
 							<Radio
 								color="black"
 								onChange={hanldeCategoryChange}
 								name="categories"
 								value="All"
 								checked={selectedCategory === "All"}
-								className="mr-2 border-blue-700 checked:bg-blue-700 checked checked:ring-blue-700 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
+								className="mr-2 border-slate-700 checked:bg-slate-700 checked checked:ring-slate-700 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
 							/>
 							<Label htmlFor="All">Todas Publicaciones</Label>
 						</div>
 						{categories.map((category) => (
 							<div
 								key={category.id}
-								className="flex items-center border rounded-lg p-4 border-blue-100 dark:border-gray-600 bg-blue-50 dark:bg-gray-700">
+								className="flex items-center border rounded-lg p-4 border-slate-100 dark:border-gray-600 bg-slate-50 dark:bg-gray-700">
 								<Radio
 									color="black"
 									onChange={hanldeCategoryChange}
@@ -140,7 +140,7 @@ export function ArticleSearch({
 									name="categories"
 									value={category.id}
 									checked={Number(selectedCategory) === category.id}
-									className="mr-2 border-blue-700 checked:bg-blue-700 checked checked:ring-blue-700 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
+									className="mr-2 border-slate-700 checked:bg-slate-700 checked checked:ring-slate-700 dark:border-gray-900 dark:checked:bg-gray-900 dark:checked:ring-gray-900"
 								/>
 								<Label htmlFor={category.id.toString()}>{category.name}</Label>
 							</div>

@@ -17,10 +17,10 @@ export default function MainFooter() {
 	const navigation = useNavigationData();
 
 	return (
-		<footer className="w-full bg-blue-950 dark:bg-gray-950 text-blue-50 dark:text-gray-50 py-10">
+		<footer className="w-full bg-slate-950 dark:bg-gray-950 text-slate-50 dark:text-gray-50 py-10">
 			<div className="max-w-7xl mx-auto w-full px-12 md:px-10">
 				<div className="flex flex-col items-start gap-8">
-					<div className="w-full lg:w-4/12 text-blue-50 dark:text-gray-50">
+					<div className="w-full lg:w-4/12 text-slate-50 dark:text-gray-50">
 						<Link className="flex items-center" href="/">
 							<Image
 								alt="Fruto del Espíritu Logo"
@@ -35,14 +35,14 @@ export default function MainFooter() {
 					<div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:mt-4 sm:gap-6">
 						<div className="w-full">
 							<FooterTitle
-								className="text-blue-50 dark:text-gray-50"
+								className="text-slate-50 dark:text-gray-50"
 								title="Sobre Nosotros"
 							/>
 							<FooterLinkGroup col>
 								{navigation.company.map((nav) => (
 									<div key={nav.href}>
 										<FooterLink
-											className="text-blue-50 dark:text-gray-50"
+											className="text-slate-50 dark:text-gray-50"
 											href={nav.href}>
 											{nav.name}
 										</FooterLink>
@@ -52,14 +52,14 @@ export default function MainFooter() {
 						</div>
 						<div className="w-full">
 							<FooterTitle
-								className="text-blue-50 dark:text-gray-50"
+								className="text-slate-50 dark:text-gray-50"
 								title="Legal"
 							/>
 							<FooterLinkGroup col>
 								{navigation.legal.map((nav) => (
 									<div key={nav.href}>
 										<FooterLink
-											className="text-blue-50 dark:text-gray-50"
+											className="text-slate-50 dark:text-gray-50"
 											href={nav.href}>
 											{nav.name}
 										</FooterLink>
@@ -69,14 +69,14 @@ export default function MainFooter() {
 						</div>
 						<div className="w-full">
 							<FooterTitle
-								className="text-blue-50 dark:text-gray-50"
+								className="text-slate-50 dark:text-gray-50"
 								title="Ayuda"
 							/>
 							<FooterLinkGroup col>
 								{navigation.support.map((nav) => (
 									<div key={nav.href}>
 										<FooterLink
-											className="text-blue-50 dark:text-gray-50"
+											className="text-slate-50 dark:text-gray-50"
 											href={nav.href}>
 											{nav.name}
 										</FooterLink>
@@ -86,10 +86,10 @@ export default function MainFooter() {
 						</div>
 					</div>
 				</div>
-				<hr className="my-8 text-blue-900 dark:text-gray-900" />
+				<hr className="my-8 text-slate-900 dark:text-gray-900" />
 				<div className="w-full sm:flex sm:items-center sm:justify-between">
 					<FooterCopyright
-						className="text-blue-50 dark:text-gray-50"
+						className="text-slate-50 dark:text-gray-50"
 						href="/"
 						by="Fruto del Espíritu™"
 						year={new Date().getFullYear()}
@@ -98,7 +98,7 @@ export default function MainFooter() {
 						{navigation.social.map((social, i) => (
 							<FooterIcon
 								key={i}
-								className="text-blue-50 dark:text-gray-50"
+								className="text-slate-50 dark:text-gray-50"
 								href={social.href}
 								icon={social.icon}
 							/>

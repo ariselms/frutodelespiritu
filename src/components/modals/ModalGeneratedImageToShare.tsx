@@ -41,13 +41,13 @@ export default function ModalGeneratedImageToShare({
 	};
 	return (
 		<Modal
-			className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
+			className="backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50"
 			show={showGeneratedImage}
 			onClose={() => setShowGeneratedImage(false)}
 			popup
 			dismissible>
-			<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-4"/>
-			<ModalBody className="p-6 border-b border-blue-200 dark:border-gray-600 flex items-center justify-between">
+			<ModalHeader className="bg-slate-100 dark:bg-gray-800 text-slate-950 dark:text-gray-50 border-b border-slate-200 dark:border-gray-600 p-4"/>
+			<ModalBody className="p-6 border-b border-slate-200 dark:border-gray-600 flex items-center justify-between">
 				<Image
 					alt="Pasaje bíblico en Fruto del Espíritu"
 					src={generatedImageUrl}
@@ -59,7 +59,7 @@ export default function ModalGeneratedImageToShare({
 				<button
 					onClick={() => handleDownloadImage(generatedImageUrl)}
 					type="button"
-					className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+					className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-2xl text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all ">
 					<LordIconHover
 						size={22}
 						ICON_SRC={LOTTIE_DOWNLOAD_2_HOVER_PONTING}

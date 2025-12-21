@@ -159,7 +159,7 @@ export function UserProfileForm() {
 	return (
 		<>
 			<Button
-				className="flex items-center justify-center py-4 text-sm text-white dark:text-gray-50 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 border border-blue-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-gray-800 transition-all mt-6 flex-1 font-bold uppercase"
+				className="flex items-center justify-center py-4 text-sm text-white dark:text-gray-50 rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 border border-slate-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:border-gray-600 focus:ring-4 focus:ring-slate-300 dark:focus:ring-gray-800 transition-all mt-6 flex-1 font-bold uppercase"
 				onClick={() => setOpenModal(true)}>
 				<svg
 					className="fill-white dark:fill-gray-200 w-6 h-6 text-gray-800 dark:text-white mr-2"
@@ -197,7 +197,7 @@ export function UserProfileForm() {
 								<Label htmlFor="name">Nombre Completo</Label>
 							</div>
 							<input
-								className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+								className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 								id="name"
 								name="name"
 								placeholder="Juanito Perez"
@@ -216,7 +216,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_street">Calle</Label>
 								</div>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									id="address_street"
 									name="address_street"
 									placeholder="123 Calle Principal"
@@ -231,7 +231,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_city">Ciudad</Label>
 								</div>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									id="address_city"
 									name="address_city"
 									placeholder="Ciudad"
@@ -246,7 +246,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_state">Estado</Label>
 								</div>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									id="address_state"
 									name="address_state"
 									placeholder="Estado"
@@ -261,7 +261,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_zip">Código Postal</Label>
 								</div>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									id="address_zip"
 									name="address_zip"
 									placeholder="Código Postal"
@@ -276,7 +276,7 @@ export function UserProfileForm() {
 									<Label htmlFor="address_country">Pais</Label>
 								</div>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									id="address_country"
 									name="address_country"
 									placeholder="Pais"
@@ -293,7 +293,7 @@ export function UserProfileForm() {
 								<Label htmlFor="role">Permisos</Label>
 							</div>
 							<input
-								className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+								className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 								id="role"
 								name="role"
 								value={userProfile?.role || ""}
@@ -308,7 +308,7 @@ export function UserProfileForm() {
 									Sube una imagen de perfil
 								</Label>
 								<input
-									className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+									className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 									name="image_url"
 									ref={imageInputFileRef}
 									type="file"
@@ -325,7 +325,7 @@ export function UserProfileForm() {
 								<Label htmlFor="bio">Bio</Label>
 							</div>
 							<textarea
-								className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+								className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 								id="bio"
 								name="bio"
 								placeholder="Escribe una corta bio sobre ti..."
@@ -340,7 +340,7 @@ export function UserProfileForm() {
 								<Label htmlFor="contact_email">Correo Electrónico</Label>
 							</div>
 							<input
-								className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+								className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 								id="contact_email"
 								name="contact_email"
 								placeholder="email@example.com"
@@ -359,7 +359,7 @@ export function UserProfileForm() {
 								<Label htmlFor="contact_phone">Número de Teléfono</Label>
 							</div>
 							<input
-								className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+								className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 								id="contact_phone"
 								name="contact_phone"
 								placeholder="+1234567890"
@@ -371,7 +371,7 @@ export function UserProfileForm() {
 						</div>
 						<div className="w-full mt-8 mb-8">
 							<button
-								className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
+								className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 								type="submit">
 								Actualizar Perfil
 							</button>

@@ -21,7 +21,7 @@ export default function UserSavedVerses({
 			<span className="relative">
 				<svg
 					onClick={() => setIsUserSelectedModalOpen(true)}
-					className="w-[26px] h-[30px] text-blue-50 dark:text-gray-300 me-[.3rem] dark:hover:text-gray-200 cursor-pointer transition-all border border-blue-200 dark:border-gray-600 rounded-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800"
+					className="w-[26px] h-[30px] text-slate-50 dark:text-gray-300 me-[.3rem] dark:hover:text-gray-200 cursor-pointer transition-all border border-slate-200 dark:border-gray-600 rounded-sm bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800"
 					data-icon-type="saved-verse"
 					aria-hidden="true"
 					xmlns="http://www.w3.org/2000/svg"
@@ -38,18 +38,18 @@ export default function UserSavedVerses({
 			</span>
 
 			<Modal
-				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50 relative"
+				className="backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50 relative"
 				dismissible
 				show={isUserSavedVerseModalOpen}
 				onClose={() => setIsUserSelectedModalOpen(false)}>
-				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-slate-100 dark:bg-gray-800 text-slate-950 dark:text-gray-50 border-b border-slate-200 dark:border-gray-600 p-5">
 					Versículos Guardados
 				</ModalHeader>
 				<ModalBody>
 					<BiblePassageText chapterContent={verses} />
 					{verses.title && verses.content ? (
 						<>
-							<hr className="text-blue-300 dark:text-gray-300 my-6" />
+							<hr className="text-slate-300 dark:text-gray-300 my-6" />
 							<div>
 								<small className="text-base text-black dark:text-gray-300">
 									<strong>Nota en lista de aprendizaje: </strong>
@@ -81,10 +81,10 @@ export default function UserSavedVerses({
 						</>
 					)}
 				</ModalBody>
-				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-between">
+				<ModalFooter className="border-t-slate-200 dark:border-gray-600 flex items-center justify-between">
 					<Link
 						href={`/perfil/biblia/aprendizaje/${listsData?.listId}`}
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
+						className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all">
 						Editar
 					</Link>
 				</ModalFooter>

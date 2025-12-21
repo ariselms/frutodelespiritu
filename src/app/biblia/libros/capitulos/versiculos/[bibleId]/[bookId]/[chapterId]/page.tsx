@@ -29,27 +29,27 @@ export default async function SingleChapterPage({
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800 pb-4">
-				<div className="max-w-[80ch] mx-auto py-8 px-2 xl:px-0">
-					<div className="flex flex-row items-center justify-between mb-8">
+				<div className="max-w-[80ch] mx-auto py-4 px-2 xl:px-0">
+					<div className="flex flex-row flex-wrap items-center justify-between gap-1 mb-4">
 						<Link
-							className="rounded-lg border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-blue-50 dark:text-gray-50 inline-flex items-center transition-all text-xs sm:text-sm md:text-base"
+							className="rounded-lg border border-slate-100 dark:border-gray-600 bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-slate-50 dark:text-gray-50 flex items-center justify-center transition-all text-xs sm:text-sm md:text-base flex-1"
 							href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
-              <LordIconHover
-                size={22}
-                ICON_SRC={LOTTIE_GRID_PINCH}
-                state="hover-pinch"
-                text={`Capítulos de ${Book?.name}`}
-              />
+							<LordIconHover
+								size={22}
+								ICON_SRC={LOTTIE_GRID_PINCH}
+								state="hover-pinch"
+								text={`Capítulos de ${Book?.name}`}
+							/>
 						</Link>
 						<InLectureBibleSelection ChapterDetails={bibleChapterResponse} />
 					</div>
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 					<ChapterDetails
-            BibleName={Translation.name}
-            ChapterInfo={Chapter}
-            ChapterContent={Chapter.content}
-            Book={Book}
-          />
+						BibleName={Translation.name}
+						ChapterInfo={Chapter}
+						ChapterContent={Chapter.content}
+						Book={Book}
+					/>
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 				</div>
 			</section>

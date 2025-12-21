@@ -19,19 +19,19 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 	};
 
 	return (
-		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-0 bg-blue-50 dark:bg-gray-900/50 border-blue-100 dark:border-gray-600 rounded-lg border">
+		<article className="relative isolate flex flex-col gap-8 lg:flex-row p-0 bg-slate-50 dark:bg-gray-900/50 border-slate-100 dark:border-gray-600 rounded-lg border">
 			<div className="relative aspect-video sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
 				<Image
 					alt="Article image"
 					src={article?.image_url}
 					width={500}
 					height={500}
-					className="absolute inset-0 size-full rounded-t-2xl lg:rounded-tr-none lg:rounded-l-2xl bg-transparent object-cover lg:border-y-0 lg:border-l-0 lg:border-r border-blue-100 dark:border-gray-600"
+					className="absolute inset-0 size-full rounded-t-2xl lg:rounded-tr-none lg:rounded-l-2xl bg-transparent object-cover lg:border-y-0 lg:border-l-0 lg:border-r border-slate-100 dark:border-gray-600"
 				/>
 			</div>
 			<div className="flex flex-col px-4 pt-0 pb-10 lg:pt-6">
 				<div className="flex items-center gap-x-4 text-xs">
-					<span className="relative z-10 rounded-lg bg-blue-100 border border-blue-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
+					<span className="relative z-10 rounded-lg bg-slate-100 border border-slate-200 dark:border-none dark:bg-white px-3 py-1.5 font-medium text-black dark:text-black transition-colors duration-200">
 						{article.category_name}
 					</span>
 					<time
@@ -41,7 +41,7 @@ export function ArticleItem({ article }: { article: ArticleType }) {
 					</time>
 				</div>
 				<div className="group relative max-w-xl">
-					<h3 className="mt-4 text-xl font-semibold text-blue-700 dark:text-white group-hover:text-blue-800 dark:group-hover:text-gray-200 dark:underline">
+					<h3 className="mt-4 text-xl font-semibold text-slate-700 dark:text-white group-hover:text-slate-800 dark:group-hover:text-gray-200 dark:underline">
 						<Link href={`/lecturas/${article.slug}`}>
 							<span className="absolute inset-0" />
 							{article.title}
@@ -64,7 +64,7 @@ export function ArticleList({
 	articles: ArticleType[];
 }) {
 	return (
-		<section className="bg-white dark:bg-gray-800 border border-t-blue-100 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
+		<section className="bg-white dark:bg-gray-800 border border-t-slate-100 dark:border-t-gray-700 border-b-transparent py-8 sm:py-16">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{children}
 				<div className="space-y-4 mt-8 lg:mt-16">

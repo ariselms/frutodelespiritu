@@ -156,7 +156,7 @@ export default function MemoryOrNoteItemList({
 					el contenido de la biblia.
 				</p>
 				<p>
-					<Link className="text-blue-700 hover:text-blue-800" href="/biblia">
+					<Link className="text-slate-700 hover:text-slate-800" href="/biblia">
 						Abrir biblias disponibles 📖
 					</Link>
 				</p>
@@ -170,14 +170,14 @@ export default function MemoryOrNoteItemList({
 				{memoryOrNoteList?.map((listItem: MemoryItemType) => {
 					return (
 						<AccordionPanel key={listItem.id}>
-							<AccordionTitle className="bg-blue-700 hover:bg-blue-800 border-blue-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-blue-200 text-sm md:text-base">
-								<p className="text-blue-50 hover:text-blue-100 dark:text-gray-50 dark:hover:text-gray-100">
+							<AccordionTitle className="bg-slate-700 hover:bg-slate-800 border-slate-100 dark:bg-gray-900 dark:hover:bg-gray-950 dark:border-gray-600 cursor-pointer focus:ring-4 focus:ring-slate-200 text-sm md:text-base">
+								<p className="text-slate-50 hover:text-slate-100 dark:text-gray-50 dark:hover:text-gray-100">
 									{listItem.bible_book} {listItem.chapter_id}:
 									{listItem.verse_from}
 									{listItem.verse_to !== listItem.verse_from &&
 										`-${listItem.verse_to}`}{" "}
 								</p>
-								<p className="text-sm text-blue-100 dark:text-gray-400">
+								<p className="text-sm text-slate-100 dark:text-gray-400">
 									Biblia {listItem.bible_name}
 								</p>
 							</AccordionTitle>
@@ -195,7 +195,7 @@ export default function MemoryOrNoteItemList({
 													Título de la nota
 												</label>
 												<input
-													className="block w-full px-2 py-4 text-sm text-gray-900 border border-blue-100 rounded-lg bg-blue-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-blue-500 dark:focus-visible:outline-gray-500"
+													className="block w-full px-2 py-4 text-sm text-gray-900 border border-slate-100 rounded-lg bg-slate-50 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-slate-500 dark:focus-visible:outline-gray-500"
 													id="title"
 													type="text"
 													value={listItem.title || ""}
@@ -233,7 +233,7 @@ export default function MemoryOrNoteItemList({
 											<div className="flex items-center flex-wrap gap-4 mt-6 mb-4">
 												<button
 													type="button"
-													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all w-full"
+													className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all w-full"
 													// FIX 3: Pass the entire listItem to state
 													onClick={() =>
 														handleUpdateMemoryOrNoteItem(listItem)
@@ -243,7 +243,7 @@ export default function MemoryOrNoteItemList({
 												<Link
 													href={`/biblia/libros/capitulos/versiculos/${listItem.bible_id}/${listItem.book_id}/${listItem.chapter_id}/#${listItem.verse_from}`}
 													type="button"
-													className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all w-full">
+													className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-2xl text-sm sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all w-full">
 													Ir al capítulo
 												</Link>
 												<button
@@ -264,11 +264,11 @@ export default function MemoryOrNoteItemList({
 			{/* TODO: Refactor this modal  */}
 			{/* Modal for deleting a lecture */}
 			<Modal
-				className="backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50"
+				className="backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50"
 				show={deletingMemoryOrNoteItem !== null}
 				onClose={() => setDeletingMemoryOrNoteItem(null)}
 				popup>
-				<ModalHeader className="bg-blue-100 dark:bg-gray-800 text-blue-950 dark:text-gray-50 border-b border-blue-200 dark:border-gray-600 p-5">
+				<ModalHeader className="bg-slate-100 dark:bg-gray-800 text-slate-950 dark:text-gray-50 border-b border-slate-200 dark:border-gray-600 p-5">
 					Confirma remover versículos
 				</ModalHeader>
 
@@ -300,9 +300,9 @@ export default function MemoryOrNoteItemList({
 					</p>
 				</ModalBody>
 
-				<ModalFooter className="border-t-blue-200 dark:border-gray-600 flex items-center justify-end">
+				<ModalFooter className="border-t-slate-200 dark:border-gray-600 flex items-center justify-end">
 					<button
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
+						className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:border dark:border-gray-600 dark:focus:ring-800 cursor-pointer transition-all mt-4"
 						onClick={() => {
 							if (deletingMemoryOrNoteItem) {
 								// Get ID and bibleId from the state object

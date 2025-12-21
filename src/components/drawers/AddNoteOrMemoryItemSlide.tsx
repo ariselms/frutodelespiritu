@@ -75,7 +75,7 @@ export default function AddNoteOrMemorySlide({
 	return (
 		<>
 			<Drawer
-				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-b-blue-200 dark:border-b-gray-600"
+				className="bg-white/60 dark:bg-black/70 backdrop-blur-lg border border-b-slate-200 dark:border-b-gray-600"
 				open={isDrawerOpen}
 				onClose={() => handleCloseModal()}
 				position="top"
@@ -94,7 +94,7 @@ export default function AddNoteOrMemorySlide({
 								setOpenModal(true);
 								setAction(BibleCrudActions.memorization);
 							}}
-							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-slate-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 							<LordIconHover
 								size={32}
 								ICON_SRC={LOTTIE_BRAIN_HOVER_PINCH}
@@ -107,7 +107,7 @@ export default function AddNoteOrMemorySlide({
 								setOpenModal(true);
 								setAction(BibleCrudActions.note);
 							}}
-							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
+							className="uppercase my-1 mx-1 inline-block px-4 py-2 text-sm font-medium text-center text-white dark:text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-slate-100 dark:border-gray-600 focus:ring-4 focus:ring-sky -300  dark:focus:ring-gray-800 transition-all duration-300 ease-in">
 							<LordIconHover
 								size={32}
 								ICON_SRC={LOTTIE_NOTEBOOK_1_HOVER_PINCH}

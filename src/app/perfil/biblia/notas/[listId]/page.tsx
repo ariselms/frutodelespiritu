@@ -34,11 +34,11 @@ export default async function ({
   }
 
 	return (
-		<div className="w-full bg-white dark:bg-gray-800 text-blue-950 dark:text-gray-50">
+		<div className="w-full bg-white dark:bg-gray-800 text-slate-950 dark:text-gray-50">
 			<section className="container mx-auto p-4 text-lg">
 				<Link
 					href="/perfil/biblia"
-					className="text-blue-900 hover:text-blue-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 mt-4 mb-7 inline-block">
+					className="text-slate-900 hover:text-slate-800 dark:text-gray-100 dark:hover:text-gray-200 underline underline-offset-4 mt-4 mb-7 inline-block">
 					&larr; Volver a Mis Listas de Memorización
 				</Link>
 				<h1>

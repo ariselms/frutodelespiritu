@@ -29,10 +29,11 @@ export default function BibleTranslationsViewComponent({
 				`/biblia/libros/${bibleId}?booksView=${translations.compact}`
 			);
 		}
+
 	}, [view]);
 
 	return (
-		<div className="flex items-center justify-center mb-8">
+		<div className="flex items-center justify-center mb-4">
 			<ButtonGroup>
 				{/* add the translations in a select input */}
 				<Button
@@ -41,8 +42,8 @@ export default function BibleTranslationsViewComponent({
 					onClick={() => setView(translations.detailed)}
 					className={`${
 						view === translations.detailed &&
-						"bg-blue-700 text-blue-50 dark:bg-gray-900 text:white hover:text-blue-100 hover:bg-blue-800 dark:hover:bg-gray-900"
-					} cursor-pointer hover:bg-blue-800 hover:text-blue-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
+						"bg-slate-700 text-slate-50 dark:bg-gray-900 text:white hover:text-slate-100 hover:bg-slate-800 dark:hover:bg-gray-900"
+					} cursor-pointer hover:bg-slate-800 hover:text-slate-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
 					Vista {translations.detailed}
 				</Button>
 				<Button
@@ -51,8 +52,8 @@ export default function BibleTranslationsViewComponent({
 					onClick={() => setView(translations.compact)}
 					className={`${
 						view === translations.compact &&
-						"bg-blue-700 text-blue-50 dark:bg-gray-900 text:white hover:text-blue-100 hover:bg-blue-800 dark:hover:bg-gray-900"
-					} cursor-pointer hover:bg-blue-800 hover:text-blue-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
+						"bg-slate-700 text-slate-50 dark:bg-gray-900 text:white hover:text-slate-100 hover:bg-slate-800 dark:hover:bg-gray-900"
+					} cursor-pointer hover:bg-slate-800 hover:text-slate-50 dark:hover:bg-gray-900 dark:text-gray-50 transition-all`}>
 					Vista {translations.compact}
 				</Button>
 			</ButtonGroup>

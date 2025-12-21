@@ -11,7 +11,7 @@ export default function JumbotronMain() {
 							<span>Biblia,</span> <span>Estudios,</span>{" "}
 							<span>Reflexiones</span>
 						</h1>
-						<p className="fade-in-move-up max-w-2xl mb-10 font-light text-gray-950 lg:mb-8 md:text-lg lg:text-xl dark:text-blue-50">
+						<p className="fade-in-move-up max-w-2xl mb-10 font-light text-gray-950 lg:mb-8 md:text-lg lg:text-xl dark:text-slate-50">
 							Explora la sabiduría de la Biblia a través de estudios profundos y
 							reflexiones inspiradoras que nutren tu espíritu y fortalecen tu
 							fe.

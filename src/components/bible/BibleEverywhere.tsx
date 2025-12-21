@@ -317,7 +317,7 @@ export default function BibleEverywhere({
 	};
 
 	const renderHeader = (title: string, icon: React.ReactNode) => (
-		<div className="flex items-center justify-between p-4 border-b border-blue-200 dark:border-gray-600 rounded-t-lg">
+		<div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-600 rounded-t-lg">
 			<div className="flex items-center gap-2">
 				{step !== "translation" && (
 					<button
@@ -350,12 +350,12 @@ export default function BibleEverywhere({
 	);
 
 	const renderSearch = (placeholder: string) => (
-		<div className="px-2 py-4  border-b border-blue-200 dark:border-gray-600">
+		<div className="px-2 py-4  border-b border-slate-200 dark:border-gray-600">
 			<div className="relative flex items-center w-full">
 				<input
 					type="text"
 					placeholder={placeholder}
-					className="block bg-blue-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
+					className="block bg-slate-50 dark:bg-gray-700 w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-slate-500 focus:border-slate-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500 relative"
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					autoFocus
@@ -388,8 +388,8 @@ export default function BibleEverywhere({
 							<button
 								key={t.id}
 								onClick={() => handleSelectTranslation(t)}
-								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-start justify-center">
-								<div className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200 mb-2">
+								className="text-sm bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-start justify-center">
+								<div className="font-medium text-slate-50 dark:text-gray-200 group-hover:text-slate-700 dark:group-hover:text-gray-200 mb-2">
 									{t.name}
 								</div>
 								<div className="text-xs text-gray-400 flex items-center gap-2">
@@ -434,8 +434,8 @@ export default function BibleEverywhere({
 							<button
 								key={b.id}
 								onClick={() => handleSelectBook(b)}
-								className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold py-2.5 px-0.5 rounded-lg transition-all border dark:border-gray-600 wrap-break-word text-center cursor-pointer">
-								<span className="font-medium text-blue-50 dark:text-gray-200 group-hover:text-blue-700 dark:group-hover:text-gray-200">
+								className="text-sm bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold py-2.5 px-0.5 rounded-lg transition-all border dark:border-gray-600 wrap-break-word text-center cursor-pointer">
+								<span className="font-medium text-slate-50 dark:text-gray-200 group-hover:text-slate-700 dark:group-hover:text-gray-200">
 									{b.name}
 								</span>
 							</button>
@@ -469,7 +469,7 @@ export default function BibleEverywhere({
 						<button
 							key={num}
 							onClick={() => handleSelectChapter(num)}
-							className="text-sm bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-center justify-center">
+							className="text-sm bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 text-white font-bold p-4 rounded-lg transition-all border dark:border-gray-600 wrap-break-word cursor-pointer flex flex-col items-center justify-center">
 							{num}
 						</button>
 					))}
@@ -547,11 +547,11 @@ export default function BibleEverywhere({
 						</div>
 					) : (
 						<>
-							<div className="p-4 border-b border-blue-200 dark:border-gray-600 flex flex-col items-center flex-wrap sticky top-0 z-10 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-t-lg">
+							<div className="p-4 border-b border-slate-200 dark:border-gray-600 flex flex-col items-center flex-wrap sticky top-0 z-10 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-t-lg">
 								<h3 className="text-sm font-medium text-black dark:text-gray-200 uppercase tracking-wider mb-1">
 									Selección de versículo(s)
 								</h3>
-								<div className="text-xs text-gray-700 font-medium bg-blue-50 px-2 py-1 rounded mt-1 sm:mt-0">
+								<div className="text-xs text-gray-700 font-medium bg-slate-50 px-2 py-1 rounded mt-1 sm:mt-0">
 									{selection.verses?.length
 										? selection.verses.length === 1
 											? `Versículo ${selection.verses[0]}`
@@ -566,15 +566,15 @@ export default function BibleEverywhere({
 										<button
 											key={num}
 											onClick={() => handleSelectVerse(num)}
-											className={`text-left px-4 py-3 border-b border-blue-200 dark:border-gray-600 transition flex gap-3 cursor-pointer
-                      ${active ? "bg-blue-50 dark:bg-gray-700" : ""}
+											className={`text-left px-4 py-3 border-b border-slate-200 dark:border-gray-600 transition flex gap-3 cursor-pointer
+                      ${active ? "bg-slate-50 dark:bg-gray-700" : ""}
                     `}>
 											<div
 												className={`shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-medium text-sm transition
                         ${
 													active
-														? "bg-blue-700 dark:bg-gray-900 text-blue-50 dark:text-gray-200"
-														: "bg-blue-700 dark:bg-gray-900 text-blue-50 dark:text-gray-200"
+														? "bg-slate-700 dark:bg-gray-900 text-slate-50 dark:text-gray-200"
+														: "bg-slate-700 dark:bg-gray-900 text-slate-50 dark:text-gray-200"
 												}
                       `}>
 												{num}
@@ -596,11 +596,11 @@ export default function BibleEverywhere({
 						</>
 					)}
 				</div>
-				<div className="p-4 border-t border-blue-200 dark:border-gray-600 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-b-lg sticky bottom-0 z-20 text-center">
+				<div className="p-4 border-t border-slate-200 dark:border-gray-600 backdrop-blur-2xl bg-gray-50/60 dark:bg-gray-800/70 rounded-b-lg sticky bottom-0 z-20 text-center">
 					<button
 						disabled={!selection.verses || selection.verses.length === 0}
 						onClick={handleConfirmSelection}
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all ">
 						Confirmar Selección
 					</button>
 				</div>
@@ -632,7 +632,7 @@ export default function BibleEverywhere({
 			value: string | undefined;
 			stepName: BibleSelectionStep;
 		}) => (
-			<div className="flex items-center justify-between border-b border-blue-200 pb-2 last:border-0 last:pb-0">
+			<div className="flex items-center justify-between border-b border-slate-200 pb-2 last:border-0 last:pb-0">
 				<div className="flex flex-col justify-between px-4">
 					<span className="text-xs text-gray-800 dark:text-gray-200 font-semibold uppercase">
 						{label}
@@ -643,7 +643,7 @@ export default function BibleEverywhere({
 				</div>
 				<button
 					onClick={() => handleEditStep(stepName)}
-					className="p-2 text-blue-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-gray-200 rounded-full transition cursor-pointer"
+					className="p-2 text-slate-700 hover:text-slate-800 dark:text-gray-300 dark:hover:text-gray-200 rounded-full transition cursor-pointer"
 					title={`Edit ${label}`}>
 					<LordIconHover
 						size={32}
@@ -656,19 +656,19 @@ export default function BibleEverywhere({
 		);
 
 		return (
-			<div className="p-6 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-lg max-w-md mx-auto w-full">
+			<div className="p-6 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-600 rounded-lg max-w-md mx-auto w-full">
 				<div className="flex justify-between items-center mb-4">
 					<h2 className="text-lg font-bold text-gray-950 dark:text-gray-200 ">
 						Tu selección:
 					</h2>
 					<button
 						onClick={handleOpen}
-						className="text-sm text-blue-700 hover:underline dark:text-white dark:underline dark:underline-offset-4 cursor-pointer">
+						className="text-sm text-slate-700 hover:underline dark:text-white dark:underline dark:underline-offset-4 cursor-pointer">
 						Reiniciar
 					</button>
 				</div>
 
-				<div className="flex flex-col gap-3 text-sm font-mono text-gray-600 bg-blue-100 dark:bg-gray-800 py-4">
+				<div className="flex flex-col gap-3 text-sm font-mono text-gray-600 bg-slate-100 dark:bg-gray-800 py-4">
 					<EditRow
 						label="Traducción"
 						value={selection.translation?.id}
@@ -688,8 +688,8 @@ export default function BibleEverywhere({
 				</div>
 
 				{selectedText && (
-					<div className="mt-4 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg text-sm italic border-l-8 border border-blue-200 dark:border-l-8 dark:border dark:border-gray-600 max-h-60 overflow-y-auto">
-						<pre className="whitespace-pre-wrap font-sans font-normal leading-relaxed text-blue-950 dark:text-gray-50">
+					<div className="mt-4 p-4 bg-slate-50 dark:bg-gray-800 rounded-lg text-sm italic border-l-8 border border-slate-200 dark:border-l-8 dark:border dark:border-gray-600 max-h-60 overflow-y-auto">
+						<pre className="whitespace-pre-wrap font-sans font-normal leading-relaxed text-slate-950 dark:text-gray-50">
 							{selectedText}
 						</pre>
 					</div>
@@ -698,7 +698,7 @@ export default function BibleEverywhere({
 				<div className="pt-10 pb-4 text-center">
 					<Link
 						href={`/biblia/libros/capitulos/versiculos/${selection.translation?.id}/${selection.book?.id}/${selection.chapter}#${verseFrom}`}
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all ">
+						className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all ">
 						Ir al capítulo
 					</Link>
 				</div>
@@ -716,7 +716,7 @@ export default function BibleEverywhere({
 					) : (
 						<button
 							onClick={handleOpen}
-							className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-blue-100 transition-all">
+							className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full p-4 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-800 cursor-pointer dark:border-gray-600 border border-slate-100 transition-all">
 							<LordIconHover
 								size={32}
 								ICON_SRC={LOTTIE_BIBLE_HOVER_PINCH}
@@ -730,9 +730,9 @@ export default function BibleEverywhere({
 
 			{/* Modal Overlay */}
 			{isOpen && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200 backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
+				<div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200 backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50">
 					{/* Modal Content */}
-					<div className="w-full max-w-lg h-[600px] flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden border border-blue-200 dark:border-gray-600 rounded-lg backdrop-blur-md bg-blue-50/10 dark:bg-gray-950/50">
+					<div className="w-full max-w-lg h-[600px] flex flex-col animate-in zoom-in-95 duration-200 overflow-hidden border border-slate-200 dark:border-gray-600 rounded-lg backdrop-blur-md bg-slate-50/10 dark:bg-gray-950/50">
 						{step === "translation" && renderTranslations()}
 						{step === "book" && renderBooks()}
 						{step === "chapter" && renderChapters()}

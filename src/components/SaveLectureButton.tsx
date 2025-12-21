@@ -107,7 +107,7 @@ export function SaveLecturebutton({ lectureId }: { lectureId: string }) {
 			<button
 				type="button"
 				onClick={handleSaveLecture}
-				className="rounde-2xl px-5 py-3 text-sm font-medium text-blue-50 dark:text-gray-100 rounded-lg cursor-pointer bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-blue-100 dark:border-gray-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
+				className="rounde-2xl px-5 py-3 text-sm font-medium text-slate-50 dark:text-gray-100 rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 border border-slate-100 dark:border-gray-600 focus:ring-4 focus:ring-slate-300 dark:focus:ring-gray-800 m-auto lg:mx-0 flex items-center justify-center w-full">
 
 				<LordIconHover
 					size={32}
