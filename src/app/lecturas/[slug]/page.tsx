@@ -1,13 +1,12 @@
 // this is the view to see the single article details, it will use the article id to fetch it from the server side
-import { QueryResultRow, sql } from "@vercel/postgres";
 import Link from "next/link";
-import "../../lectures.css";
 import Image from "next/image";
-import { ArticleType } from "@/models/articlesTypes";
+import { QueryResultRow, sql } from "@vercel/postgres";
 import ArticleDetailRandomVerse from "@/components/bible/ArticleDetailRandomVerse";
+import { ArticleType } from "@/models/articlesTypes";
 import { ShareButtons } from "@/components/ShareButtons";
 import { SaveLecturebutton } from "@/components/SaveLectureButton";
-import { LectureDetailDriver } from "@/components/joyride/LectureDetailDriver";
+import "../../lectures.css";
 
 export default async function SingleLecturePage({
 	params
@@ -51,7 +50,6 @@ export default async function SingleLecturePage({
 
 	return (
 		<main className="pb-16 lg:pb-24 bg-slate-50 dark:bg-gray-800 antialiased">
-			<LectureDetailDriver />
 			<header
 				className="w-full h-[450px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative mb-16 flex justify-center items-center"
 				style={{
