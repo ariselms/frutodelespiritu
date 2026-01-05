@@ -6,6 +6,7 @@ import { BibleBookType } from "@/models/bibleTypes";
 import InLectureBibleSelection from "@/components/bible/InLectureBibleSelection";
 import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_GRID_PINCH from "@/lotties/grid-pinch.json";
+import ClickVerseHint from "@/components/bible/ClickVerseHint";
 
 export default async function SingleChapterPage({
 	params
@@ -29,27 +30,28 @@ export default async function SingleChapterPage({
 	return (
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800 pb-4">
-				<div className="max-w-[80ch] mx-auto py-8 px-2 xl:px-0">
-					<div className="flex flex-row items-center justify-between mb-8">
+				<div className="max-w-[80ch] mx-auto p-2 xl:px-0">
+					<ClickVerseHint />
+					<div className="flex flex-row items-center justify-between">
 						<Link
 							className="rounded-lg border border-blue-100 dark:border-gray-600 bg-blue-700 hover:bg-blue-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-blue-50 dark:text-gray-50 inline-flex items-center transition-all text-xs sm:text-sm md:text-base"
 							href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
-              <LordIconHover
-                size={22}
-                ICON_SRC={LOTTIE_GRID_PINCH}
-                state="hover-pinch"
-                text={`Capítulos de ${Book?.name}`}
-              />
+							<LordIconHover
+								size={22}
+								ICON_SRC={LOTTIE_GRID_PINCH}
+								state="hover-pinch"
+								text={`Capítulos de ${Book?.name}`}
+							/>
 						</Link>
 						<InLectureBibleSelection ChapterDetails={bibleChapterResponse} />
 					</div>
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 					<ChapterDetails
-            BibleName={Translation.name}
-            ChapterInfo={Chapter}
-            ChapterContent={Chapter.content}
-            Book={Book}
-          />
+						BibleName={Translation.name}
+						ChapterInfo={Chapter}
+						ChapterContent={Chapter.content}
+						Book={Book}
+					/>
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 				</div>
 			</section>
