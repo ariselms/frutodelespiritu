@@ -6,6 +6,7 @@ import { BibleBookType } from "@/models/bibleTypes";
 import InLectureBibleSelection from "@/components/bible/InLectureBibleSelection";
 import { LordIconHover } from "@/components/animations/lordicon";
 import LOTTIE_GRID_PINCH from "@/lotties/grid-pinch.json";
+import ClickVerseHint from "@/components/bible/ClickVerseHint";
 
 export default async function SingleChapterPage({
 	params
@@ -30,7 +31,7 @@ export default async function SingleChapterPage({
 		<main>
 			<section className="w-full dark:bg-gray-800 text-gray-800 pb-4">
 				<div className="max-w-[80ch] mx-auto py-4 px-2 xl:px-0">
-					<div className="flex flex-row flex-wrap items-center justify-between gap-1 mb-4">
+					<div className="flex flex-row flex-wrap items-center justify-between gap-1">
 						<Link
 							className="rounded-lg border border-slate-100 dark:border-gray-600 bg-slate-700 hover:bg-slate-800 dark:bg-gray-900 dark:hover:bg-gray-800 px-4 h-10 font-bold text-slate-50 dark:text-gray-50 flex items-center justify-center transition-all text-xs sm:text-sm md:text-base flex-1"
 							href={`/biblia/libros/capitulos/${bibleId}/${bookId}`}>
@@ -43,6 +44,7 @@ export default async function SingleChapterPage({
 						</Link>
 						<InLectureBibleSelection ChapterDetails={bibleChapterResponse} />
 					</div>
+          <ClickVerseHint />
 					<BibleNavigationAndNotes BibleChapterData={bibleChapterResponse} />
 					<ChapterDetails
 						BibleName={Translation.name}
