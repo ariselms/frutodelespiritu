@@ -402,7 +402,7 @@ export default function AddNoteOrMemorizationForm({
 									<label
 										className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
 										htmlFor="memorizationList">
-										Selecciona una lista de aprendizaje
+										Primero selecciona una lista
 									</label>
 
 									<select
@@ -448,7 +448,7 @@ export default function AddNoteOrMemorizationForm({
 											text="Crear nueva lista de aprendizaje"></LordIconHover>
 									</Button>
 
-									{action === BibleCrudActions.note && (
+									{action === BibleCrudActions.note &&  (
 										<div className="mt-6 mb-2">
 											<div className="mb-3">
 												<label
@@ -459,7 +459,9 @@ export default function AddNoteOrMemorizationForm({
 
 												{titleFieldHasValue}
 												<input
-													disabled={titleFieldHasValue}
+													disabled={
+														titleFieldHasValue || selectedLearningList === ""
+													}
 													type="text"
 													className="p-2 text-sm font-medium text-black dark:text-white rounded-lg cursor-pointer border border-blue-700 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:focus:ring-gray-800 transition-all duration-300 ease-in w-full"
 													id="note_title"
@@ -481,7 +483,10 @@ export default function AddNoteOrMemorizationForm({
 
 												<div className={styles.ReactAdminContainer}>
 													<TextEditor
-														disabled={contentFieldHasValue}
+														disabled={
+															contentFieldHasValue ||
+															selectedLearningList === ""
+														}
 														value={userNote.content || ""}
 														onChange={(value) =>
 															setUserNote({
